@@ -1,0 +1,113 @@
+#!/usr/bin/env node
+
+/**
+ * Motus Command Line Interface
+ * This is the main entry point for /motus commands in Claude Code
+ */
+
+require('dotenv').config();
+const EnhancedLifeDepartment = require('./lib/life-department-enhanced');
+const MotusCommand = require('./motus-command');
+const MotusLife = require('./motus-life');
+const fs = require('fs').promises;
+const path = require('path');
+
+async function main() {
+  const args = process.argv.slice(2);
+  const [command, subcommand, ...params] = args;
+
+  // Initialize Motus
+  const motus = new MotusCommand();
+  await motus.initialize();
+
+  // Handle daily-brief shortcut
+  if (command === 'daily-brief') {
+    const motusLife = new MotusLife();
+    await motusLife.handleCommand(['daily-brief']);
+    return;
+  }
+
+  // Handle Life Department commands with real integrations
+  if (command === 'life') {
+    const motusLife = new MotusLife();
+    await motusLife.handleCommand([subcommand, ...params]);
+    return;
+  }
+
+  // DEPRECATED - Old life commands for backward compatibility
+  if (command === 'life-old') {
+    const lifeDept = new EnhancedLifeDepartment();
+    
+    switch (subcommand) {
+      case 'briefing':
+        await lifeDept.morningBriefing();
+        break;
+      
+      case 'review':
+        await lifeDept.eveningReview();
+        break;
+      
+      case 'track':
+        const [type, ...data] = params;
+        console.log(`✅ Tracked ${type}: ${data.join(' ')}`);
+        // Save to data file
+        const trackingPath = path.join(process.env.MOTUS_DATA_DIR || './data', 'tracking.json');
+        let tracking = [];
+        try {
+          const existing = await fs.readFile(trackingPath, 'utf8');
+          tracking = JSON.parse(existing);
+        } catch (e) {}
+        tracking.push({
+          type,
+          data: data.join(' '),
+          timestamp: new Date().toISOString()
+        });
+        await fs.mkdir(path.dirname(trackingPath), { recursive: true });
+        await fs.writeFile(trackingPath, JSON.stringify(tracking, null, 2));
+        break;
+      
+      case 'plan':
+        const period = params[0] || 'day';
+        console.log(`\n📅 Planning session for: ${period}\n`);
+        if (period === 'week') {
+          // Weekly planning would go here
+          console.log('Weekly planning coming soon with full Task integration!');
+        } else {
+          console.log('Daily planning coming soon!');
+        }
+        break;
+      
+      default:
+        console.log(`
+🏠 Life Department Commands:
+  /motus life briefing    - Morning briefing with real weather
+  /motus life review      - Evening review
+  /motus life track       - Track habits/goals
+  /motus life plan        - Planning session
+`);
+    }
+  } 
+  // Run workflow shortcut
+  else if (command === 'run') {
+    if (subcommand === 'morning-briefing') {
+      const lifeDept = new EnhancedLifeDepartment();
+      await lifeDept.morningBriefing();
+    } else if (subcommand === 'evening-review') {
+      const lifeDept = new EnhancedLifeDepartment();
+      await lifeDept.eveningReview();
+    } else {
+      await motus.runWorkflow(subcommand, params);
+    }
+  }
+  // Default to original command handler
+  else {
+    await motus.handleCommand(args);
+  }
+}
+
+// Run if executed directly
+if (require.main === module) {
+  main().catch(console.error);
+}
+
+module.exports = main;

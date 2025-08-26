@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/ianwinscom/slashmotus/data"],
+      "description": "File system access for Motus data persistence"
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "/Users/ianwinscom/slashmotus/data/motus.db"],
+      "description": "SQLite database for structured data storage"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub integration for code and project management"
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      },
+      "description": "Google Drive for document storage"
+    }
+  },
+  "activeServers": ["filesystem", "sqlite"],
+  "dataStoragePath": "/Users/ianwinscom/slashmotus/data",
+  "features": {
+    "persistence": true,
+    "externalIntegrations": true,
+    "secureStorage": true
+  }
+}

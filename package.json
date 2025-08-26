@@ -1,0 +1,38 @@
+{
+  "name": "motus-claude",
+  "version": "1.0.0",
+  "description": "Motus - AI Life & Business Automation System for Claude Code",
+  "main": "motus-command.js",
+  "scripts": {
+    "start": "node motus-command.js",
+    "init": "node motus-command.js init",
+    "briefing": "node motus-command.js run morning-briefing",
+    "review": "node motus-command.js run evening-review",
+    "status": "node motus-command.js status"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "life-management",
+    "productivity",
+    "claude",
+    "agents"
+  ],
+  "author": "Motus AI",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^20.1.2",
+    "axios": "^1.11.0",
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
+    "commander": "^11.0.0",
+    "dotenv": "^16.3.1",
+    "googleapis": "^128.0.0",
+    "inquirer": "^9.2.0",
+    "node-cron": "^3.0.2",
+    "open": "^10.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
