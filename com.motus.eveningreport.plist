@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.motus.eveningreport</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/claude-code</string>
+        <string>run</string>
+        <string>/motus evening-report</string>
+    </array>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/ianwinscom/slashmotus</string>
+    
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>21</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/ianwinscom/slashmotus/logs/evening-report.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/ianwinscom/slashmotus/logs/evening-report-error.log</string>
+    
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

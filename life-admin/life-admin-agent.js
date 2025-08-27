@@ -69,7 +69,7 @@ class LifeAdminAgent {
    */
   async initializeGoogleAuth() {
     if (!this.config.googleCredentials.clientId || !this.config.googleCredentials.refreshToken) {
-      console.log('⚠️  Google OAuth not configured. Using mock data.');
+      console.log('⚠️  Google OAuth not configured. No data available.');
       return false;
     }
 
@@ -158,7 +158,7 @@ class LifeAdminAgent {
    */
   async fetchCalendarEvents() {
     if (!this.oauth2Client) {
-      return this.getMockCalendarEvents();
+      return []; // No auth, return empty array instead of mock data
     }
 
     try {
@@ -205,7 +205,63 @@ class LifeAdminAgent {
       });
     } catch (error) {
       console.error('Calendar fetch error:', error.message);
-      return this.getMockCalendarEvents();
+      return []; // Return empty array instead of mock data
+    }
+  }
+
+  /**
+   * Fetch Tomorrow's Calendar Events from Google Calendar
+   */
+  async fetchTomorrowCalendarEvents() {
+    if (!this.oauth2Client) {
+      return []; // No auth, return empty array instead of mock data
+    }
+
+    try {
+      const calendar = google.calendar({ version: 'v3', auth: this.oauth2Client });
+      
+      // Get events for tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      const endOfTomorrow = new Date(tomorrow);
+      endOfTomorrow.setHours(23, 59, 59, 999);
+
+      const response = await calendar.events.list({
+        calendarId: 'primary',
+        timeMin: tomorrow.toISOString(),
+        timeMax: endOfTomorrow.toISOString(),
+        singleEvents: true,
+        orderBy: 'startTime'
+      });
+
+      return response.data.items.map(event => {
+        // Format time as HH:MM
+        let formattedTime = '';
+        if (event.start.dateTime) {
+          const eventDate = new Date(event.start.dateTime);
+          formattedTime = eventDate.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false,
+            timeZone: this.config.timezone
+          });
+        } else {
+          formattedTime = 'All day';
+        }
+        
+        return {
+          time: formattedTime,
+          title: event.summary || 'Untitled Event',
+          location: event.location,
+          attendees: event.attendees ? event.attendees.map(a => a.email) : [],
+          meetingLink: this.extractMeetingLink(event),
+          duration: this.calculateDuration(event.start, event.end)
+        };
+      });
+    } catch (error) {
+      console.error('Tomorrow calendar fetch error:', error.message);
+      return []; // Return empty array instead of mock data
     }
   }
 
@@ -244,7 +300,7 @@ class LifeAdminAgent {
    */
   async processEmails() {
     if (!this.oauth2Client) {
-      return this.getMockEmails();
+      return []; // No auth, return empty array instead of mock data
     }
 
     try {
@@ -277,7 +333,7 @@ class LifeAdminAgent {
       return this.categorizeEmails(emails);
     } catch (error) {
       console.error('Email fetch error:', error.message);
-      return this.getMockEmails();
+      return []; // No auth, return empty array instead of mock data
     }
   }
 
@@ -1138,6 +1194,18 @@ if (require.main === module) {
           console.log('Progress:', result.status.progress);
           console.log('\nSummary:', result.summary);
         }
+      } else if (command === 'get-calendar') {
+        await agent.initializeGoogleAuth();
+        const events = await agent.fetchCalendarEvents();
+        console.log(JSON.stringify(events, null, 2));
+      } else if (command === 'get-tomorrow-calendar') {
+        await agent.initializeGoogleAuth();
+        const events = await agent.fetchTomorrowCalendarEvents();
+        console.log(JSON.stringify(events, null, 2));
+      } else if (command === 'get-emails') {
+        await agent.initializeGoogleAuth();
+        const emails = await agent.processEmails();
+        console.log(JSON.stringify(emails, null, 2));
       } else if (command === 'supplements' || command === 'peptides') {
         const scheduleText = process.argv.slice(3).join(' ');
         if (!scheduleText) {

@@ -1,0 +1,58 @@
+{
+  "hooks": {
+    "scheduled": [
+      {
+        "name": "daily-brief",
+        "schedule": "0 6 * * *",
+        "command": "/motus daily-brief",
+        "description": "Run daily briefing every morning at 6:00 AM",
+        "enabled": true
+      },
+      {
+        "name": "evening-report",
+        "schedule": "0 21 * * *",
+        "command": "/motus evening-report",
+        "description": "Run evening report every night at 9:00 PM",
+        "enabled": true
+      },
+      {
+        "name": "weekly-planning",
+        "schedule": "0 10 * * 0",
+        "command": "/motus weekly-plan",
+        "description": "Weekly planning session every Sunday at 10:00 AM",
+        "enabled": false
+      },
+      {
+        "name": "weekly-review",
+        "schedule": "0 17 * * 5",
+        "command": "/motus weekly-review",
+        "description": "Weekly review every Friday at 5:00 PM",
+        "enabled": false
+      },
+      {
+        "name": "monthly-planning",
+        "schedule": "0 10 1 * *",
+        "command": "/motus monthly-plan",
+        "description": "Monthly planning on the 1st of each month at 10:00 AM",
+        "enabled": false
+      }
+    ],
+    "event": [
+      {
+        "name": "on-startup",
+        "trigger": "startup",
+        "command": "/motus status",
+        "description": "Check system status when Claude Code starts",
+        "enabled": false
+      },
+      {
+        "name": "on-file-save",
+        "trigger": "file-save",
+        "pattern": "*.md",
+        "command": "echo 'Markdown file saved'",
+        "description": "Trigger when markdown files are saved",
+        "enabled": false
+      }
+    ]
+  }
+}

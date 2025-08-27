@@ -8,15 +8,48 @@ argument-hint: [subcommand] [options] (e.g., daily-brief, life briefing, init)
 
 You are the Motus Life Admin orchestrator. Process the command: `$ARGUMENTS`
 
-## CRITICAL: DO NOT USE Task TOOL
-For ALL commands below, use Bash, Read, Edit, and other tools directly.
-NEVER use the Task tool to delegate to sub-agents.
-This ensures proper API usage and avoids web scraping.
+## Available Specialized Agents
+These agents are defined in /Users/ianwinscom/slashmotus/.claude/agents/:
+- weather-fetcher - Retrieves weather from WeatherAPI
+- calendar-fetcher - Gets Google Calendar events
+- email-processor - Processes Gmail for important emails
+- task-compiler - Compiles tasks from all sources
+- insight-generator - Generates actionable insights
+- note-creator - Creates/updates Obsidian daily notes
+- evening-review-agent - Handles evening review workflow
+- workflow-creator - Creates custom workflows
+
+## CRITICAL: Agent Orchestration Rules
+For `daily-brief` command: MUST use Task tool for parallel agent execution
+For other commands: Use appropriate tools (Bash, Read, Edit) as specified
+NEVER use Bash to run life-admin-agent.js for daily-brief
+ALWAYS use parallel Task execution for data collection
+
+## Parallel Agent Execution Pattern
+
+For daily-brief, you MUST run these SPECIFIC agents in parallel:
+```
+Step 1: Launch ALL these simultaneously (parallel execution):
+- Task(weather-fetcher) → Get weather data from WeatherAPI
+- Task(calendar-fetcher) → Fetch today's Google Calendar events
+- Task(email-processor) → Process important Gmail emails
+- Task(task-compiler) → Compile and prioritize tasks
+
+Step 2: After ALL parallel tasks complete:
+- Task(insight-generator) → Analyze all data and generate insights
+
+Step 3: Final step:
+- Task(note-creator) → Create/update Obsidian daily note with all data
+
+NEVER run these sequentially. ALWAYS run Step 1 agents in parallel.
+USE ONLY these specific agents defined in .claude/agents/
+```
 
 ## Available Commands
 
 ### Core Commands
 - `init` - Initialize Motus system
+- `terminal` - Launch beautiful web terminal interface
 - `daily-brief` or `life briefing` - Generate complete morning briefing
 - `life review` - Evening review and reflection
 - `life plan [day|week|month]` - Planning sessions
@@ -28,6 +61,14 @@ This ensures proper API usage and avoids web scraping.
 - `life finance` - Finance snapshot
 - `status` - System status
 - `help` - Show help
+
+### Workflow Commands
+- `workflow list` - List all available workflows
+- `workflow create` - Create new workflow with wizard
+- `workflow run [name]` - Execute a specific workflow
+- `workflow show [name]` - View workflow details
+- `workflow edit [name]` - Edit existing workflow
+- `workflow schedule [name] [time]` - Schedule workflow execution
 
 ### Daily Note Updates
 - `update [activity]` - Update daily note with completed activity
@@ -52,22 +93,31 @@ This ensures proper API usage and avoids web scraping.
 
 ## Implementation
 
+CRITICAL: All commands MUST use Task tool delegation to agents. Never use Bash for executing scripts directly.
+
 Based on the command, perform these actions:
 
+### For `terminal`:
+1. Use Bash to run: `./start-terminal.sh`
+2. This launches a beautiful web-based terminal at localhost:3000
+3. Provides full dashboard, wizards, and interactive workflows
+4. Tell user: "Terminal launching at http://localhost:3000"
+
 ### For `daily-brief` or `life briefing`:
-1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/life-admin-agent.js daily-brief`
-2. The bash command output contains a beautiful CLI dashboard with Unicode box characters
-3. You MUST display the complete output exactly as returned by the bash command
-4. Include ALL of these elements from the output:
-   - The boxed header: ╔══════════════════════════════════════╗
-   - The quote box with borders
-   - The weather widget with rounded corners: ╭────────────────╮
-   - The email summary box
-   - All emoji icons and formatting
-5. Display the output in a code block to preserve formatting:
-```
-[INSERT THE COMPLETE BASH OUTPUT HERE]
-```
+1. MUST use Task tool to run these SPECIFIC agents IN PARALLEL (all at once):
+   - Task(subagent_type: 'weather-fetcher') - Get weather from WeatherAPI
+   - Task(subagent_type: 'calendar-fetcher') - Fetch Google Calendar events
+   - Task(subagent_type: 'email-processor') - Process Gmail emails
+   - Task(subagent_type: 'task-compiler') - Compile and prioritize tasks
+2. After parallel data collection completes:
+   - Task(subagent_type: 'insight-generator') - Generate insights from all collected data
+3. Finally:
+   - Task(subagent_type: 'note-creator') - Create/update Obsidian daily note
+4. These agents are defined in: /Users/ianwinscom/slashmotus/.claude/agents/
+5. DO NOT use generic life-admin agent
+6. DO NOT use Bash to execute scripts
+7. ONLY use the specific agents listed above
+8. Display results showing all collected data and confirmation of note creation
 
 ### For `life review`:
 1. Review today's accomplishments
@@ -103,6 +153,45 @@ Save data to tracking file and provide confirmation.
 
 ### For planning sessions:
 Generate appropriate planning content based on timeframe (day/week/month).
+
+### For `workflow list`:
+1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js list`
+2. Display the list of available workflows with their descriptions
+
+### For `workflow create`:
+1. Use Task tool to delegate to workflow-creator agent
+2. The agent will guide through interactive workflow creation
+3. Save the workflow for future use
+
+### For `workflow run [name]`:
+1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js run [workflow-name]`
+2. Execute each step using appropriate sub-agents via Task tool
+3. Show progress and results for each step
+
+### For `workflow show [name]`:
+1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js show [workflow-name]`
+2. Display the workflow structure and steps
+
+### For `life review` or `evening-review`:
+1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/evening-review.js`
+2. This runs an interactive evening review that:
+   - Reviews today's accomplishments
+   - Sets tomorrow's priorities
+   - Tracks health metrics
+   - Records gratitude
+   - Captures notes and ideas
+3. Automatically updates the Obsidian daily note with all responses
+
+### For `evening-report`:
+1. MUST use Task tool to run these SPECIFIC agents IN PARALLEL (all at once):
+   - Task(subagent_type: 'note-reader') - Read today's Obsidian note
+   - Task(subagent_type: 'tomorrow-weather') - Get tomorrow's weather forecast
+   - Task(subagent_type: 'tomorrow-calendar') - Get tomorrow's calendar events
+2. After parallel data collection completes:
+   - Task(subagent_type: 'accomplishment-analyzer') - Analyze completed tasks and create summary
+3. Finally:
+   - Task(subagent_type: 'note-appender') - Append evening report to daily note
+4. Display summary of completed tasks and tomorrow's overview
 
 ## Environment Configuration
 - Weather Location: Chiang Mai, TH
