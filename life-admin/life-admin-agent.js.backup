@@ -16,7 +16,6 @@ const SupplementParserV2 = require('./supplement-parser-v2');
 const { createSupplementCalendarEvents } = require('./calendar-supplement-creator');
 const CLIDashboard = require('./cli-dashboard');
 const SimpleDashboard = require('./simple-dashboard');
-const OuraFetcher = require('./oura-fetcher');
 
 class LifeAdminAgent {
   constructor(config = {}) {

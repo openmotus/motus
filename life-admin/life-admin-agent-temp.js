@@ -12,11 +12,10 @@ const path = require('path');
 const axios = require('axios');
 const DailyNoteUpdater = require('./daily-note-updater');
 const SupplementManager = require('./supplement-manager');
-const SupplementParserV2 = require('./supplement-parser-v2');
+// const SupplementParserV2 = require('./supplement-parser-v2');
 const { createSupplementCalendarEvents } = require('./calendar-supplement-creator');
 const CLIDashboard = require('./cli-dashboard');
 const SimpleDashboard = require('./simple-dashboard');
-const OuraFetcher = require('./oura-fetcher');
 
 class LifeAdminAgent {
   constructor(config = {}) {

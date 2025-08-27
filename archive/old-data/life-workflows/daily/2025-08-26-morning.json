@@ -1,0 +1,110 @@
+{
+  "date": "2025-08-26T08:59:13.990Z",
+  "calendar": [
+    {
+      "time": "09:00",
+      "title": "Team Standup",
+      "location": "Zoom",
+      "duration": "30 mins",
+      "meetingLink": "https://zoom.us/j/123456"
+    },
+    {
+      "time": "11:00",
+      "title": "Client Meeting",
+      "location": "Google Meet",
+      "duration": "1 hour",
+      "attendees": [
+        "client@example.com"
+      ]
+    },
+    {
+      "time": "14:00",
+      "title": "Deep Work Block",
+      "duration": "2 hours",
+      "description": "Focus on project X"
+    },
+    {
+      "time": "16:30",
+      "title": "Weekly Review",
+      "duration": "30 mins"
+    }
+  ],
+  "emails": {
+    "important": [
+      {
+        "from": "boss@company.com",
+        "subject": "Q3 Report Review",
+        "preview": "Please review the attached report before tomorrow's meeting",
+        "receivedAt": "7:30 AM",
+        "actionRequired": true
+      },
+      {
+        "from": "client@bigcorp.com",
+        "subject": "Project Update Request",
+        "preview": "Could you send the latest status update?",
+        "receivedAt": "6:45 AM",
+        "actionRequired": true
+      }
+    ],
+    "regular": [
+      {
+        "from": "newsletter@medium.com",
+        "subject": "Your Daily Digest",
+        "preview": "Top stories from your network",
+        "receivedAt": "Yesterday 8:00 PM"
+      }
+    ],
+    "notifications": [
+      {
+        "from": "github@github.com",
+        "subject": "PR #123 merged",
+        "preview": "Your pull request was successfully merged",
+        "receivedAt": "11:30 PM"
+      }
+    ]
+  },
+  "tasks": [
+    {
+      "source": "email",
+      "priority": "high",
+      "task": "Reply to boss@company.com: Q3 Report Review",
+      "context": "Please review the attached report before tomorrow's meeting"
+    },
+    {
+      "source": "email",
+      "priority": "high",
+      "task": "Reply to client@bigcorp.com: Project Update Request",
+      "context": "Could you send the latest status update?"
+    },
+    {
+      "source": "routine",
+      "priority": "medium",
+      "task": "Morning meditation (20 min)"
+    },
+    {
+      "source": "routine",
+      "priority": "medium",
+      "task": "Review and update project status"
+    },
+    {
+      "source": "routine",
+      "priority": "low",
+      "task": "Process inbox to zero"
+    }
+  ],
+  "insights": [
+    "☔ Rainy day - perfect for indoor focused work"
+  ],
+  "weather": {
+    "temp": "24.1°C / 75.4°F",
+    "condition": "Light rain",
+    "feelsLike": "26.7°C",
+    "humidity": "100%",
+    "uv": 1.1
+  },
+  "quotes": null,
+  "quote": {
+    "text": "The secret of getting ahead is getting started.",
+    "author": "Mark Twain"
+  }
+}

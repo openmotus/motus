@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motus OAuth Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .services {
+            display: grid;
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .service-icon {
+            font-size: 36px;
+            line-height: 1;
+        }
+
+        .service-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-not-configured {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .service-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .service-scopes {
+            flex: 1;
+        }
+
+        .scope-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .scope {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-connect {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-connect:hover:not(:disabled) {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-disconnect {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-disconnect:hover:not(:disabled) {
+            background: #c53030;
+        }
+
+        .btn-test {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-test:hover:not(:disabled) {
+            background: #38a169;
+        }
+
+        .error-message {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fee;
+            border-left: 4px solid #f56565;
+            border-radius: 4px;
+            color: #c53030;
+            font-size: 14px;
+        }
+
+        .success-message {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            border-radius: 4px;
+            color: #22543d;
+            font-size: 14px;
+        }
+
+        .test-results {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .test-results h4 {
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .test-item {
+            padding: 4px 0;
+            color: #4a5568;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .future-service {
+            opacity: 0.5;
+            position: relative;
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #805ad5;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 OAuth Manager</h1>
+        <p class="subtitle">Connect and manage your service integrations for Motus</p>
+        
+        <div class="services" id="services">
+            <!-- Services will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Check for URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            setTimeout(() => {
+                window.history.replaceState({}, document.title, '/');
+                loadStatus();
+            }, 1000);
+        }
+
+        // Load service status on page load
+        loadStatus();
+
+        async function loadStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const status = await response.json();
+                renderServices(status);
+            } catch (error) {
+                console.error('Failed to load status:', error);
+            }
+        }
+
+        function renderServices(status) {
+            const container = document.getElementById('services');
+            container.innerHTML = '';
+
+            // Render actual services
+            for (const [service, info] of Object.entries(status)) {
+                container.appendChild(createServiceCard(service, info));
+            }
+
+            // Add future services
+            const futureServices = [
+                { id: 'slack', name: 'Slack', icon: '💬' },
+                { id: 'notion', name: 'Notion', icon: '📝' },
+                { id: 'todoist', name: 'Todoist', icon: '✅' },
+                { id: 'spotify', name: 'Spotify', icon: '🎵' }
+            ];
+
+            futureServices.forEach(service => {
+                container.appendChild(createFutureServiceCard(service));
+            });
+        }
+
+        function createServiceCard(serviceId, info) {
+            const card = document.createElement('div');
+            card.className = 'service-card';
+            card.id = `service-${serviceId}`;
+
+            let statusClass = 'status-disconnected';
+            let statusText = 'Disconnected';
+            
+            if (!info.configured) {
+                statusClass = 'status-not-configured';
+                statusText = 'Not Configured';
+            } else if (info.connected) {
+                statusClass = 'status-connected';
+                statusText = 'Connected';
+            }
+
+            const scopes = getServiceScopes(serviceId);
+
+            card.innerHTML = `
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="service-icon">${info.icon}</div>
+                        <div class="service-name">${info.name}</div>
+                    </div>
+                    <div class="status-badge ${statusClass}">${statusText}</div>
+                </div>
+                ${info.error ? `<div class="error-message">${info.error}</div>` : ''}
+                <div class="service-details">
+                    <div class="service-scopes">
+                        <div style="color: #666; font-size: 12px; font-weight: 600;">PERMISSIONS</div>
+                        <div class="scope-list">
+                            ${scopes.map(scope => `<span class="scope">${scope}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="service-actions">
+                        ${info.connected ? `
+                            <button class="btn-test" onclick="testConnection('${serviceId}')">Test</button>
+                            <button class="btn-disconnect" onclick="disconnect('${serviceId}')">Disconnect</button>
+                        ` : `
+                            <button class="btn-connect" onclick="connect('${serviceId}')" 
+                                ${!info.configured ? 'disabled' : ''}>Connect</button>
+                        `}
+                    </div>
+                </div>
+                <div id="${serviceId}-results"></div>
+            `;
+
+            return card;
+        }
+
+        function createFutureServiceCard(service) {
+            const card = document.createElement('div');
+            card.className = 'service-card future-service';
+            
+            card.innerHTML = `
+                <span class="coming-soon">Coming Soon</span>
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="service-icon">${service.icon}</div>
+                        <div class="service-name">${service.name}</div>
+                    </div>
+                    <div class="status-badge status-not-configured">Not Available</div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function getServiceScopes(serviceId) {
+            const scopes = {
+                google: ['Calendar', 'Gmail'],
+                oura: ['Sleep Score', 'Activity', 'Readiness', 'Heart Rate'],
+                slack: ['Messages', 'Channels'],
+                notion: ['Pages', 'Databases'],
+                todoist: ['Tasks', 'Projects'],
+                spotify: ['Playback', 'Library']
+            };
+            return scopes[serviceId] || [];
+        }
+
+        async function connect(service) {
+            const card = document.getElementById(`service-${service}`);
+            card.classList.add('loading');
+            
+            try {
+                const response = await fetch(`/api/connect/${service}`, { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.authUrl) {
+                    window.location.href = data.authUrl;
+                } else {
+                    throw new Error(data.error || 'Failed to get auth URL');
+                }
+            } catch (error) {
+                console.error('Connection error:', error);
+                alert('Failed to initiate connection: ' + error.message);
+                card.classList.remove('loading');
+            }
+        }
+
+        async function disconnect(service) {
+            if (!confirm(`Are you sure you want to disconnect ${service}?`)) {
+                return;
+            }
+
+            const card = document.getElementById(`service-${service}`);
+            card.classList.add('loading');
+            
+            try {
+                const response = await fetch(`/api/disconnect/${service}`, { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    loadStatus();
+                } else {
+                    throw new Error(data.error || 'Failed to disconnect');
+                }
+            } catch (error) {
+                console.error('Disconnect error:', error);
+                alert('Failed to disconnect: ' + error.message);
+                card.classList.remove('loading');
+            }
+        }
+
+        async function testConnection(service) {
+            const resultsDiv = document.getElementById(`${service}-results`);
+            resultsDiv.innerHTML = '<div class="test-results"><span class="spinner"></span>Testing connection...</div>';
+            
+            try {
+                const response = await fetch(`/api/test/${service}`, { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultsDiv.innerHTML = `
+                        <div class="success-message">
+                            <h4>✅ Connection Successful</h4>
+                            ${Object.entries(data.services).map(([name, status]) => 
+                                `<div class="test-item">${name}: ${status}</div>`
+                            ).join('')}
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="error-message">
+                            <h4>❌ Connection Failed</h4>
+                            <div>${data.error}</div>
+                        </div>
+                    `;
+                }
+                
+                // Clear results after 5 seconds
+                setTimeout(() => {
+                    resultsDiv.innerHTML = '';
+                }, 5000);
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="error-message">
+                        <h4>❌ Test Failed</h4>
+                        <div>${error.message}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-refresh status every 30 seconds
+        setInterval(loadStatus, 30000);
+    </script>
+</body>
+</html>

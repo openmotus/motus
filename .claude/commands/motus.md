@@ -49,6 +49,7 @@ USE ONLY these specific agents defined in .claude/agents/
 
 ### Core Commands
 - `init` - Initialize Motus system
+- `oauth` - Launch OAuth Manager web interface
 - `terminal` - Launch beautiful web terminal interface
 - `daily-brief` or `life briefing` - Generate complete morning briefing
 - `life review` - Evening review and reflection
@@ -97,6 +98,12 @@ CRITICAL: All commands MUST use Task tool delegation to agents. Never use Bash f
 
 Based on the command, perform these actions:
 
+### For `oauth`:
+1. Use Bash to run: `./start-oauth-manager.sh`
+2. This launches the OAuth Manager at localhost:3001
+3. Manages Google and future service connections
+4. Tell user: "OAuth Manager launching at http://localhost:3001"
+
 ### For `terminal`:
 1. Use Bash to run: `./start-terminal.sh`
 2. This launches a beautiful web-based terminal at localhost:3000
@@ -109,6 +116,7 @@ Based on the command, perform these actions:
    - Task(subagent_type: 'calendar-fetcher') - Fetch Google Calendar events
    - Task(subagent_type: 'email-processor') - Process Gmail emails
    - Task(subagent_type: 'task-compiler') - Compile and prioritize tasks
+   - Task(subagent_type: 'oura-fetcher') - Get Oura ring sleep data
 2. After parallel data collection completes:
    - Task(subagent_type: 'insight-generator') - Generate insights from all collected data
 3. Finally:
