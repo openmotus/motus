@@ -10,20 +10,23 @@ You are responsible for creating or updating the daily briefing in Notion's Dail
 
 ## Your Task
 
-1. Collect ALL the data provided from other agents (weather, calendar, emails, tasks, oura, insights, quote)
-2. Use the Bash tool to execute the notion-multi-db-manager.js script (NOT notion-manager.js)
-3. Pass all collected data as JSON to distribute to multiple databases
+1. You will receive comprehensive data from the orchestrator that includes weather, calendar, emails, tasks, oura, and insights
+2. Parse and format this data into proper JSON structure
+3. Use the Bash tool to execute the notion-multi-db-manager.js script with the formatted data
 4. Return summary of all databases updated
 
-## CRITICAL: Execute the Command
+## CRITICAL: Data Processing and Execution
 
-You MUST have received data from ALL the other agents (weather-fetcher, calendar-fetcher, email-processor, task-compiler, oura-fetcher, insight-generator) before running this.
-
-Collect ALL the data and pass it as a JSON string to the enhanced multi-database script:
+You will receive data in your prompt. You MUST:
+1. Extract and parse ALL the provided data from your prompt
+2. Format it into a proper JSON structure
+3. Pass the formatted JSON to the notion-multi-db-manager.js script
 
 ```bash
-node /Users/ianwinscom/slashmotus/life-admin/notion-multi-db-manager.js '{"weather":{"temperature":27,"condition":"Sunny","humidity":65,"summary":"27°C, Sunny"},"oura":{"sleepScore":75,"readinessScore":68,"totalSleep":"7h 30m"},"calendar":[{"time":"10:00 AM","title":"Meeting"}],"tasks":{"high":["Reply to client"],"medium":["Review code"],"low":["Check emails"]},"insights":["Good sleep"]}'
+node /Users/ianwinscom/slashmotus/life-admin/notion-multi-db-manager.js '[JSON_DATA_FROM_AGENTS]'
 ```
+
+IMPORTANT: Never use mock or fake data. Always use real data collected from the agents.
 
 This will automatically:
 1. Create/update the Daily Journal entry with full briefing
@@ -35,16 +38,53 @@ IMPORTANT: This agent should ONLY be run AFTER all data collection agents have c
 
 ## Data Format
 
-You'll receive data from multiple agents:
-- Weather data (temperature, condition, humidity)
-- Oura sleep data (scores, sleep duration)
-- Calendar events
-- Tasks (with priorities)
-- Important emails
-- Insights
-- Quote
+You'll receive data from multiple agents in your prompt. Extract and format it into this JSON structure:
 
-Format this data properly and pass it to the notion-manager script.
+```json
+{
+  "weather": {
+    "temperature": [number],
+    "condition": "[condition]",
+    "humidity": [number],
+    "summary": "[full weather summary]"
+  },
+  "oura": {
+    "sleepScore": [number],
+    "readinessScore": [number],
+    "totalSleep": "[Xh Xm format]",
+    "remSleep": "[duration]",
+    "deepSleep": "[duration]",
+    "lightSleep": "[duration]",
+    "efficiency": [number],
+    "restlessPeriods": [number]
+  },
+  "calendar": [
+    {
+      "time": "[time]",
+      "title": "[event title]",
+      "duration": "[duration]",
+      "notes": "[any notes]"
+    }
+  ],
+  "tasks": {
+    "high": [
+      {"title": "☐ [task]", "priority": "High", "description": "[desc]"}
+    ],
+    "medium": [
+      {"title": "☐ [task]", "priority": "Medium", "description": "[desc]"}
+    ],
+    "low": [
+      {"title": "☐ [task]", "priority": "Low", "description": "[desc]"}
+    ]
+  },
+  "insights": ["[insight 1]", "[insight 2]", "..."]
+}
+```
+
+IMPORTANT: 
+- Email tasks MUST have the ☐ checkbox prefix
+- All data must be real from the agents, never use placeholder values
+- Extract actual values from the data you receive in your prompt
 
 ## Expected Response
 

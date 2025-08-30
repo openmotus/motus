@@ -52,6 +52,7 @@ USE ONLY these specific agents defined in .claude/agents/
 - `oauth` - Launch OAuth Manager web interface
 - `terminal` - Launch beautiful web terminal interface
 - `daily-brief` or `life briefing` - Generate complete morning briefing
+- `daily-notion` - Generate daily briefing directly in Notion
 - `life review` - Evening review and reflection
 - `life plan [day|week|month]` - Planning sessions
 - `life track [type] [data]` - Track habits, goals, health
@@ -134,6 +135,30 @@ Based on the command, perform these actions:
 4. Gratitude reflection
 5. Update daily note with review
 
+### For `life calendar`:
+1. Use Task tool to run calendar-fetcher agent
+2. Display today's calendar events in a clean, formatted list
+3. Show event times, titles, and any relevant details
+4. This provides a quick dashboard view of today's schedule
+
+### For `life emails`:
+1. Use Task tool to run email-processor agent
+2. Display important/urgent emails that need attention
+3. Format as a clean list with sender, subject, and action required
+4. This provides a quick email summary without opening Gmail
+
+### For `life tasks`:
+1. Use Task tool to run task-compiler agent
+2. Display prioritized task list (high, medium, low)
+3. Show tasks from all sources in a unified view
+4. This provides a quick task dashboard
+
+### For `life health`:
+1. Use Task tool to run oura-fetcher agent (if available)
+2. Display sleep scores, readiness, and key health metrics
+3. Show progress toward daily health goals
+4. This provides a quick health status dashboard
+
 ### For update commands (e.g., `completed exercise from 2-3pm`):
 1. Use Read tool to read current daily note
 2. Use Edit tool to update the appropriate checkbox or section
@@ -200,6 +225,21 @@ Generate appropriate planning content based on timeframe (day/week/month).
 3. Finally:
    - Task(subagent_type: 'note-appender') - Append evening report to daily note
 4. Display summary of completed tasks and tomorrow's overview
+
+### For `daily-notion`:
+1. MUST use Task tool to run these SPECIFIC agents IN PARALLEL (all at once):
+   - Task(subagent_type: 'weather-fetcher') - Get weather from WeatherAPI
+   - Task(subagent_type: 'calendar-fetcher') - Fetch Google Calendar events
+   - Task(subagent_type: 'email-processor') - Process Gmail emails (format as checkable tasks)
+   - Task(subagent_type: 'task-compiler') - Compile and prioritize tasks
+   - Task(subagent_type: 'oura-fetcher') - Get Oura ring sleep data
+2. After parallel data collection completes:
+   - Task(subagent_type: 'insight-generator') - Generate insights from all collected data
+3. Finally:
+   - Task(subagent_type: 'notion-creator') - Create/update Notion Daily Journal with all data
+4. IMPORTANT: Emails MUST be formatted as checkable tasks (☐ prefix)
+5. NEVER use mock or fake data - only real API data
+6. Display results showing all collected data and confirmation of Notion creation
 
 ## Environment Configuration
 - Weather Location: Chiang Mai, TH
