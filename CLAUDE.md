@@ -123,7 +123,6 @@ The Motus system is a Claude Code automation framework that orchestrates special
 - [ ] Exercise 4x per week
 - [ ] Read 2 books per month
 - [ ] Save 20% of income
-- [ ] Learn Spanish (30 min daily)
 
 ### Tracked Habits
 - Meditation
