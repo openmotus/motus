@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["name", "description", "department", "type"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,50}$",
+      "description": "Agent name in kebab-case (action-noun pattern)"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Human-readable agent name"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Clear description of what this agent does"
+    },
+    "department": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,30}$",
+      "description": "Parent department name"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["data-fetcher", "orchestrator", "specialist"],
+      "description": "Agent type determines template used"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Bash", "Read", "Write", "Edit", "Task", "WebFetch", "WebSearch", "Glob", "Grep", "TodoWrite"]
+      },
+      "minItems": 1,
+      "description": "Claude Code tools this agent can use"
+    },
+    "model": {
+      "type": "string",
+      "enum": ["sonnet", "haiku", "opus"],
+      "default": "sonnet",
+      "description": "Claude model to use"
+    },
+    "color": {
+      "type": "string",
+      "enum": ["cyan", "green", "yellow", "red", "blue", "magenta"],
+      "default": "cyan",
+      "description": "Terminal output color"
+    },
+    "scriptPath": {
+      "type": "string",
+      "description": "Path to implementation script (for data-fetcher agents)"
+    },
+    "apiUrl": {
+      "type": "string",
+      "description": "Base API URL (for data-fetcher agents)"
+    },
+    "apiPath": {
+      "type": "string",
+      "description": "API endpoint path"
+    },
+    "authType": {
+      "type": "string",
+      "enum": ["bearer", "api-key", "oauth2", "none"],
+      "description": "Authentication type"
+    },
+    "envVar": {
+      "type": "string",
+      "description": "Environment variable name for credentials"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Function parameters"
+    },
+    "outputFields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Fields to extract from API response"
+    },
+    "responsibilities": {
+      "type": "array",
+      "description": "List of responsibilities (for specialist agents)"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Agent capabilities"
+    },
+    "workflowSteps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Workflow process steps"
+    },
+    "parallelAgents": {
+      "type": "array",
+      "description": "Agents to run in parallel (for orchestrator)"
+    },
+    "processingAgents": {
+      "type": "array",
+      "description": "Processing agents (for orchestrator)"
+    },
+    "outputAgents": {
+      "type": "array",
+      "description": "Output agents (for orchestrator)"
+    }
+  }
+}

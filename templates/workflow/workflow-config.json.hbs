@@ -1,0 +1,51 @@
+{
+  "name": "{{kebabCase name}}",
+  "displayName": "{{capitalize name}}",
+  "department": "{{kebabCase department}}",
+  "description": "{{description}}",
+  "created": "{{timestamp}}",
+  "version": "1.0.0",
+  "status": "active",
+  "orchestrator": "{{kebabCase department}}-orchestrator",
+  "agents": [
+    {{#each steps}}
+    {{#each this.agents}}
+    "{{this.name}}"{{#unless @last}},{{/unless}}{{/each}}{{#unless @last}},
+{{/unless}}
+    {{/each}}
+  ],
+  "steps": [
+    {{#each steps}}
+    {
+      "group": {{stepNumber @index}},
+      "parallel": {{this.parallel}},
+      "agents": [
+        {{#each this.agents}}
+        {
+          "name": "{{this.name}}",
+          "prompt": "{{this.prompt}}"
+        }{{#unless @last}},{{/unless}}
+        {{/each}}
+      ]
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  {{#if trigger}}
+  "trigger": {
+    "type": "{{trigger.type}}",
+    {{#if trigger.schedule}}
+    "schedule": "{{trigger.schedule}}",
+    "timezone": "{{trigger.timezone}}",
+    {{/if}}
+    "enabled": {{trigger.enabled}}
+  },
+  {{/if}}
+  "output": {
+    "type": "{{output.type}}",
+    "destination": "{{output.destination}}"
+  },
+  "estimatedDuration": "{{estimatedDuration}}",
+  "lastRun": null,
+  "runCount": 0,
+  "successRate": 1.0
+}

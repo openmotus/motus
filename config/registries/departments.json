@@ -1,0 +1,284 @@
+{
+  "departments": {
+    "life": {
+      "name": "life",
+      "displayName": "Life Department",
+      "description": "Personal life management including daily briefings, calendar, email, health tracking, finance management, and goal tracking",
+      "created": "2025-01-01T00:00:00.000Z",
+      "status": "active",
+      "version": "1.0.0",
+      "agents": [
+        "life-admin",
+        "daily-brief-orchestrator",
+        "evening-report-orchestrator",
+        "daily-planner",
+        "health-tracker",
+        "finance-manager",
+        "goal-tracker",
+        "content-curator",
+        "weather-fetcher",
+        "calendar-fetcher",
+        "tomorrow-calendar",
+        "email-processor",
+        "task-compiler",
+        "quote-fetcher",
+        "tomorrow-weather",
+        "oura-fetcher",
+        "note-creator",
+        "note-reader",
+        "note-appender",
+        "accomplishment-analyzer",
+        "insight-generator",
+        "notion-creator",
+        "evening-review-agent"
+      ],
+      "workflows": [
+        "daily-brief",
+        "evening-report",
+        "daily-notion",
+        "evening-review"
+      ],
+      "integrations": [
+        {
+          "name": "Google Calendar",
+          "type": "oauth2",
+          "envVars": [
+            "GOOGLE_CLIENT_ID",
+            "GOOGLE_CLIENT_SECRET"
+          ],
+          "setup": "Configure via OAuth Manager at localhost:3001"
+        },
+        {
+          "name": "Gmail",
+          "type": "oauth2",
+          "envVars": [
+            "GOOGLE_CLIENT_ID",
+            "GOOGLE_CLIENT_SECRET"
+          ],
+          "setup": "Configure via OAuth Manager at localhost:3001"
+        },
+        {
+          "name": "WeatherAPI",
+          "type": "api-key",
+          "envVars": [
+            "WEATHER_API_KEY"
+          ],
+          "setup": "Get API key from weatherapi.com"
+        },
+        {
+          "name": "Notion",
+          "type": "api-key",
+          "envVars": [
+            "NOTION_API_KEY",
+            "NOTION_DATABASE_ID"
+          ],
+          "setup": "Create integration at notion.so/my-integrations"
+        },
+        {
+          "name": "Oura Ring",
+          "type": "oauth2",
+          "envVars": [
+            "OURA_ACCESS_TOKEN"
+          ],
+          "setup": "Configure via OAuth Manager at localhost:3001"
+        },
+        {
+          "name": "Obsidian",
+          "type": "file-system",
+          "envVars": [
+            "OBSIDIAN_VAULT_PATH"
+          ],
+          "setup": "Set path to Obsidian vault (usually iCloud Documents)"
+        }
+      ],
+      "responsibilities": [
+        {
+          "title": "Daily Management",
+          "tasks": [
+            "Generate daily briefings with weather, calendar, emails, tasks",
+            "Create and update Obsidian daily notes",
+            "Process and prioritize emails",
+            "Compile and organize tasks"
+          ]
+        },
+        {
+          "title": "Health & Wellness",
+          "tasks": [
+            "Track exercise and fitness metrics",
+            "Monitor sleep quality via Oura Ring",
+            "Manage nutrition and water intake",
+            "Track health goals and habits"
+          ]
+        },
+        {
+          "title": "Financial Management",
+          "tasks": [
+            "Track expenses and budgets",
+            "Monitor investments and savings",
+            "Manage bill payments",
+            "Generate financial reports"
+          ]
+        },
+        {
+          "title": "Goal Tracking",
+          "tasks": [
+            "Set and monitor personal goals",
+            "Track habit formation",
+            "Celebrate milestones",
+            "Provide progress insights"
+          ]
+        },
+        {
+          "title": "Evening Review",
+          "tasks": [
+            "Analyze daily accomplishments",
+            "Review completed tasks",
+            "Prepare tomorrow's plan",
+            "Generate evening summary"
+          ]
+        }
+      ]
+    },
+    "system": {
+      "name": "system",
+      "displayName": "System Department",
+      "description": "Meta-system agents for creating departments, agents, workflows, and managing documentation",
+      "created": "2025-10-08T00:00:00.000Z",
+      "status": "active",
+      "version": "1.0.0",
+      "agents": [
+        "department-creator",
+        "agent-creator",
+        "workflow-creator",
+        "documentation-updater"
+      ],
+      "workflows": [],
+      "integrations": [],
+      "responsibilities": [
+        {
+          "title": "Creation & Management",
+          "tasks": [
+            "Create new departments with wizard",
+            "Create agents with type auto-detection",
+            "Create workflows with step builder",
+            "Generate and update all documentation"
+          ]
+        },
+        {
+          "title": "Registry Management",
+          "tasks": [
+            "Maintain department registry",
+            "Track agent metadata",
+            "Monitor workflow configurations",
+            "Validate system integrity"
+          ]
+        }
+      ]
+    },
+    "marketing": {
+      "name": "marketing",
+      "displayName": "Marketing Department",
+      "description": "Social media marketing, content creation, campaign analytics, and brand management",
+      "created": "2025-10-08T05:20:55.940Z",
+      "status": "active",
+      "version": "1.0.0",
+      "agents": [
+        "marketing-admin",
+        "marketing-orchestrator",
+        "trend-analyzer",
+        "analytics-fetcher",
+        "social-fetcher",
+        "sentiment-analyzer",
+        "content-creator",
+        "campaign-analyzer",
+        "report-creator"
+      ],
+      "workflows": [
+        "daily-trends",
+        "content-pipeline",
+        "campaign-analytics",
+        "social-report"
+      ],
+      "integrations": [
+        {
+          "name": "Twitter API",
+          "type": "api-key",
+          "envVars": [
+            "TWITTER_API_KEY",
+            "TWITTER_API_SECRET"
+          ],
+          "setup": "Get API credentials from developer.twitter.com"
+        },
+        {
+          "name": "Google Analytics",
+          "type": "oauth2",
+          "envVars": [
+            "GOOGLE_ANALYTICS_CLIENT_ID",
+            "GOOGLE_ANALYTICS_CLIENT_SECRET"
+          ],
+          "setup": "Configure via Google Cloud Console"
+        },
+        {
+          "name": "Facebook API",
+          "type": "oauth2",
+          "envVars": [
+            "FACEBOOK_CLIENT_ID",
+            "FACEBOOK_CLIENT_SECRET"
+          ],
+          "setup": "Create app at developers.facebook.com"
+        },
+        {
+          "name": "LinkedIn API",
+          "type": "oauth2",
+          "envVars": [
+            "LINKEDIN_CLIENT_ID",
+            "LINKEDIN_CLIENT_SECRET"
+          ],
+          "setup": "Configure at linkedin.com/developers"
+        },
+        {
+          "name": "Buffer",
+          "type": "api-key",
+          "envVars": [
+            "BUFFER_API_KEY"
+          ],
+          "setup": "Get API key from buffer.com/developers"
+        }
+      ],
+      "responsibilities": [
+        {
+          "title": "Social Media Management",
+          "tasks": [
+            "Monitor trending topics across platforms",
+            "Analyze social sentiment and engagement",
+            "Schedule and post content",
+            "Track social media metrics"
+          ]
+        },
+        {
+          "title": "Content Creation",
+          "tasks": [
+            "Generate AI-powered content ideas",
+            "Create and review marketing copy",
+            "Manage content calendar",
+            "Optimize content for SEO"
+          ]
+        },
+        {
+          "title": "Campaign Analytics",
+          "tasks": [
+            "Track campaign performance",
+            "Analyze ROI and conversion rates",
+            "Generate marketing reports",
+            "Provide actionable insights"
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "totalDepartments": 3,
+    "lastUpdated": "2025-10-08T05:34:59.475Z",
+    "version": "1.0.0"
+  }
+}

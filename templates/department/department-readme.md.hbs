@@ -1,0 +1,77 @@
+# {{capitalize name}} Department
+
+**Created:** {{formatDate created}}
+**Status:** {{status}}
+**Version:** {{version}}
+
+## Overview
+
+{{description}}
+
+## Statistics
+
+- **Agents:** {{agents.length}}
+- **Workflows:** {{workflows.length}}
+- **Integrations:** {{integrations.length}}
+
+## Integrations
+
+{{#each integrations}}
+### {{this.name}}
+- **Type:** {{this.type}}
+- **Environment Variables:** {{join this.envVars ", "}}
+
+{{/each}}
+
+## Agents
+
+{{#each agents}}
+### {{this}}
+See `.claude/agents/{{kebabCase this}}.md` for details.
+
+{{/each}}
+
+## Workflows
+
+{{#each workflows}}
+### {{this}}
+See `life-admin/departments/{{kebabCase ../name}}/workflows/{{kebabCase this}}.json` for configuration.
+
+**Run Command:**
+```bash
+/motus {{kebabCase ../name}} {{kebabCase this}}
+```
+
+{{/each}}
+
+## Quick Start
+
+### Run First Workflow
+```bash
+/motus {{kebabCase name}} {{kebabCase workflows.0}}
+```
+
+### Create New Agent
+```bash
+/motus {{kebabCase name}} agent create my-new-agent
+```
+
+### Create New Workflow
+```bash
+/motus {{kebabCase name}} workflow create my-workflow
+```
+
+## Environment Setup
+
+Required environment variables:
+{{#each integrations}}
+{{#each this.envVars}}
+- `{{this}}`
+{{/each}}
+{{/each}}
+
+Add these to your `.env` file.
+
+---
+
+*Generated: {{timestamp}}*

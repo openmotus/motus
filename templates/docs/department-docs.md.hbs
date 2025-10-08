@@ -1,0 +1,111 @@
+# {{capitalize name}} Department
+
+**Created:** {{formatDate created}}
+**Status:** {{status}}
+**Version:** {{version}}
+
+## Overview
+
+{{description}}
+
+## Statistics
+
+- **Agents:** {{agents.length}}
+- **Workflows:** {{workflows.length}}
+- **Integrations:** {{integrations.length}}
+
+## Integrations
+
+{{#each integrations}}
+### {{this.name}}
+- **Type:** {{this.type}}
+- **Environment Variables:** {{join this.envVars ", "}}
+{{#if this.setup}}
+- **Setup:** {{this.setup}}
+{{/if}}
+
+{{/each}}
+
+## Agents
+
+{{#each agentDetails}}
+### {{this.displayName}}
+**Name:** `{{this.name}}`
+**Type:** {{this.type}}
+**Description:** {{this.description}}
+
+{{#if this.script}}
+**Implementation:** {{this.script}}
+{{/if}}
+
+{{#if this.usedInWorkflows}}
+**Used in Workflows:** {{join this.usedInWorkflows ", "}}
+{{/if}}
+
+{{/each}}
+
+## Workflows
+
+{{#each workflowDetails}}
+### {{this.displayName}}
+**Name:** `{{this.name}}`
+**Description:** {{this.description}}
+
+**Run Command:**
+```bash
+/motus {{kebabCase ../name}} {{kebabCase this.name}}
+```
+
+{{#if this.trigger}}
+{{#eq this.trigger.type "scheduled"}}
+**Schedule:** {{this.trigger.schedule}} ({{this.trigger.timezone}})
+{{/eq}}
+{{/if}}
+
+**Agents:** {{join this.agents ", "}}
+
+**Estimated Duration:** {{this.estimatedDuration}}
+
+{{#if this.runCount}}
+**Statistics:**
+- Total Runs: {{this.runCount}}
+- Success Rate: {{multiply this.successRate 100}}%
+- Last Run: {{formatDate this.lastRun}}
+{{/if}}
+
+{{/each}}
+
+## Quick Start
+
+### Run Primary Workflow
+```bash
+/motus {{kebabCase name}} {{kebabCase workflows.0}}
+```
+
+### Create New Agent
+```bash
+/motus {{kebabCase name}} agent create my-new-agent
+```
+
+### Create New Workflow
+```bash
+/motus {{kebabCase name}} workflow create my-workflow
+```
+
+## Environment Setup
+
+Required environment variables:
+```bash
+{{#each integrations}}
+{{#each this.envVars}}
+{{this}}=your_value_here
+{{/each}}
+{{/each}}
+```
+
+Add these to your `.env` file.
+
+---
+
+*Auto-generated: {{timestamp}}*
+*Do not edit manually - use `/motus docs update` to regenerate*

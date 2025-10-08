@@ -64,6 +64,19 @@ USE ONLY these specific agents defined in .claude/agents/
 - `status` - System status
 - `help` - Show help
 
+### Creation System Commands (New)
+- `department create [name]` - Create new department with interactive wizard
+- `department list` - List all departments
+- `department info [name]` - Show department details
+- `[dept] agent create [name]` - Create agent in specified department
+- `[dept] agent list` - List agents in department
+- `[dept] agent info [name]` - Show agent details
+- `[dept] workflow create [name]` - Create workflow in department
+- `[dept] workflow list` - List workflows in department
+- `[dept] workflow info [name]` - Show workflow details
+- `docs update` - Regenerate all documentation from registries
+- `docs show` - Display command reference
+
 ### Workflow Commands
 - `workflow list` - List all available workflows
 - `workflow create` - Create new workflow with wizard
@@ -240,6 +253,70 @@ Generate appropriate planning content based on timeframe (day/week/month).
 4. IMPORTANT: Emails MUST be formatted as checkable tasks (☐ prefix)
 5. NEVER use mock or fake data - only real API data
 6. Display results showing all collected data and confirmation of Notion creation
+
+### For `department create [name]`:
+1. Use Task tool to delegate to department-creator agent
+2. Pass department name as parameter
+3. The agent will guide through interactive wizard
+4. Creates complete department with agents, workflows, documentation
+5. Example: /motus department create marketing
+
+### For `department list`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => rm.listDepartments()).then(d => console.log(JSON.stringify(d, null, 2)));"`
+2. Display all departments with their agent/workflow counts
+3. Format as clean list with status
+
+### For `department info [name]`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => console.log(JSON.stringify(rm.getDepartment('${name}'), null, 2)));"`
+2. Display department details: agents, workflows, integrations, responsibilities
+3. Format as readable summary
+
+### For `[dept] agent create [name]`:
+1. Use Task tool to delegate to agent-creator agent
+2. Pass department and agent name as parameters
+3. The agent will guide through interactive wizard
+4. Auto-detects agent type (data-fetcher/orchestrator/specialist)
+5. Generates agent definition and implementation
+6. Example: /motus life agent create trend-analyzer
+
+### For `[dept] agent list`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => rm.listAgentsByDepartment('${dept}')).then(a => console.log(JSON.stringify(a, null, 2)));"`
+2. Display all agents in department
+3. Show agent type, description
+
+### For `[dept] agent info [name]`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => console.log(JSON.stringify(rm.getAgent('${name}'), null, 2)));"`
+2. Display agent details: type, tools, workflows using it
+3. Format as readable summary
+
+### For `[dept] workflow create [name]`:
+1. Use Task tool to delegate to workflow-creator agent
+2. Pass department and workflow name as parameters
+3. The agent will guide through interactive step builder
+4. Auto-detects parallel vs sequential execution
+5. Generates workflow config and trigger scripts
+6. Example: /motus life workflow create weekly-report
+
+### For `[dept] workflow list`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => rm.listWorkflowsByDepartment('${dept}')).then(w => console.log(JSON.stringify(w, null, 2)));"`
+2. Display all workflows in department
+3. Show trigger type, agent count, last run
+
+### For `[dept] workflow info [name]`:
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => console.log(JSON.stringify(rm.getWorkflow('${dept}', '${name}'), null, 2)));"`
+2. Display workflow details: steps, agents, trigger, output
+3. Format as readable workflow diagram
+
+### For `docs update`:
+1. Use Task tool to delegate to documentation-updater agent
+2. Agent regenerates all documentation from registries
+3. Creates/updates: COMMANDS_REFERENCE.md, department docs, CLAUDE.md
+4. Display confirmation of updated files
+
+### For `docs show`:
+1. Use Read tool to read org-docs/COMMANDS_REFERENCE.md
+2. Display the master command reference
+3. Format for terminal display
 
 ## Environment Configuration
 - Weather Location: Chiang Mai, TH

@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["name", "department", "description", "steps"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,50}$",
+      "description": "Workflow name in kebab-case"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Human-readable workflow name"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "What this workflow accomplishes"
+    },
+    "department": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,30}$",
+      "description": "Parent department name"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["parallel", "agents"],
+        "properties": {
+          "group": {
+            "type": "number",
+            "minimum": 1
+          },
+          "parallel": {
+            "type": "boolean",
+            "description": "Whether agents in this step run in parallel"
+          },
+          "agents": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["name", "prompt"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Agent name"
+                },
+                "prompt": {
+                  "type": "string",
+                  "minLength": 5,
+                  "description": "Specific instruction for this agent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "required": ["type", "enabled"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["manual", "scheduled", "event"],
+          "description": "How this workflow is triggered"
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Cron-like schedule (e.g., 'daily 9:00', 'weekly Monday 10am')"
+        },
+        "timezone": {
+          "type": "string",
+          "default": "UTC",
+          "description": "Timezone for scheduled triggers"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether trigger is active"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["type", "destination"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["obsidian", "notion", "console", "file", "email"],
+          "description": "Output format"
+        },
+        "destination": {
+          "type": "string",
+          "description": "Where output is saved"
+        }
+      }
+    },
+    "estimatedDuration": {
+      "type": "string",
+      "description": "Estimated execution time (e.g., '10-15 seconds')"
+    }
+  }
+}

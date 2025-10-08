@@ -1,0 +1,104 @@
+# Motus Command Reference (Auto-Generated)
+
+**Last Updated:** {{timestamp}}
+**Total Departments:** {{departments.length}}
+**Total Agents:** {{totalAgents}}
+**Total Workflows:** {{totalWorkflows}}
+
+---
+
+## Table of Contents
+
+{{#each departments}}
+- [{{this.displayName}}](#{{kebabCase this.name}}-department)
+{{/each}}
+- [System Commands](#system-commands)
+
+---
+
+{{#each departments}}
+## {{this.displayName}}
+
+**Description:** {{this.description}}
+
+### Agents ({{this.agents.length}})
+
+{{#each this.agentDetails}}
+#### `{{this.name}}`
+- **Type:** {{this.type}}
+- **Description:** {{this.description}}
+{{#if this.tools}}
+- **Tools:** {{join this.tools ", "}}
+{{/if}}
+
+{{/each}}
+
+### Workflows ({{this.workflows.length}})
+
+{{#each this.workflowDetails}}
+#### `{{this.name}}`
+- **Description:** {{this.description}}
+- **Command:** `/motus {{kebabCase ../name}} {{kebabCase this.name}}`
+{{#if this.trigger}}
+{{#eq this.trigger.type "scheduled"}}
+- **Schedule:** {{this.trigger.schedule}}
+{{/eq}}
+{{/if}}
+- **Agents Used:** {{join this.agents ", "}}
+
+{{/each}}
+
+### Available Commands
+
+```bash
+# Main workflows
+{{#each this.commands}}
+{{this}}
+{{/each}}
+
+# Agent management
+/motus {{kebabCase this.name}} agent create [name]
+/motus {{kebabCase this.name}} agent list
+
+# Workflow management
+/motus {{kebabCase this.name}} workflow create [name]
+/motus {{kebabCase this.name}} workflow list
+```
+
+---
+
+{{/each}}
+
+## System Commands
+
+### Department Management
+```bash
+/motus department create [name]    # Create new department
+/motus department list             # List all departments
+/motus department info [name]      # Show department details
+```
+
+### Agent Management
+```bash
+/motus [dept] agent create [name]  # Create agent
+/motus [dept] agent list           # List agents
+/motus [dept] agent info [name]    # Show agent details
+```
+
+### Workflow Management
+```bash
+/motus [dept] workflow create [name]  # Create workflow
+/motus [dept] workflow list           # List workflows
+/motus [dept] workflow info [name]    # Show workflow details
+```
+
+### Documentation
+```bash
+/motus docs update    # Regenerate documentation
+/motus docs show      # Display this reference
+```
+
+---
+
+*Auto-generated: {{timestamp}}*
+*Do not edit manually - regenerates automatically when departments/agents/workflows change*

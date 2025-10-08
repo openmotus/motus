@@ -1,0 +1,71 @@
+---
+name: {{kebabCase name}}
+description: {{description}}
+tools: {{toolsList tools}}
+model: {{model}}
+color: {{color}}
+---
+
+You are the {{capitalize name}} Agent, a specialist for {{lowercase domain}}.
+
+## Primary Responsibilities
+
+{{#each responsibilities}}
+{{stepNumber @index}}. **{{this.title}}**
+   {{#each this.tasks}}
+   - {{this}}
+   {{/each}}
+
+{{/each}}
+
+## Capabilities
+
+{{#each capabilities}}
+- {{this}}
+{{/each}}
+
+## Workflow Process
+
+When handling {{lowercase name}} requests:
+{{#each workflowSteps}}
+{{stepNumber @index}}. {{this}}
+{{/each}}
+
+{{#if integrations}}
+## Integration Points
+
+{{#each integrations}}
+- **{{this.name}}**: {{this.description}}
+{{/each}}
+{{/if}}
+
+{{#if decisionLogic}}
+## Decision Logic
+
+{{#each decisionLogic}}
+### {{this.condition}}
+{{this.action}}
+
+{{/each}}
+{{/if}}
+
+## Output Standards
+
+Always provide:
+- Clear, actionable recommendations
+- Data-driven insights where applicable
+- Prioritized action items
+- Comprehensive but concise responses
+
+{{#if examples}}
+## Example Interactions
+
+{{#each examples}}
+### Example {{stepNumber @index}}
+**User:** {{this.user}}
+**You:** {{this.response}}
+
+{{/each}}
+{{/if}}
+
+Focus on {{lowercase purpose}} while maintaining high quality and accuracy in all outputs.

@@ -92,16 +92,103 @@ The Motus system is a Claude Code automation framework that orchestrates special
 - Notion pages use database properties and content blocks
 - Email items must be formatted as checkable tasks (☐ prefix)
 
+## Standardized Creation System ✅ Phase 2 Complete
+
+Motus includes a wizard-driven system for consistently creating departments, agents, and workflows:
+
+### Creation Commands
+```bash
+# Department Management
+/motus department create [name]      # Interactive wizard creates full department
+/motus department list               # Show all departments
+/motus department info [name]        # Department details
+
+# Agent Management (within departments)
+/motus [dept] agent create [name]    # Create agent in department
+/motus [dept] agent list             # List department agents
+/motus [dept] agent info [name]      # Agent details
+
+# Workflow Management
+/motus [dept] workflow create [name] # Create workflow in department
+/motus [dept] workflow list          # List workflows
+/motus [dept] workflow info [name]   # Workflow details
+
+# Documentation (auto-generated)
+/motus docs update                   # Regenerate all docs from registries
+/motus docs show                     # Display command reference
+```
+
+### Phase 2 Components (Completed)
+**Libraries:**
+- ✅ **Template Engine** (`/lib/template-engine.js`) - Handlebars with 20+ helpers, schema validation
+- ✅ **Registry Manager** (`/lib/registry-manager.js`) - CRUD for departments, agents, workflows with validation
+- ✅ **Validator** (`/lib/validator.js`) - Name validation, type detection, context validation
+
+**Creator Agents:**
+- ✅ **department-creator** (`.claude/agents/department-creator.md`) - Interactive wizard, auto-suggests agents/workflows
+- ✅ **agent-creator** (`.claude/agents/agent-creator.md`) - Auto-detects type (data-fetcher/orchestrator/specialist)
+- ✅ **workflow-creator** (`.claude/agents/workflow-creator.md`) - Step builder with parallel/sequential detection
+- ✅ **documentation-updater** (`.claude/agents/documentation-updater.md`) - Auto-generates all docs from registries
+
+**Templates:** (14 templates)
+- Department: `department-agent.md`, `orchestrator-agent.md`
+- Agents: `data-fetcher-agent.md`, `data-fetcher-script.js`, `orchestrator-agent.md`, `specialist-agent.md`
+- Workflows: `workflow-config.json`, `workflow-trigger.sh`
+- Documentation: `commands-reference.md`, `department-docs.md`
+
+**Testing:**
+- ✅ Template engine tests (7/7 passing)
+- ✅ Phase 2 components tests (48/48 passing)
+
+### Registry Files
+- `config/registries/departments.json` - All departments with metadata
+- `config/registries/agents.json` - All agents organized by department
+- `config/registries/workflows.json` - All workflows with execution data
+
+### Auto-Generated Documentation
+- `org-docs/COMMANDS_REFERENCE.md` - Master command reference
+- `org-docs/departments/[dept].md` - Per-department documentation
+- This file (CLAUDE.md) - Architecture updates
+
+See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan.
+
 ## Working Directory Structure
 ```
 /Users/ianwinscom/slashmotus/
 ├── .claude/
-│   ├── agents/           # Specialized agent definitions
+│   ├── agents/           # Specialized agent definitions (26 existing)
 │   └── commands/         # Command configurations
-├── lib/                  # Core libraries
-├── data/                 # Local data storage
-├── motus                 # Main executable
-└── CLAUDE.md            # This file (persistent memory)
+├── templates/            # Handlebars templates for creation system
+│   ├── department/       # Department templates
+│   ├── agent/           # Agent templates (by type)
+│   ├── workflow/        # Workflow templates
+│   └── docs/            # Documentation templates
+├── config/
+│   └── registries/      # Central registry system
+│       ├── departments.json
+│       ├── agents.json
+│       └── workflows.json
+├── lib/                 # Core libraries
+│   ├── template-engine.js    # Template rendering
+│   ├── registry-manager.js   # Registry CRUD
+│   ├── validator.js          # Validation system
+│   └── doc-generator.js      # Auto-doc generation
+├── org-docs/            # Auto-generated documentation
+│   ├── COMMANDS_REFERENCE.md
+│   └── departments/
+├── life-admin/
+│   ├── departments/     # Organized by department
+│   │   └── life/
+│   │       ├── agents/
+│   │       └── workflows/
+│   └── [existing scripts...]
+├── data/                # Local data storage
+├── docs/                # Master documentation
+│   ├── STANDARDIZED-CREATION-SYSTEM-PLAN.md
+│   ├── PROJECT_OVERVIEW.md
+│   └── AGENT_DEVELOPMENT_GUIDE.md
+├── motus                # Main executable
+└── CLAUDE.md           # This file (persistent memory)
 ```
 
 ## Development Notes

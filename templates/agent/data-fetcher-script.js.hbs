@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+{{commentHeader name}}
+
+require('dotenv').config();
+const axios = require('axios');
+
+/**
+ * {{capitalize name}}
+ * {{description}}
+ */
+
+async function {{camelCase name}}({{#if parameters}}{{join parameters ", "}}{{/if}}) {
+  try {
+    {{#if authType}}
+    {{#eq authType "bearer"}}
+    const apiKey = process.env.{{#if envVar}}{{uppercase envVar}}{{else}}API_KEY{{/if}};
+    {{/eq}}
+    {{#eq authType "api-key"}}
+    const apiKey = process.env.{{#if envVar}}{{uppercase envVar}}{{else}}API_KEY{{/if}};
+    {{/eq}}
+    {{/if}}
+
+    const response = await axios.get('{{apiUrl}}{{apiPath}}', {
+      {{#if authType}}
+      {{#eq authType "bearer"}}
+      headers: {
+        'Authorization': 'Bearer ' + apiKey
+      },
+      {{/eq}}
+      {{#eq authType "api-key"}}
+      headers: {
+        'X-API-Key': apiKey
+      },
+      {{/eq}}
+      {{/if}}
+      {{#if queryParams}}
+      params: {
+        {{#each queryParams}}
+        {{this.key}}: {{#if this.env}}process.env.{{uppercase this.env}}{{else}}'{{this.value}}'{{/if}},
+        {{/each}}
+      }
+      {{/if}}
+    });
+
+    const data = {
+      {{#each outputFields}}
+      {{this.key}}: response.data.{{this.path}},
+      {{/each}}
+      timestamp: new Date().toISOString()
+    };
+
+    return data;
+  } catch (error) {
+    console.error('Error in {{camelCase name}}:', error.message);
+    return {
+      error: error.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
+// If run directly, output JSON
+if (require.main === module) {
+  {{#if parameters}}
+  const {{#each parameters}}{{#if @first}}{{this}}{{/if}}{{/each}} = process.argv[2]{{#if defaultValue}} || '{{defaultValue}}'{{/if}};
+  {{camelCase name}}({{#each parameters}}{{#if @first}}{{this}}{{/if}}{{/each}}).then(data => {
+  {{else}}
+  {{camelCase name}}().then(data => {
+  {{/if}}
+    console.log(JSON.stringify(data, null, 2));
+  }).catch(console.error);
+}
+
+module.exports = { {{camelCase name}} };
