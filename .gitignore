@@ -65,6 +65,11 @@ org-docs/departments/*.md
 ~/.motus/
 .motus/
 
+# Hook configurations (personal automation)
+.claude/hooks.json
+.claudecode/hooks/
+.claudecode/mcp/
+
 # Keep example files
 !.env.example
 !org-docs/departments/.gitkeep
