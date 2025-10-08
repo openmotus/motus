@@ -50,6 +50,8 @@ token.json
 data/
 life-admin/
 marketing/
+archive/
+docs/
 org-docs/departments/*.md
 !docs/examples/
 ~/.motus/
