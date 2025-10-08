@@ -2,6 +2,8 @@
 
 Learn how to create automated workflows that combine multiple agents into powerful automation sequences.
 
+> **💡 Note**: This guide uses example workflows like "daily-briefing" and "content-pipeline" to illustrate concepts. These are examples of workflows you can build - Motus creates the workflow structure and configuration, you implement the agents that power them.
+
 ## Understanding Workflows
 
 Workflows are automated processes that combine multiple agents to accomplish complex tasks. They can run manually on-demand or automatically on a schedule.

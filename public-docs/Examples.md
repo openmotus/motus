@@ -2,6 +2,8 @@
 
 Real-world examples of departments, agents, and workflows you can build with Motus.
 
+> **💡 Important**: These are examples of systems you **CAN BUILD** with Motus, not pre-built features included in the framework. Motus provides the structure (departments, agents, workflows, templates) - you provide the implementation (the actual code for each agent). Each example below shows the commands to create the structure and describes what logic you would implement.
+
 ## Life Management Examples
 
 ### Example 1: Daily Briefing System

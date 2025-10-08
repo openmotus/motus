@@ -324,9 +324,11 @@ OPENAI_API_KEY=sk-your_openai_key
 
 ## Configuration by Department
 
-Different departments require different integrations:
+Different departments require different integrations. Below are examples of departments you might create and the environment variables they would use:
 
-### Life Department
+> **💡 Note**: These are example department configurations. Create departments that match your needs and configure the variables for the integrations you choose to use.
+
+### Life Department Example
 
 **Required**:
 - `TIMEZONE` - For scheduling
@@ -338,7 +340,7 @@ Different departments require different integrations:
 - `NOTION_API_KEY/DATABASE_ID` - For Notion briefings
 - `OURA_ACCESS_TOKEN` - For health tracking
 
-### Marketing Department
+### Marketing Department Example
 
 **Required**:
 - `TIMEZONE` - For scheduling
@@ -349,7 +351,7 @@ Different departments require different integrations:
 - `FACEBOOK_*` - For Facebook analytics
 - `BUFFER_ACCESS_TOKEN` - For social posting
 
-### Finance Department
+### Finance Department Example
 
 **Required**:
 - `TIMEZONE` - For scheduling

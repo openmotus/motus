@@ -2,6 +2,8 @@
 
 Learn how to create specialized AI agents in /Motus. Agents are the workers that perform tasks within your departments.
 
+> **💡 Note**: This guide uses examples like "weather-fetcher" and "calendar-fetcher" to illustrate concepts. These are examples of agents you can build - Motus creates the agent structure and templates, you implement the actual logic.
+
 ## Understanding Agents
 
 Agents are AI assistants that live inside Claude Code and perform specific tasks. Each agent has:
@@ -58,9 +60,10 @@ Purpose: Coordinate daily marketing workflows
 Name: weather-fetcher
 Type: Data Fetcher
 Tools: Bash, Read
-Script: life-admin/weather-fetcher.js
 Purpose: Get current weather from WeatherAPI
 ```
+
+When you create this agent, the wizard generates the agent definition file and optionally creates a script template at `<department>/agents/weather-fetcher.js` that you would implement.
 
 ### 3. Specialist Agents
 

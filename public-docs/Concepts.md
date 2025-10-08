@@ -126,7 +126,7 @@ Responsibility: Coordinate daily trend analysis workflow
 ```markdown
 Name: weather-fetcher
 Tools: Bash, Read
-Script: life-admin/weather-fetcher.js
+Script: <department>/agents/weather-fetcher.js
 Responsibility: Get weather from WeatherAPI
 ```
 
