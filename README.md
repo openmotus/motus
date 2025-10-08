@@ -10,7 +10,27 @@
 
 ## 🚀 What is Motus?
 
-Motus is a sophisticated automation framework that helps you organize your life and business through AI-powered **departments**, **agents**, and **workflows**. Create your personal AI organization that runs 24/7, handling everything from daily briefings to marketing campaigns.
+Motus is a sophisticated automation **framework** that provides the structure to organize your life and business through AI-powered **departments**, **agents**, and **workflows**. You build your personal AI organization using Motus's creation system and templates—you provide the implementation, Motus provides the architecture.
+
+### What You Get ✅
+
+- **Creation System** - Wizards to generate departments, agents, and workflows
+- **Template Engine** - 11 Handlebars templates for consistent code generation
+- **Registry System** - Centralized tracking of all your departments, agents, and workflows
+- **OAuth Manager** - Web UI to manage API integrations with any OAuth2 service
+- **Documentation Generator** - Auto-generates docs from your setup
+- **Project Structure** - Organized directory layout for departments and agents
+
+### What You DON'T Get ❌
+
+- Pre-built departments (Life, Marketing, etc.) - You create your own
+- Implemented agents - You write the implementation logic
+- Pre-configured integrations - You add your own API keys and services
+- Ready-to-run workflows - You define the workflow steps
+
+**Think of it like this:**
+- **Rails** is a web framework → You build your own web apps
+- **Motus** is an automation framework → You build your own automation systems
 
 ### Key Features
 
@@ -40,6 +60,8 @@ Motus is a sophisticated automation framework that helps you organize your life 
 ```
 
 ## 🎯 Use Cases
+
+> **Note**: These are examples of what you **can build** with Motus, not pre-built features. Motus provides the framework—you implement the functionality.
 
 ### Life Management
 - 📅 Daily briefings with weather, calendar, and tasks
@@ -95,12 +117,11 @@ chmod +x motus
 
 # Create a workflow
 /motus tasks workflow create daily-tasks
-
-# Run the workflow
-/motus tasks daily-tasks
 ```
 
-**Done!** You just created your first automated system. 🎉
+**What just happened?** Motus created the department structure, agent definition, and workflow configuration.
+
+**Next step**: Implement your agent's logic by editing the generated files. Motus provides the structure and templates—you add the actual functionality. See the [Creating Agents](public-docs/Creating-Agents.md) guide for implementation details.
 
 ## 📚 Documentation
 
@@ -264,12 +285,13 @@ Need help?
 - [ ] Mobile notifications for workflow completion
 - [ ] Advanced analytics and insights
 
-## 📊 Stats
+## 📊 What's Included
 
-- **Departments**: Create unlimited departments
-- **Agents**: 40+ templates included
-- **Integrations**: 10+ services supported
-- **Templates**: Handlebars with 20+ helpers
+- **Creator Agents**: 4 wizards (department, agent, workflow, documentation)
+- **Templates**: 11 Handlebars templates for code generation
+- **Template Helpers**: 20+ helpers for complex logic
+- **Integration Framework**: OAuth Manager (supports any OAuth2 service)
+- **Core Libraries**: 5 libraries (registry, template engine, validator, OAuth, doc generator)
 
 ---
 

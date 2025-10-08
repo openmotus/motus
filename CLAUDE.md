@@ -12,85 +12,90 @@ npm install
 # Run main Motus command
 ./motus [command] [options]
 
-# Core life automation commands
-./motus daily-brief        # Generate morning briefing with weather, calendar, emails, tasks
-./motus daily-notion       # Create daily briefing in Notion database
-./motus evening-report     # Generate evening accomplishment report
-./motus life review        # Interactive evening review
-./motus life calendar      # Check today's calendar
-./motus life emails        # Review important emails
-./motus life tasks         # View prioritized tasks
+# Creation system commands (used within Claude Code)
+/motus department create [name]      # Create new department
+/motus [dept] agent create [name]    # Create new agent in department
+/motus [dept] workflow create [name] # Create new workflow in department
+/motus docs update                   # Regenerate all documentation
 
-# OAuth and authentication
+# OAuth Manager
 ./start-oauth-manager.sh   # Launch OAuth Manager at localhost:3001
 
-# Automation setup
-./setup-automation.sh      # Configure automated workflows
-./install-cron.sh          # Install scheduled tasks
+# Your custom commands will be created as:
+/motus [department] [workflow]       # Run department workflows
 ```
 
 ### Environment Configuration
-Copy `.env.example` to `.env` and configure:
-- `WEATHER_API_KEY` - WeatherAPI.com key for weather data
-- `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` - Google OAuth credentials
-- `NOTION_API_KEY`, `NOTION_DATABASE_ID` - Notion integration tokens
-- `OBSIDIAN_VAULT_PATH` - Path to Obsidian vault (usually `/Users/username/Library/Mobile Documents/iCloud~md~obsidian/Documents`)
+Copy `.env.example` to `.env` and configure with your API keys and service credentials.
+
+**Example variables** (add what you need for your integrations):
+- `YOUR_API_KEY` - API keys for services you integrate
+- `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET` - OAuth credentials
+- `SERVICE_TOKEN` - Service-specific tokens
+- `FILE_PATH` - Paths to local resources
+
+See `.env.example` for the template structure.
 
 ## Architecture Overview
 
 ### System Architecture
-The Motus system is a Claude Code automation framework that orchestrates specialized AI agents for life and business management:
+Motus is a framework for building department-based AI automation systems within Claude Code:
 
 1. **Command Entry Point** (`/motus` command in `.claude/commands/motus.md`)
-   - Routes commands to appropriate handlers
-   - MUST use Task tool for parallel agent execution (never sequential)
-   - Delegates to specialized agents defined in `.claude/agents/`
+   - Routes commands to department handlers
+   - Uses Task tool for parallel agent execution when appropriate
+   - Delegates to agents defined in `.claude/agents/`
 
-2. **Agent Orchestration Pattern**
-   - **Parallel Execution**: Data collection agents (weather, calendar, email, tasks) run simultaneously
-   - **Sequential Processing**: Analysis and creation agents run after data collection
-   - **Specialized Agents**: Each agent has a single responsibility (weather fetching, calendar reading, etc.)
+2. **Three-Layer Structure**
+   - **Departments**: Organizational units (e.g., Tasks, Marketing, Finance)
+   - **Agents**: AI assistants that perform specific functions
+     - **Orchestrators**: Coordinate workflows and other agents
+     - **Data Fetchers**: Retrieve information from external sources
+     - **Specialists**: Analyze data, make decisions, create content
+   - **Workflows**: Automated processes combining multiple agents
 
-3. **Key Agents** (in `.claude/agents/`)
-   - `weather-fetcher` - Gets weather from WeatherAPI
-   - `calendar-fetcher` - Retrieves Google Calendar events  
-   - `email-processor` - Processes Gmail for important emails
-   - `task-compiler` - Compiles and prioritizes tasks
-   - `oura-fetcher` - Gets Oura ring sleep data
-   - `insight-generator` - Analyzes data and generates insights
-   - `note-creator` - Creates/updates Obsidian daily notes
-   - `notion-creator` - Creates Notion Daily Journal entries
+3. **Creator Agents** (in `.claude/agents/`)
+   - `department-creator` - Interactive wizard for creating departments
+   - `agent-creator` - Generates agent definitions and implementation templates
+   - `workflow-creator` - Builds workflow configurations
+   - `documentation-updater` - Auto-generates documentation from registries
 
-### Integration Points
-- **Obsidian**: Daily notes in vault at `OBSIDIAN_VAULT_PATH/Daily/`
-- **Notion**: Daily Journal database via Notion API
-- **Google Services**: Calendar and Gmail via OAuth2
-- **WeatherAPI**: Current and forecast weather data
-- **Oura Ring**: Sleep and health metrics via API
+### Agent Types and Patterns
 
-### Data Flow for Daily Brief
-1. Parallel data collection from all sources
-2. Data aggregation and insight generation
-3. Note creation in Obsidian or Notion
-4. User receives formatted summary
+**Orchestrator Agents**
+- Coordinate multiple agents
+- Manage workflow execution
+- Aggregate results from sub-agents
+- Example: A "daily-report" orchestrator that runs data-fetchers in parallel
 
-## Critical Implementation Rules
+**Data Fetcher Agents**
+- Single-purpose data retrieval
+- Execute quickly and independently
+- Return structured data
+- Example: Weather fetcher, calendar fetcher, API data retriever
 
-### Agent Execution
-- **ALWAYS** use Task tool for agent delegation, never Bash
-- **ALWAYS** run data collection agents in parallel (weather, calendar, email, tasks)
-- **NEVER** use sequential execution for independent data sources
-- **USE** specific agents from `.claude/agents/`, not generic scripts
+**Specialist Agents**
+- Analyze and process data
+- Make decisions or create content
+- May use Claude's intelligence
+- Example: Content analyzer, report generator, task prioritizer
 
-### API Integration
-- Use actual API integrations (Weather, Google, Notion), never mock data
-- Store credentials securely in `.env` file
-- Use OAuth2 for Google services via OAuth Manager
+### Execution Patterns
 
-### Daily Note Format
-- Obsidian notes use markdown with checkboxes and sections
-- Notion pages use database properties and content blocks
-- Email items must be formatted as checkable tasks (☐ prefix)
+**Parallel Execution** (for independent tasks):
+- Use Claude Code Task tool
+- Run multiple agents simultaneously
+- Ideal for data collection from multiple sources
+
+**Sequential Execution** (for dependent tasks):
+- One task completes before next starts
+- Used when later steps need earlier results
+- Common for analysis → decision → action workflows
+
+**Hybrid Execution**:
+- Parallel data collection
+- Sequential analysis and action
+- Most efficient for complex workflows
 
 ## Standardized Creation System ✅ Phase 2 Complete
 
@@ -130,15 +135,16 @@ Motus includes a wizard-driven system for consistently creating departments, age
 - ✅ **workflow-creator** (`.claude/agents/workflow-creator.md`) - Step builder with parallel/sequential detection
 - ✅ **documentation-updater** (`.claude/agents/documentation-updater.md`) - Auto-generates all docs from registries
 
-**Templates:** (14 templates)
+**Templates:** (11 total)
 - Department: `department-agent.md`, `orchestrator-agent.md`
 - Agents: `data-fetcher-agent.md`, `data-fetcher-script.js`, `orchestrator-agent.md`, `specialist-agent.md`
 - Workflows: `workflow-config.json`, `workflow-trigger.sh`
 - Documentation: `commands-reference.md`, `department-docs.md`
+- Schema: `agent-schema.json`
 
 **Testing:**
-- ✅ Template engine tests (7/7 passing)
-- ✅ Phase 2 components tests (48/48 passing)
+- ✅ 3 test suites: `test-template-engine.js`, `test-phase2-components.js`, `test-phase3-integration.js`
+- ⚠️ Comprehensive test coverage recommended for production use
 
 ### Registry Files
 - `config/registries/departments.json` - All departments with metadata
@@ -154,47 +160,59 @@ See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan
 
 ## Working Directory Structure
 ```
-/Users/ianwinscom/motus/
+/path/to/motus/
 ├── .claude/
-│   ├── agents/           # Specialized agent definitions (26 existing)
+│   ├── agents/           # Creator agents (4 agents)
+│   │   ├── department-creator.md
+│   │   ├── agent-creator.md
+│   │   ├── workflow-creator.md
+│   │   └── documentation-updater.md
 │   └── commands/         # Command configurations
+│       └── motus.md      # Main /motus command
 ├── templates/            # Handlebars templates for creation system
 │   ├── department/       # Department templates
 │   ├── agent/           # Agent templates (by type)
 │   ├── workflow/        # Workflow templates
-│   └── docs/            # Documentation templates
+│   ├── docs/            # Documentation templates
+│   └── schemas/         # JSON schemas
 ├── config/
 │   └── registries/      # Central registry system
-│       ├── departments.json
-│       ├── agents.json
-│       └── workflows.json
-├── lib/                 # Core libraries
+│       ├── departments.json  # Empty by default
+│       ├── agents.json       # Empty by default
+│       └── workflows.json    # Empty by default
+├── lib/                 # Core libraries (5 libraries)
 │   ├── template-engine.js    # Template rendering
 │   ├── registry-manager.js   # Registry CRUD
 │   ├── validator.js          # Validation system
+│   ├── oauth-registry.js     # OAuth management
 │   └── doc-generator.js      # Auto-doc generation
+├── oauth-manager/       # OAuth Manager server
+│   ├── server.js
+│   └── public/         # Web UI
 ├── org-docs/            # Auto-generated documentation
 │   ├── COMMANDS_REFERENCE.md
-│   └── departments/
-├── life-admin/
-│   ├── departments/     # Organized by department
-│   │   └── life/
-│   │       ├── agents/
-│   │       └── workflows/
-│   └── [existing scripts...]
-├── data/                # Local data storage
-├── docs/                # Master documentation
+│   └── departments/    # Created as you add departments
+├── public-docs/         # User-facing documentation (16 files)
+├── docs/                # Technical documentation
 │   ├── STANDARDIZED-CREATION-SYSTEM-PLAN.md
 │   ├── PROJECT_OVERVIEW.md
-│   └── AGENT_DEVELOPMENT_GUIDE.md
-├── motus                # Main executable
-└── CLAUDE.md           # This file (persistent memory)
+│   └── GAP-REPORT.md
+├── tests/               # Test suites (3 files)
+├── .env.example         # Environment template
+├── motus                # Main CLI executable
+└── CLAUDE.md           # This file
 ```
+
+**Your departments will be created at:**
+- `.claude/agents/[department-name]-[agent-name].md` - Agent definitions
+- Custom directories you create for implementations
 
 ## Development Notes
 - Node.js 18+ required
 - Uses Commander for CLI parsing
 - Axios for HTTP requests
-- Google APIs and Notion SDK for integrations
-- All timestamps in user's configured timezone (default: Asia/Bangkok)
+- Handlebars for templating
+- JSON-based registries for state management
+- OAuth2 integration support via OAuth Manager
+- Extensible architecture for custom integrations
 

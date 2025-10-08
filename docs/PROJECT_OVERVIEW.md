@@ -1,581 +1,731 @@
-# Motus - AI Life & Business Automation System
+# Motus - AI Automation Framework
+
+**A framework for building department-based AI automation systems with Claude Code CLI**
+
+---
 
 ## What is Motus?
 
-Motus is a sophisticated AI-powered automation framework built exclusively for Claude Code CLI that enables one person to manage their entire life and business through specialized AI agents. It implements a revolutionary **parallel agent orchestration** architecture where multiple AI agents work simultaneously to execute complex workflows with 98% autonomy.
+Motus is a **framework**, not a pre-built automation system. It provides the infrastructure to build your own AI-powered automation through departments, agents, and workflows.
 
-## Core Concept
+**Think of it like this:**
+- Rails is a web framework → You build your own web apps
+- Motus is an automation framework → You build your own automation systems
 
-Traditional automation runs tasks sequentially. Motus runs **everything in parallel** - gathering weather, calendar, emails, and tasks all at once - then intelligently combines the results. This approach reduces execution time from minutes to seconds.
+---
 
-## The Vision
+## What You Get
 
-> **Run your entire life and business through simple commands while AI agents handle the execution**
-
-- **Single Person, Unlimited Scale**: One person can manage operations that typically require a team
-- **98% Autonomous**: AI handles execution while you maintain creative control
-- **Natural Language Commands**: Type `/motus daily-brief` instead of opening 5 apps
-- **Private by Default**: Everything runs locally on your machine
-- **Real Integrations**: Actual APIs (Google Calendar, Gmail, Weather, Notion, Oura) not mock data
-
-## Architecture Overview
-
-### Three-Layer System
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    COMMAND LAYER                         │
-│              (/motus slash commands)                     │
-│   Entry points for users via Claude Code CLI             │
-└─────────────────┬───────────────────────────────────────┘
-                  │
-┌─────────────────┴───────────────────────────────────────┐
-│                  ORCHESTRATOR LAYER                      │
-│         (Master agents that coordinate others)           │
-│   - daily-brief-orchestrator                             │
-│   - evening-report-orchestrator                          │
-│   - life-admin                                           │
-└─────────────────┬───────────────────────────────────────┘
-                  │
-┌─────────────────┴───────────────────────────────────────┐
-│                  EXECUTION LAYER                         │
-│         (Specialized agents that do work)                │
-│   - weather-fetcher    - calendar-fetcher                │
-│   - email-processor    - task-compiler                   │
-│   - note-creator       - notion-creator                  │
-│   - insight-generator  - oura-fetcher                    │
-│   + 18 more agents...                                    │
-└──────────────────────────────────────────────────────────┘
-```
-
-### The Parallel Execution Innovation
-
-**Traditional Sequential Approach** (Slow):
-```
-Get weather (3s) → Get calendar (4s) → Get email (5s) → Get tasks (2s)
-Total: 14 seconds
-```
-
-**Motus Parallel Approach** (Fast):
-```
-Get weather (3s) ┐
-Get calendar (4s)├─→ All run simultaneously → Longest is 5s
-Get email (5s)   │
-Get tasks (2s)   ┘
-Total: 5 seconds
-```
-
-## Current Departments
-
-### Life Department
-The fully implemented personal life automation system:
-
-**Agents:**
-- `life-admin` - Master orchestrator for all life management
-- `daily-planner` - Schedule optimization and time blocking
-- `health-tracker` - Fitness, nutrition, sleep tracking (Oura integration)
-- `finance-manager` - Budget tracking and expense analysis
-- `goal-tracker` - Goal progress and milestone tracking
-- `content-curator` - Weather, news, learning resources
-
-**Workflows:**
-- **Morning Briefing** - Weather, calendar, emails, tasks, insights → Obsidian/Notion
-- **Evening Report** - Accomplishments, tomorrow's prep, health summary
-- **Evening Review** - Interactive reflection and planning
-- **Weekly Planning** - Goal review, week ahead planning
-
-## How It Works: Daily Briefing Example
-
-When you run `/motus daily-brief`:
-
-### Step 1: Parallel Data Collection (5 seconds)
-```
-┌────────────────────────────────────────────┐
-│      daily-brief-orchestrator              │
-└──────┬──────────────────────────────┬──────┘
-       │ Launches 5 agents in parallel │
-       ▼                               ▼
-
-AGENT 1: weather-fetcher
-  → Calls WeatherAPI
-  → Returns: 28°C, Partly Cloudy, 60% humidity
-
-AGENT 2: calendar-fetcher
-  → Calls Google Calendar API
-  → Returns: 3 events (9am meeting, 2pm call, 5pm workout)
-
-AGENT 3: email-processor
-  → Calls Gmail API
-  → Returns: 12 emails, 3 urgent, 5 need response
-
-AGENT 4: task-compiler
-  → Reads existing Obsidian note
-  → Returns: 8 pending tasks, 3 high priority
-
-AGENT 5: oura-fetcher
-  → Calls Oura Ring API
-  → Returns: Sleep score 85, Readiness 78, 7h 23m sleep
-```
-
-### Step 2: Analysis (2 seconds)
-```
-insight-generator receives all data:
-  → Analyzes schedule density
-  → Checks weather vs outdoor plans
-  → Correlates sleep quality with today's demands
-  → Generates 4 actionable insights
-```
-
-### Step 3: Output Creation (1 second)
-```
-note-creator receives everything:
-  → Creates formatted Obsidian markdown note
-  → Includes all data in organized sections
-  → Adds checkboxes for tasks
-  → Saves to vault
-
-OR
-
-notion-creator receives everything:
-  → Creates Notion database page
-  → Populates properties (sleep, weather, etc)
-  → Adds tasks to Tasks database
-  → Updates Health Tracker database
-```
-
-**Total Time: ~8 seconds** for a comprehensive daily briefing that would take 30+ minutes manually.
-
-## Key Features
-
-### 1. Real API Integrations
-- **Weather**: WeatherAPI for current conditions and forecasts
-- **Calendar**: Google Calendar with OAuth2 authentication
-- **Email**: Gmail with full OAuth2 access
-- **Notes**: Obsidian vault (markdown files)
-- **Database**: Notion API with multi-database support
-- **Health**: Oura Ring API for sleep and readiness tracking
-- **External Triggers**: Shell scripts for cron, Raycast, Alfred, Shortcuts
-
-### 2. 26 Specialized Agents
-Each agent has a single, focused responsibility:
-
-**Data Collection Agents:**
-- `weather-fetcher` - Current weather and forecast
-- `calendar-fetcher` - Today's events from Google Calendar
-- `email-processor` - Important emails requiring action
-- `task-compiler` - Tasks from all sources
-- `oura-fetcher` - Sleep and health metrics
-- `quote-fetcher` - Inspirational quotes
-
-**Orchestrator Agents:**
-- `daily-brief-orchestrator` - Coordinates morning briefing
-- `evening-report-orchestrator` - Coordinates evening report
-- `life-admin` - Primary life department orchestrator
-
-**Processing Agents:**
-- `insight-generator` - Analyzes data and creates recommendations
-- `accomplishment-analyzer` - Summarizes completed tasks
-- `task-compiler` - Prioritizes and organizes tasks
-
-**Output Agents:**
-- `note-creator` - Creates/updates Obsidian daily notes
-- `note-appender` - Appends content to existing notes
-- `note-reader` - Reads and extracts note content
-- `notion-creator` - Creates Notion database entries
-
-**Department Agents:**
-- `daily-planner` - Schedule optimization
-- `health-tracker` - Health and wellness monitoring
-- `finance-manager` - Budget and expense tracking
-- `goal-tracker` - Goal and milestone tracking
-- `content-curator` - Information gathering
-
-**Utility Agents:**
-- `tomorrow-weather` - Tomorrow's weather forecast
-- `tomorrow-calendar` - Tomorrow's schedule
-- `workflow-creator` - Interactive workflow builder
-- `evening-review-agent` - Interactive evening reflection
-
-### 3. Smart Workflows
-
-**Built-in Workflows:**
+### The Creation System
 ```bash
-/motus daily-brief       # Complete morning briefing
-/motus daily-notion      # Morning briefing to Notion
-/motus evening-report    # Evening accomplishment report
-/motus life review       # Interactive evening review
-/motus life calendar     # Quick calendar dashboard
-/motus life emails       # Quick email summary
-/motus life tasks        # Quick task dashboard
-/motus life health       # Quick health metrics
+/motus department create [name]    # Create a department
+/motus [dept] agent create [name]  # Create an agent
+/motus [dept] workflow create [name] # Create a workflow
 ```
 
-### 4. Obsidian Integration
+### Core Infrastructure
+- **Registry System** - Tracks departments, agents, workflows
+- **Template Engine** - 11 Handlebars templates for code generation
+- **4 Creator Agents** - Wizards that build departments/agents/workflows
+- **OAuth Manager** - Web UI for managing API integrations
+- **Documentation Generator** - Auto-generates docs from registry
 
-Daily notes are created in markdown with this structure:
-```markdown
-# Oct 08, 2025
+### What You DON'T Get
+- ❌ Pre-built departments (empty state)
+- ❌ Pre-configured agents (you create them)
+- ❌ Working automations (you implement them)
+- ❌ API integrations (you add them via OAuth Manager)
 
-## 🌤️ Weather
-28°C, Partly Cloudy
-Feels like 30°C | Humidity 60%
+**You provide the implementation. Motus provides the structure.**
 
-## 😴 Sleep & Recovery
-Sleep Score: 85/100
-Readiness: 78/100
-Total Sleep: 7h 23m
+---
 
-## 📅 Calendar
-- [ ] 9:00 AM - Team Standup (30m)
-- [ ] 2:00 PM - Client Call (1h)
-- [ ] 5:00 PM - Workout (45m)
+## Architecture
 
-## ✅ Tasks
-### High Priority
-- [ ] Complete project proposal
-- [ ] Review pull requests
-- [ ] Call accountant
+### The Corporate Org Chart Analogy
 
-## 📧 Important Emails
-- [ ] [Client] Budget approval needed
-- [ ] [Team] Design review feedback
+Think of Motus like a corporate organization:
 
-## 💡 Insights
-1. Great sleep score - good day for focused work
-2. Light schedule - ideal for deep work blocks
-3. Weather is good for outdoor workout
+```
+┌─────────────────────────────────────────────┐
+│           /Motus CLI (Command Center)        │
+│        Entry point for all operations        │
+└──────────────────┬──────────────────────────┘
+                   │
+      ┌────────────┴────────────┐
+      │                         │
+┌─────▼────────┐      ┌────────▼─────┐
+│ Department 1 │      │ Department 2 │
+│ (e.g., HR)   │      │ (e.g., Sales)│
+└──────┬───────┘      └──────┬───────┘
+       │                     │
+   ┌───┴────┐           ┌────┴────┐
+   │        │           │         │
+   │  Orchestrator      │    Orchestrator
+   │  (Department Head) │    (Department Head)
+   │        │           │         │
+   │  ┌─────┴─────┐    │   ┌─────┴─────┐
+   │  │           │    │   │           │
+   │  Agents       │   │   Agents      │
+   │  (Workers)    │   │   (Workers)   │
+   │  │           │    │   │           │
+   │  Workflows    │   │   Workflows   │
+   │  (Processes)  │   │   (Processes) │
+   └──────┬────────┘   └───────┬───────┘
+          │                    │
+    ┌─────▼────────────────────▼─────┐
+    │    External Integrations        │
+    │    (APIs, databases, services)  │
+    └─────────────────────────────────┘
 ```
 
-### 5. Notion Integration
+**Key Concepts:**
 
-Creates entries in multiple Notion databases simultaneously:
-- **Daily Journal** - Full briefing with rich content
-- **Tasks Database** - All tasks with priorities
-- **Health Tracker** - Sleep and health metrics
-- **Projects** - Updates related projects
+1. **Departments** = Organizational units (HR, Sales, Marketing, Finance, etc.)
+2. **Orchestrator** = Department head that coordinates workers
+3. **Agents** = Workers that execute specific tasks
+4. **Workflows** = Business processes that combine multiple agents
+5. **Integrations** = External systems the department connects to
 
-### 6. External Trigger System
+---
 
-Scripts in `/triggers/` allow other apps to invoke Motus:
-- **Cron** - Scheduled automation (6am briefing, 9pm report)
-- **Raycast** - Quick access launcher
-- **Alfred** - Workflow integration
-- **Keyboard Maestro** - Macro triggers
-- **iOS Shortcuts** - Mobile access via SSH
-- **Custom Apps** - API integration from any language
+## Agent Types
 
-## Technology Stack
+Motus supports three types of agents:
 
-**Core:**
-- **Runtime**: Node.js 18+
-- **Framework**: Claude Code CLI (Task tool for agent orchestration)
-- **CLI**: Commander.js for command parsing
+### 1. Orchestrator Agents
+**Role:** Department head - coordinates other agents
 
-**Integrations:**
-- **APIs**: Axios for HTTP requests
-- **Google**: googleapis package with OAuth2
-- **Notion**: @notionhq/client official SDK
-- **Weather**: WeatherAPI.com REST API
-- **Oura**: REST API with Personal Access Token
+**Example Use Cases:**
+- `hr-admin` - Coordinates all HR department operations
+- `sales-pipeline-manager` - Orchestrates sales workflow
+- `marketing-campaign-orchestrator` - Runs marketing campaigns
 
-**Storage:**
-- **Notes**: Markdown files in Obsidian vault
-- **Configuration**: .env file with credentials
-- **Logs**: JSON logs in /logs directory
-- **Data**: JSON files in /data directory
+**Characteristics:**
+- Calls other agents (doesn't do work itself)
+- Manages workflow execution
+- Coordinates parallel/sequential operations
+- Returns aggregated results
+
+**Template:** `templates/agent/orchestrator-agent.md.hbs`
+
+---
+
+### 2. Data Fetcher Agents
+**Role:** Retrieve data from external sources
+
+**Example Use Cases:**
+- `api-data-fetcher` - Gets data from REST APIs
+- `database-query-agent` - Queries databases
+- `file-reader-agent` - Reads files from disk
+- `web-scraper-agent` - Scrapes web pages
+
+**Characteristics:**
+- Single responsibility (one data source)
+- Returns structured data
+- Handles errors gracefully
+- Stateless operations
+
+**Template:** `templates/agent/data-fetcher-agent.md.hbs`
+
+---
+
+### 3. Specialist Agents
+**Role:** Analyze data, make decisions, create content
+
+**Example Use Cases:**
+- `data-analyzer-agent` - Analyzes data and generates insights
+- `report-generator-agent` - Creates formatted reports
+- `decision-maker-agent` - Makes decisions based on rules
+- `content-writer-agent` - Generates text content
+
+**Characteristics:**
+- Receives input from other agents
+- Applies logic/analysis
+- Produces output (reports, decisions, content)
+- May use AI/ML for intelligence
+
+**Template:** `templates/agent/specialist-agent.md.hbs`
+
+---
+
+## Workflow Patterns
+
+### Sequential Workflow
+Tasks run one after another (B waits for A to complete):
+
+```
+Agent A → Agent B → Agent C → Result
+  (3s)      (4s)      (2s)     = 9 seconds
+```
+
+**Use When:**
+- Agent B needs Agent A's output
+- Order matters
+- Dependencies exist
+
+**Example:**
+```
+1. Fetch user data from database
+2. Analyze user behavior
+3. Generate recommendations based on analysis
+```
+
+---
+
+### Parallel Workflow
+Tasks run simultaneously (all start at once):
+
+```
+Agent A (3s) ┐
+Agent B (4s) ├─→ Combine → Result
+Agent C (2s) ┘     = 4 seconds (longest)
+```
+
+**Use When:**
+- Agents are independent
+- No dependencies
+- Speed is important
+
+**Example:**
+```
+Simultaneously:
+1. Fetch weather data
+2. Fetch calendar events
+3. Fetch email summary
+Then combine all three into dashboard
+```
+
+---
+
+### Hybrid Workflow
+Combination of parallel and sequential:
+
+```
+Step 1 (Parallel):
+  Agent A ┐
+  Agent B ├─→ Agent D (Analyzer)
+  Agent C ┘
+
+Step 2 (Sequential):
+  Agent D → Agent E (Reporter) → Result
+```
+
+**Use When:**
+- Complex multi-stage processes
+- Some steps independent, others dependent
+
+**Example:**
+```
+1. Parallel: Gather data from 3 APIs
+2. Sequential: Analyze combined data
+3. Sequential: Generate report from analysis
+```
+
+---
+
+## Parallel Execution (Technical)
+
+### How It Works
+
+Motus uses Claude Code's Task tool to run agents in parallel:
+
+```javascript
+// Theoretical example (you would implement this)
+async function runWorkflow() {
+  // Launch all agents simultaneously
+  const [weather, calendar, emails] = await Promise.all([
+    runAgent('weather-fetcher'),
+    runAgent('calendar-fetcher'),
+    runAgent('email-fetcher')
+  ]);
+
+  // Combine results
+  return combineData(weather, calendar, emails);
+}
+```
+
+**Performance Benefits:**
+- 3 agents × 5 seconds sequential = 15 seconds
+- 3 agents in parallel = 5 seconds (longest agent)
+- **67% time reduction**
+
+**When to Use:**
+- Independent data collection
+- No inter-agent dependencies
+- I/O-bound operations (API calls, database queries)
+
+**When NOT to Use:**
+- Agent B needs Agent A's result
+- Shared resource conflicts
+- Order-dependent operations
+
+---
+
+## The Creation System
+
+### How Departments are Created
+
+```bash
+$ /motus department create tasks
+
+# Wizard asks:
+# - Department name: tasks
+# - Description: Task management department
+# - Suggested agents: task-admin, task-fetcher, task-analyzer
+# - Suggested workflows: daily-tasks, weekly-review
+
+# Creates:
+# 1. .claude/agents/task-admin.md (orchestrator)
+# 2. config/registries/departments.json (updated)
+# 3. org-docs/departments/tasks-department.md (docs)
+```
+
+---
+
+### How Agents are Created
+
+```bash
+$ /motus tasks agent create task-fetcher
+
+# Wizard asks:
+# - Agent name: task-fetcher
+# - Agent type: data-fetcher (auto-detected from name)
+# - Description: Fetches tasks from various sources
+# - Data sources: Todoist, Google Tasks, Notion
+
+# Creates:
+# 1. .claude/agents/task-fetcher.md (agent definition)
+# 2. config/registries/agents.json (updated)
+# 3. tasks/agents/task-fetcher.js (implementation scaffold)
+```
+
+**You must implement:** The actual `.js` file logic to fetch tasks.
+
+---
+
+### How Workflows are Created
+
+```bash
+$ /motus tasks workflow create daily-tasks
+
+# Wizard asks:
+# - Workflow name: daily-tasks
+# - Trigger: manual or scheduled
+# - Steps: Which agents to run
+# - Execution: parallel or sequential
+
+# Creates:
+# 1. config/workflows/daily-tasks.json (configuration)
+# 2. triggers/daily-tasks.sh (execution script)
+# 3. config/registries/workflows.json (updated)
+```
+
+**You must implement:** The actual agent logic called by the workflow.
+
+---
+
+## Template System
+
+Motus includes 11 Handlebars templates:
+
+### Agent Templates (4)
+- `specialist-agent.md.hbs` - For analysis/decision agents
+- `data-fetcher-agent.md.hbs` - For data retrieval agents
+- `orchestrator-agent.md.hbs` - For coordinator agents
+- `data-fetcher-script.js.hbs` - JavaScript implementation scaffold
+
+### Department Templates (3)
+- `department-agent.md.hbs` - Main department orchestrator
+- `orchestrator-agent.md.hbs` - Department-level coordinator
+- `department-readme.md.hbs` - Department documentation
+
+### Workflow Templates (2)
+- `workflow-config.json.hbs` - Workflow configuration
+- `workflow-trigger.sh.hbs` - Execution script
+
+### Documentation Templates (2)
+- `commands-reference.md.hbs` - Auto-generated command docs
+- `department-docs.md.hbs` - Department documentation
+
+---
+
+## Registry System
+
+The registry tracks everything you create:
+
+### departments.json
+```json
+{
+  "departments": {
+    "tasks": {
+      "name": "tasks",
+      "displayName": "Task Management",
+      "description": "Manages tasks from multiple sources",
+      "agents": ["task-admin", "task-fetcher", "task-analyzer"],
+      "workflows": ["daily-tasks", "weekly-review"],
+      "created": "2025-10-08T00:00:00.000Z"
+    }
+  }
+}
+```
+
+### agents.json
+```json
+{
+  "agents": {
+    "task-fetcher": {
+      "name": "task-fetcher",
+      "type": "data-fetcher",
+      "department": "tasks",
+      "description": "Fetches tasks from Todoist, Google Tasks",
+      "implementation": "tasks/agents/task-fetcher.js",
+      "created": "2025-10-08T00:00:00.000Z"
+    }
+  }
+}
+```
+
+### workflows.json
+```json
+{
+  "workflows": {
+    "daily-tasks": {
+      "name": "daily-tasks",
+      "department": "tasks",
+      "trigger": "manual",
+      "agents": ["task-fetcher", "task-analyzer"],
+      "execution": "sequential",
+      "created": "2025-10-08T00:00:00.000Z"
+    }
+  }
+}
+```
+
+---
+
+## OAuth Manager
+
+Web-based interface for managing API integrations.
+
+```bash
+$ ./start-oauth-manager.sh
+# Opens http://localhost:3001
+```
+
+**Supports:**
+- Google (Calendar, Gmail, Drive, etc.)
+- Notion
+- Oura Ring
+- Twitter
+- Any OAuth2-compatible service
+
+**Features:**
+- Guided OAuth flow
+- Token management
+- Token refresh automation
+- Secure token storage
+
+---
 
 ## Project Structure
 
 ```
-/Users/ianwinscom/motus/
-├── .claude/                      # Claude Code configuration
-│   ├── agents/                   # 26 agent definitions (.md files)
-│   │   ├── weather-fetcher.md
-│   │   ├── calendar-fetcher.md
-│   │   ├── daily-brief-orchestrator.md
-│   │   └── ...
-│   └── commands/                 # Slash command definitions
-│       └── motus.md              # Main /motus command
+motus/
+├── .claude/
+│   ├── agents/                    # Agent definitions (.md files)
+│   │   ├── department-creator.md  # ✅ Creator wizard
+│   │   ├── agent-creator.md       # ✅ Creator wizard
+│   │   ├── workflow-creator.md    # ✅ Creator wizard
+│   │   └── documentation-updater.md # ✅ Doc generator
+│   └── commands/
+│       └── motus.md               # Main CLI command
 │
-├── life-admin/                   # Life department implementations
-│   ├── life-admin-agent.js       # Main life orchestrator
-│   ├── weather-fetcher.js        # Weather API client
-│   ├── gmail-processor.js        # Gmail API client
-│   ├── oura-fetcher.js          # Oura API client
-│   ├── notion-multi-db-manager.js # Notion multi-DB writer
-│   └── ...
+├── config/
+│   └── registries/                # Central registry
+│       ├── departments.json       # All departments
+│       ├── agents.json            # All agents
+│       └── workflows.json         # All workflows
 │
-├── triggers/                     # External trigger scripts
-│   ├── motus-daily-brief.sh     # Morning briefing trigger
-│   ├── motus-evening-report.sh  # Evening report trigger
-│   └── ...
+├── lib/                           # Core libraries
+│   ├── registry-manager.js        # ✅ CRUD for registries
+│   ├── template-engine.js         # ✅ Template rendering
+│   ├── validator.js               # ✅ Name/type validation
+│   ├── oauth-registry.js          # ✅ OAuth management
+│   └── doc-generator.js           # ✅ Auto documentation
 │
-├── docs/                         # Documentation
-│   ├── WORKFLOW-ORCHESTRATION-MASTER.md
-│   ├── NOTION-API-SETUP-GUIDE.md
-│   └── ...
+├── templates/                     # 11 Handlebars templates
+│   ├── agent/                     # Agent templates
+│   ├── department/                # Department templates
+│   ├── workflow/                  # Workflow templates
+│   └── docs/                      # Documentation templates
 │
-├── data/                         # Local data storage
-│   └── briefings/               # Generated briefings
+├── oauth-manager/                 # OAuth Manager server
+│   ├── server.js                  # Express server
+│   └── public/index.html          # Web UI
 │
-├── logs/                         # Execution logs
+├── public-docs/                   # User documentation
+│   ├── Introduction.md
+│   ├── Creating-Departments.md
+│   ├── Creating-Agents.md
+│   └── Creating-Workflows.md
 │
-├── motus                         # Main executable
-├── package.json                  # Dependencies
-├── .env                         # Configuration (not in git)
-├── .env.example                 # Configuration template
-├── CLAUDE.md                    # Persistent context for Claude
-└── README.md                    # Quick start guide
+├── org-docs/                      # Auto-generated docs
+│   └── departments/               # (empty until you create departments)
+│
+├── .env.example                   # Environment template
+├── motus                          # Main executable
+└── README.md                      # Quick start
 ```
 
-## Getting Started
+---
 
-### 1. Installation
+## Building Your First Department
+
+### Example: Task Management Department
+
+**Step 1: Create Department**
 ```bash
-cd ~/motus
-npm install
+/motus department create tasks
 ```
 
-### 2. Configuration
+**Step 2: Create Orchestrator Agent**
 ```bash
-cp .env.example .env
-# Edit .env with your API keys and credentials
+/motus tasks agent create task-admin
+# Type: orchestrator
+# Coordinates all task operations
 ```
 
-### 3. Required API Keys
-- **Weather**: Free at weatherapi.com
-- **Google OAuth**: From Google Cloud Console
-- **Notion** (optional): Integration token from notion.so/my-integrations
-- **Oura** (optional): Personal Access Token from cloud.ouraring.com
-
-### 4. First Run
+**Step 3: Create Data Fetcher Agent**
 ```bash
-/motus daily-brief
+/motus tasks agent create task-fetcher
+# Type: data-fetcher
+# Fetches tasks from Todoist API
 ```
 
-## Real-World Usage
+**Step 4: Implement Agent Logic**
+```javascript
+// tasks/agents/task-fetcher.js
+const axios = require('axios');
 
-### Morning Routine (Automated via Cron)
+module.exports = async function fetchTasks() {
+  const response = await axios.get('https://api.todoist.com/rest/v2/tasks', {
+    headers: { 'Authorization': `Bearer ${process.env.TODOIST_API_KEY}` }
+  });
+
+  return response.data;
+};
+```
+
+**Step 5: Create Workflow**
 ```bash
-# At 6:00 AM every day
-/motus daily-notion
-```
-Result: Wake up to a complete daily briefing in Notion with:
-- Weather and outfit recommendations
-- Calendar with meeting links
-- Urgent emails requiring action
-- Prioritized tasks for the day
-- Sleep quality analysis
-- Personalized insights
-
-### Quick Dashboards (Manual)
-```bash
-/motus life calendar    # What's on my schedule?
-/motus life emails      # What emails need attention?
-/motus life tasks       # What should I work on?
-/motus life health      # How did I sleep?
+/motus tasks workflow create daily-tasks
+# Agents: task-fetcher, task-analyzer
+# Execution: sequential
+# Trigger: manual
 ```
 
-### Evening Routine (Automated via Cron)
+**Step 6: Run Workflow**
 ```bash
-# At 9:00 PM every day
-/motus evening-report
+/motus tasks daily-tasks
+# Executes: task-fetcher → task-analyzer → result
 ```
-Result: Automated summary of:
-- What you accomplished today
-- Tomorrow's weather and calendar
-- Wins and progress
-- Appended to today's daily note
 
-### Interactive Review (Manual)
-```bash
-/motus life review
-```
-Result: Guided reflection on:
-- Today's accomplishments
-- Tomorrow's priorities
-- Gratitude and learnings
-- Health and wellness
+---
 
 ## Key Principles
 
-### 1. Real Data Only
-Every agent MUST call actual APIs. Mock data is strictly forbidden. If an API is unavailable, the agent reports the error, never fakes data.
+### 1. Framework, Not Product
+Motus provides structure. You provide implementation.
 
-### 2. Parallel First
-Data collection agents MUST run in parallel using Claude Code's Task tool. Sequential execution is only used when one agent depends on another's output.
+### 2. Single Responsibility
+Each agent does ONE thing well. No multi-purpose agents.
 
-### 3. Single Responsibility
-Each agent does ONE thing well. Weather agent gets weather, calendar agent gets calendar. No multi-purpose agents.
+### 3. Declarative Configuration
+Agents defined in markdown, workflows in JSON. Easy to read, modify, create.
 
-### 4. Declarative Configuration
-Agents are defined in markdown files with frontmatter, making them easy to read, modify, and create without touching code.
+### 4. Template-Driven
+Consistent code generation from templates. Modify templates to change output.
 
-### 5. Idempotent Operations
-Running a briefing twice produces the same result. Operations are safe to retry and won't create duplicates.
+### 5. Registry-Centric
+Everything tracked in registries. Single source of truth for system state.
 
-## Future Roadmap
+### 6. Extensible by Design
+Add new agent types, templates, integrations without modifying core.
 
-### Phase 1: Life Department (Complete ✅)
-- Morning briefings
-- Evening reviews
-- Health tracking
-- Task management
-- Calendar integration
+---
 
-### Phase 2: Business Department (Planned)
-**Sales Agent**
-- Lead tracking
-- Pipeline management
-- Follow-up automation
+## What You Need to Provide
 
-**Marketing Agent**
-- Content calendar
-- Campaign tracking
-- Analytics reporting
+### For Each Agent
+1. **Definition** (.md file) - Created by wizard ✅
+2. **Implementation** (.js file) - **YOU WRITE THIS**
+3. **Dependencies** (APIs, libraries) - **YOU CONFIGURE THIS**
 
-**Operations Agent**
-- Project management
-- Team coordination
-- Resource allocation
+### For Each Workflow
+1. **Configuration** (.json file) - Created by wizard ✅
+2. **Agent implementations** - **YOU WRITE THIS**
+3. **Integration setup** - **YOU CONFIGURE THIS**
 
-### Phase 3: Creative Department (Planned)
-**Content Creator Agent**
-- Blog post generation
-- Social media scheduling
-- Newsletter compilation
+### For Each Department
+1. **Structure** (agents, workflows) - Created by wizard ✅
+2. **Business logic** - **YOU IMPLEMENT THIS**
+3. **API credentials** - **YOU PROVIDE THIS**
 
-**Design Agent**
-- Asset organization
-- Brand guidelines
-- Template management
+---
 
-### Phase 4: Finance Department (Planned)
-**Advanced Finance Agent**
-- Investment tracking
-- Tax preparation
-- Expense categorization
-- Budget forecasting
+## Technology Stack
 
-### Phase 5: Learning Department (Planned)
-**Skill Tracker Agent**
-- Course progress
-- Learning paths
-- Knowledge base
+**Core:**
+- Node.js 18+
+- Claude Code CLI (Task tool for agent orchestration)
+- Commander.js (CLI parsing)
 
-### Phase 6: Full Autonomy (Vision)
-- 100% autonomous operation
-- Cross-department workflows
-- Predictive automation
-- Self-optimization
+**Template Engine:**
+- Handlebars 4.7+
+- Custom helpers for code generation
+
+**Registry:**
+- JSON-based storage
+- File system persistence
+
+**OAuth:**
+- Express server
+- Socket.io for real-time updates
+- Secure token management
+
+---
+
+## Comparison: Framework vs Implementation
+
+| Aspect | Framework Provides | You Implement |
+|--------|-------------------|---------------|
+| **Structure** | Departments, agents, workflows | Business logic |
+| **Templates** | 11 code generation templates | Custom templates (optional) |
+| **Registry** | Tracking system | Data in registry |
+| **OAuth** | Manager UI + flow | API credentials |
+| **Documentation** | Auto-generation | Content |
+| **CLI** | Creation commands | Execution logic |
+| **Agents** | Definitions (.md files) | Implementations (.js files) |
+| **Workflows** | Configuration | Agent logic |
+
+---
+
+## Use Cases (What You CAN Build)
+
+### Personal Automation
+- Daily briefing system (weather, calendar, tasks)
+- Health tracking dashboard (Oura, Fitbit, Apple Health)
+- Finance management (expense tracking, budgets)
+- Learning system (course progress, flashcards)
+
+### Business Automation
+- CRM integration (sales pipeline, lead tracking)
+- Marketing automation (campaigns, analytics)
+- HR system (onboarding, reviews, time tracking)
+- Operations dashboard (metrics, KPIs, alerts)
+
+### Content Creation
+- Social media management (scheduling, analytics)
+- Blog automation (research, drafts, publishing)
+- Newsletter system (content curation, sending)
+- Video workflow (scripts, editing notes, publishing)
+
+### Development Workflow
+- CI/CD monitoring (build status, deployments)
+- Code review automation (PR checks, comments)
+- Issue management (triage, assignment, notifications)
+- Documentation generation (API docs, changelogs)
+
+---
+
+## Getting Started
+
+**1. Clone Repository**
+```bash
+git clone https://github.com/openmotus/motus.git
+cd motus
+npm install
+```
+
+**2. Copy Environment Template**
+```bash
+cp .env.example .env
+# Edit .env with your settings
+```
+
+**3. Create Your First Department**
+```bash
+/motus department create [your-department]
+```
+
+**4. Create Agents**
+```bash
+/motus [dept] agent create [agent-name]
+```
+
+**5. Implement Agent Logic**
+```javascript
+// Write your implementation in generated .js files
+```
+
+**6. Create Workflow**
+```bash
+/motus [dept] workflow create [workflow-name]
+```
+
+**7. Run Workflow**
+```bash
+/motus [dept] [workflow-name]
+```
+
+---
+
+## Documentation
+
+- **[Creating Departments](../public-docs/Creating-Departments.md)** - Department creation guide
+- **[Creating Agents](../public-docs/Creating-Agents.md)** - Agent types and creation
+- **[Creating Workflows](../public-docs/Creating-Workflows.md)** - Workflow patterns
+- **[Setup Environment](../public-docs/Setup-Environment.md)** - Environment configuration
+- **[OAuth Manager](../public-docs/OAuth-Manager.md)** - OAuth integration guide
+- **[API Reference](../public-docs/API-Reference.md)** - Core library API
+
+---
 
 ## Philosophy
 
-**Human Creativity + AI Execution = Unlimited Scale**
+**Motus is infrastructure, not implementation.**
 
-Motus is built on the belief that:
-1. Humans are best at creative decisions and strategic thinking
-2. AI is best at execution, research, and coordination
-3. One person with good tools can accomplish what used to require a team
-4. Automation should be invisible and trustworthy
-5. Local-first and privacy-respecting is non-negotiable
+Like Ruby on Rails doesn't build your web app for you, Motus doesn't build your automation for you. It provides:
+- Proven patterns
+- Code generation
+- Organization structure
+- Integration framework
+- Documentation automation
 
-## Success Metrics
+You bring:
+- Your use case
+- Your API integrations
+- Your business logic
+- Your workflows
+- Your domain knowledge
 
-What "98% autonomous" means in practice:
-- **Daily briefing**: 0 minutes of manual work (was 30 minutes)
-- **Calendar management**: 95% automated (was 100% manual)
-- **Email triage**: 90% automated (was 100% manual)
-- **Task prioritization**: 95% automated (was 100% manual)
-- **Health tracking**: 100% automated with Oura (was manual journaling)
-- **Evening review**: 5 minutes interactive (was 20 minutes)
+Together: **A powerful, custom automation system tailored to YOUR needs.**
 
-**Time saved per day**: ~2 hours
-**Time saved per month**: ~60 hours
-**Annual productivity gain**: ~730 hours (30 full days)
-
-## Use Cases
-
-### For Entrepreneurs
-- Manage multiple businesses from one interface
-- Stay on top of all communications
-- Track health while working long hours
-- Never miss a meeting or deadline
-
-### For Developers
-- Automated daily standup notes
-- GitHub integration for code tracking
-- Calendar-aware focus time blocking
-- Health tracking for sedentary work
-
-### For Creators
-- Content calendar management
-- Multi-platform publishing
-- Audience engagement tracking
-- Creative routine optimization
-
-### For Knowledge Workers
-- Email zero inbox
-- Meeting preparation automation
-- Learning progress tracking
-- Work-life balance monitoring
-
-## Comparison
-
-### Motus vs. Traditional Tools
-
-**Traditional Approach:**
-- Check Weather app → 2 min
-- Review Google Calendar → 5 min
-- Triage Gmail → 15 min
-- Update task manager → 5 min
-- Journal health metrics → 3 min
-- **Total: 30 minutes**
-
-**Motus Approach:**
-- Run `/motus daily-brief` → 8 seconds
-- Review generated briefing → 2 min
-- **Total: 2 minutes**
-
-**Time saved: 28 minutes, 93% reduction**
-
-### Motus vs. Other Automation
-
-**Zapier/Make/IFTTT:**
-- ❌ No AI intelligence
-- ❌ No parallel execution
-- ❌ Limited to predefined triggers
-- ✅ Cloud-based
-- ❌ Expensive at scale
-
-**Motus:**
-- ✅ AI-powered insights
-- ✅ Parallel agent orchestration
-- ✅ Natural language commands
-- ✅ Local-first, private
-- ✅ Free (just API costs)
-
-## Contributing
-
-This is currently a personal project, but the architecture is designed to be extensible:
-
-1. **Add a new agent**: Create a .md file in `.claude/agents/`
-2. **Add a new workflow**: Define orchestration in an orchestrator agent
-3. **Add a new integration**: Write a Node.js script in `life-admin/`
-4. **Add a new department**: Follow the pattern from Life Department
+---
 
 ## License
 
 MIT - See LICENSE file
 
+---
+
 ## Credits
 
-Built with Claude Code CLI by Anthropic
-Created by Ian Winscom
-Powered by the belief that one person can change the world with the right tools
+Built exclusively for Claude Code CLI by Anthropic
 
 ---
 
 **Motus**: Latin for "motion, movement, impulse"
 
-*Because life moves fast. Your automation should move faster.*
+*A framework for building automation systems that move as fast as you think.*
