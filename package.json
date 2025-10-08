@@ -1,24 +1,25 @@
 {
-  "name": "motus-claude",
+  "name": "motus",
   "version": "1.0.0",
-  "description": "Motus - AI Life & Business Automation System for Claude Code",
-  "main": "motus-command.js",
+  "description": "Motus - Department-based AI automation framework for Claude Code",
+  "main": "motus",
+  "bin": {
+    "motus": "./motus"
+  },
   "scripts": {
-    "start": "node motus-command.js",
-    "init": "node motus-command.js init",
-    "briefing": "node motus-command.js run morning-briefing",
-    "review": "node motus-command.js run evening-review",
-    "status": "node motus-command.js status"
+    "test": "node tests/test-template-engine.js && node tests/test-phase2-components.js && node tests/test-phase3-integration.js",
+    "oauth": "./start-oauth-manager.sh"
   },
   "keywords": [
     "ai",
     "automation",
-    "life-management",
-    "productivity",
-    "claude",
-    "agents"
+    "framework",
+    "claude-code",
+    "agents",
+    "workflows",
+    "departments"
   ],
-  "author": "Motus AI",
+  "author": "Ian Borders <https://x.com/ianborders>",
   "license": "MIT",
   "dependencies": {
     "@notionhq/client": "^4.0.2",
