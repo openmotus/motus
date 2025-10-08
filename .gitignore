@@ -42,3 +42,19 @@ token.json
 
 # Obsidian vault (it's in iCloud)
 # Don't commit actual daily notes
+# ============================================================================
+# Personal Data - DO NOT COMMIT
+# ============================================================================
+.env
+.env.local
+data/
+life-admin/
+marketing/
+org-docs/departments/*.md
+!docs/examples/
+~/.motus/
+.motus/
+
+# Keep example files
+!.env.example
+!org-docs/departments/.gitkeep

@@ -198,3 +198,28 @@ See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan
 - Google APIs and Notion SDK for integrations
 - All timestamps in user's configured timezone (default: Asia/Bangkok)
 
+## Personal Configuration
+
+### User Preferences
+- Prefer concise summaries
+- Priority on health and fitness
+- Financial conservative approach
+- Learning focus on tech and languages
+
+### Current Goals
+- [ ] Exercise 4x per week
+- [ ] Read 2 books per month
+- [ ] Save 20% of income
+
+### Tracked Habits
+- Meditation
+- Exercise
+- Reading
+- Water intake (8 glasses)
+- Sleep (7+ hours)
+
+### Health Metrics
+- Target Steps: 10,000/day
+- Target Calories: 2,200/day
+- Sleep Goal: 7.5 hours
+- Water Goal: 8 glasses
