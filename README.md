@@ -1,208 +1,278 @@
-# 🎯 Motus for Claude Code
+# /Motus
 
-> Run your entire life and business through AI agents with 98% autonomous operation
+**AI-Powered Life & Business Automation Framework for Claude Code**
 
-## What is Motus?
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Built%20for-Claude%20Code-5A67D8)](https://claude.com/claude-code)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js)](https://nodejs.org/)
 
-Motus is an AI-powered life and business automation system that runs entirely within Claude Code. It enables a single person to manage their entire life and business through simple `/motus` commands, with AI agents handling execution.
+> Automate your life and business with AI-powered departments, agents, and workflows built exclusively for Claude Code CLI.
 
-## ✨ Features
+## 🚀 What is Motus?
 
-- **🏠 Life Department**: Manage personal life, health, finances, and goals
-- **🤖 AI Agents**: Specialized agents for different tasks (planner, health tracker, finance manager, etc.)
-- **🔄 Workflows**: Automated routines like morning briefings and weekly planning
-- **💯 Autonomous**: 98% self-managing with minimal human intervention
-- **🔒 Private**: Everything runs locally on your machine
-- **⚡ Instant Setup**: Get started in under 5 minutes
+Motus is a sophisticated automation framework that helps you organize your life and business through AI-powered **departments**, **agents**, and **workflows**. Create your personal AI organization that runs 24/7, handling everything from daily briefings to marketing campaigns.
 
-## 🚀 Quick Start
+### Key Features
 
-### 1. Install Dependencies
+- ✨ **AI-Powered Automation** - Leverages Claude's intelligence for smart automation
+- 🏢 **Department-Based Organization** - Organize automation into logical units (Life, Marketing, Finance, etc.)
+- 🤖 **Specialized AI Agents** - Orchestrators, Data Fetchers, and Specialists working together
+- 🔄 **Flexible Workflows** - Manual or scheduled, simple or complex
+- 🔌 **Extensible Integrations** - Google, Notion, Twitter, Weather, Oura, and more
+- 📝 **Template System** - Consistent, professional outputs every time
+- 🛠️ **Built for Claude Code** - Exclusive integration with Claude Code CLI
+- 📚 **Auto-Documentation** - Generates comprehensive docs automatically
+
+## 📸 Quick Look
+
 ```bash
+# Create a department
+/motus department create marketing
+
+# Add an agent
+/motus marketing agent create trend-analyzer
+
+# Create a workflow
+/motus marketing workflow create daily-trends
+
+# Run it
+/motus marketing daily-trends
+```
+
+## 🎯 Use Cases
+
+### Life Management
+- 📅 Daily briefings with weather, calendar, and tasks
+- 📊 Health tracking with Oura Ring integration
+- 📝 Obsidian note management
+- 🎯 Goal and habit tracking
+
+### Marketing Automation
+- 📈 Social media trend analysis
+- ✍️ Content creation and ideation
+- 📱 Sentiment monitoring
+- 📊 Campaign reporting
+
+### Business Operations
+- 💰 Expense and budget tracking
+- 📧 Email processing and prioritization
+- 📅 Calendar management
+- 📈 Business intelligence reports
+
+## 🏃 Quick Start
+
+### Prerequisites
+
+- [Claude Code CLI](https://claude.com/claude-code) installed
+- Node.js 18+ installed
+- Git installed
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/openmotus/slashmotus.git
+cd slashmotus
+
+# Install dependencies
 npm install
+
+# Make executable
+chmod +x motus
+
+# Verify installation
+./motus --version
 ```
 
-### 2. Configure Environment
+### Your First Department
+
 ```bash
-cp .env.example .env
-# Edit .env with your API keys
+# Create a Tasks department
+/motus department create tasks
+
+# Create an agent
+/motus tasks agent create task-fetcher
+
+# Create a workflow
+/motus tasks workflow create daily-tasks
+
+# Run the workflow
+/motus tasks daily-tasks
 ```
 
-### 3. Run Morning Briefing
+**Done!** You just created your first automated system. 🎉
+
+## 📚 Documentation
+
+Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus.sh/)**
+
+### Core Guides
+
+- **[Introduction](public-docs/Introduction.md)** - What is Motus?
+- **[Quick Start](public-docs/Quick-Start.md)** - Get running in 5 minutes
+- **[Installation](public-docs/Installation.md)** - Detailed setup guide
+- **[Concepts](public-docs/Concepts.md)** - Understanding the architecture
+
+### Building with Motus
+
+- **[Creating Departments](public-docs/Creating-Departments.md)** - Organize your automation
+- **[Creating Agents](public-docs/Creating-Agents.md)** - Build AI assistants
+- **[Creating Workflows](public-docs/Creating-Workflows.md)** - Automate complex tasks
+
+### Configuration
+
+- **[Setup Environment](public-docs/Setup-Environment.md)** - Configure API keys
+- **[Setup Integrations](public-docs/Setup-Integrations.md)** - Connect services
+- **[OAuth Manager](public-docs/OAuth-Manager.md)** - Manage OAuth connections
+
+### Resources
+
+- **[Examples](public-docs/Examples.md)** - Real-world implementations
+- **[API Reference](public-docs/API-Reference.md)** - Library documentation
+- **[Troubleshooting](public-docs/Troubleshooting.md)** - Common issues
+- **[FAQ](public-docs/FAQ.md)** - Frequently asked questions
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│              /Motus CLI                      │
+└────────────────┬────────────────────────────┘
+                 │
+                 ▼
+        ┌────────────────┐
+        │  Departments   │
+        └────────┬───────┘
+                 │
+         ┌───────┴───────┐
+         │               │
+    ┌────▼────┐    ┌────▼────┐
+    │ Agents  │    │Workflows│
+    └────┬────┘    └────┬────┘
+         │               │
+         └───────┬───────┘
+                 │
+           ┌─────▼──────┐
+           │Integrations│
+           └────────────┘
+```
+
+### Core Components
+
+- **Departments** - Organizational units (Life, Marketing, Finance)
+- **Agents** - AI assistants that perform tasks
+  - **Orchestrators** - Coordinate workflows
+  - **Data Fetchers** - Retrieve information from APIs
+  - **Specialists** - Analyze data and create content
+- **Workflows** - Automated processes combining multiple agents
+- **Integrations** - Connections to external services
+
+## 🔧 Technology Stack
+
+- **Platform**: Claude Code CLI (exclusive)
+- **Runtime**: Node.js 18+
+- **Templates**: Handlebars
+- **Storage**: JSON registries
+- **APIs**: Google, Notion, Twitter, Weather, Oura, Buffer, and more
+
+## 📦 Project Structure
+
+```
+slashmotus/
+├── .claude/              # Claude Code configuration
+│   ├── agents/          # Agent definitions
+│   └── commands/        # CLI commands
+├── config/              # System configuration
+│   └── registries/      # Department/agent/workflow registries
+├── lib/                 # Core libraries
+│   ├── registry-manager.js
+│   ├── template-engine.js
+│   ├── oauth-registry.js
+│   └── doc-generator.js
+├── templates/           # Handlebars templates
+├── oauth-manager/       # OAuth Manager server
+├── public-docs/         # User documentation
+├── org-docs/            # Auto-generated docs
+├── motus                # Main CLI executable
+└── package.json         # Dependencies
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Motus is open source and built by the community.
+
+### How to Contribute
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+See [Contributing Guide](public-docs/Contributing.md) for details.
+
+### Development Setup
+
 ```bash
-/motus daily-brief
+# Clone your fork
+git clone https://github.com/YOUR-USERNAME/slashmotus.git
+cd slashmotus
+
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Make your changes
+# ...
+
+# Test your changes
+./motus department create test-dept
 ```
-
-## 📋 Available Commands
-
-### Core Commands
-- `/motus init` - Initialize system
-- `/motus status` - Check system status
-- `/motus help` - Get help
-
-### Life Department
-- `/motus life briefing` - Morning briefing
-- `/motus life review` - Evening review
-- `/motus life plan [day/week/month]` - Planning sessions
-- `/motus life track [habit/goal/health]` - Track progress
-- `/motus life finance [budget/bills]` - Financial management
-- `/motus life health [workout/meals]` - Health tracking
-
-### Workflows
-- `/motus run morning-briefing` - Start your day
-- `/motus run evening-review` - End of day review
-- `/motus run weekly-planning` - Weekly planning session
-- `/motus workflow list` - See all workflows
-- `/motus workflow create` - Create new workflow
-
-### Agents
-- `/motus agent list` - List all agents
-- `/motus agent status` - Check agent status
-- `/motus agent create` - Create new agent
-
-## 🏗️ Architecture
-
-```
-Motus System
-├── Life Department
-│   ├── Daily Planner Agent
-│   ├── Health Tracker Agent
-│   ├── Finance Manager Agent
-│   ├── Personal Assistant Agent
-│   ├── Goal Tracker Agent
-│   └── Content Curator Agent
-├── Workflows
-│   ├── Morning Briefing
-│   ├── Evening Review
-│   ├── Weekly Planning
-│   └── Custom Workflows
-└── Data Storage
-    ├── Briefings
-    ├── Reviews
-    ├── Plans
-    └── Tracking Data
-```
-
-## 🎯 Life Department Agents
-
-### Daily Planner
-- Schedule optimization
-- Task prioritization
-- Time blocking
-- Calendar management
-
-### Health Tracker
-- Fitness tracking
-- Nutrition monitoring
-- Sleep analysis
-- Wellness recommendations
-
-### Finance Manager
-- Budget tracking
-- Bill reminders
-- Investment monitoring
-- Expense analysis
-
-### Personal Assistant
-- Email drafts
-- Appointment scheduling
-- Reminders
-- Task management
-
-### Goal Tracker
-- Progress monitoring
-- Milestone tracking
-- Motivation
-- Achievement celebration
-
-### Content Curator
-- Weather updates
-- News digest
-- Learning resources
-- Entertainment recommendations
-
-## 🔄 Daily Workflows
-
-### Morning Briefing (8:00 AM)
-1. Weather forecast
-2. Calendar review
-3. Daily priorities
-4. Health check
-5. Budget status
-6. News digest
-
-### Evening Review (9:00 PM)
-1. Daily accomplishments
-2. Tomorrow's preparation
-3. Health summary
-4. Gratitude reflection
-
-### Weekly Planning (Sunday 10:00 AM)
-1. Goal progress review
-2. Week ahead planning
-3. Fitness schedule
-4. Budget allocation
-
-## 📊 Data Storage
-
-All data is stored locally in `~/.motus-claude/`:
-- Configuration: `config.json`
-- Departments: `departments/`
-- Workflows: `workflows/`
-- Personal Data: `data/life/`
-
-## 🔮 Future Departments
-
-Coming soon:
-- **💼 Business Department**: Sales, Marketing, Operations
-- **💰 Finance Department**: Advanced investing, taxes, accounting
-- **🎨 Creative Department**: Content creation, design, writing
-- **📚 Learning Department**: Skill development, course management
-- **🏠 Home Department**: Household management, maintenance
-
-## 🛠️ Customization
-
-### Create Custom Department
-```bash
-/motus department create
-```
-
-### Create Custom Workflow
-```bash
-/motus workflow create
-```
-
-### Add Custom Agent
-```bash
-/motus agent create
-```
-
-## 🤝 Integration with Claude Code
-
-Motus leverages Claude Code's powerful features:
-- **Task Tool**: Sub-agent orchestration
-- **MCP Servers**: External integrations
-- **Hooks**: Automation triggers
-- **Settings**: User preferences
-- **CLAUDE.md**: Long-term memory
-
-## 📈 Roadmap
-
-- [ ] Week 1: Life Department ✅
-- [ ] Week 2: Interactive wizards
-- [ ] Week 3: Business departments
-- [ ] Week 4: Full automation
-- [ ] Month 2: Cross-department workflows
-- [ ] Month 3: 100% autonomous operation
-
-## 💡 Philosophy
-
-Motus is built on the belief that one person should be able to run their entire life and business through AI automation. By delegating execution to AI agents while maintaining human creativity and decision-making, we enable unprecedented personal productivity and business scale.
 
 ## 📝 License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌟 Acknowledgments
+
+- Built exclusively for [Claude Code](https://claude.com/claude-code)
+- Powered by Anthropic's Claude AI
+- Inspired by the need for intelligent automation
+
+## 🔗 Links
+
+- **Website**: [https://motus.sh](https://motus.sh)
+- **Documentation**: [https://docs.motus.sh](https://docs.motus.sh)
+- **GitHub**: [https://github.com/openmotus/slashmotus](https://github.com/openmotus/slashmotus)
+- **Issues**: [Report bugs or request features](https://github.com/openmotus/slashmotus/issues)
+
+## 🆘 Support
+
+Need help?
+
+- 📖 Check the [Documentation](https://docs.motus.sh/)
+- 🐛 Report issues on [GitHub](https://github.com/openmotus/slashmotus/issues)
+- 💬 Ask questions in [Discussions](https://github.com/openmotus/slashmotus/discussions)
+
+## 🎯 Roadmap
+
+- [ ] Additional integrations (Slack, Todoist, Spotify)
+- [ ] Web dashboard for monitoring workflows
+- [ ] Community marketplace for sharing departments/agents
+- [ ] Mobile notifications for workflow completion
+- [ ] Advanced analytics and insights
+
+## 📊 Stats
+
+- **Departments**: Create unlimited departments
+- **Agents**: 40+ templates included
+- **Integrations**: 10+ services supported
+- **Templates**: Handlebars with 20+ helpers
 
 ---
 
-*Built with ❤️ for Claude Code by the Motus team*
+**Built with ❤️ for [Claude Code](https://claude.com/claude-code)**
+
+*Automate everything. Live better.*
