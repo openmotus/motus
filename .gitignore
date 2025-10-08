@@ -34,6 +34,14 @@ tmp/
 temp/
 *.tmp
 
+# Backup files
+*.backup
+*.bak
+*.old
+
+# macOS LaunchAgent files
+*.plist
+
 # Private keys and credentials
 *.pem
 *.key
