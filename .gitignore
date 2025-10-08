@@ -67,6 +67,7 @@ org-docs/departments/*.md
 
 # Hook configurations (personal automation)
 .claude/hooks.json
+.claude/settings/
 .claudecode/hooks/
 .claudecode/mcp/
 
