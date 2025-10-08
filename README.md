@@ -14,19 +14,23 @@ Motus is a sophisticated automation **framework** that provides the structure to
 
 ### What You Get ✅
 
-- **Creation System** - Wizards to generate departments, agents, and workflows
+- **Creation Wizards** - Interactive wizards that generate complete departments with:
+  - Department master and orchestrator agents
+  - 3-5 starter agents (auto-suggested based on department type)
+  - 2-3 workflow templates (ready to customize)
+  - Implementation skeletons for all agents
 - **Template Engine** - 11 Handlebars templates for consistent code generation
 - **Registry System** - Centralized tracking of all your departments, agents, and workflows
 - **OAuth Manager** - Web UI to manage API integrations with any OAuth2 service
-- **Documentation Generator** - Auto-generates docs from your setup
-- **Project Structure** - Organized directory layout for departments and agents
+- **Documentation Generator** - Auto-generates comprehensive docs from your setup
+- **Project Structure** - Organized directory layout for everything
 
 ### What You DON'T Get ❌
 
-- Pre-built departments (Life, Marketing, etc.) - You create your own
-- Implemented agents - You write the implementation logic
-- Pre-configured integrations - You add your own API keys and services
-- Ready-to-run workflows - You define the workflow steps
+- Pre-built departments (Life, Marketing, etc.) - Wizards help you create your own
+- Fully-implemented agents - You get editable templates, you add your specific logic
+- Pre-configured API keys - You add your own credentials
+- Production-ready workflows - You get starter templates to customize
 
 **Think of it like this:**
 - **Rails** is a web framework → You build your own web apps
@@ -109,19 +113,25 @@ chmod +x motus
 ### Your First Department
 
 ```bash
-# Create a Tasks department
+# Create a department with interactive wizard
 /motus department create tasks
 
-# Create an agent
-/motus tasks agent create task-fetcher
-
-# Create a workflow
-/motus tasks workflow create daily-tasks
+# The wizard will:
+# 1. Ask about the department's purpose
+# 2. Suggest integrations based on your needs
+# 3. Auto-generate 3-5 starter agents (editable templates)
+# 4. Create 2-3 workflows (ready to customize)
+# 5. Generate all documentation
 ```
 
-**What just happened?** Motus created the department structure, agent definition, and workflow configuration.
+**What you get:**
+- Department master agent (`tasks-admin.md`)
+- Department orchestrator (`tasks-orchestrator.md`)
+- 3-5 starter agents with implementation templates
+- 2-3 workflow configurations
+- Complete documentation
 
-**Next step**: Implement your agent's logic by editing the generated files. Motus provides the structure and templates—you add the actual functionality. See the [Creating Agents](public-docs/Creating-Agents.md) guide for implementation details.
+**Next step**: Customize the generated agents and workflows for your specific use case. The wizard creates working templates—you edit them to match your exact needs. See the [Creating Agents](public-docs/Creating-Agents.md) guide for customization details.
 
 ## 📚 Documentation
 
@@ -157,7 +167,7 @@ Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus
 
 ```
 ┌─────────────────────────────────────────────┐
-│              /Motus CLI                      │
+│              /Motus CLI                     │
 └────────────────┬────────────────────────────┘
                  │
                  ▼
@@ -165,13 +175,13 @@ Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus
         │  Departments   │
         └────────┬───────┘
                  │
-         ┌───────┴───────┐
-         │               │
+         ┌───────┴──────┐
+         │              │
     ┌────▼────┐    ┌────▼────┐
-    │ Agents  │    │Workflows│
+    │  Agents │    │Workflows│
     └────┬────┘    └────┬────┘
-         │               │
-         └───────┬───────┘
+         │              │
+         └───────┬──────┘
                  │
            ┌─────▼──────┐
            │Integrations│
@@ -236,7 +246,7 @@ See [Contributing Guide](public-docs/Contributing.md) for details.
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR-USERNAME/motus.git
+git clone https://github.com/openmotus/motus.git
 cd motus
 
 # Install dependencies
@@ -258,6 +268,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🌟 Acknowledgments
 
+- **Created by**: [Ian Borders](https://x.com/ianborders)
 - Built exclusively for [Claude Code](https://claude.com/claude-code)
 - Powered by Anthropic's Claude AI
 - Inspired by the need for intelligent automation
