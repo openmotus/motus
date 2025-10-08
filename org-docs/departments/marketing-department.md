@@ -191,7 +191,7 @@ This department requires the following integrations to function properly:
 - `TWITTER_API_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.TWITTER_API_KEY)"`
 
@@ -237,7 +237,7 @@ If you prefer manual configuration:
 - `GOOGLE_ANALYTICS_CLIENT_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.GOOGLE_ANALYTICS_CLIENT_ID)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -285,7 +285,7 @@ If you prefer manual configuration:
 - `FACEBOOK_CLIENT_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.FACEBOOK_CLIENT_ID)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -333,7 +333,7 @@ If you prefer manual configuration:
 - `LINKEDIN_CLIENT_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.LINKEDIN_CLIENT_ID)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -363,7 +363,7 @@ If you prefer manual configuration:
 - `BUFFER_API_KEY`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.BUFFER_API_KEY)"`
 

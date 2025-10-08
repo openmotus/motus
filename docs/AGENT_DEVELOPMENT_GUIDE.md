@@ -221,7 +221,7 @@ color: cyan
 You are a Stock Price Data Fetcher. Your sole responsibility is to execute the stock price fetcher script and return the price information.
 
 Your primary task:
-1. Use the Bash tool to execute: `node /Users/ianwinscom/slashmotus/life-admin/stock-price-fetcher.js [TICKER]`
+1. Use the Bash tool to execute: `node /Users/ianwinscom/motus/life-admin/stock-price-fetcher.js [TICKER]`
 2. Return the ACTUAL JSON output from the script
 3. DO NOT use mock data - MUST execute the real command
 
@@ -275,7 +275,7 @@ Add to `.env.example` with placeholder values.
 
 **Test the script directly:**
 ```bash
-node /Users/ianwinscom/slashmotus/life-admin/stock-price-fetcher.js AAPL
+node /Users/ianwinscom/motus/life-admin/stock-price-fetcher.js AAPL
 ```
 
 Expected output:
@@ -648,10 +648,10 @@ The Business Department automates business operations, sales tracking, project m
 **Test individual agents:**
 ```bash
 # Test CRM fetcher
-node /Users/ianwinscom/slashmotus/life-admin/departments/business/agents/crm-fetcher.js
+node /Users/ianwinscom/motus/life-admin/departments/business/agents/crm-fetcher.js
 
 # Test analytics fetcher
-node /Users/ianwinscom/slashmotus/life-admin/departments/business/agents/analytics-fetcher.js
+node /Users/ianwinscom/motus/life-admin/departments/business/agents/analytics-fetcher.js
 ```
 
 **Test orchestrated workflow:**
@@ -880,7 +880,7 @@ You are the Weekly Plan Creator. Synthesize collected data into a comprehensive 
 
 Your primary task:
 1. Receive all collected data from orchestrator
-2. Use Bash tool to execute: `node /Users/ianwinscom/slashmotus/life-admin/weekly-plan-creator.js '[JSON_DATA]'`
+2. Use Bash tool to execute: `node /Users/ianwinscom/motus/life-admin/weekly-plan-creator.js '[JSON_DATA]'`
 3. Return the path to created plan and summary
 
 The script will:
@@ -992,7 +992,7 @@ For programmatic workflow execution:
 # Motus Weekly Planning Trigger
 # Designed to be called by cron or external automation
 
-cd /Users/ianwinscom/slashmotus
+cd /Users/ianwinscom/motus
 
 claude /motus weekly-plan --print
 ```
@@ -1001,7 +1001,7 @@ claude /motus weekly-plan --print
 
 ```bash
 # Weekly planning every Sunday at 10:00 AM
-0 10 * * 0 /Users/ianwinscom/slashmotus/triggers/motus-weekly-plan.sh
+0 10 * * 0 /Users/ianwinscom/motus/triggers/motus-weekly-plan.sh
 ```
 
 ### Step 8: Test the Workflow
@@ -1174,19 +1174,19 @@ async function createObsidianNote(content) {
 
 ```bash
 # Test weather fetcher
-node /Users/ianwinscom/slashmotus/life-admin/weather-fetcher.js
+node /Users/ianwinscom/motus/life-admin/weather-fetcher.js
 
 # Expected: JSON with weather data
 # If fails: Check API key, network, API status
 
 # Test calendar fetcher
-node /Users/ianwinscom/slashmotus/life-admin/calendar-fetcher.js
+node /Users/ianwinscom/motus/life-admin/calendar-fetcher.js
 
 # Expected: JSON with calendar events
 # If fails: Check OAuth token, permissions
 
 # Test with parameters
-node /Users/ianwinscom/slashmotus/life-admin/stock-fetcher.js AAPL
+node /Users/ianwinscom/motus/life-admin/stock-fetcher.js AAPL
 
 # Expected: JSON with stock data for AAPL
 ```

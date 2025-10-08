@@ -78,7 +78,7 @@
         "BashOutput"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/weather-fetcher.js",
+      "script": "/Users/ianwinscom/motus/life-admin/weather-fetcher.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -96,7 +96,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/calendar-fetcher.js",
+      "script": "/Users/ianwinscom/motus/life-admin/calendar-fetcher.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -113,7 +113,7 @@
         "Bash"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/tomorrow-calendar.js",
+      "script": "/Users/ianwinscom/motus/life-admin/tomorrow-calendar.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -130,7 +130,7 @@
         "Bash"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/tomorrow-weather.js",
+      "script": "/Users/ianwinscom/motus/life-admin/tomorrow-weather.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -148,7 +148,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/email-processor.js",
+      "script": "/Users/ianwinscom/motus/life-admin/email-processor.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -165,7 +165,7 @@
         "Bash"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/quote-fetcher.js",
+      "script": "/Users/ianwinscom/motus/life-admin/quote-fetcher.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -183,7 +183,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/oura-fetcher.js",
+      "script": "/Users/ianwinscom/motus/life-admin/oura-fetcher.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -405,7 +405,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/life-admin/notion-creator.js",
+      "script": "/Users/ianwinscom/motus/life-admin/notion-creator.js",
       "created": "2025-01-01T00:00:00.000Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -554,7 +554,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/marketing/agents/trend-analyzer.js",
+      "script": "/Users/ianwinscom/motus/marketing/agents/trend-analyzer.js",
       "created": "2025-10-08T05:21:14.996Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -572,7 +572,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/marketing/agents/analytics-fetcher.js",
+      "script": "/Users/ianwinscom/motus/marketing/agents/analytics-fetcher.js",
       "created": "2025-10-08T05:21:14.997Z",
       "version": "1.0.0",
       "usedInWorkflows": [
@@ -590,7 +590,7 @@
         "Read"
       ],
       "model": "sonnet",
-      "script": "/Users/ianwinscom/slashmotus/marketing/agents/social-fetcher.js",
+      "script": "/Users/ianwinscom/motus/marketing/agents/social-fetcher.js",
       "created": "2025-10-08T05:21:14.997Z",
       "version": "1.0.0",
       "usedInWorkflows": [

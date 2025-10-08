@@ -9,7 +9,7 @@ Help improve Motus! This guide explains how to contribute to the project.
 Found a bug? Help us fix it!
 
 **Steps**:
-1. Check [existing issues](https://github.com/openmotus/slashmotus/issues)
+1. Check [existing issues](https://github.com/openmotus/motus/issues)
 2. Create new issue if not reported
 3. Include:
    - Clear description
@@ -51,7 +51,7 @@ Paste error logs here
 Have an idea? We'd love to hear it!
 
 **Steps**:
-1. Check [existing feature requests](https://github.com/openmotus/slashmotus/issues?q=is%3Aissue+label%3Aenhancement)
+1. Check [existing feature requests](https://github.com/openmotus/motus/issues?q=is%3Aissue+label%3Aenhancement)
 2. Create new issue with label "enhancement"
 3. Include:
    - Clear description
@@ -147,8 +147,8 @@ Write code to improve Motus!
 
 ```bash
 # Fork on GitHub first, then:
-git clone https://github.com/YOUR_USERNAME/slashmotus.git
-cd slashmotus
+git clone https://github.com/YOUR_USERNAME/motus.git
+cd motus
 ```
 
 2. **Install Dependencies**
@@ -417,8 +417,8 @@ Closes #123
 ### Questions?
 
 - Check [Documentation](README.md)
-- Search [existing issues](https://github.com/openmotus/slashmotus/issues)
-- Ask in [Discussions](https://github.com/openmotus/slashmotus/discussions)
+- Search [existing issues](https://github.com/openmotus/motus/issues)
+- Ask in [Discussions](https://github.com/openmotus/motus/discussions)
 
 ### Stuck?
 

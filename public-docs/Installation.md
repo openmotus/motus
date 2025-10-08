@@ -23,8 +23,8 @@ Before installing Motus, ensure you have:
 In your terminal, run:
 
 ```bash
-git clone https://github.com/openmotus/slashmotus.git
-cd slashmotus
+git clone https://github.com/openmotus/motus.git
+cd motus
 npm install
 ```
 
@@ -33,7 +33,7 @@ That's it! The installation is complete.
 ### Step 2: Open in Claude Code
 
 1. Open Claude Code CLI
-2. Navigate to the slashmotus directory
+2. Navigate to the motus directory
 3. You're ready to use Motus!
 
 ### Step 3: Verify Installation
@@ -51,7 +51,7 @@ You should see the Motus version number. If you do, installation succeeded!
 Your Motus directory contains:
 
 ```
-slashmotus/
+motus/
 ├── .claude/                 # Claude Code configuration
 │   ├── agents/             # Agent definitions
 │   └── commands/           # Motus commands
@@ -125,7 +125,7 @@ Now that Motus is installed, choose your path:
 ## Getting Help
 
 - **Documentation**: [docs.motus.sh](https://docs.motus.sh/)
-- **Issues**: [GitHub Issues](https://github.com/openmotus/slashmotus/issues)
+- **Issues**: [GitHub Issues](https://github.com/openmotus/motus/issues)
 - **FAQ**: [FAQ.md](FAQ.md)
 
 ---

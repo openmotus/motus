@@ -7,15 +7,15 @@ echo "🤖 Motus Automation Setup"
 echo "========================="
 
 # Create logs directory if it doesn't exist
-mkdir -p /Users/ianwinscom/slashmotus/logs
+mkdir -p /Users/ianwinscom/motus/logs
 
 # Function to setup LaunchAgents
 setup_launchagents() {
     echo "Setting up LaunchAgents for macOS..."
     
     # Copy plist files to LaunchAgents directory
-    cp /Users/ianwinscom/slashmotus/com.motus.dailybrief.plist ~/Library/LaunchAgents/
-    cp /Users/ianwinscom/slashmotus/com.motus.eveningreport.plist ~/Library/LaunchAgents/
+    cp /Users/ianwinscom/motus/com.motus.dailybrief.plist ~/Library/LaunchAgents/
+    cp /Users/ianwinscom/motus/com.motus.eveningreport.plist ~/Library/LaunchAgents/
     
     # Load the agents
     launchctl load ~/Library/LaunchAgents/com.motus.dailybrief.plist
@@ -41,10 +41,10 @@ setup_crontab() {
     
     # Add new entries
     echo "# Motus Daily Brief at 6:00 AM" >> /tmp/motus_cron
-    echo "0 6 * * * cd /Users/ianwinscom/slashmotus && /usr/local/bin/claude-code run '/motus daily-brief' >> /Users/ianwinscom/slashmotus/logs/daily-brief.log 2>&1" >> /tmp/motus_cron
+    echo "0 6 * * * cd /Users/ianwinscom/motus && /usr/local/bin/claude-code run '/motus daily-brief' >> /Users/ianwinscom/motus/logs/daily-brief.log 2>&1" >> /tmp/motus_cron
     echo "" >> /tmp/motus_cron
     echo "# Motus Evening Report at 9:00 PM" >> /tmp/motus_cron
-    echo "0 21 * * * cd /Users/ianwinscom/slashmotus && /usr/local/bin/claude-code run '/motus evening-report' >> /Users/ianwinscom/slashmotus/logs/evening-report.log 2>&1" >> /tmp/motus_cron
+    echo "0 21 * * * cd /Users/ianwinscom/motus && /usr/local/bin/claude-code run '/motus evening-report' >> /Users/ianwinscom/motus/logs/evening-report.log 2>&1" >> /tmp/motus_cron
     
     # Install new crontab
     crontab /tmp/motus_cron
@@ -89,4 +89,4 @@ echo "To manually trigger:"
 echo "  • Daily Brief: claude-code run '/motus daily-brief'"
 echo "  • Evening Report: claude-code run '/motus evening-report'"
 echo ""
-echo "Logs are stored in: /Users/ianwinscom/slashmotus/logs/"
+echo "Logs are stored in: /Users/ianwinscom/motus/logs/"

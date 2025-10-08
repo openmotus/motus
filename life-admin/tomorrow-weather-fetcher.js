@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
-require('dotenv').config({ path: '/Users/ianwinscom/slashmotus/.env' });
+require('dotenv').config({ path: '/Users/ianwinscom/motus/.env' });
 
 async function getTomorrowWeather() {
   try {

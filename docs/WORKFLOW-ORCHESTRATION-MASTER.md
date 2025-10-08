@@ -76,17 +76,17 @@ The key innovation is **parallel agent execution** - multiple agents run simulta
 #### Data Collection Agents (Parallel Group 1)
 
 1. **weather-fetcher**
-   - Executes: `node /Users/ianwinscom/slashmotus/life-admin/weather-fetcher.js`
+   - Executes: `node /Users/ianwinscom/motus/life-admin/weather-fetcher.js`
    - Returns: Current weather from WeatherAPI
    - Tools: Bash
 
 2. **calendar-fetcher**
-   - Executes: `node /Users/ianwinscom/slashmotus/life-admin/life-admin-agent.js get-calendar`
+   - Executes: `node /Users/ianwinscom/motus/life-admin/life-admin-agent.js get-calendar`
    - Returns: Today's Google Calendar events
    - Tools: Bash, Read
 
 3. **email-processor**
-   - Executes: `node /Users/ianwinscom/slashmotus/life-admin/life-admin-agent.js get-emails`
+   - Executes: `node /Users/ianwinscom/motus/life-admin/life-admin-agent.js get-emails`
    - Returns: Important Gmail messages
    - Tools: Bash, Read
 
@@ -260,9 +260,9 @@ Raw Data (Group 1) → Processed Data (Group 2) → Final Output (Group 3)
 
 ### File Locations
 - Daily Notes: `/Users/ianwinscom/Library/Mobile Documents/iCloud~md~obsidian/Documents/Daily/`
-- Scripts: `/Users/ianwinscom/slashmotus/life-admin/`
-- Agents: `/Users/ianwinscom/slashmotus/.claude/agents/`
-- Commands: `/Users/ianwinscom/slashmotus/.claude/commands/`
+- Scripts: `/Users/ianwinscom/motus/life-admin/`
+- Agents: `/Users/ianwinscom/motus/.claude/agents/`
+- Commands: `/Users/ianwinscom/motus/.claude/commands/`
 
 ### Date Format
 - Filename: "Aug 26, 2025" (Month Day, Year)
@@ -403,8 +403,8 @@ This script:
 
 **Check Execution Logs**:
 ```bash
-tail -f /Users/ianwinscom/slashmotus/logs/daily-brief.log
-tail -f /Users/ianwinscom/slashmotus/logs/evening-report.log
+tail -f /Users/ianwinscom/motus/logs/daily-brief.log
+tail -f /Users/ianwinscom/motus/logs/evening-report.log
 ```
 
 **Verify Schedule**:
@@ -468,7 +468,7 @@ This creates a fully automated daily loop that requires zero manual intervention
 **Best Practice**:
 ```javascript
 // Good: Use existing authenticated functions
-node /Users/ianwinscom/slashmotus/life-admin/life-admin-agent.js get-calendar
+node /Users/ianwinscom/motus/life-admin/life-admin-agent.js get-calendar
 
 // Bad: Trying to create new auth flow
 const credentials = fs.readFileSync('/path/to/credentials.json')

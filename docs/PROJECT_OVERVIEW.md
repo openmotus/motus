@@ -287,7 +287,7 @@ Scripts in `/triggers/` allow other apps to invoke Motus:
 ## Project Structure
 
 ```
-/Users/ianwinscom/slashmotus/
+/Users/ianwinscom/motus/
 ├── .claude/                      # Claude Code configuration
 │   ├── agents/                   # 26 agent definitions (.md files)
 │   │   ├── weather-fetcher.md
@@ -332,7 +332,7 @@ Scripts in `/triggers/` allow other apps to invoke Motus:
 
 ### 1. Installation
 ```bash
-cd ~/slashmotus
+cd ~/motus
 npm install
 ```
 

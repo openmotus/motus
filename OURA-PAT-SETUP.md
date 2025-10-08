@@ -21,7 +21,7 @@ OURA_PERSONAL_ACCESS_TOKEN=<paste-your-token-here>
 
 Run this command:
 ```bash
-node /Users/ianwinscom/slashmotus/life-admin/oura-fetcher-pat.js sleep
+node /Users/ianwinscom/motus/life-admin/oura-fetcher-pat.js sleep
 ```
 
 You should see your sleep data!

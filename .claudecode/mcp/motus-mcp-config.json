@@ -2,12 +2,12 @@
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/ianwinscom/slashmotus/data"],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/ianwinscom/motus/data"],
       "description": "File system access for Motus data persistence"
     },
     "sqlite": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sqlite", "/Users/ianwinscom/slashmotus/data/motus.db"],
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "/Users/ianwinscom/motus/data/motus.db"],
       "description": "SQLite database for structured data storage"
     },
     "github": {
@@ -29,7 +29,7 @@
     }
   },
   "activeServers": ["filesystem", "sqlite"],
-  "dataStoragePath": "/Users/ianwinscom/slashmotus/data",
+  "dataStoragePath": "/Users/ianwinscom/motus/data",
   "features": {
     "persistence": true,
     "externalIntegrations": true,

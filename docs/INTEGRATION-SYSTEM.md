@@ -50,7 +50,7 @@ We've created a comprehensive system that automatically:
 - `TWITTER_API_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.TWITTER_API_KEY)"`
 ```

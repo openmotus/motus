@@ -90,7 +90,7 @@ async function testTemplateEngine() {
       tools: ['Bash', 'Read'],
       model: 'sonnet',
       color: 'cyan',
-      scriptPath: '/Users/ianwinscom/slashmotus/life-admin/departments/marketing/agents/trend-analyzer.js',
+      scriptPath: '/Users/ianwinscom/motus/life-admin/departments/marketing/agents/trend-analyzer.js',
       apiInfo: {
         service: 'Twitter API',
         endpoint: '/trends/place',

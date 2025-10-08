@@ -98,7 +98,7 @@ Absolute path to your Obsidian vault.
 
 #### DATA_DIR
 ```
-DATA_DIR=/Users/username/slashmotus/data
+DATA_DIR=/Users/username/motus/data
 ```
 Where to store local data files.
 

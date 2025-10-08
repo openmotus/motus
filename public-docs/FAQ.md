@@ -33,8 +33,8 @@ Advanced users can write custom agents if desired.
 ### How do I install Motus?
 
 ```bash
-git clone https://github.com/openmotus/slashmotus.git
-cd slashmotus
+git clone https://github.com/openmotus/motus.git
+cd motus
 npm install
 ```
 
@@ -281,12 +281,12 @@ Faster than building from scratch.
 
 1. Check this [FAQ](FAQ.md)
 2. Read [documentation](README.md)
-3. Search [issues](https://github.com/openmotus/slashmotus/issues)
-4. Ask in [discussions](https://github.com/openmotus/slashmotus/discussions)
+3. Search [issues](https://github.com/openmotus/motus/issues)
+4. Ask in [discussions](https://github.com/openmotus/motus/discussions)
 
 ### How do I report bugs?
 
-Create an issue on [GitHub](https://github.com/openmotus/slashmotus/issues) with:
+Create an issue on [GitHub](https://github.com/openmotus/motus/issues) with:
 - Clear description
 - Steps to reproduce
 - Expected vs actual behavior
@@ -295,18 +295,18 @@ Create an issue on [GitHub](https://github.com/openmotus/slashmotus/issues) with
 
 ### Can I request features?
 
-Yes! Create a feature request issue on [GitHub](https://github.com/openmotus/slashmotus/issues).
+Yes! Create a feature request issue on [GitHub](https://github.com/openmotus/motus/issues).
 
 ### Is there a community?
 
-Join discussions on [GitHub Discussions](https://github.com/openmotus/slashmotus/discussions).
+Join discussions on [GitHub Discussions](https://github.com/openmotus/motus/discussions).
 
 ## Still Have Questions?
 
 Can't find your answer?
 
-1. Search [existing issues](https://github.com/openmotus/slashmotus/issues)
-2. Ask in [Discussions](https://github.com/openmotus/slashmotus/discussions)
+1. Search [existing issues](https://github.com/openmotus/motus/issues)
+2. Ask in [Discussions](https://github.com/openmotus/motus/discussions)
 3. Create new issue if needed
 
 We're here to help! 🚀

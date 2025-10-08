@@ -13,7 +13,7 @@ https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%
 
 In a terminal, run:
 ```bash
-cd /Users/ianwinscom/slashmotus
+cd /Users/ianwinscom/motus
 node life-admin/setup-google-oauth.js
 ```
 

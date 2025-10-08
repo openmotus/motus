@@ -23,7 +23,7 @@ You will receive data in your prompt. You MUST:
 3. Pass the formatted JSON to the notion-multi-db-manager.js script
 
 ```bash
-node /Users/ianwinscom/slashmotus/life-admin/notion-multi-db-manager.js '[JSON_DATA_FROM_AGENTS]'
+node /Users/ianwinscom/motus/life-admin/notion-multi-db-manager.js '[JSON_DATA_FROM_AGENTS]'
 ```
 
 IMPORTANT: Never use mock or fake data. Always use real data collected from the agents.

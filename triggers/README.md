@@ -19,7 +19,7 @@ These scripts allow external applications to trigger Motus commands through Clau
 const { exec } = require('child_process');
 
 // Trigger daily briefing
-exec('/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh', (error, stdout, stderr) => {
+exec('/Users/ianwinscom/motus/triggers/motus-daily-brief.sh', (error, stdout, stderr) => {
   if (error) {
     console.error(`Error: ${error}`);
     return;
@@ -28,7 +28,7 @@ exec('/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh', (error, stdou
 });
 
 // Get calendar events
-exec('/Users/ianwinscom/slashmotus/triggers/motus-life-calendar.sh', (error, stdout, stderr) => {
+exec('/Users/ianwinscom/motus/triggers/motus-life-calendar.sh', (error, stdout, stderr) => {
   console.log('Calendar:', stdout);
 });
 ```
@@ -39,7 +39,7 @@ import subprocess
 
 # Trigger daily briefing
 result = subprocess.run(
-    ['/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh'],
+    ['/Users/ianwinscom/motus/triggers/motus-daily-brief.sh'],
     capture_output=True,
     text=True
 )
@@ -47,7 +47,7 @@ print("Daily Briefing:", result.stdout)
 
 # Get health metrics
 result = subprocess.run(
-    ['/Users/ianwinscom/slashmotus/triggers/motus-life-health.sh'],
+    ['/Users/ianwinscom/motus/triggers/motus-life-health.sh'],
     capture_output=True,
     text=True
 )
@@ -57,10 +57,10 @@ print("Health Metrics:", result.stdout)
 ### From AppleScript/Shortcuts
 ```applescript
 -- Trigger daily briefing
-do shell script "/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh"
+do shell script "/Users/ianwinscom/motus/triggers/motus-daily-brief.sh"
 
 -- Get calendar
-do shell script "/Users/ianwinscom/slashmotus/triggers/motus-life-calendar.sh"
+do shell script "/Users/ianwinscom/motus/triggers/motus-life-calendar.sh"
 ```
 
 ### From Cron
@@ -68,13 +68,13 @@ do shell script "/Users/ianwinscom/slashmotus/triggers/motus-life-calendar.sh"
 # Add to crontab with: crontab -e
 
 # Daily briefing at 6 AM
-0 6 * * * /Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh
+0 6 * * * /Users/ianwinscom/motus/triggers/motus-daily-brief.sh
 
 # Evening report at 9 PM
-0 21 * * * /Users/ianwinscom/slashmotus/triggers/motus-evening-report.sh
+0 21 * * * /Users/ianwinscom/motus/triggers/motus-evening-report.sh
 
 # Health check every 4 hours
-0 */4 * * * /Users/ianwinscom/slashmotus/triggers/motus-life-health.sh
+0 */4 * * * /Users/ianwinscom/motus/triggers/motus-life-health.sh
 ```
 
 ### From Raycast
@@ -87,13 +87,13 @@ Create a Raycast script command:
 # @raycast.title Daily Briefing
 # @raycast.mode fullOutput
 
-/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh
+/Users/ianwinscom/motus/triggers/motus-daily-brief.sh
 ```
 
 ### From Alfred Workflow
 1. Create a new workflow
 2. Add a "Run Script" action
-3. Set script to: `/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh`
+3. Set script to: `/Users/ianwinscom/motus/triggers/motus-daily-brief.sh`
 4. Connect to a keyword trigger
 
 ### From Keyboard Maestro
@@ -106,7 +106,7 @@ Create a Raycast script command:
 ```
 Run Script Over SSH:
 Host: your-mac.local
-Script: /Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh
+Script: /Users/ianwinscom/motus/triggers/motus-daily-brief.sh
 ```
 
 ### From Swift/macOS App
@@ -115,7 +115,7 @@ import Foundation
 
 let task = Process()
 task.launchPath = "/bin/bash"
-task.arguments = ["-c", "/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh"]
+task.arguments = ["-c", "/Users/ianwinscom/motus/triggers/motus-daily-brief.sh"]
 
 let pipe = Pipe()
 task.standardOutput = pipe
@@ -136,7 +136,7 @@ import (
 )
 
 func main() {
-    cmd := exec.Command("/Users/ianwinscom/slashmotus/triggers/motus-daily-brief.sh")
+    cmd := exec.Command("/Users/ianwinscom/motus/triggers/motus-daily-brief.sh")
     output, err := cmd.Output()
     if err != nil {
         fmt.Println("Error:", err)
@@ -149,7 +149,7 @@ func main() {
 ## Notes
 
 - All scripts use the `--print` flag for non-interactive output
-- Scripts automatically change to the slashmotus directory for proper context
+- Scripts automatically change to the motus directory for proper context
 - Claude CLI must be installed and configured
 - Ensure your Claude session has necessary permissions and API keys configured
 
@@ -157,6 +157,6 @@ func main() {
 
 If a script doesn't work:
 1. Check that Claude CLI is installed: `which claude`
-2. Verify the script is executable: `ls -la /Users/ianwinscom/slashmotus/triggers/`
+2. Verify the script is executable: `ls -la /Users/ianwinscom/motus/triggers/`
 3. Test Claude directly: `claude /motus life calendar --print`
 4. Check Claude configuration: `~/.claude/config.json`

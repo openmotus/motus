@@ -6,10 +6,10 @@ echo "=========================================="
 # Create the crontab entries
 CRON_ENTRIES="# Motus Life Admin Automation
 # Daily Brief at 6:00 AM every day
-0 6 * * * /Users/ianwinscom/slashmotus/run-motus-command.sh daily-brief
+0 6 * * * /Users/ianwinscom/motus/run-motus-command.sh daily-brief
 
 # Evening Report at 9:00 PM every day
-0 21 * * * /Users/ianwinscom/slashmotus/run-motus-command.sh evening-report"
+0 21 * * * /Users/ianwinscom/motus/run-motus-command.sh evening-report"
 
 # Backup existing crontab
 echo "Backing up existing crontab..."
@@ -38,7 +38,7 @@ echo "To test manually:"
 echo "  ./run-motus-command.sh daily-brief"
 echo "  ./run-motus-command.sh evening-report"
 echo ""
-echo "Logs are saved to: /Users/ianwinscom/slashmotus/logs/"
+echo "Logs are saved to: /Users/ianwinscom/motus/logs/"
 echo ""
 echo "To uninstall:"
 echo "  crontab -l | grep -v 'run-motus-command.sh' | crontab -"

@@ -339,7 +339,7 @@ If you prefer manual configuration:
 - `GOOGLE_CLIENT_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.GOOGLE_CLIENT_ID)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -387,7 +387,7 @@ If you prefer manual configuration:
 - `GOOGLE_CLIENT_SECRET`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.GOOGLE_CLIENT_ID)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -417,7 +417,7 @@ If you prefer manual configuration:
 - `WEATHER_API_KEY`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.WEATHER_API_KEY)"`
 
@@ -447,7 +447,7 @@ If you prefer manual configuration:
 - `NOTION_DATABASE_ID`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.NOTION_API_KEY)"`
 
@@ -491,7 +491,7 @@ If you prefer manual configuration:
 - `OURA_ACCESS_TOKEN`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.OURA_ACCESS_TOKEN)"`
 - If OAuth fails, try disconnecting and reconnecting in the OAuth Manager
@@ -503,7 +503,7 @@ If you prefer manual configuration:
 - `OBSIDIAN_VAULT_PATH`
 
 **Troubleshooting:**
-- Make sure .env file is in the project root: `/Users/ianwinscom/slashmotus/.env`
+- Make sure .env file is in the project root: `/Users/ianwinscom/motus/.env`
 - Restart any running services after updating .env
 - Check that environment variables are loaded: `node -e "require('dotenv').config(); console.log(process.env.OBSIDIAN_VAULT_PATH)"`
 

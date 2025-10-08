@@ -60,10 +60,10 @@ If Claude Code hooks are not available, use system crontab:
 2. Add these lines:
    ```cron
    # Daily Brief at 6:00 AM
-   0 6 * * * cd /Users/ianwinscom/slashmotus && /usr/local/bin/claude-code run "/motus daily-brief" >> /Users/ianwinscom/slashmotus/logs/daily-brief.log 2>&1
+   0 6 * * * cd /Users/ianwinscom/motus && /usr/local/bin/claude-code run "/motus daily-brief" >> /Users/ianwinscom/motus/logs/daily-brief.log 2>&1
    
    # Evening Report at 9:00 PM
-   0 21 * * * cd /Users/ianwinscom/slashmotus && /usr/local/bin/claude-code run "/motus evening-report" >> /Users/ianwinscom/slashmotus/logs/evening-report.log 2>&1
+   0 21 * * * cd /Users/ianwinscom/motus && /usr/local/bin/claude-code run "/motus evening-report" >> /Users/ianwinscom/motus/logs/evening-report.log 2>&1
    ```
 
 3. Save and exit the editor
@@ -99,8 +99,8 @@ claude-code hooks logs daily-brief
 claude-code hooks logs evening-report
 
 # Or check system logs
-tail -f /Users/ianwinscom/slashmotus/logs/daily-brief.log
-tail -f /Users/ianwinscom/slashmotus/logs/evening-report.log
+tail -f /Users/ianwinscom/motus/logs/daily-brief.log
+tail -f /Users/ianwinscom/motus/logs/evening-report.log
 ```
 
 ## Troubleshooting

@@ -131,7 +131,7 @@ This will:
    Add to crontab for 8 AM daily briefing:
    ```bash
    crontab -e
-   # Add: 0 8 * * * /usr/bin/osascript -e 'tell application "Terminal" to do script "cd /Users/ianwinscom/slashmotus && ./motus daily-brief"'
+   # Add: 0 8 * * * /usr/bin/osascript -e 'tell application "Terminal" to do script "cd /Users/ianwinscom/motus && ./motus daily-brief"'
    ```
 
 ## 💡 Architecture Summary

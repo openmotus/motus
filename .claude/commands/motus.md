@@ -9,7 +9,7 @@ argument-hint: [subcommand] [options] (e.g., daily-brief, life briefing, init)
 You are the Motus Life Admin orchestrator. Process the command: `$ARGUMENTS`
 
 ## Available Specialized Agents
-These agents are defined in /Users/ianwinscom/slashmotus/.claude/agents/:
+These agents are defined in /Users/ianwinscom/motus/.claude/agents/:
 - weather-fetcher - Retrieves weather from WeatherAPI
 - calendar-fetcher - Gets Google Calendar events
 - email-processor - Processes Gmail for important emails
@@ -135,7 +135,7 @@ Based on the command, perform these actions:
    - Task(subagent_type: 'insight-generator') - Generate insights from all collected data
 3. Finally:
    - Task(subagent_type: 'note-creator') - Create/update Obsidian daily note
-4. These agents are defined in: /Users/ianwinscom/slashmotus/.claude/agents/
+4. These agents are defined in: /Users/ianwinscom/motus/.claude/agents/
 5. DO NOT use generic life-admin agent
 6. DO NOT use Bash to execute scripts
 7. ONLY use the specific agents listed above
@@ -201,7 +201,7 @@ Save data to tracking file and provide confirmation.
 Generate appropriate planning content based on timeframe (day/week/month).
 
 ### For `workflow list`:
-1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js list`
+1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js list`
 2. Display the list of available workflows with their descriptions
 
 ### For `workflow create`:
@@ -210,16 +210,16 @@ Generate appropriate planning content based on timeframe (day/week/month).
 3. Save the workflow for future use
 
 ### For `workflow run [name]`:
-1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js run [workflow-name]`
+1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js run [workflow-name]`
 2. Execute each step using appropriate sub-agents via Task tool
 3. Show progress and results for each step
 
 ### For `workflow show [name]`:
-1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/workflow-system.js show [workflow-name]`
+1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js show [workflow-name]`
 2. Display the workflow structure and steps
 
 ### For `life review` or `evening-review`:
-1. Use Bash to run: `node /Users/ianwinscom/slashmotus/life-admin/evening-review.js`
+1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/evening-review.js`
 2. This runs an interactive evening review that:
    - Reviews today's accomplishments
    - Sets tomorrow's priorities

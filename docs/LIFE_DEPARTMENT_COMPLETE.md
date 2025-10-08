@@ -138,11 +138,11 @@ This will:
 crontab -e
 
 # Add these lines:
-0 8 * * * cd /Users/ianwinscom/slashmotus && ./motus daily-brief
-0 12 * * * cd /Users/ianwinscom/slashmotus && ./motus life midday
-0 21 * * * cd /Users/ianwinscom/slashmotus && ./motus life evening
-0 10 * * 0 cd /Users/ianwinscom/slashmotus && ./motus life weekly-plan
-0 17 * * 5 cd /Users/ianwinscom/slashmotus && ./motus life weekly-review
+0 8 * * * cd /Users/ianwinscom/motus && ./motus daily-brief
+0 12 * * * cd /Users/ianwinscom/motus && ./motus life midday
+0 21 * * * cd /Users/ianwinscom/motus && ./motus life evening
+0 10 * * 0 cd /Users/ianwinscom/motus && ./motus life weekly-plan
+0 17 * * 5 cd /Users/ianwinscom/motus && ./motus life weekly-review
 ```
 
 ### Option 2: Claude Code Hooks

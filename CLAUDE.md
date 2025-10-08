@@ -154,7 +154,7 @@ See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan
 
 ## Working Directory Structure
 ```
-/Users/ianwinscom/slashmotus/
+/Users/ianwinscom/motus/
 ├── .claude/
 │   ├── agents/           # Specialized agent definitions (26 existing)
 │   └── commands/         # Command configurations

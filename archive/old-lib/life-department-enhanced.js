@@ -12,7 +12,7 @@ const path = require('path');
 class EnhancedLifeDepartment {
   constructor() {
     this.integrations = new MotusIntegrations();
-    this.dataPath = path.join(process.env.MOTUS_DATA_DIR || '/Users/ianwinscom/slashmotus/data');
+    this.dataPath = path.join(process.env.MOTUS_DATA_DIR || '/Users/ianwinscom/motus/data');
   }
 
   /**

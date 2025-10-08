@@ -1809,7 +1809,7 @@ runTests().catch(console.error);
 ## File Structure After Implementation
 
 ```
-/slashmotus/
+/motus/
 ├── templates/                          # NEW - All Handlebars templates
 │   ├── department/
 │   │   ├── department-agent.md.hbs

@@ -31,14 +31,14 @@ Welcome to the official Motus documentation! This guide will help you get starte
 
 - **Website**: [https://motus.sh](https://motus.sh)
 - **Docs**: [https://docs.motus.sh](https://docs.motus.sh)
-- **GitHub**: [https://github.com/openmotus/slashmotus](https://github.com/openmotus/slashmotus)
-- **Issues**: [Report bugs](https://github.com/openmotus/slashmotus/issues)
+- **GitHub**: [https://github.com/openmotus/motus](https://github.com/openmotus/motus)
+- **Issues**: [Report bugs](https://github.com/openmotus/motus/issues)
 
 ## 💡 Need Help?
 
 - Check the [Troubleshooting Guide](Troubleshooting.md)
 - Read the [FAQ](FAQ.md)
-- Open an [issue on GitHub](https://github.com/openmotus/slashmotus/issues)
+- Open an [issue on GitHub](https://github.com/openmotus/motus/issues)
 
 ## 📖 Recommended Reading Order
 

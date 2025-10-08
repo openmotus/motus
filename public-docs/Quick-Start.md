@@ -242,7 +242,7 @@ Check out example departments:
 **Issue:** Command not found
 ```bash
 # Solution: Make sure motus is executable
-chmod +x /path/to/slashmotus/motus
+chmod +x /path/to/motus/motus
 ```
 
 **Issue:** Agent not working

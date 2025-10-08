@@ -215,7 +215,7 @@ const context = {
   color: "cyan",
 
   // Data fetcher specific
-  scriptPath: "/Users/ianwinscom/slashmotus/life-admin/departments/marketing/agents/trend-analyzer.js",
+  scriptPath: "/Users/ianwinscom/motus/life-admin/departments/marketing/agents/trend-analyzer.js",
   apiUrl: "https://api.twitter.com/1.1",
   apiPath: "/trends/place.json",
   authType: "bearer",

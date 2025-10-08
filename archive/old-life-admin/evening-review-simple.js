@@ -128,7 +128,7 @@ async function getEveningReviewTemplate() {
   output += '  motus update "sleep quality 8"\n';
   output += '\n';
   output += 'Or run the interactive review:\n';
-  output += '  node /Users/ianwinscom/slashmotus/life-admin/evening-review.js\n';
+  output += '  node /Users/ianwinscom/motus/life-admin/evening-review.js\n';
   output += '\n';
   
   // Daily note path

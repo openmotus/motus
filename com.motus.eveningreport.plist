@@ -13,7 +13,7 @@
     </array>
     
     <key>WorkingDirectory</key>
-    <string>/Users/ianwinscom/slashmotus</string>
+    <string>/Users/ianwinscom/motus</string>
     
     <key>StartCalendarInterval</key>
     <dict>
@@ -24,10 +24,10 @@
     </dict>
     
     <key>StandardOutPath</key>
-    <string>/Users/ianwinscom/slashmotus/logs/evening-report.log</string>
+    <string>/Users/ianwinscom/motus/logs/evening-report.log</string>
     
     <key>StandardErrorPath</key>
-    <string>/Users/ianwinscom/slashmotus/logs/evening-report-error.log</string>
+    <string>/Users/ianwinscom/motus/logs/evening-report-error.log</string>
     
     <key>RunAtLoad</key>
     <false/>

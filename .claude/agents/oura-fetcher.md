@@ -17,7 +17,7 @@ You are responsible for fetching and formatting Oura ring sleep data for the dai
 ## CRITICAL: Execute the Command
 
 ```bash
-node /Users/ianwinscom/slashmotus/life-admin/oura-fetcher-pat.js sleep
+node /Users/ianwinscom/motus/life-admin/oura-fetcher-pat.js sleep
 ```
 
 ## Expected Output Format

@@ -62,7 +62,7 @@ After gathering all information:
 Since this requires user input, when called:
 1. Run the interactive evening review script:
    ```bash
-   node /Users/ianwinscom/slashmotus/life-admin/evening-review.js
+   node /Users/ianwinscom/motus/life-admin/evening-review.js
    ```
 
 2. The script will:

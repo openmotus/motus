@@ -71,8 +71,8 @@ Motus is a sophisticated automation framework that helps you organize your life 
 
 ```bash
 # Clone the repository
-git clone https://github.com/openmotus/slashmotus.git
-cd slashmotus
+git clone https://github.com/openmotus/motus.git
+cd motus
 
 # Install dependencies
 npm install
@@ -178,7 +178,7 @@ Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus
 ## 📦 Project Structure
 
 ```
-slashmotus/
+motus/
 ├── .claude/              # Claude Code configuration
 │   ├── agents/          # Agent definitions
 │   └── commands/        # CLI commands
@@ -215,8 +215,8 @@ See [Contributing Guide](public-docs/Contributing.md) for details.
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR-USERNAME/slashmotus.git
-cd slashmotus
+git clone https://github.com/YOUR-USERNAME/motus.git
+cd motus
 
 # Install dependencies
 npm install
@@ -245,16 +245,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Website**: [https://motus.sh](https://motus.sh)
 - **Documentation**: [https://docs.motus.sh](https://docs.motus.sh)
-- **GitHub**: [https://github.com/openmotus/slashmotus](https://github.com/openmotus/slashmotus)
-- **Issues**: [Report bugs or request features](https://github.com/openmotus/slashmotus/issues)
+- **GitHub**: [https://github.com/openmotus/motus](https://github.com/openmotus/motus)
+- **Issues**: [Report bugs or request features](https://github.com/openmotus/motus/issues)
 
 ## 🆘 Support
 
 Need help?
 
 - 📖 Check the [Documentation](https://docs.motus.sh/)
-- 🐛 Report issues on [GitHub](https://github.com/openmotus/slashmotus/issues)
-- 💬 Ask questions in [Discussions](https://github.com/openmotus/slashmotus/discussions)
+- 🐛 Report issues on [GitHub](https://github.com/openmotus/motus/issues)
+- 💬 Ask questions in [Discussions](https://github.com/openmotus/motus/discussions)
 
 ## 🎯 Roadmap
 

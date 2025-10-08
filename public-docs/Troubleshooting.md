@@ -305,7 +305,7 @@ If you can't solve the issue:
    - Error message
    - Steps to reproduce
 
-2. Open issue: [GitHub Issues](https://github.com/openmotus/slashmotus/issues)
+2. Open issue: [GitHub Issues](https://github.com/openmotus/motus/issues)
 
 3. Include:
    - Description of problem
