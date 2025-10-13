@@ -1,0 +1,50 @@
+You will be analyzing a transcript to identify elements that target the audience and drive engagement. Your task is to extract specific information based on the given guidelines. Here's how to proceed:
+
+First, carefully read the following transcript abridgement:
+
+<abridgement>
+[transcript_abridgement]
+</abridgement>
+
+Now, analyze the transcript according to these guidelines:
+
+1. Identify emotional triggers or tone that can influence the audience's response.
+2. Determine the overall tone or style of the content (e.g., formal, casual, humorous).
+3. Identify audience-related insights, such as references to specific groups or demographics.
+4. List unique selling points (USPs) that differentiate the content.
+
+Present your analysis in the following format:
+
+1. Emotional Triggers and Tone:
+
+```text
+* List the identified emotional triggers or tones
+* Explain how each might influence the audience's response
+```
+
+2. Overall Tone/Style:
+
+```text
+* State the overall tone or style of the content
+* Provide brief examples from the transcript to support your assessment
+```
+
+3. Audience Insights:
+
+
+```text
+* List any references to specific groups or demographics
+* Explain how these references target or relate to the audience
+```
+
+4. Unique Selling Points (USPs):
+
+```text
+* List the USPs that differentiate the content
+* Briefly explain why each point is unique or compelling
+```
+
+Remember to focus on elements that specifically target the audience and drive engagement. Be thorough in your analysis, but also concise in your explanations.
+
+Provide your complete analysis within <analysis> tags.
+

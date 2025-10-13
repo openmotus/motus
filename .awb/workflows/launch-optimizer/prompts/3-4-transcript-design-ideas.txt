@@ -1,0 +1,38 @@
+You are tasked with creating a CSV file to generate b-roll images for a faceless YouTube channel using Midjourney.
+The images should match the words spoken in the video while adhering to a specific style.
+
+**Input**:  
+<transcript>[transcript]</transcript>  
+<design_style>[design_style]</design_style>
+
+Your task is to break down the transcript into visual concepts and generate multiple prompts for each concept.
+
+Follow these steps:
+
+1. Read the transcript and identify key visual concepts that can be represented in images. Aim for one concept per sentence or every few sentences, depending on the content.
+2. For each concept, create 2-3 different prompts to generate images in Midjourney. These prompts should:  
+   a) Accurately represent the concept from the transcript  
+   b) Adhere to the specified style description if provided
+   c) Provide enough variety to create diverse images
+
+3. Format your output as a CSV with these columns:  
+   - Concept: The visual concept identified from the transcript  
+   - Sentence: The exact sentence or phrase from the transcript that the concept relates to  
+   - Prompt: The Midjourney prompt to generate the image (this column will repeat 2-3 times per concept)
+
+**Example Output**:  
+
+"File","Concept","Sentence","Prompt"
+"01-futuristic-city-skyline-1-","Futuristic city skyline","In the year 2050, cities looked very different.","futuristic city skyline with floating buildings, neon lights, holographic advertisements [style_description]"
+"01-futuristic-city-skyline-2-","Futuristic city skyline","In the year 2050, cities looked very different.","aerial view of a sprawling megacity with interconnected skyscrapers, flying vehicles, vibrant energy streams [style_description]"
+"02-advanced-ai-assistant-1-","Advanced AI assistant","AI assistants became an integral part of daily life.","hyper-realistic humanoid robot with glowing eyes assisting a person, surrounded by holographic interfaces [style_description]"
+"02-advanced-ai-assistant-2-","Advanced AI assistant","AI assistants became an integral part of daily life.","sleek AI assistant device projecting a lifelike hologram, futuristic home interior, soft ambient lighting [style_description]"
+
+**Additional Guidelines**:  
+- Ensure each prompt includes elements from the style description for consistency across all images.  
+- Use descriptive and vivid language in your prompts to generate detailed and engaging images.  
+- For abstract concepts in the transcript, creatively represent their essence visually.  
+- Keep the prompts concise but detailed enough to generate high-quality images.
+- Adhere to image generation best practices for the Midjourney/Leonardo.AI.
+
+Write the output in CSV format inside a code block:

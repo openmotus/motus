@@ -1,0 +1,43 @@
+You are tasked with aligning suggested chapter names with folder names for a YouTube video, 
+while considering the content of each chapter. 
+Your goal is to create a cohesive structure that balances accuracy, SEO, and readability.
+
+Follow these steps:
+
+1. Review the suggested chapter names:
+<identify_chapters>
+[identify_chapters]
+</identify_chapters>
+
+2. Analyze the transcript:
+<transcript>
+[transcript]
+</transcript>
+
+3. Consider the folder names provided by the author:
+<chapter_folder_names>
+[chapter_folder_names]
+</chapter_folder_names>
+
+4. Analyze the content:
+- Read through the transcript text carefully
+- Identify the main themes and topics covered in the chapter
+- Consider how well the suggested chapter names reflect the content
+- Evaluate how accurately the folder names represent the chapter's content
+
+5. Align chapter names with folder names:
+- Use the folder names as the **authoritative structure**. 
+- You must produce **exactly one chapter title per folder name**.
+- Preserve the folder order exactly as given—**do not add, remove, or reorder chapters**.
+- Normalize or merge any suggested chapter content to fit the folder structure provided.
+- Consider SEO and readability, but always anchor each chapter’s meaning to the folder's original intent.
+
+6. Format your output as follows, show in code block:
+
+Chapters:
+[First chapter title]
+[Second chapter title]
+...
+[Last chapter title]
+
+Remember: the folder names define the final structure. If multiple suggested chapters fit one folder, **summarize or merge them** under a single SEO-optimized title. Keep it tight, aligned, and readable.

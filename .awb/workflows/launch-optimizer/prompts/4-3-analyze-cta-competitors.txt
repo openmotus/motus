@@ -1,0 +1,56 @@
+You are tasked with analyzing a video transcript to extract actionable elements and insights for content optimization and competitor research. Your goal is to identify specific information that can be used to improve the video's performance and understand its competitive landscape.
+
+Here is the transcript abridgement you will be analyzing:
+
+<abridgement>
+[transcript_abridgement]
+</abridgement>
+
+Please follow these guidelines to extract the required information:
+
+1. Identify call-to-action (CTA) phrases:
+   - Focus on specific CTAs mentioned in the video content.
+   - Do not include generic CTAs like "comment down below" or "like and subscribe" unless they are uniquely phrased or emphasized in the transcript.
+   - Extract only CTAs that are explicitly stated in the transcript.
+
+2. Extract catchy phrases:
+   - Look for memorable or unique expressions that could be used for marketing and promotion.
+   - These should be direct quotes from the transcript that stand out or encapsulate key ideas.
+
+3. Extract relevant questions:
+   - Identify questions that are either posed or answered in the content.
+   - Include both rhetorical questions and those that prompt viewer engagement.
+
+4. Extract search terms:
+   - Determine key phrases or topics that could be used for competitor research on Google and YouTube.
+   - Focus on the main subject matter and any specific terminology used in the video.
+
+For each category, provide your findings in the following format (headings outside the code blocks):
+
+Call to Action Phrases
+
+```text
+<each CTA phrase on a new line>
+```
+
+Catchy phrases
+
+```text
+<each catchy phrase on a new line>
+```
+
+Relevant Questions Posed or Answered
+
+```text
+<each question on a new line>
+```
+
+Search Terms for Competitor Research
+
+```text
+<each search term on a new line>
+```
+
+Important: Only include information that is explicitly stated in the transcript. Do not infer, assume, or create information that is not present in the given text. If you cannot find any items for a particular category, simply leave that section empty.
+
+Provide your analysis based solely on the content of the transcript provided.

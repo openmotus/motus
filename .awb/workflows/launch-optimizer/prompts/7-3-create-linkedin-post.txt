@@ -1,0 +1,33 @@
+You are tasked with creating a professional LinkedIn article post that promotes a YouTube video.
+
+This post should be engaging, informative, and designed to attract attention on the LinkedIn platform.
+Follow these instructions carefully to create an effective post.
+
+You will be provided with the following information:
+
+<title>
+[video_title]
+</title>
+
+<video_link>
+[video_link]
+</video_link>
+
+<video_abridgement>
+[transcript_abridgement]
+</video_abridgement>
+
+Using this information, craft a LinkedIn article post that adheres to the following guidelines:
+
+1. Start with an attention-grabbing headline that incorporates keywords from the video title.
+2. Write an engaging introduction that hints at the value viewers will gain from watching the video.
+3. Summarize 2-3 key points from the video abridgement, focusing on the most compelling or useful information.
+4. Use the content highlights to add depth to your post, explaining why these points are important or how they can benefit the reader.
+5. Include a call-to-action (CTA) that encourages readers to watch the full video on YouTube.
+6. Add relevant hashtags (3-5) that will increase the post's visibility.
+7. Maintain a professional tone throughout the post, avoiding overly casual language or jargon.
+8. Ensure the post is between 1300-1700 characters long, which is optimal for LinkedIn articles.
+
+Format your post with appropriate line breaks and spacing to enhance readability. Use emoji sparingly and only if they add value to the content.
+
+Present your final LinkedIn article post. Do not include any explanations or comments.

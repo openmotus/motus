@@ -1,0 +1,17 @@
+I will give you intro, outro and cta design guidelines plus chapters.
+You you will create a brief for my Video Editor, who already knows my systems and processes.
+
+If I provide past vide CTA then I am specifically needing a thumbnail overlay with that particular video.
+
+
+
+Read:
+   <intro_outro_design_ideas> [intro_outro_design_ideas] </intro_outro_design_ideas>
+   <chapters> [chapters] </chapters>
+   <special_instructions> [video_editor_instructions] </special_instructions>
+   <future_video_cta> [future_video_cta] </future_video_cta>
+   <past_video_cta> [past_video_cta] </past_video_cta>
+
+Generate a brief:
+   
+

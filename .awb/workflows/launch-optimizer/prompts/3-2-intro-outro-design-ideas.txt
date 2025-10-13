@@ -1,0 +1,39 @@
+Can you use this style when writing prompts:
+<style>[design_style]</style>
+
+You will be analyzing the intro & outro and identify important information to generate prompts for visual elements.
+
+1. Read 
+   <intro> [transcript_intro] </intro>
+   <outro> [transcript_outro] </outro>
+
+2. For both the intro and outro, identify key concepts and sentences that could be represented by role graphics:
+   - Look for main ideas, important terms, or statistics that could be visually represented.
+   - List these concepts or sentences, numbering them for each section.
+
+3. For each identified concept or sentence, generate two Midjourney prompts:
+   - Create prompts that visually represent the concept in an engaging way.
+   - Each prompt should be concise but descriptive.
+
+Present your findings in the following format:
+
+Concepts:
+1. [Concept or sentence 1]
+2. [Concept or sentence 2]
+...
+
+Intro prompts:
+1a. [First Midjourney prompt for concept 1]
+1b. [Second Midjourney prompt for concept 1]
+2a. [First Midjourney prompt for concept 2]
+2b. [Second Midjourney prompt for concept 2]
+...
+
+Outro prompts:
+1a. [First Midjourney prompt for concept 1]
+1b. [Second Midjourney prompt for concept 1]
+2a. [First Midjourney prompt for concept 2]
+2b. [Second Midjourney prompt for concept 2]
+...
+
+Ensure that your analysis is thorough and that the Midjourney prompts are creative and relevant to the identified concepts.

@@ -1,0 +1,50 @@
+You are tasked with creating valid chapter timestamps for a YouTube video description. This task is crucial for improving video navigation and user experience. You will be provided with two pieces of information:
+XYZ
+1. An SRT file containing sentences and their corresponding timestamps:
+<srt>
+[srt]
+</srt>
+
+2. A list of chapter names and their associated sentences:
+<chapters>
+[chapters]
+</chapters>
+
+Follow these steps to complete the task:
+
+1. Carefully read through the SRT file and the list of chapters.
+
+2. For each chapter in the list:
+   a. Locate the associated sentence in the SRT file.
+   b. Find the timestamp that corresponds to the start of that sentence.
+   c. If the exact sentence is not found, look for the closest matching sentence or phrase.
+
+3. Create a list of chapters with their corresponding timestamps in the following format:
+   [timestamp] [Chapter Name]
+
+   The timestamp should be in the format of minutes:seconds (M:SS) or hours:minutes:seconds (H:MM:SS) if the video is longer than an hour.
+
+4. Ensure that the chapters are in chronological order based on their timestamps.
+
+5. The first chapter should always start at 0:00.
+
+6. There should be no duplicate timestamps.
+
+Important guidelines:
+
+- Be flexible when matching sentences. The associated sentence might not appear exactly as written in the SRT file. Look for close matches or key phrases.
+- If you can't find an exact or close match for a sentence, use your best judgment to estimate where that chapter might start based on the context and surrounding content.
+- Ensure that all chapter names from the provided list are included in the final output.
+- If you encounter any issues or ambiguities, explain your reasoning and decision-making process in a brief note before the final output.
+
+Please provide your final output in a code block, formatted as shown in the example below:
+
+```
+0:00 Introduction
+1:35 Topic 1
+3:45 Topic 2
+6:15 Topic 3
+9:00 Conclusion
+```
+
+Remember, accuracy in timestamp placement is crucial for a good user experience, so take care to match the sentences as closely as possible to the SRT content.

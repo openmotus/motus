@@ -1,0 +1,9 @@
+Write CSV into a markdown block with the following titles:
+
+"Thumb Text,Part 1,Part 2,Part 3,Title"
+
+Using
+
+<thumbnail_text>
+[thumbnail_text]
+</thumbnail_text>

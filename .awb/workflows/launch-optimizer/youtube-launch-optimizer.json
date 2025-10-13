@@ -1,0 +1,2674 @@
+{
+  "name": "youtube_launch_optimizer",
+  "title": "Youtube Launch Optimizer",
+  "description": "This workflow optimizes video launch by analyzing, preparing, and generating content for various platforms.",
+  "settings": {
+    "prompt_path": {
+      "value": "/Users/davidcruwys/dev/ad/agent-workflow-builder/ad-agent_architecture/prompts/youtube/launch_optimizer",
+      "description": null,
+      "title": "Prompt Path"
+    },
+    "default_llm": {
+      "value": "gpt4o",
+      "description": null,
+      "title": "Default Llm"
+    }
+  },
+  "sections": [
+    {
+      "name": "Video Preparation",
+      "title": "Video Preparation",
+      "order": 1,
+      "description": null,
+      "steps": [
+        {
+          "name": "Configure",
+          "title": "Configure",
+          "order": 1,
+          "description": null,
+          "prompt": "Review the project folder name \"[project_folder]\" and extract the project code which will be a letter followed by two numbers, example \"b69\" , then build a short title short title based on the project folder name using \"Title Format\"\n\nRead the transcription and generate a list of aditional titles, each 3-7 words based on the video's key content.\n\n# Format\n\nProject Code: \n[code goes inside a codeblock]\n\nShort Title: \n[title goes inside a codeblock]\n\nSuggested Titles:\n\n[\n  titles get listed inside a codeblock\n  Format:\n  - title one\n  - title two etc.\n]\n\n<transcript>\n[transcript]\n</transcript>\n\n",
+          "input_attributes": [
+            {
+              "name": "gpt_links",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Gpt Links"
+            },
+            {
+              "name": "gpt_links2",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Gpt Links2"
+            },
+            {
+              "name": "project_code",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Code"
+            },
+            {
+              "name": "project_folder",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Folder"
+            },
+            {
+              "name": "short_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Title"
+            },
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            },
+            {
+              "name": "video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link"
+            },
+            {
+              "name": "video_related_links",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Related Links"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "brand_info",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Info"
+            },
+            {
+              "name": "fold_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Fold Cta"
+            },
+            {
+              "name": "primary_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Primary Cta"
+            },
+            {
+              "name": "affiliate_cta",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Affiliate Cta"
+            },
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "srt",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Srt"
+            },
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            },
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            },
+            {
+              "name": "transcript_hook",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Hook"
+            },
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            },
+            {
+              "name": "transcript_recap",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Recap"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "project_code",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Code"
+            },
+            {
+              "name": "short_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Title"
+            },
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Script Summary",
+          "title": "Script Summary",
+          "order": 2,
+          "description": null,
+          "prompt": "Streamline and Condense YouTube Video Transcriptions\n\nAnalyzes content using advanced NLP to extract pivotal information from video script and summarize content while maintaining the original intent and tone.\n\nGuidelines:\n- Identify and summarize main topics, key arguments, and essential points.\n- Eliminate unnecessary details to create concise, readable summaries.\n- Ensure summaries are comprehensive yet succinct, aligning with the video's original message.\n\nCondense the text to its essential points or main ideas. \nThe goal is to capture the core meaning or highlights of the original content without going into detail.\n\nCan you summarize the following:\n\n[transcript]\n",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            },
+            {
+              "name": "project_code",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Code"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Script Abridgement",
+          "title": "Script Abridgement",
+          "order": 3,
+          "description": null,
+          "prompt": "Refine and Abridge YouTube Video Transcriptions\n\nUtilize advanced NLP techniques to condense the full video transcript while preserving its narrative, key themes, and original tone.\n\nGuidelines:\n- Retain the core message, arguments, and essential details.\n- Remove repetitive or non-essential content without losing the overall flow.\n- Ensure the abridged version reads smoothly, maintaining the original intent and style.\n- Leverage NLP to ensure the abridged content is both accurate and coherent.\n- Double check against the original transcript to ensure you have not missed anything.\n\nCan you abridge the following:\n\n[transcript]\n",
+          "input_attributes": [
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            },
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Abridge QA",
+          "title": "Abridge Qa",
+          "order": 4,
+          "description": null,
+          "prompt": "Accuracy Check for Abridged Transcript\n\nCompare the abridged output to the original transcript to identify any discrepancies, omissions, or inaccuracies. Focus on key details, narrative flow, and the preservation of the original intent and tone. List only the discrepancies or potential issues where the abridged version may not accurately reflect the source material.\n\nGuidelines:\n- Identify any missing key points, themes, or arguments from the original transcript.\n- Flag any changes in tone or intent that alter the original message.\n- Highlight areas where the abridged version might oversimplify or misrepresent the content.\n\nCan you analyze the following and list discrepancies:\n\nAbridged Output:\n[transcript_abridgement]\n\nOriginal Transcript:\n[transcript]\n",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_abridgement_descrepencies",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement Descrepencies"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Intro/Outro Seperation",
+          "title": "Intro Outro Seperation",
+          "order": 5,
+          "description": null,
+          "prompt": "You will be analyzing a video transcript to identify key sections, extract important information, and generate prompts for visual elements. Follow these steps carefully:\n\n1. Read the following video transcript:  \n   <transcript> [transcript] </transcript>\n\n2. Identify the intro and outro sections of the transcript:\n   - The intro includes everything up to where the main content begins.\n   - The outro starts when the speaker recaps or mentions liking/subscribing.\n\n3. Extract the words from the intro and outro:\n   - Copy the text of the intro section and place it under Intro section.\n   - Copy the text of the outro section and place it under Outro section.\n\nPresent your findings in the following format:\n\nIntro section:\n[Extracted intro text]\n\nOutro section:\n[Extracted outro text]\n\n",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            },
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            },
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Find Video CTA",
+          "title": "Find Video Cta",
+          "order": 6,
+          "description": null,
+          "prompt": "You will be analyzing a transcript from a video to identify references to other videos made by the same creator. Your task is to identify both past and future video references and format them appropriately. \n\nHere's the transcript:\n<transcript> [transcript] </transcript>\n\nFollow these steps to complete the task:\n\n1. Identifying past video references:\n   - Look for phrases that indicate a reference to a previously made video, such as \"As I mentioned in my video about...\", \"In a previous video, I talked about...\", or \"If you've seen my video on...\".\n   - For each past video reference, extract:\n     a) A short title or topic of the referenced video\n     b) The full sentence in which the reference was made\n\n2. Identifying future video references:\n   - Look for phrases that indicate a planned or upcoming video, such as \"I'll be making a video about...\", \"In an upcoming video, I'll discuss...\", or \"Stay tuned for my video on...\".\n   - For future video references, extract:\n     a) A short title or topic of the planned video\n     b) The full sentence in which the reference was made\n\n3. Output format:\n   Present your findings in the following format:\n\n   <past_videos>\n   1. Title: [Short title or topic]\n      Reference: [Full sentence containing the reference]\n   2. Title: [Short title or topic]\n      Reference: [Full sentence containing the reference]\n   ...\n   </past_videos>\n\n   <future_video>\n   Title: [Short title or topic]\n   Reference: [Full sentence containing the reference]\n   </future_video>\n\n4. Important notes:\n   - Only include clear references to other videos. Do not include vague mentions or general topics that aren't explicitly linked to other videos.\n   - If there are no past video references, do not include a <past_videos></past_videos> tag.\n   - If there is no future video reference, do not include a <future_video></future_video> tag.\n   - There will typically be at most one future video reference, but there can be multiple past video references.\n\nProvide your analysis based on the given transcript, following the instructions above.",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_references",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video References"
+            },
+            {
+              "name": "future_video_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Future Video Cta"
+            },
+            {
+              "name": "past_video_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Past Video Cta"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Build Chapters",
+      "title": "Build Chapters",
+      "order": 2,
+      "description": null,
+      "steps": [
+        {
+          "name": "Find Chapters",
+          "title": "Find Chapters",
+          "order": 1,
+          "description": null,
+          "prompt": "Identify and list youtube chapters with reference from the transcript included on next line in quote marks.\n\nChapter names should: \"Use simple, general terms; minimize detail\"\n\nPut list in code block in markdown format, do not use **bold** and number each chapter\n\nHere is a (SAMPLE ONLY) format:\n\n1. Chapter Name\n  \"In this video....\"\n2 Another Chapter Name\n  \"Some information about...\"\n\n<more chapters>\n\n5 Last Chapter Name\n  \"Whatever was said\"\n\nHere is the script:\n\n[transcript]\n[x-transcript-abridgement]",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "identify_chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Identify Chapters"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Refine Chapters",
+          "title": "Refine Chapters",
+          "order": 2,
+          "description": null,
+          "prompt": "You are tasked with aligning suggested chapter names with folder names for a YouTube video, \nwhile considering the content of each chapter. \nYour goal is to create a cohesive structure that balances accuracy, SEO, and readability.\n\nFollow these steps:\n\n1. Review the suggested chapter names:\n<identify_chapters>\n[identify_chapters]\n</identify_chapters>\n\n2. Analyze the transcript:\n<transcript>\n[transcript]\n</transcript>\n\n3. Consider the folder names provided by the author:\n<chapter_folder_names>\n[chapter_folder_names]\n</chapter_folder_names>\n\n4. Analyze the content:\n- Read through the transcript text carefully\n- Identify the main themes and topics covered in the chapter\n- Consider how well the suggested chapter names reflect the content\n- Evaluate how accurately the folder names represent the chapter's content\n\n5. Align chapter names with folder names:\n- Use the folder names as the **authoritative structure**. \n- You must produce **exactly one chapter title per folder name**.\n- Preserve the folder order exactly as given—**do not add, remove, or reorder chapters**.\n- Normalize or merge any suggested chapter content to fit the folder structure provided.\n- Consider SEO and readability, but always anchor each chapter’s meaning to the folder's original intent.\n\n6. Format your output as follows, show in code block:\n\nChapters:\n[First chapter title]\n[Second chapter title]\n...\n[Last chapter title]\n\nRemember: the folder names define the final structure. If multiple suggested chapters fit one folder, **summarize or merge them** under a single SEO-optimized title. Keep it tight, aligned, and readable.\n",
+          "input_attributes": [
+            {
+              "name": "identify_chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Identify Chapters"
+            },
+            {
+              "name": "chapter_folder_names",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapter Folder Names"
+            },
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create Chapters",
+          "title": "Create Chapters",
+          "order": 3,
+          "description": null,
+          "prompt": "You are tasked with creating valid chapter timestamps for a YouTube video description. This task is crucial for improving video navigation and user experience. You will be provided with two pieces of information:\nXYZ\n1. An SRT file containing sentences and their corresponding timestamps:\n<srt>\n[srt]\n</srt>\n\n2. A list of chapter names and their associated sentences:\n<chapters>\n[chapters]\n</chapters>\n\nFollow these steps to complete the task:\n\n1. Carefully read through the SRT file and the list of chapters.\n\n2. For each chapter in the list:\n   a. Locate the associated sentence in the SRT file.\n   b. Find the timestamp that corresponds to the start of that sentence.\n   c. If the exact sentence is not found, look for the closest matching sentence or phrase.\n\n3. Create a list of chapters with their corresponding timestamps in the following format:\n   [timestamp] [Chapter Name]\n\n   The timestamp should be in the format of minutes:seconds (M:SS) or hours:minutes:seconds (H:MM:SS) if the video is longer than an hour.\n\n4. Ensure that the chapters are in chronological order based on their timestamps.\n\n5. The first chapter should always start at 0:00.\n\n6. There should be no duplicate timestamps.\n\nImportant guidelines:\n\n- Be flexible when matching sentences. The associated sentence might not appear exactly as written in the SRT file. Look for close matches or key phrases.\n- If you can't find an exact or close match for a sentence, use your best judgment to estimate where that chapter might start based on the context and surrounding content.\n- Ensure that all chapter names from the provided list are included in the final output.\n- If you encounter any issues or ambiguities, explain your reasoning and decision-making process in a brief note before the final output.\n\nPlease provide your final output in a code block, formatted as shown in the example below:\n\n```\n0:00 Introduction\n1:35 Topic 1\n3:45 Topic 2\n6:15 Topic 3\n9:00 Conclusion\n```\n\nRemember, accuracy in timestamp placement is crucial for a good user experience, so take care to match the sentences as closely as possible to the SRT content.\n",
+          "input_attributes": [
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "srt",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Srt"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B-Roll Suggestions",
+      "title": "B Roll Suggestions",
+      "order": 3,
+      "description": null,
+      "steps": [
+        {
+          "name": "Design Style List",
+          "title": "Design Style List",
+          "order": 1,
+          "description": null,
+          "prompt": "You are tasked with generating style guidelines for creating images in Midjourney based on a given transcript. Your goal is to identify visual elements that align with the themes, tone, and content of the text.\n\n**Input**:  \n<transcript> [transcript] </transcript>\n\nCarefully read and analyze the transcript, paying attention to the overall mood, setting, characters, and key themes presented in the text.\n\nBased on your analysis, create a list of 10 distinct style ideas that could be used to generate images in Midjourney that visually represent the transcript's content and atmosphere.\n\nFor each style idea:  \n1. Provide a short label or title (2-5 words)  \n2. Follow it with a brief descriptive sentence (15-20 words) that gives additional detail about the style  \n\nConsider various visual elements such as:  \n- Color schemes  \n- Textures  \n- Lighting  \n- Art styles or movements  \n- Time periods or eras  \n- Atmospheric qualities  \n- Symbolic representations  \n\nEnsure that each style idea is unique and captures a different aspect of the transcript's themes or tone.\n\nStyle ideas:\n\n1. [Short Label]: [Descriptive sentence]  \n2. [Short Label]: [Descriptive sentence]  \n...  \n10. [Short Label]: [Descriptive sentence]\n\nMake each style idea distinct and evocative of the transcript's content, allowing the user to select the one that best suits their vision for the Midjourney image generation.\n",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "design_style",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Design Style"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Intro/Outro B-Roll",
+          "title": "Intro Outro B Roll",
+          "order": 2,
+          "description": null,
+          "prompt": "Can you use this style when writing prompts:\n<style>[design_style]</style>\n\nYou will be analyzing the intro & outro and identify important information to generate prompts for visual elements.\n\n1. Read \n   <intro> [transcript_intro] </intro>\n   <outro> [transcript_outro] </outro>\n\n2. For both the intro and outro, identify key concepts and sentences that could be represented by role graphics:\n   - Look for main ideas, important terms, or statistics that could be visually represented.\n   - List these concepts or sentences, numbering them for each section.\n\n3. For each identified concept or sentence, generate two Midjourney prompts:\n   - Create prompts that visually represent the concept in an engaging way.\n   - Each prompt should be concise but descriptive.\n\nPresent your findings in the following format:\n\nConcepts:\n1. [Concept or sentence 1]\n2. [Concept or sentence 2]\n...\n\nIntro prompts:\n1a. [First Midjourney prompt for concept 1]\n1b. [Second Midjourney prompt for concept 1]\n2a. [First Midjourney prompt for concept 2]\n2b. [Second Midjourney prompt for concept 2]\n...\n\nOutro prompts:\n1a. [First Midjourney prompt for concept 1]\n1b. [Second Midjourney prompt for concept 1]\n2a. [First Midjourney prompt for concept 2]\n2b. [Second Midjourney prompt for concept 2]\n...\n\nEnsure that your analysis is thorough and that the Midjourney prompts are creative and relevant to the identified concepts.\n",
+          "input_attributes": [
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            },
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            },
+            {
+              "name": "design_style",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Design Style"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "intro_outro_design_ideas",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Intro Outro Design Ideas"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Brief for Video Editor",
+          "title": "Brief For Video Editor",
+          "order": 3,
+          "description": null,
+          "prompt": "I will give you intro, outro and cta design guidelines plus chapters.\nYou you will create a brief for my Video Editor, who already knows my systems and processes.\n\nIf I provide past vide CTA then I am specifically needing a thumbnail overlay with that particular video.\n\n\n\nRead:\n   <intro_outro_design_ideas> [intro_outro_design_ideas] </intro_outro_design_ideas>\n   <chapters> [chapters] </chapters>\n   <special_instructions> [video_editor_instructions] </special_instructions>\n   <future_video_cta> [future_video_cta] </future_video_cta>\n   <past_video_cta> [past_video_cta] </past_video_cta>\n\nGenerate a brief:\n   \n\n",
+          "input_attributes": [
+            {
+              "name": "video_editor_instructions",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Editor Instructions"
+            },
+            {
+              "name": "intro_outro_design_ideas",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Intro Outro Design Ideas"
+            },
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "future_video_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Future Video Cta"
+            },
+            {
+              "name": "past_video_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Past Video Cta"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "editor_brief",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Editor Brief"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Transcript Design Ideas",
+          "title": "Transcript Design Ideas",
+          "order": 4,
+          "description": null,
+          "prompt": "You are tasked with creating a CSV file to generate b-roll images for a faceless YouTube channel using Midjourney.\nThe images should match the words spoken in the video while adhering to a specific style.\n\n**Input**:  \n<transcript>[transcript]</transcript>  \n<design_style>[design_style]</design_style>\n\nYour task is to break down the transcript into visual concepts and generate multiple prompts for each concept.\n\nFollow these steps:\n\n1. Read the transcript and identify key visual concepts that can be represented in images. Aim for one concept per sentence or every few sentences, depending on the content.\n2. For each concept, create 2-3 different prompts to generate images in Midjourney. These prompts should:  \n   a) Accurately represent the concept from the transcript  \n   b) Adhere to the specified style description if provided\n   c) Provide enough variety to create diverse images\n\n3. Format your output as a CSV with these columns:  \n   - Concept: The visual concept identified from the transcript  \n   - Sentence: The exact sentence or phrase from the transcript that the concept relates to  \n   - Prompt: The Midjourney prompt to generate the image (this column will repeat 2-3 times per concept)\n\n**Example Output**:  \n\n\"File\",\"Concept\",\"Sentence\",\"Prompt\"\n\"01-futuristic-city-skyline-1-\",\"Futuristic city skyline\",\"In the year 2050, cities looked very different.\",\"futuristic city skyline with floating buildings, neon lights, holographic advertisements [style_description]\"\n\"01-futuristic-city-skyline-2-\",\"Futuristic city skyline\",\"In the year 2050, cities looked very different.\",\"aerial view of a sprawling megacity with interconnected skyscrapers, flying vehicles, vibrant energy streams [style_description]\"\n\"02-advanced-ai-assistant-1-\",\"Advanced AI assistant\",\"AI assistants became an integral part of daily life.\",\"hyper-realistic humanoid robot with glowing eyes assisting a person, surrounded by holographic interfaces [style_description]\"\n\"02-advanced-ai-assistant-2-\",\"Advanced AI assistant\",\"AI assistants became an integral part of daily life.\",\"sleek AI assistant device projecting a lifelike hologram, futuristic home interior, soft ambient lighting [style_description]\"\n\n**Additional Guidelines**:  \n- Ensure each prompt includes elements from the style description for consistency across all images.  \n- Use descriptive and vivid language in your prompts to generate detailed and engaging images.  \n- For abstract concepts in the transcript, creatively represent their essence visually.  \n- Keep the prompts concise but detailed enough to generate high-quality images.\n- Adhere to image generation best practices for the Midjourney/Leonardo.AI.\n\nWrite the output in CSV format inside a code block:\n",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "design_style",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Design Style"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "design_ideas",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Design Ideas"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Content Analysis",
+      "title": "Content Analysis",
+      "order": 4,
+      "description": null,
+      "steps": [
+        {
+          "name": "Content Essence",
+          "title": "Content Essence",
+          "order": 1,
+          "description": null,
+          "prompt": "Extract the core elements of the abridgement to define the main content and key points.\n\nGuidelines:\n\n* Identify the main topic or theme.\n* Extract relevant keywords that capture the essence of the content.\n* Note important statistics or numbers mentioned.\n* Highlight key takeaways or insights that summarize the content.\n\nPlease analyze the following abridgement and provide the extracted information:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nMain Topic or Theme:\n\n```text\n[Insert identified theme here]\n```\n\nRelevant Keywords:\n\n```text\n[Insert keywords here, separated by commas or new lines]\n```\n\nImportant Statistics or Numbers:\n\n```text\n[Insert any mentioned statistics or numbers here]\n```\n\nKey Takeaways or Insights:\n\n```text\n[Insert concise bullet points summarizing insights here]\n```\n",
+          "input_attributes": [
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "video_topic_theme",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Topic Theme"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "important_statistics",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Important Statistics"
+            },
+            {
+              "name": "content_highlights",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Highlights"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_topic_theme",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Topic Theme"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "important_statistics",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Important Statistics"
+            },
+            {
+              "name": "content_highlights",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Highlights"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Audience Engagement",
+          "title": "Audience Engagement",
+          "order": 2,
+          "description": null,
+          "prompt": "You will be analyzing a transcript to identify elements that target the audience and drive engagement. Your task is to extract specific information based on the given guidelines. Here's how to proceed:\n\nFirst, carefully read the following transcript abridgement:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nNow, analyze the transcript according to these guidelines:\n\n1. Identify emotional triggers or tone that can influence the audience's response.\n2. Determine the overall tone or style of the content (e.g., formal, casual, humorous).\n3. Identify audience-related insights, such as references to specific groups or demographics.\n4. List unique selling points (USPs) that differentiate the content.\n\nPresent your analysis in the following format:\n\n1. Emotional Triggers and Tone:\n\n```text\n* List the identified emotional triggers or tones\n* Explain how each might influence the audience's response\n```\n\n2. Overall Tone/Style:\n\n```text\n* State the overall tone or style of the content\n* Provide brief examples from the transcript to support your assessment\n```\n\n3. Audience Insights:\n\n\n```text\n* List any references to specific groups or demographics\n* Explain how these references target or relate to the audience\n```\n\n4. Unique Selling Points (USPs):\n\n```text\n* List the USPs that differentiate the content\n* Briefly explain why each point is unique or compelling\n```\n\nRemember to focus on elements that specifically target the audience and drive engagement. Be thorough in your analysis, but also concise in your explanations.\n\nProvide your complete analysis within <analysis> tags.\n\n",
+          "input_attributes": [
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "emotional_trigger_tone",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Emotional Trigger Tone"
+            },
+            {
+              "name": "overal_tone_style",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Overal Tone Style"
+            },
+            {
+              "name": "audience_insights",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Audience Insights"
+            },
+            {
+              "name": "usp",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Usp"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "emotional_trigger_tone",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Emotional Trigger Tone"
+            },
+            {
+              "name": "overal_tone_style",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Overal Tone Style"
+            },
+            {
+              "name": "audience_insights",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Audience Insights"
+            },
+            {
+              "name": "usp",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Usp"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "CTA/Competitors",
+          "title": "Cta Competitors",
+          "order": 3,
+          "description": null,
+          "prompt": "You are tasked with analyzing a video transcript to extract actionable elements and insights for content optimization and competitor research. Your goal is to identify specific information that can be used to improve the video's performance and understand its competitive landscape.\n\nHere is the transcript abridgement you will be analyzing:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nPlease follow these guidelines to extract the required information:\n\n1. Identify call-to-action (CTA) phrases:\n   - Focus on specific CTAs mentioned in the video content.\n   - Do not include generic CTAs like \"comment down below\" or \"like and subscribe\" unless they are uniquely phrased or emphasized in the transcript.\n   - Extract only CTAs that are explicitly stated in the transcript.\n\n2. Extract catchy phrases:\n   - Look for memorable or unique expressions that could be used for marketing and promotion.\n   - These should be direct quotes from the transcript that stand out or encapsulate key ideas.\n\n3. Extract relevant questions:\n   - Identify questions that are either posed or answered in the content.\n   - Include both rhetorical questions and those that prompt viewer engagement.\n\n4. Extract search terms:\n   - Determine key phrases or topics that could be used for competitor research on Google and YouTube.\n   - Focus on the main subject matter and any specific terminology used in the video.\n\nFor each category, provide your findings in the following format (headings outside the code blocks):\n\nCall to Action Phrases\n\n```text\n<each CTA phrase on a new line>\n```\n\nCatchy phrases\n\n```text\n<each catchy phrase on a new line>\n```\n\nRelevant Questions Posed or Answered\n\n```text\n<each question on a new line>\n```\n\nSearch Terms for Competitor Research\n\n```text\n<each search term on a new line>\n```\n\nImportant: Only include information that is explicitly stated in the transcript. Do not infer, assume, or create information that is not present in the given text. If you cannot find any items for a particular category, simply leave that section empty.\n\nProvide your analysis based solely on the content of the transcript provided.\n",
+          "input_attributes": [
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "cta_phrases",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Cta Phrases"
+            },
+            {
+              "name": "catchy_phrases",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Catchy Phrases"
+            },
+            {
+              "name": "questions_posed_or_answered",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Questions Posed Or Answered"
+            },
+            {
+              "name": "competitor_search_terms",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Competitor Search Terms"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "cta_phrases",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Cta Phrases"
+            },
+            {
+              "name": "catchy_phrases",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Catchy Phrases"
+            },
+            {
+              "name": "questions_posed_or_answered",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Questions Posed Or Answered"
+            },
+            {
+              "name": "competitor_search_terms",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Competitor Search Terms"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rony",
+      "title": "Rony",
+      "order": 5,
+      "description": null,
+      "steps": [
+        {
+          "name": "Step 1",
+          "title": "Step 1",
+          "order": 1,
+          "description": null,
+          "prompt": "content_highlights",
+          "input_attributes": [
+            {
+              "name": "first_name",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "First Name"
+            },
+            {
+              "name": "last_name",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Last Name"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "full_name",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Full Name"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Step 2",
+          "title": "Step 2",
+          "order": 2,
+          "description": null,
+          "prompt": "content_highlights",
+          "input_attributes": [
+            {
+              "name": "company",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Company"
+            }
+          ],
+          "output_attributes": [],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Title & Thumbnail",
+      "title": "Title Thumbnail",
+      "order": 6,
+      "description": null,
+      "steps": [
+        {
+          "name": "Title Ideas",
+          "title": "Title Ideas",
+          "order": 1,
+          "description": null,
+          "prompt": "You are a specialist in youtube video title creation.\n\nYou will create 10 youtube titles\n\nWhen creating a YouTube title:\n- Keep it under 70 characters for full visibility.\n- Use action verbs at the beginning for engagement.\n- Avoid clickbait; focus on curiosity-driven content.\n- Incorporate relevant keywords and the current year for SEO.\n- Use brackets, numbers, and all caps strategically.\n- Include solutions to pain points with \"how-to\" titles.\n\n<short_title>\n[short_title]\n</short_title>\n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n",
+          "input_attributes": [
+            {
+              "name": "short_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Title"
+            },
+            {
+              "name": "video_topic_theme",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Topic Theme"
+            },
+            {
+              "name": "content_highlights",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Highlights"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Thumb Text Ideas",
+          "title": "Thumb Text Ideas",
+          "order": 2,
+          "description": null,
+          "prompt": "You are tasked with creating engaging thumbnail text ideas for a YouTube video.\nYour goal is to generate text that will grab viewers' attention and entice them to click on the video.\nThe thumbnail text should be different from the video title but still relate to the video's content and theme.\nThe text \n\nYou will be provided with the following information:\n\n<title>\n[video_title]\n<title>\n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<other_title_ideas>\n[title_ideas]\n</other_title_ideas>\n\n<example_only>\n| Thumb Text                | Part 1        | Part 2      | Part 3    | Title Idea                                                        |\n|---------------------------|---------------|-------------|-----------|-------------------------------------------------------------------|\n| Build AI Fast!            | Build AI      | Fast!       |           | Agent as Code: The Fastest Way to Build AI Workflows in 2024      |\n| Fast AI, No Code          | Fast AI       | No Code     |           |                                                                   |\n| Speed Up Your AI          | Speed Up      | Your AI     |           |                                                                   |\n| Automate Workflows Now    | Automate      | Workflows   | Now       |                                                                   |\n| Unlock AI Speed           | Unlock        | AI Speed    |           |                                                                   |\n| Simplify AI Creation      | Simplify      | AI Creation |           | Agent as Code: A Simple Language for Rapid AI Automation          |\n| AI Automation Simplified  | AI Automation | Simplified  |           |                                                                   |\n| Create AI in Minutes      | Create AI     | in Minutes  |           |                                                                   |\n| Quick AI, Simple Code     | Quick AI      | Simple Code |           |                                                                   |\n| Fast, Simple AI Workflows | Fast          | Simple AI   | Workflows |                                                                   |\n| Concept to Workflow       | Concept       | to Workflow |           | Agent as Code: A Proof of Concept for Rapid AI Workflow Creation  |\n| See AI in Action          | See AI        | in Action   |           |                                                                   |\n| Workflow Revolution       | Workflow      | Revolution  |           |                                                                   |\n| From Idea to AI           | From Idea     | to AI       |           |                                                                   |\n| Transform AI Creation     | Transform     | AI Creation |           |                                                                   |\n</example_only>\n\nKeep in mind that thumbnail text differs from video titles in the following ways:\n1. It uses a different psychological hook\n2. It's usually shorter and more concise\n3. It may be split into multiple text pieces\n4. It often has a visual element associated with it\n\nWhen creating thumbnail text ideas, follow these guidelines:\n1. Keep the text short and impactful (typically 3-5 words)\n2. Use attention-grabbing words or phrases\n3. Create a sense of curiosity or urgency\n4. Relate to the video's content without directly copying the title\n5. Consider using numbers, questions, or provocative statements\n\nWhen generating the table of ideas\n1. Generate 3-5 thumb text ideas based on the provided title idea\n2. Split the thumb text idea up into parts (aka segments) using 1, 2, 3 or 4 parts\n3. Ensure that the parts use the same text as the thumb text\n\nPresent your ideas in a code block in a table with the following headings\n\n- Thumb Text \n- Part 1 \n- Part 2 \n- Part 3 \n- Title Idea \n\nRemember to be creative and think about what would make a viewer want to click on the video.\nYour ideas should be distinct from the provided title ideas while still relating to the video's theme and content.\nIt should include best practices for thumbnail text\nIt should be complementary to a YouTube title, meaning it should reinforce from a different perspective, maybe emotional, not say the same thing",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "video_topic_theme",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Topic Theme"
+            },
+            {
+              "name": "content_highlights",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Highlights"
+            },
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "thumbnail_text",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Text"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Thumb Text CSV",
+          "title": "Thumb Text Csv",
+          "order": 3,
+          "description": null,
+          "prompt": "Write CSV into a markdown block with the following titles:\n\n\"Thumb Text,Part 1,Part 2,Part 3,Title\"\n\nUsing\n\n<thumbnail_text>\n[thumbnail_text]\n</thumbnail_text>\n",
+          "input_attributes": [
+            {
+              "name": "thumbnail_text",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Text"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "thumbnail_text_csv",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Text Csv"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "THUMB THUMB THUMB",
+          "title": "Thumb Thumb Thumb",
+          "order": 4,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [],
+          "output_attributes": [],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Visual Element Ideas",
+          "title": "Visual Element Ideas",
+          "order": 5,
+          "description": null,
+          "prompt": "You are an AI assistant tasked with generating visual element ideas for YouTube video thumbnails. Your goal is to create compelling and eye-catching visual concepts based on the video's content. These ideas should be simple, usually consisting of one or two elements, but highly effective in attracting viewers' attention.\n\nYou will be provided with the following information about a video:\n\nTopic/Theme: \n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n\n<title_ideas>\n[title_ideas]\n</title_ideas>\n\nFirst, analyze the provided information and extract key details in the following categories:\n\n1. Main Topic or Theme: Identify the central focus of the video.\n2. Key Highlights: Note important moments or points that could visually stand out.\n3. Emotional Triggers: Identify any moments that evoke a strong emotional response.\n4. Psychological Hooks: List phrases or concepts that could entice viewers to click.\n\nUse this extracted information to generate visual element ideas for the thumbnail. Remember, each idea should typically include only one or two elements to maintain simplicity and impact.\n\nCreate three separate sets of visual guidelines, each supporting the input information but distinct from one another. For each set, provide:\n\n1. A brief description of the visual concept\n2. The main element(s) to be featured\n3. Any text to be included (if applicable)\n4. A suggested color scheme or mood\n5. How this visual connects to the video's content\n\nPresent your ideas in the following format <Repeat for each idea>:\n\n```\nGuidelines: \n[Include the five points listed above the set of guidelines]\n\nPrompts:\n\n[Prompt for primary visual element]\n[Prompt for secondary visual element]\n```\n\nEnsure that each set of guidelines is unique and offers a different approach to visualizing the video's content. Be creative and think about what would make a viewer want to click on the video based on the thumbnail alone.\nEnsure that each set includes two prompts",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "content_highlights",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Highlights"
+            },
+            {
+              "name": "title_ideas",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Title Ideas"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "thumbnail_visual_elements",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Visual Elements"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create Thumbnail",
+          "title": "Create Thumbnail",
+          "order": 6,
+          "description": null,
+          "prompt": "You are a thumbnail prompt generator images created in Leonardo AI.\n\nYou will be given:\n- A video title\n- Multiple example thumbnail text, you can only pick one line\n- An abridged video description\n\nYour job is to generate a Leonardo AI prompt that will create a **16:9 YouTube-style thumbnail image** that:\n- Visually captures the *core idea or emotion* behind the title and abridged description.\n- Is **vivid, eye-catching, and clean**—suitable for small-screen YouTube browsing.\n- Leaves **space for thumbnail text** or optionally integrates the provided text into the image as a *natural design element* (e.g. sign, banner, digital screen).\n- Avoids overly complex scenes or too much fine detail that will be lost at small sizes.\n- Follows Leonardo best practices: simple structure, consistent character presence if needed, clear subject focus, bold contrast and lighting.\n\n<video_title>\n[video_title]\n</video_title>\n\n<thumbnail_text>\n[thumbnail_text]\n</thumbnail_text>\n\n<transcript_abridgement>\n[transcript_abridgement]\n</transcript_abridgement>\n\nWrite the final prompt into a codeblock as raw text",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "thumbnail_text",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Text"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "thumbnail_image",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Thumbnail Image"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "YouTube Meta Data",
+      "title": "You Tube Meta Data",
+      "order": 7,
+      "description": null,
+      "steps": [
+        {
+          "name": "Simple Description",
+          "title": "Simple Description",
+          "order": 1,
+          "description": null,
+          "prompt": "Craft engaging description to be embedded into an existing YouTube video descriptions\n\nSpecializes in creating what a YouTube video is about, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nAdhere to YouTube's content policies to ensure guideline compliance.\nSome keywords can be woven into the description, but do not add a sectiona called keywords.\n\nI need you to create the description based on this title: \"[video_title]\"\nDon't include the title in the out output\nWeave in some of these keywords \"[video_keywords]\" but do not add a sectiona called keywords.\nKeep the description length to less then 1000 characters\nKeep the description simple, it will be embedded into a final description keywords, ctas in a future step.\n\nAbridgement\n[transcript_abridgement]\n\n\nNote:\nDon't do anything other than the simple description as it will be embedded into a final description keywords, ctas in the next step.\n",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_simple_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Simple Description"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Write Description",
+          "title": "Write Description",
+          "order": 2,
+          "description": null,
+          "prompt": "Craft engaging and informative YouTube video description\n\nSpecializes in creating descriptions for YouTube videos, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nGather information about the video and assemble into a captivating descriptions that flows nicely with a scattering of emojis\n\nWrite the output in code block.\n\nSections:\n- Above the fold (include fold_cta at end)\n- Simple Description\n- Chapters\n- Related Videos\n- Secondary CTAs/Affiliate Links\n- Brand/Social Links\n- End Note/Closing Statement\n- #Keyword1, #Keyword2\n- Legal Disclosure\n\nGuidelines:\n- Incorporate a concise introduction that fits above the fold (about 40 words in length), includes the primary keyword early, and features a clickable link for the above the fold call to action. It is a plain sentence.\n- Use the simple description in the approprate location and maintains an appropriate length and tone, balancing informativeness with readability.\n- The YouTube description outline is a guide, not the actual headings that you should use, in keeping with YouTube description Best practices, the flow should feel natural, note: YouTube descriptions are not the same as articles in their formatting.\n\nUse the following inputs:\n\n<video_simple_description>\n[video_simple_description]\n</video_simple_description>\n\n<fold_cta>\n[fold_cta]\n</fold_cta>\n\n<primary_cta>\n[primary_cta]\n</primary_cta>\n\n<chapters>\n[chapters]\n</chapters>\n\n<brand_information>\n[brand_info]\n</brand_information>\n\n<affiliate_cta>\n[affiliate_cta]\n</affiliate_cta>\n\n<video_related_links>\n[video_related_links]\n</video_related_links>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "video_simple_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Simple Description"
+            },
+            {
+              "name": "brand_info",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Info"
+            },
+            {
+              "name": "fold_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Fold Cta"
+            },
+            {
+              "name": "primary_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Primary Cta"
+            },
+            {
+              "name": "affiliate_cta",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Affiliate Cta"
+            },
+            {
+              "name": "video_related_links",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Related Links"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Description"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Format Description",
+          "title": "Format Description",
+          "order": 3,
+          "description": null,
+          "prompt": "You will format a raw text or markdown document so that it can be pasted into a YouTube description.\n\nYouTube descriptions follow some of, but but not all of the conventions of markdown format.\n\nYou can use #, ## or ### for headings.\nWhen you want to bold use a single asterix, This is different to markdown that uses two Asterix.\n  Example:\n    **Chapters**\n    becomes\n    *Chapters*\n\nWhen you need a hyperlink, you just include the RAW URL and ignore the markdown format\n  example:\n    [https://appydave.com](https://appydave.com)\n    becomes\n    https://appydave.com\nYou will ignore any horizontal lines ---\n\nYou will write out in a code block of type text\n\nVideo description:\n\n[video_description]\n\n",
+          "input_attributes": [
+            {
+              "name": "video_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Description"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Description"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Custom GPT Description",
+          "title": "Custom Gpt Description",
+          "order": 4,
+          "description": null,
+          "prompt": "create:\n\n<video_title>\n[video_title]\n<video_title>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n\n<chapters>\n[chapters]\n</chapters>\n\n<brand_information>\n[brand_info]\n</brand_information>\n\n<above_the_folder_cta>\n[fold_cta]\n</above_the_folder_cta>\n\n<primary_cta>\n[primary_cta]\n</primary_cta>\n\n<affiliate_cta>\n[affiliate_cta]\n</affiliate_cta>\n\n<video_related_links>\n[video_related_links]\n</video_related_links>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n\n<transcript_abridgement>\n[transcript_abridgement]\n</transcript_abridgement>\n\nCraft engaging and informative YouTube video descriptions\n\nSpecializes in creating descriptions for YouTube videos, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nCommands:\nCREATE: Create description based on  [title] ,  [keywords]  and  [transcript]  and emphasize key points and primary CTA\nHASHTAGS|TAGS: Suggest relevant hashtags  [video content]\nHELP: Show role, overview, guidelines, and list of commands\n\nGuidelines:\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nSuggest relevant hashtags and tags for enhanced video discoverability.\nAdhere to YouTube's content policies to ensure guideline compliance.\n\nResponse style for commands and questions:\nCREATE: Write the description\nHASHTAGS: Show comma separated list of tags\nHELP: Detailed command list with descriptions and parameters",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "brand_info",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Info"
+            },
+            {
+              "name": "fold_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Fold Cta"
+            },
+            {
+              "name": "primary_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Primary Cta"
+            },
+            {
+              "name": "affiliate_cta",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Affiliate Cta"
+            },
+            {
+              "name": "video_related_links",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Related Links"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_description_custom_gpt",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Description Custom Gpt"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Pinned Comment",
+          "title": "Pinned Comment",
+          "order": 5,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "chapters",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Chapters"
+            },
+            {
+              "name": "brand_info",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Info"
+            },
+            {
+              "name": "fold_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Fold Cta"
+            },
+            {
+              "name": "primary_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Primary Cta"
+            },
+            {
+              "name": "affiliate_cta",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Affiliate Cta"
+            },
+            {
+              "name": "video_related_links",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Related Links"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "video_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Description"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_pinned_comment",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Pinned Comment"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Extra Metadata",
+          "title": "Extra Metadata",
+          "order": 6,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_metadata",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Metadata"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Social Media Posts",
+      "title": "Social Media Posts",
+      "order": 8,
+      "description": null,
+      "steps": [
+        {
+          "name": "Create Tweet",
+          "title": "Create Tweet",
+          "order": 1,
+          "description": null,
+          "prompt": "You are tasked with creating engaging tweets for YouTube videos. Your goal is to capture the essence of the video in tweet format, encourage viewers to watch, and increase video views through Twitter.\n\nYou will be provided with the following information about the YouTube video:\n\n<title>\n[video_title]\n</title>\n\n<video_link>\n[video_link]\n</video_link>\n\n<content_summary>\n[transcript_summary]\n</content_summary>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n\n<keyword_ideas>\n[video_keywords]\n</keyword_ideas>\n\nWhen crafting tweets, follow these guidelines:\n1. Highlight key points of the video that will intrigue potential viewers.\n2. Use concise and compelling language that fits within Twitter's 280-character limit.\n3. Ensure the tone aligns with the brand's voice and target audience on Twitter.\n4. Create a sense of urgency or curiosity to encourage clicks and views.\n\nIncorporate relevant hashtags based on the keyword ideas provided to increase the visibility of the tweet. Use 1-3 hashtags per tweet, placing them strategically within the text or at the end.\n\nPlace the YouTube <video_link> near the end of each tweet, some hashtags can go after\n\nRemember to keep each tweet within the 280-character limit, including the <video_link> and any hashtags used.\n",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link"
+            },
+            {
+              "name": "video_link_playlist",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link Playlist"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "tweet_content",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Tweet Content"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create FB Post",
+          "title": "Create Fb Post",
+          "order": 2,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "facebook_post",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Facebook Post"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create LinkedIn Post",
+          "title": "Create Linked In Post",
+          "order": 3,
+          "description": null,
+          "prompt": "You are tasked with creating a professional LinkedIn article post that promotes a YouTube video.\n\nThis post should be engaging, informative, and designed to attract attention on the LinkedIn platform.\nFollow these instructions carefully to create an effective post.\n\nYou will be provided with the following information:\n\n<title>\n[video_title]\n</title>\n\n<video_link>\n[video_link]\n</video_link>\n\n<video_abridgement>\n[transcript_abridgement]\n</video_abridgement>\n\nUsing this information, craft a LinkedIn article post that adheres to the following guidelines:\n\n1. Start with an attention-grabbing headline that incorporates keywords from the video title.\n2. Write an engaging introduction that hints at the value viewers will gain from watching the video.\n3. Summarize 2-3 key points from the video abridgement, focusing on the most compelling or useful information.\n4. Use the content highlights to add depth to your post, explaining why these points are important or how they can benefit the reader.\n5. Include a call-to-action (CTA) that encourages readers to watch the full video on YouTube.\n6. Add relevant hashtags (3-5) that will increase the post's visibility.\n7. Maintain a professional tone throughout the post, avoiding overly casual language or jargon.\n8. Ensure the post is between 1300-1700 characters long, which is optimal for LinkedIn articles.\n\nFormat your post with appropriate line breaks and spacing to enhance readability. Use emoji sparingly and only if they add value to the content.\n\nPresent your final LinkedIn article post. Do not include any explanations or comments.",
+          "input_attributes": [
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link"
+            },
+            {
+              "name": "video_link_playlist",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link Playlist"
+            },
+            {
+              "name": "video_keywords",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Video Keywords"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "linkedin_post",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Linkedin Post"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Add To Video List",
+          "title": "Add To Video List",
+          "order": 4,
+          "description": null,
+          "prompt": "[project_folder]\n[video_title]\n[video_link]\n",
+          "input_attributes": [
+            {
+              "name": "project_folder",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Folder"
+            },
+            {
+              "name": "video_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Title"
+            },
+            {
+              "name": "video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link"
+            },
+            {
+              "name": "video_link_playlist",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video Link Playlist"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "video_references",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Video References"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "YouTube Shorts",
+      "title": "You Tube Shorts",
+      "order": 9,
+      "description": null,
+      "steps": [
+        {
+          "name": "Create Shorts Title",
+          "title": "Create Shorts Title",
+          "order": 1,
+          "description": null,
+          "prompt": "You are a specialist in youtube video title creation for you Shorts\n\nYou will create 10 youtube titles\n\nWhen creating a YouTube title:\n- Keep it under 70 characters for full visibility.\n- Use action verbs at the beginning for engagement.\n- Avoid clickbait; focus on curiosity-driven content.\n- Incorporate relevant keywords and the current year for SEO.\n- Use brackets, numbers, and all caps strategically.\n- Include solutions to pain points with \"how-to\" titles.\n\nUse the shorts transcription:\n\n<short_transcription>\n[short_transcription]\n</short_transcription>\n",
+          "input_attributes": [
+            {
+              "name": "short_transcription",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Transcription"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "shorts_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Title"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create Shorts Description",
+          "title": "Create Shorts Description",
+          "order": 2,
+          "description": null,
+          "prompt": "Craft engaging YouTube video description for Shorts\n\nSpecializes in creating what a YouTube video is about, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nAdhere to YouTube's content policies to ensure guideline compliance.\nSome keywords can be woven into the description, but do not add a sectiona called keywords.\n\nI need you to create the description based on this title: \"[shorts_title]\"\nDon't include the title in the out output\nKeep the description length to less then 1000 characters\n\nUse this title for guideline\n\n<shorts_title>\n[shorts_title]\n</shorts_title>\n\nUse the shorts transcription:\n\n<short_transcription>\n[short_transcription]\n</short_transcription>\n\nThese keywords could be woven into the description\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n",
+          "input_attributes": [
+            {
+              "name": "shorts_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Title"
+            },
+            {
+              "name": "short_transcription",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Transcription"
+            },
+            {
+              "name": "shorts_video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Video Link"
+            },
+            {
+              "name": "shorts_video_keywords",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Shorts Video Keywords"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "shorts_description",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Description"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create Tweet",
+          "title": "Create Tweet",
+          "order": 3,
+          "description": null,
+          "prompt": "You are tasked with creating engaging tweets for YouTube videos. Your goal is to capture the essence of the video in tweet format, encourage viewers to watch, and increase video views through Twitter.\n\nYou will be provided with the following information about the YouTube video:\n\n<title>\n[shorts_title]\n</title>\n\n<video_link>\n[shorts_video_link]\n</video_link>\n\n<shorts_video_keywords>\n[shorts_video_keywords]\n</shorts_video_keywords>\n\n<shorts_transcription>\n[shorts_transcription]\n</shorts_transcription>\n\n<keyword_ideas>\n[video_keywords]\n</keyword_ideas>\n\nWhen crafting tweets, follow these guidelines:\n1. Highlight key points of the video that will intrigue potential viewers.\n2. Use concise and compelling language that fits within Twitter's 280-character limit.\n3. Ensure the tone aligns with the brand's voice and target audience on Twitter.\n4. Create a sense of urgency or curiosity to encourage clicks and views.\n\nIncorporate relevant hashtags based on the keyword ideas provided to increase the visibility of the tweet. Use 1-3 hashtags per tweet, placing them strategically within the text or at the end.\n\nPlace the YouTube <video_link> near the end of each tweet, some hashtags can go after\n\nRemember to keep each tweet within the 280-character limit, including the <video_link> and any hashtags used.\n",
+          "input_attributes": [
+            {
+              "name": "shorts_title",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Title"
+            },
+            {
+              "name": "short_transcription",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Short Transcription"
+            },
+            {
+              "name": "shorts_video_link",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Video Link"
+            },
+            {
+              "name": "shorts_video_keywords",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Shorts Video Keywords"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "shorts_tweet",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Shorts Tweet"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    }
+  ],
+  "attributes": {
+    "gpt_links": {
+      "name": "gpt_links",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Gpt Links"
+    },
+    "gpt_links2": {
+      "name": "gpt_links2",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Gpt Links2"
+    },
+    "project_code": {
+      "name": "project_code",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Project Code"
+    },
+    "project_folder": {
+      "name": "project_folder",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Project Folder"
+    },
+    "short_title": {
+      "name": "short_title",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Short Title"
+    },
+    "transcript": {
+      "name": "transcript",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript"
+    },
+    "transcript_abridgement": {
+      "name": "transcript_abridgement",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Abridgement"
+    },
+    "transcript_abridgement_descrepencies": {
+      "name": "transcript_abridgement_descrepencies",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Abridgement Descrepencies"
+    },
+    "transcript_intro": {
+      "name": "transcript_intro",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Intro"
+    },
+    "transcript_outro": {
+      "name": "transcript_outro",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Outro"
+    },
+    "transcript_hook": {
+      "name": "transcript_hook",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Hook"
+    },
+    "transcript_recap": {
+      "name": "transcript_recap",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Recap"
+    },
+    "video_editor_instructions": {
+      "name": "video_editor_instructions",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Editor Instructions"
+    },
+    "intro_outro_design_ideas": {
+      "name": "intro_outro_design_ideas",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Intro Outro Design Ideas"
+    },
+    "design_style": {
+      "name": "design_style",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Design Style"
+    },
+    "design_ideas": {
+      "name": "design_ideas",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Design Ideas"
+    },
+    "editor_brief": {
+      "name": "editor_brief",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Editor Brief"
+    },
+    "srt": {
+      "name": "srt",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Srt"
+    },
+    "analyze_cta_competitors": {
+      "name": "analyze_cta_competitors",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analyze Cta Competitors"
+    },
+    "video_title": {
+      "name": "video_title",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Title"
+    },
+    "video_link": {
+      "name": "video_link",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Link"
+    },
+    "video_link_playlist": {
+      "name": "video_link_playlist",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Link Playlist"
+    },
+    "video_topic_theme": {
+      "name": "video_topic_theme",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Topic Theme"
+    },
+    "video_related_links": {
+      "name": "video_related_links",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Video Related Links"
+    },
+    "video_keywords": {
+      "name": "video_keywords",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Video Keywords"
+    },
+    "important_statistics": {
+      "name": "important_statistics",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Important Statistics"
+    },
+    "video_description": {
+      "name": "video_description",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Description"
+    },
+    "video_simple_description": {
+      "name": "video_simple_description",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Simple Description"
+    },
+    "video_description_custom_gpt": {
+      "name": "video_description_custom_gpt",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Description Custom Gpt"
+    },
+    "video_pinned_comment": {
+      "name": "video_pinned_comment",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Pinned Comment"
+    },
+    "video_metadata": {
+      "name": "video_metadata",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video Metadata"
+    },
+    "video_references": {
+      "name": "video_references",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Video References"
+    },
+    "key_takeaways": {
+      "name": "key_takeaways",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Key Takeaways"
+    },
+    "content_highlights": {
+      "name": "content_highlights",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Content Highlights"
+    },
+    "identify_chapters": {
+      "name": "identify_chapters",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Identify Chapters"
+    },
+    "chapter_folder_names": {
+      "name": "chapter_folder_names",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Chapter Folder Names"
+    },
+    "chapters": {
+      "name": "chapters",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Chapters"
+    },
+    "fold_cta": {
+      "name": "fold_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Fold Cta"
+    },
+    "primary_cta": {
+      "name": "primary_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Primary Cta"
+    },
+    "affiliate_cta": {
+      "name": "affiliate_cta",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Affiliate Cta"
+    },
+    "future_video_cta": {
+      "name": "future_video_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Future Video Cta"
+    },
+    "past_video_cta": {
+      "name": "past_video_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Past Video Cta"
+    },
+    "brand_info": {
+      "name": "brand_info",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Brand Info"
+    },
+    "title_ideas": {
+      "name": "title_ideas",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Title Ideas"
+    },
+    "thumbnail_text": {
+      "name": "thumbnail_text",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Thumbnail Text"
+    },
+    "thumbnail_text_csv": {
+      "name": "thumbnail_text_csv",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Thumbnail Text Csv"
+    },
+    "thumbnail_visual_elements": {
+      "name": "thumbnail_visual_elements",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Thumbnail Visual Elements"
+    },
+    "tweet_content": {
+      "name": "tweet_content",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Tweet Content"
+    },
+    "facebook_post": {
+      "name": "facebook_post",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Facebook Post"
+    },
+    "linkedin_post": {
+      "name": "linkedin_post",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Linkedin Post"
+    },
+    "shorts_context": {
+      "name": "shorts_context",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Shorts Context"
+    },
+    "shorts_title": {
+      "name": "shorts_title",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Shorts Title"
+    },
+    "shorts_description": {
+      "name": "shorts_description",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Shorts Description"
+    },
+    "outcome_notes": {
+      "name": "outcome_notes",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Outcome Notes"
+    },
+    "transcript_summary": {
+      "name": "transcript_summary",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Summary"
+    },
+    "emotional_trigger_tone": {
+      "name": "emotional_trigger_tone",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Emotional Trigger Tone"
+    },
+    "overal_tone_style": {
+      "name": "overal_tone_style",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Overal Tone Style"
+    },
+    "audience_insights": {
+      "name": "audience_insights",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Audience Insights"
+    },
+    "usp": {
+      "name": "usp",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Usp"
+    },
+    "cta_phrases": {
+      "name": "cta_phrases",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Cta Phrases"
+    },
+    "catchy_phrases": {
+      "name": "catchy_phrases",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Catchy Phrases"
+    },
+    "questions_posed_or_answered": {
+      "name": "questions_posed_or_answered",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Questions Posed Or Answered"
+    },
+    "competitor_search_terms": {
+      "name": "competitor_search_terms",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Competitor Search Terms"
+    },
+    "first_name": {
+      "name": "first_name",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "First Name"
+    },
+    "last_name": {
+      "name": "last_name",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Last Name"
+    },
+    "full_name": {
+      "name": "full_name",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Full Name"
+    },
+    "company": {
+      "name": "company",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Company"
+    },
+    "thumbnail_image": {
+      "name": "thumbnail_image",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Thumbnail Image"
+    },
+    "short_transcription": {
+      "name": "short_transcription",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Short Transcription"
+    },
+    "shorts_video_link": {
+      "name": "shorts_video_link",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Shorts Video Link"
+    },
+    "shorts_video_keywords": {
+      "name": "shorts_video_keywords",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Shorts Video Keywords"
+    },
+    "shorts_tweet": {
+      "name": "shorts_tweet",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Shorts Tweet"
+    }
+  },
+  "prompts": {
+    "short_title_prompt": {
+      "name": "short_title_prompt",
+      "content": "Review the project folder name \"[project_folder]\" and extract the project code which will be a letter followed by two numbers, example \"b69\" , then build a short title short title based on the project folder name using \"Title Format\"\n\nRead the transcription and generate a list of aditional titles, each 3-7 words based on the video's key content.\n\n# Format\n\nProject Code: \n[code goes inside a codeblock]\n\nShort Title: \n[title goes inside a codeblock]\n\nSuggested Titles:\n\n[\n  titles get listed inside a codeblock\n  Format:\n  - title one\n  - title two etc.\n]\n\n<transcript>\n[transcript]\n</transcript>\n\n",
+      "description": null,
+      "title": "Short Title Prompt"
+    },
+    "video_summary_prompt": {
+      "name": "video_summary_prompt",
+      "content": "Streamline and Condense YouTube Video Transcriptions\n\nAnalyzes content using advanced NLP to extract pivotal information from video script and summarize content while maintaining the original intent and tone.\n\nGuidelines:\n- Identify and summarize main topics, key arguments, and essential points.\n- Eliminate unnecessary details to create concise, readable summaries.\n- Ensure summaries are comprehensive yet succinct, aligning with the video's original message.\n\nCondense the text to its essential points or main ideas. \nThe goal is to capture the core meaning or highlights of the original content without going into detail.\n\nCan you summarize the following:\n\n[transcript]\n",
+      "description": null,
+      "title": "Video Summary Prompt"
+    },
+    "video_abridgement_prompt": {
+      "name": "video_abridgement_prompt",
+      "content": "Refine and Abridge YouTube Video Transcriptions\n\nUtilize advanced NLP techniques to condense the full video transcript while preserving its narrative, key themes, and original tone.\n\nGuidelines:\n- Retain the core message, arguments, and essential details.\n- Remove repetitive or non-essential content without losing the overall flow.\n- Ensure the abridged version reads smoothly, maintaining the original intent and style.\n- Leverage NLP to ensure the abridged content is both accurate and coherent.\n- Double check against the original transcript to ensure you have not missed anything.\n\nCan you abridge the following:\n\n[transcript]\n",
+      "description": null,
+      "title": "Video Abridgement Prompt"
+    },
+    "abridgement_descrepencies_prompt": {
+      "name": "abridgement_descrepencies_prompt",
+      "content": "Accuracy Check for Abridged Transcript\n\nCompare the abridged output to the original transcript to identify any discrepancies, omissions, or inaccuracies. Focus on key details, narrative flow, and the preservation of the original intent and tone. List only the discrepancies or potential issues where the abridged version may not accurately reflect the source material.\n\nGuidelines:\n- Identify any missing key points, themes, or arguments from the original transcript.\n- Flag any changes in tone or intent that alter the original message.\n- Highlight areas where the abridged version might oversimplify or misrepresent the content.\n\nCan you analyze the following and list discrepancies:\n\nAbridged Output:\n[transcript_abridgement]\n\nOriginal Transcript:\n[transcript]\n",
+      "description": null,
+      "title": "Abridgement Descrepencies Prompt"
+    },
+    "intro_outro_seperation_prompt": {
+      "name": "intro_outro_seperation_prompt",
+      "content": "You will be analyzing a video transcript to identify key sections, extract important information, and generate prompts for visual elements. Follow these steps carefully:\n\n1. Read the following video transcript:  \n   <transcript> [transcript] </transcript>\n\n2. Identify the intro and outro sections of the transcript:\n   - The intro includes everything up to where the main content begins.\n   - The outro starts when the speaker recaps or mentions liking/subscribing.\n\n3. Extract the words from the intro and outro:\n   - Copy the text of the intro section and place it under Intro section.\n   - Copy the text of the outro section and place it under Outro section.\n\nPresent your findings in the following format:\n\nIntro section:\n[Extracted intro text]\n\nOutro section:\n[Extracted outro text]\n\n",
+      "description": null,
+      "title": "Intro Outro Seperation Prompt"
+    },
+    "find_video_cta_prompt": {
+      "name": "find_video_cta_prompt",
+      "content": "You will be analyzing a transcript from a video to identify references to other videos made by the same creator. Your task is to identify both past and future video references and format them appropriately. \n\nHere's the transcript:\n<transcript> [transcript] </transcript>\n\nFollow these steps to complete the task:\n\n1. Identifying past video references:\n   - Look for phrases that indicate a reference to a previously made video, such as \"As I mentioned in my video about...\", \"In a previous video, I talked about...\", or \"If you've seen my video on...\".\n   - For each past video reference, extract:\n     a) A short title or topic of the referenced video\n     b) The full sentence in which the reference was made\n\n2. Identifying future video references:\n   - Look for phrases that indicate a planned or upcoming video, such as \"I'll be making a video about...\", \"In an upcoming video, I'll discuss...\", or \"Stay tuned for my video on...\".\n   - For future video references, extract:\n     a) A short title or topic of the planned video\n     b) The full sentence in which the reference was made\n\n3. Output format:\n   Present your findings in the following format:\n\n   <past_videos>\n   1. Title: [Short title or topic]\n      Reference: [Full sentence containing the reference]\n   2. Title: [Short title or topic]\n      Reference: [Full sentence containing the reference]\n   ...\n   </past_videos>\n\n   <future_video>\n   Title: [Short title or topic]\n   Reference: [Full sentence containing the reference]\n   </future_video>\n\n4. Important notes:\n   - Only include clear references to other videos. Do not include vague mentions or general topics that aren't explicitly linked to other videos.\n   - If there are no past video references, do not include a <past_videos></past_videos> tag.\n   - If there is no future video reference, do not include a <future_video></future_video> tag.\n   - There will typically be at most one future video reference, but there can be multiple past video references.\n\nProvide your analysis based on the given transcript, following the instructions above.",
+      "description": null,
+      "title": "Find Video Cta Prompt"
+    },
+    "identify_chapters_prompt": {
+      "name": "identify_chapters_prompt",
+      "content": "Identify and list youtube chapters with reference from the transcript included on next line in quote marks.\n\nChapter names should: \"Use simple, general terms; minimize detail\"\n\nPut list in code block in markdown format, do not use **bold** and number each chapter\n\nHere is a (SAMPLE ONLY) format:\n\n1. Chapter Name\n  \"In this video....\"\n2 Another Chapter Name\n  \"Some information about...\"\n\n<more chapters>\n\n5 Last Chapter Name\n  \"Whatever was said\"\n\nHere is the script:\n\n[transcript]\n[x-transcript-abridgement]",
+      "description": null,
+      "title": "Identify Chapters Prompt"
+    },
+    "chapter_folder_names_prompt": {
+      "name": "chapter_folder_names_prompt",
+      "content": "You are tasked with aligning suggested chapter names with folder names for a YouTube video, \nwhile considering the content of each chapter. \nYour goal is to create a cohesive structure that balances accuracy, SEO, and readability.\n\nFollow these steps:\n\n1. Review the suggested chapter names:\n<identify_chapters>\n[identify_chapters]\n</identify_chapters>\n\n2. Analyze the transcript:\n<transcript>\n[transcript]\n</transcript>\n\n3. Consider the folder names provided by the author:\n<chapter_folder_names>\n[chapter_folder_names]\n</chapter_folder_names>\n\n4. Analyze the content:\n- Read through the transcript text carefully\n- Identify the main themes and topics covered in the chapter\n- Consider how well the suggested chapter names reflect the content\n- Evaluate how accurately the folder names represent the chapter's content\n\n5. Align chapter names with folder names:\n- Use the folder names as the **authoritative structure**. \n- You must produce **exactly one chapter title per folder name**.\n- Preserve the folder order exactly as given—**do not add, remove, or reorder chapters**.\n- Normalize or merge any suggested chapter content to fit the folder structure provided.\n- Consider SEO and readability, but always anchor each chapter’s meaning to the folder's original intent.\n\n6. Format your output as follows, show in code block:\n\nChapters:\n[First chapter title]\n[Second chapter title]\n...\n[Last chapter title]\n\nRemember: the folder names define the final structure. If multiple suggested chapters fit one folder, **summarize or merge them** under a single SEO-optimized title. Keep it tight, aligned, and readable.\n",
+      "description": null,
+      "title": "Chapter Folder Names Prompt"
+    },
+    "create_chapters_prompt": {
+      "name": "create_chapters_prompt",
+      "content": "You are tasked with creating valid chapter timestamps for a YouTube video description. This task is crucial for improving video navigation and user experience. You will be provided with two pieces of information:\nXYZ\n1. An SRT file containing sentences and their corresponding timestamps:\n<srt>\n[srt]\n</srt>\n\n2. A list of chapter names and their associated sentences:\n<chapters>\n[chapters]\n</chapters>\n\nFollow these steps to complete the task:\n\n1. Carefully read through the SRT file and the list of chapters.\n\n2. For each chapter in the list:\n   a. Locate the associated sentence in the SRT file.\n   b. Find the timestamp that corresponds to the start of that sentence.\n   c. If the exact sentence is not found, look for the closest matching sentence or phrase.\n\n3. Create a list of chapters with their corresponding timestamps in the following format:\n   [timestamp] [Chapter Name]\n\n   The timestamp should be in the format of minutes:seconds (M:SS) or hours:minutes:seconds (H:MM:SS) if the video is longer than an hour.\n\n4. Ensure that the chapters are in chronological order based on their timestamps.\n\n5. The first chapter should always start at 0:00.\n\n6. There should be no duplicate timestamps.\n\nImportant guidelines:\n\n- Be flexible when matching sentences. The associated sentence might not appear exactly as written in the SRT file. Look for close matches or key phrases.\n- If you can't find an exact or close match for a sentence, use your best judgment to estimate where that chapter might start based on the context and surrounding content.\n- Ensure that all chapter names from the provided list are included in the final output.\n- If you encounter any issues or ambiguities, explain your reasoning and decision-making process in a brief note before the final output.\n\nPlease provide your final output in a code block, formatted as shown in the example below:\n\n```\n0:00 Introduction\n1:35 Topic 1\n3:45 Topic 2\n6:15 Topic 3\n9:00 Conclusion\n```\n\nRemember, accuracy in timestamp placement is crucial for a good user experience, so take care to match the sentences as closely as possible to the SRT content.\n",
+      "description": null,
+      "title": "Create Chapters Prompt"
+    },
+    "transcript_design_style_prompt": {
+      "name": "transcript_design_style_prompt",
+      "content": "You are tasked with generating style guidelines for creating images in Midjourney based on a given transcript. Your goal is to identify visual elements that align with the themes, tone, and content of the text.\n\n**Input**:  \n<transcript> [transcript] </transcript>\n\nCarefully read and analyze the transcript, paying attention to the overall mood, setting, characters, and key themes presented in the text.\n\nBased on your analysis, create a list of 10 distinct style ideas that could be used to generate images in Midjourney that visually represent the transcript's content and atmosphere.\n\nFor each style idea:  \n1. Provide a short label or title (2-5 words)  \n2. Follow it with a brief descriptive sentence (15-20 words) that gives additional detail about the style  \n\nConsider various visual elements such as:  \n- Color schemes  \n- Textures  \n- Lighting  \n- Art styles or movements  \n- Time periods or eras  \n- Atmospheric qualities  \n- Symbolic representations  \n\nEnsure that each style idea is unique and captures a different aspect of the transcript's themes or tone.\n\nStyle ideas:\n\n1. [Short Label]: [Descriptive sentence]  \n2. [Short Label]: [Descriptive sentence]  \n...  \n10. [Short Label]: [Descriptive sentence]\n\nMake each style idea distinct and evocative of the transcript's content, allowing the user to select the one that best suits their vision for the Midjourney image generation.\n",
+      "description": null,
+      "title": "Transcript Design Style Prompt"
+    },
+    "intro_outro_design_ideas_prompt": {
+      "name": "intro_outro_design_ideas_prompt",
+      "content": "Can you use this style when writing prompts:\n<style>[design_style]</style>\n\nYou will be analyzing the intro & outro and identify important information to generate prompts for visual elements.\n\n1. Read \n   <intro> [transcript_intro] </intro>\n   <outro> [transcript_outro] </outro>\n\n2. For both the intro and outro, identify key concepts and sentences that could be represented by role graphics:\n   - Look for main ideas, important terms, or statistics that could be visually represented.\n   - List these concepts or sentences, numbering them for each section.\n\n3. For each identified concept or sentence, generate two Midjourney prompts:\n   - Create prompts that visually represent the concept in an engaging way.\n   - Each prompt should be concise but descriptive.\n\nPresent your findings in the following format:\n\nConcepts:\n1. [Concept or sentence 1]\n2. [Concept or sentence 2]\n...\n\nIntro prompts:\n1a. [First Midjourney prompt for concept 1]\n1b. [Second Midjourney prompt for concept 1]\n2a. [First Midjourney prompt for concept 2]\n2b. [Second Midjourney prompt for concept 2]\n...\n\nOutro prompts:\n1a. [First Midjourney prompt for concept 1]\n1b. [Second Midjourney prompt for concept 1]\n2a. [First Midjourney prompt for concept 2]\n2b. [Second Midjourney prompt for concept 2]\n...\n\nEnsure that your analysis is thorough and that the Midjourney prompts are creative and relevant to the identified concepts.\n",
+      "description": null,
+      "title": "Intro Outro Design Ideas Prompt"
+    },
+    "editor_brief_prompt": {
+      "name": "editor_brief_prompt",
+      "content": "I will give you intro, outro and cta design guidelines plus chapters.\nYou you will create a brief for my Video Editor, who already knows my systems and processes.\n\nIf I provide past vide CTA then I am specifically needing a thumbnail overlay with that particular video.\n\n\n\nRead:\n   <intro_outro_design_ideas> [intro_outro_design_ideas] </intro_outro_design_ideas>\n   <chapters> [chapters] </chapters>\n   <special_instructions> [video_editor_instructions] </special_instructions>\n   <future_video_cta> [future_video_cta] </future_video_cta>\n   <past_video_cta> [past_video_cta] </past_video_cta>\n\nGenerate a brief:\n   \n\n",
+      "description": null,
+      "title": "Editor Brief Prompt"
+    },
+    "transcript_design_ideas_prompt": {
+      "name": "transcript_design_ideas_prompt",
+      "content": "You are tasked with creating a CSV file to generate b-roll images for a faceless YouTube channel using Midjourney.\nThe images should match the words spoken in the video while adhering to a specific style.\n\n**Input**:  \n<transcript>[transcript]</transcript>  \n<design_style>[design_style]</design_style>\n\nYour task is to break down the transcript into visual concepts and generate multiple prompts for each concept.\n\nFollow these steps:\n\n1. Read the transcript and identify key visual concepts that can be represented in images. Aim for one concept per sentence or every few sentences, depending on the content.\n2. For each concept, create 2-3 different prompts to generate images in Midjourney. These prompts should:  \n   a) Accurately represent the concept from the transcript  \n   b) Adhere to the specified style description if provided\n   c) Provide enough variety to create diverse images\n\n3. Format your output as a CSV with these columns:  \n   - Concept: The visual concept identified from the transcript  \n   - Sentence: The exact sentence or phrase from the transcript that the concept relates to  \n   - Prompt: The Midjourney prompt to generate the image (this column will repeat 2-3 times per concept)\n\n**Example Output**:  \n\n\"File\",\"Concept\",\"Sentence\",\"Prompt\"\n\"01-futuristic-city-skyline-1-\",\"Futuristic city skyline\",\"In the year 2050, cities looked very different.\",\"futuristic city skyline with floating buildings, neon lights, holographic advertisements [style_description]\"\n\"01-futuristic-city-skyline-2-\",\"Futuristic city skyline\",\"In the year 2050, cities looked very different.\",\"aerial view of a sprawling megacity with interconnected skyscrapers, flying vehicles, vibrant energy streams [style_description]\"\n\"02-advanced-ai-assistant-1-\",\"Advanced AI assistant\",\"AI assistants became an integral part of daily life.\",\"hyper-realistic humanoid robot with glowing eyes assisting a person, surrounded by holographic interfaces [style_description]\"\n\"02-advanced-ai-assistant-2-\",\"Advanced AI assistant\",\"AI assistants became an integral part of daily life.\",\"sleek AI assistant device projecting a lifelike hologram, futuristic home interior, soft ambient lighting [style_description]\"\n\n**Additional Guidelines**:  \n- Ensure each prompt includes elements from the style description for consistency across all images.  \n- Use descriptive and vivid language in your prompts to generate detailed and engaging images.  \n- For abstract concepts in the transcript, creatively represent their essence visually.  \n- Keep the prompts concise but detailed enough to generate high-quality images.\n- Adhere to image generation best practices for the Midjourney/Leonardo.AI.\n\nWrite the output in CSV format inside a code block:\n",
+      "description": null,
+      "title": "Transcript Design Ideas Prompt"
+    },
+    "analyze_content_essence_prompt": {
+      "name": "analyze_content_essence_prompt",
+      "content": "Extract the core elements of the abridgement to define the main content and key points.\n\nGuidelines:\n\n* Identify the main topic or theme.\n* Extract relevant keywords that capture the essence of the content.\n* Note important statistics or numbers mentioned.\n* Highlight key takeaways or insights that summarize the content.\n\nPlease analyze the following abridgement and provide the extracted information:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nMain Topic or Theme:\n\n```text\n[Insert identified theme here]\n```\n\nRelevant Keywords:\n\n```text\n[Insert keywords here, separated by commas or new lines]\n```\n\nImportant Statistics or Numbers:\n\n```text\n[Insert any mentioned statistics or numbers here]\n```\n\nKey Takeaways or Insights:\n\n```text\n[Insert concise bullet points summarizing insights here]\n```\n",
+      "description": null,
+      "title": "Analyze Content Essence Prompt"
+    },
+    "analyze_audience_engagement_prompt": {
+      "name": "analyze_audience_engagement_prompt",
+      "content": "You will be analyzing a transcript to identify elements that target the audience and drive engagement. Your task is to extract specific information based on the given guidelines. Here's how to proceed:\n\nFirst, carefully read the following transcript abridgement:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nNow, analyze the transcript according to these guidelines:\n\n1. Identify emotional triggers or tone that can influence the audience's response.\n2. Determine the overall tone or style of the content (e.g., formal, casual, humorous).\n3. Identify audience-related insights, such as references to specific groups or demographics.\n4. List unique selling points (USPs) that differentiate the content.\n\nPresent your analysis in the following format:\n\n1. Emotional Triggers and Tone:\n\n```text\n* List the identified emotional triggers or tones\n* Explain how each might influence the audience's response\n```\n\n2. Overall Tone/Style:\n\n```text\n* State the overall tone or style of the content\n* Provide brief examples from the transcript to support your assessment\n```\n\n3. Audience Insights:\n\n\n```text\n* List any references to specific groups or demographics\n* Explain how these references target or relate to the audience\n```\n\n4. Unique Selling Points (USPs):\n\n```text\n* List the USPs that differentiate the content\n* Briefly explain why each point is unique or compelling\n```\n\nRemember to focus on elements that specifically target the audience and drive engagement. Be thorough in your analysis, but also concise in your explanations.\n\nProvide your complete analysis within <analysis> tags.\n\n",
+      "description": null,
+      "title": "Analyze Audience Engagement Prompt"
+    },
+    "analyze_cta_competitors_prompt": {
+      "name": "analyze_cta_competitors_prompt",
+      "content": "You are tasked with analyzing a video transcript to extract actionable elements and insights for content optimization and competitor research. Your goal is to identify specific information that can be used to improve the video's performance and understand its competitive landscape.\n\nHere is the transcript abridgement you will be analyzing:\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n\nPlease follow these guidelines to extract the required information:\n\n1. Identify call-to-action (CTA) phrases:\n   - Focus on specific CTAs mentioned in the video content.\n   - Do not include generic CTAs like \"comment down below\" or \"like and subscribe\" unless they are uniquely phrased or emphasized in the transcript.\n   - Extract only CTAs that are explicitly stated in the transcript.\n\n2. Extract catchy phrases:\n   - Look for memorable or unique expressions that could be used for marketing and promotion.\n   - These should be direct quotes from the transcript that stand out or encapsulate key ideas.\n\n3. Extract relevant questions:\n   - Identify questions that are either posed or answered in the content.\n   - Include both rhetorical questions and those that prompt viewer engagement.\n\n4. Extract search terms:\n   - Determine key phrases or topics that could be used for competitor research on Google and YouTube.\n   - Focus on the main subject matter and any specific terminology used in the video.\n\nFor each category, provide your findings in the following format (headings outside the code blocks):\n\nCall to Action Phrases\n\n```text\n<each CTA phrase on a new line>\n```\n\nCatchy phrases\n\n```text\n<each catchy phrase on a new line>\n```\n\nRelevant Questions Posed or Answered\n\n```text\n<each question on a new line>\n```\n\nSearch Terms for Competitor Research\n\n```text\n<each search term on a new line>\n```\n\nImportant: Only include information that is explicitly stated in the transcript. Do not infer, assume, or create information that is not present in the given text. If you cannot find any items for a particular category, simply leave that section empty.\n\nProvide your analysis based solely on the content of the transcript provided.\n",
+      "description": null,
+      "title": "Analyze Cta Competitors Prompt"
+    },
+    "title_generation_prompt": {
+      "name": "title_generation_prompt",
+      "content": "You are a specialist in youtube video title creation.\n\nYou will create 10 youtube titles\n\nWhen creating a YouTube title:\n- Keep it under 70 characters for full visibility.\n- Use action verbs at the beginning for engagement.\n- Avoid clickbait; focus on curiosity-driven content.\n- Incorporate relevant keywords and the current year for SEO.\n- Use brackets, numbers, and all caps strategically.\n- Include solutions to pain points with \"how-to\" titles.\n\n<short_title>\n[short_title]\n</short_title>\n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n",
+      "description": null,
+      "title": "Title Generation Prompt"
+    },
+    "thumbnail_text_prompt": {
+      "name": "thumbnail_text_prompt",
+      "content": "You are tasked with creating engaging thumbnail text ideas for a YouTube video.\nYour goal is to generate text that will grab viewers' attention and entice them to click on the video.\nThe thumbnail text should be different from the video title but still relate to the video's content and theme.\nThe text \n\nYou will be provided with the following information:\n\n<title>\n[video_title]\n<title>\n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<other_title_ideas>\n[title_ideas]\n</other_title_ideas>\n\n<example_only>\n| Thumb Text                | Part 1        | Part 2      | Part 3    | Title Idea                                                        |\n|---------------------------|---------------|-------------|-----------|-------------------------------------------------------------------|\n| Build AI Fast!            | Build AI      | Fast!       |           | Agent as Code: The Fastest Way to Build AI Workflows in 2024      |\n| Fast AI, No Code          | Fast AI       | No Code     |           |                                                                   |\n| Speed Up Your AI          | Speed Up      | Your AI     |           |                                                                   |\n| Automate Workflows Now    | Automate      | Workflows   | Now       |                                                                   |\n| Unlock AI Speed           | Unlock        | AI Speed    |           |                                                                   |\n| Simplify AI Creation      | Simplify      | AI Creation |           | Agent as Code: A Simple Language for Rapid AI Automation          |\n| AI Automation Simplified  | AI Automation | Simplified  |           |                                                                   |\n| Create AI in Minutes      | Create AI     | in Minutes  |           |                                                                   |\n| Quick AI, Simple Code     | Quick AI      | Simple Code |           |                                                                   |\n| Fast, Simple AI Workflows | Fast          | Simple AI   | Workflows |                                                                   |\n| Concept to Workflow       | Concept       | to Workflow |           | Agent as Code: A Proof of Concept for Rapid AI Workflow Creation  |\n| See AI in Action          | See AI        | in Action   |           |                                                                   |\n| Workflow Revolution       | Workflow      | Revolution  |           |                                                                   |\n| From Idea to AI           | From Idea     | to AI       |           |                                                                   |\n| Transform AI Creation     | Transform     | AI Creation |           |                                                                   |\n</example_only>\n\nKeep in mind that thumbnail text differs from video titles in the following ways:\n1. It uses a different psychological hook\n2. It's usually shorter and more concise\n3. It may be split into multiple text pieces\n4. It often has a visual element associated with it\n\nWhen creating thumbnail text ideas, follow these guidelines:\n1. Keep the text short and impactful (typically 3-5 words)\n2. Use attention-grabbing words or phrases\n3. Create a sense of curiosity or urgency\n4. Relate to the video's content without directly copying the title\n5. Consider using numbers, questions, or provocative statements\n\nWhen generating the table of ideas\n1. Generate 3-5 thumb text ideas based on the provided title idea\n2. Split the thumb text idea up into parts (aka segments) using 1, 2, 3 or 4 parts\n3. Ensure that the parts use the same text as the thumb text\n\nPresent your ideas in a code block in a table with the following headings\n\n- Thumb Text \n- Part 1 \n- Part 2 \n- Part 3 \n- Title Idea \n\nRemember to be creative and think about what would make a viewer want to click on the video.\nYour ideas should be distinct from the provided title ideas while still relating to the video's theme and content.\nIt should include best practices for thumbnail text\nIt should be complementary to a YouTube title, meaning it should reinforce from a different perspective, maybe emotional, not say the same thing",
+      "description": null,
+      "title": "Thumbnail Text Prompt"
+    },
+    "thumbnail_text_csv_prompt": {
+      "name": "thumbnail_text_csv_prompt",
+      "content": "Write CSV into a markdown block with the following titles:\n\n\"Thumb Text,Part 1,Part 2,Part 3,Title\"\n\nUsing\n\n<thumbnail_text>\n[thumbnail_text]\n</thumbnail_text>\n",
+      "description": null,
+      "title": "Thumbnail Text Csv Prompt"
+    },
+    "thumbnail_visual_elements_prompt": {
+      "name": "thumbnail_visual_elements_prompt",
+      "content": "You are an AI assistant tasked with generating visual element ideas for YouTube video thumbnails. Your goal is to create compelling and eye-catching visual concepts based on the video's content. These ideas should be simple, usually consisting of one or two elements, but highly effective in attracting viewers' attention.\n\nYou will be provided with the following information about a video:\n\nTopic/Theme: \n\n<video_topic_theme>\n[video_topic_theme]\n</video_topic_theme>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n\n<title_ideas>\n[title_ideas]\n</title_ideas>\n\nFirst, analyze the provided information and extract key details in the following categories:\n\n1. Main Topic or Theme: Identify the central focus of the video.\n2. Key Highlights: Note important moments or points that could visually stand out.\n3. Emotional Triggers: Identify any moments that evoke a strong emotional response.\n4. Psychological Hooks: List phrases or concepts that could entice viewers to click.\n\nUse this extracted information to generate visual element ideas for the thumbnail. Remember, each idea should typically include only one or two elements to maintain simplicity and impact.\n\nCreate three separate sets of visual guidelines, each supporting the input information but distinct from one another. For each set, provide:\n\n1. A brief description of the visual concept\n2. The main element(s) to be featured\n3. Any text to be included (if applicable)\n4. A suggested color scheme or mood\n5. How this visual connects to the video's content\n\nPresent your ideas in the following format <Repeat for each idea>:\n\n```\nGuidelines: \n[Include the five points listed above the set of guidelines]\n\nPrompts:\n\n[Prompt for primary visual element]\n[Prompt for secondary visual element]\n```\n\nEnsure that each set of guidelines is unique and offers a different approach to visualizing the video's content. Be creative and think about what would make a viewer want to click on the video based on the thumbnail alone.\nEnsure that each set includes two prompts",
+      "description": null,
+      "title": "Thumbnail Visual Elements Prompt"
+    },
+    "thumbnail_prompt": {
+      "name": "thumbnail_prompt",
+      "content": "You are a thumbnail prompt generator images created in Leonardo AI.\n\nYou will be given:\n- A video title\n- Multiple example thumbnail text, you can only pick one line\n- An abridged video description\n\nYour job is to generate a Leonardo AI prompt that will create a **16:9 YouTube-style thumbnail image** that:\n- Visually captures the *core idea or emotion* behind the title and abridged description.\n- Is **vivid, eye-catching, and clean**—suitable for small-screen YouTube browsing.\n- Leaves **space for thumbnail text** or optionally integrates the provided text into the image as a *natural design element* (e.g. sign, banner, digital screen).\n- Avoids overly complex scenes or too much fine detail that will be lost at small sizes.\n- Follows Leonardo best practices: simple structure, consistent character presence if needed, clear subject focus, bold contrast and lighting.\n\n<video_title>\n[video_title]\n</video_title>\n\n<thumbnail_text>\n[thumbnail_text]\n</thumbnail_text>\n\n<transcript_abridgement>\n[transcript_abridgement]\n</transcript_abridgement>\n\nWrite the final prompt into a codeblock as raw text",
+      "description": null,
+      "title": "Thumbnail Prompt"
+    },
+    "yt_simple_description_prompt": {
+      "name": "yt_simple_description_prompt",
+      "content": "Craft engaging description to be embedded into an existing YouTube video descriptions\n\nSpecializes in creating what a YouTube video is about, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nAdhere to YouTube's content policies to ensure guideline compliance.\nSome keywords can be woven into the description, but do not add a sectiona called keywords.\n\nI need you to create the description based on this title: \"[video_title]\"\nDon't include the title in the out output\nWeave in some of these keywords \"[video_keywords]\" but do not add a sectiona called keywords.\nKeep the description length to less then 1000 characters\nKeep the description simple, it will be embedded into a final description keywords, ctas in a future step.\n\nAbridgement\n[transcript_abridgement]\n\n\nNote:\nDon't do anything other than the simple description as it will be embedded into a final description keywords, ctas in the next step.\n",
+      "description": null,
+      "title": "Yt Simple Description Prompt"
+    },
+    "yt_description_prompt": {
+      "name": "yt_description_prompt",
+      "content": "Craft engaging and informative YouTube video description\n\nSpecializes in creating descriptions for YouTube videos, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nGather information about the video and assemble into a captivating descriptions that flows nicely with a scattering of emojis\n\nWrite the output in code block.\n\nSections:\n- Above the fold (include fold_cta at end)\n- Simple Description\n- Chapters\n- Related Videos\n- Secondary CTAs/Affiliate Links\n- Brand/Social Links\n- End Note/Closing Statement\n- #Keyword1, #Keyword2\n- Legal Disclosure\n\nGuidelines:\n- Incorporate a concise introduction that fits above the fold (about 40 words in length), includes the primary keyword early, and features a clickable link for the above the fold call to action. It is a plain sentence.\n- Use the simple description in the approprate location and maintains an appropriate length and tone, balancing informativeness with readability.\n- The YouTube description outline is a guide, not the actual headings that you should use, in keeping with YouTube description Best practices, the flow should feel natural, note: YouTube descriptions are not the same as articles in their formatting.\n\nUse the following inputs:\n\n<video_simple_description>\n[video_simple_description]\n</video_simple_description>\n\n<fold_cta>\n[fold_cta]\n</fold_cta>\n\n<primary_cta>\n[primary_cta]\n</primary_cta>\n\n<chapters>\n[chapters]\n</chapters>\n\n<brand_information>\n[brand_info]\n</brand_information>\n\n<affiliate_cta>\n[affiliate_cta]\n</affiliate_cta>\n\n<video_related_links>\n[video_related_links]\n</video_related_links>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n",
+      "description": null,
+      "title": "Yt Description Prompt"
+    },
+    "yt_format_description_prompt": {
+      "name": "yt_format_description_prompt",
+      "content": "You will format a raw text or markdown document so that it can be pasted into a YouTube description.\n\nYouTube descriptions follow some of, but but not all of the conventions of markdown format.\n\nYou can use #, ## or ### for headings.\nWhen you want to bold use a single asterix, This is different to markdown that uses two Asterix.\n  Example:\n    **Chapters**\n    becomes\n    *Chapters*\n\nWhen you need a hyperlink, you just include the RAW URL and ignore the markdown format\n  example:\n    [https://appydave.com](https://appydave.com)\n    becomes\n    https://appydave.com\nYou will ignore any horizontal lines ---\n\nYou will write out in a code block of type text\n\nVideo description:\n\n[video_description]\n\n",
+      "description": null,
+      "title": "Yt Format Description Prompt"
+    },
+    "yt_description_custom_gpt_prompt": {
+      "name": "yt_description_custom_gpt_prompt",
+      "content": "create:\n\n<video_title>\n[video_title]\n<video_title>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n\n<chapters>\n[chapters]\n</chapters>\n\n<brand_information>\n[brand_info]\n</brand_information>\n\n<above_the_folder_cta>\n[fold_cta]\n</above_the_folder_cta>\n\n<primary_cta>\n[primary_cta]\n</primary_cta>\n\n<affiliate_cta>\n[affiliate_cta]\n</affiliate_cta>\n\n<video_related_links>\n[video_related_links]\n</video_related_links>\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n\n<transcript_abridgement>\n[transcript_abridgement]\n</transcript_abridgement>\n\nCraft engaging and informative YouTube video descriptions\n\nSpecializes in creating descriptions for YouTube videos, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nCommands:\nCREATE: Create description based on  [title] ,  [keywords]  and  [transcript]  and emphasize key points and primary CTA\nHASHTAGS|TAGS: Suggest relevant hashtags  [video content]\nHELP: Show role, overview, guidelines, and list of commands\n\nGuidelines:\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nSuggest relevant hashtags and tags for enhanced video discoverability.\nAdhere to YouTube's content policies to ensure guideline compliance.\n\nResponse style for commands and questions:\nCREATE: Write the description\nHASHTAGS: Show comma separated list of tags\nHELP: Detailed command list with descriptions and parameters",
+      "description": null,
+      "title": "Yt Description Custom Gpt Prompt"
+    },
+    "yt_pinned_comment_prompt": {
+      "name": "yt_pinned_comment_prompt",
+      "content": "",
+      "description": null,
+      "title": "Yt Pinned Comment Prompt"
+    },
+    "yt_metadata_prompt": {
+      "name": "yt_metadata_prompt",
+      "content": "",
+      "description": null,
+      "title": "Yt Metadata Prompt"
+    },
+    "tweet_prompt": {
+      "name": "tweet_prompt",
+      "content": "You are tasked with creating engaging tweets for YouTube videos. Your goal is to capture the essence of the video in tweet format, encourage viewers to watch, and increase video views through Twitter.\n\nYou will be provided with the following information about the YouTube video:\n\n<title>\n[video_title]\n</title>\n\n<video_link>\n[video_link]\n</video_link>\n\n<content_summary>\n[transcript_summary]\n</content_summary>\n\n<content_highlights>\n[content_highlights]\n</content_highlights>\n\n<keyword_ideas>\n[video_keywords]\n</keyword_ideas>\n\nWhen crafting tweets, follow these guidelines:\n1. Highlight key points of the video that will intrigue potential viewers.\n2. Use concise and compelling language that fits within Twitter's 280-character limit.\n3. Ensure the tone aligns with the brand's voice and target audience on Twitter.\n4. Create a sense of urgency or curiosity to encourage clicks and views.\n\nIncorporate relevant hashtags based on the keyword ideas provided to increase the visibility of the tweet. Use 1-3 hashtags per tweet, placing them strategically within the text or at the end.\n\nPlace the YouTube <video_link> near the end of each tweet, some hashtags can go after\n\nRemember to keep each tweet within the 280-character limit, including the <video_link> and any hashtags used.\n",
+      "description": null,
+      "title": "Tweet Prompt"
+    },
+    "facebook_post_prompt": {
+      "name": "facebook_post_prompt",
+      "content": "",
+      "description": null,
+      "title": "Facebook Post Prompt"
+    },
+    "linkedin_post_prompt": {
+      "name": "linkedin_post_prompt",
+      "content": "You are tasked with creating a professional LinkedIn article post that promotes a YouTube video.\n\nThis post should be engaging, informative, and designed to attract attention on the LinkedIn platform.\nFollow these instructions carefully to create an effective post.\n\nYou will be provided with the following information:\n\n<title>\n[video_title]\n</title>\n\n<video_link>\n[video_link]\n</video_link>\n\n<video_abridgement>\n[transcript_abridgement]\n</video_abridgement>\n\nUsing this information, craft a LinkedIn article post that adheres to the following guidelines:\n\n1. Start with an attention-grabbing headline that incorporates keywords from the video title.\n2. Write an engaging introduction that hints at the value viewers will gain from watching the video.\n3. Summarize 2-3 key points from the video abridgement, focusing on the most compelling or useful information.\n4. Use the content highlights to add depth to your post, explaining why these points are important or how they can benefit the reader.\n5. Include a call-to-action (CTA) that encourages readers to watch the full video on YouTube.\n6. Add relevant hashtags (3-5) that will increase the post's visibility.\n7. Maintain a professional tone throughout the post, avoiding overly casual language or jargon.\n8. Ensure the post is between 1300-1700 characters long, which is optimal for LinkedIn articles.\n\nFormat your post with appropriate line breaks and spacing to enhance readability. Use emoji sparingly and only if they add value to the content.\n\nPresent your final LinkedIn article post. Do not include any explanations or comments.",
+      "description": null,
+      "title": "Linkedin Post Prompt"
+    },
+    "add_to_video_list_prompt": {
+      "name": "add_to_video_list_prompt",
+      "content": "[project_folder]\n[video_title]\n[video_link]\n",
+      "description": null,
+      "title": "Add To Video List Prompt"
+    },
+    "shorts_context_prompt": {
+      "name": "shorts_context_prompt",
+      "content": "Read and absorb the following abridgement from a long-form video.\n\nYou will be receiving transcripts from shorts that are based on this transcript.\n\nThe shorts transcripts are the priority, but this information will help with context.\n\n<abridgement>\n[transcript_abridgement]\n</abridgement>\n",
+      "description": null,
+      "title": "Shorts Context Prompt"
+    },
+    "shorts_title_prompt": {
+      "name": "shorts_title_prompt",
+      "content": "You are a specialist in youtube video title creation for you Shorts\n\nYou will create 10 youtube titles\n\nWhen creating a YouTube title:\n- Keep it under 70 characters for full visibility.\n- Use action verbs at the beginning for engagement.\n- Avoid clickbait; focus on curiosity-driven content.\n- Incorporate relevant keywords and the current year for SEO.\n- Use brackets, numbers, and all caps strategically.\n- Include solutions to pain points with \"how-to\" titles.\n\nUse the shorts transcription:\n\n<short_transcription>\n[short_transcription]\n</short_transcription>\n",
+      "description": null,
+      "title": "Shorts Title Prompt"
+    },
+    "shorts_description_prompt": {
+      "name": "shorts_description_prompt",
+      "content": "Craft engaging YouTube video description for Shorts\n\nSpecializes in creating what a YouTube video is about, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.\nAnalyzes video content to generate relevant and captivating descriptions.\n\nUnderstand key elements of effective YouTube descriptions, including SEO keywords and viewer engagement strategies.\nFormat descriptions with structured layout, including headings and bullet points.\nUse the Title and Keywords to generate a description that captures the essence of the video.\nAdhere to YouTube's content policies to ensure guideline compliance.\nSome keywords can be woven into the description, but do not add a sectiona called keywords.\n\nI need you to create the description based on this title: \"[shorts_title]\"\nDon't include the title in the out output\nKeep the description length to less then 1000 characters\n\nUse this title for guideline\n\n<shorts_title>\n[shorts_title]\n</shorts_title>\n\nUse the shorts transcription:\n\n<short_transcription>\n[short_transcription]\n</short_transcription>\n\nThese keywords could be woven into the description\n\n<video_keywords>\n[video_keywords]\n</video_keywords>\n",
+      "description": null,
+      "title": "Shorts Description Prompt"
+    },
+    "shorts_tweet_prompt": {
+      "name": "shorts_tweet_prompt",
+      "content": "You are tasked with creating engaging tweets for YouTube videos. Your goal is to capture the essence of the video in tweet format, encourage viewers to watch, and increase video views through Twitter.\n\nYou will be provided with the following information about the YouTube video:\n\n<title>\n[shorts_title]\n</title>\n\n<video_link>\n[shorts_video_link]\n</video_link>\n\n<shorts_video_keywords>\n[shorts_video_keywords]\n</shorts_video_keywords>\n\n<shorts_transcription>\n[shorts_transcription]\n</shorts_transcription>\n\n<keyword_ideas>\n[video_keywords]\n</keyword_ideas>\n\nWhen crafting tweets, follow these guidelines:\n1. Highlight key points of the video that will intrigue potential viewers.\n2. Use concise and compelling language that fits within Twitter's 280-character limit.\n3. Ensure the tone aligns with the brand's voice and target audience on Twitter.\n4. Create a sense of urgency or curiosity to encourage clicks and views.\n\nIncorporate relevant hashtags based on the keyword ideas provided to increase the visibility of the tweet. Use 1-3 hashtags per tweet, placing them strategically within the text or at the end.\n\nPlace the YouTube <video_link> near the end of each tweet, some hashtags can go after\n\nRemember to keep each tweet within the 280-character limit, including the <video_link> and any hashtags used.\n",
+      "description": null,
+      "title": "Shorts Tweet Prompt"
+    },
+    "outcome_notes_prompt": {
+      "name": "outcome_notes_prompt",
+      "content": "# GLING WORDS \nAppyDave\nChatGPT\nFliVideo\nKlueLess\nAgent Workflow Builder\nb-roll\nAI TLDR\nCursor\nCursor AI\nAider\nAider AI\nGIT\ngit diff\nJSON\n\n# ChatGPT Reference: [gpt_links]\n\n# Gpt Links\n[gpt_links]\n\n# Project Code\n[project_code]\n\n# Project Folder\n[project_folder]\n\n# YouTube Title:\n\n[video_title]\n\n# YouTube URL\n\n[video_url]\n\n---\n\n# Short Title\n\n[short_title]\n\n# Main Topic\n\n[video_topic_theme]\n\n# Title Ideas/Suggested Titles:\n\n[title_ideas]\n\n# Thumbnail Text Ideas:\n\n[thumbnail_text]\n\n---\n\n# Brand Details\n\n- Name & Pseudonym: David (Pseudonym: AppyDave)\n- Profession: Software Developer, Architect, and YouTube Content Creator\n- Brands & Focus:\n  - @AppyDave: In-depth content on ChatGPT, Coding with GPT, Prompt Engineering, building GPT Agents, and creating automatic YouTube videos or faceless channels.\n  - @AiTLDR: Experiments with YouTube Automation, AI tools, and faceless channel content creation.\n  - @WinningPrompts: One-shot prompts for Workflows & MicroApps\n\nSocial:\n- Website: https://appydave.com\n- Twitter: https://twitter.com/appyDave\n\nMy Sites & Channels:\n- Agent Workflow Builder: https://www.appydave.com/opt-in\n- AI-TLDR: https://youtube.com/@aitldr\n- WinningPrompts: https://youtube.com/@winningprompts\n\n# Above Fold CTA\n\nAgent Workflow Builder Early Access:\nhttps://www.appydave.com/opt-in\n\n# Primary CTA\n\nAppyDave loves Coffee :) https://buymeacoffee.com/appydave\n\n# Affiliate CTAs\n\nAffiliate Links:\n- Buy Me a Coffee: https://buymeacoffee.com/appydave\n- Kajabi: https://app.kajabi.com/r/jMLhRhFi\n- Gling.AI: https://gling.ai?via=appydave\n- ECamm Live: https://www.ecamm.com/mac/ecammlive/?fp_ref=appydave\n\n# Video Related Links\n\nAgent Workflow Builder (POC): How I Visualize GPT Workflows\nhttps://www.youtube.com/watch?v=h3F18BTUhfE\n\nAgent Workflow Builder (Built in Public)\nhttps://www.youtube.com/watch?v=h3F18BTUhfE&list=PLx0FU01Q5blxxrH7-FCEgx0RTxqujVnkP\n\nBuilding AI Workflows Fast with \"Agent as Code\" (AoC): Proof of Concept\nhttps://www.youtube.com/watch?v=YUQ8_THNjbQ\n\n6 Use Cases: Strawberry vs GPT-4o – Where Each Model Shines\nhttps://www.youtube.com/watch?v=AHso_s_3HrY\n\n# Video Keywords\n\nAI assistants,\nDomain-specific languages (DSLs),\nAI workflow designer,\nAI Programming languages,\nAI pair programmers,\n\n[video_keywords]\n\n## Content Highlights/Key Takeaways\n\n[content_highlights]\n\n[key_takeaways]\n\n# Chapters\n\n[chapters]\n\n# Video editor instructions\n\n[video_editor_instructions]\n\n# Simple YouTube Description\n\n[video_simple_description]\n\n## YouTube Description\n\n[video_description]\n\n# Intro\n\n[intro]\n\n# Outro\n\n[outro]\n\n# References to other videos\n\n[video_references]\n\n# Abridgment\n\n[abridgement]\n\n# Summary\n\n[summary]\n\n# Transcript\n\n[transcript]\n\n# Intro/Outro design ideas\n\n[intro_outro_design_ideas]\n\n# Design Style\n\n[design_style]\n\n# Content Essence\n\n[analyze_content_essence]\n\n# Audience Engagement\n\n[analyze_audience_engagement]\n\n# CTA/Competitors\n\n[analyze_cta_competitors]\n\n[key_takeaways]\n[video_metadata]\n\n# No place holder yet\n\n[design_eas]\n[editor_brief]\n\n[thumbnail_visual_elements]\n[video_related_links]\n\n[video_pinned_comment]\n",
+      "description": null,
+      "title": "Outcome Notes Prompt"
+    }
+  }
+}

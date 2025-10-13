@@ -1,0 +1,69 @@
+You are tasked with creating engaging thumbnail text ideas for a YouTube video.
+Your goal is to generate text that will grab viewers' attention and entice them to click on the video.
+The thumbnail text should be different from the video title but still relate to the video's content and theme.
+The text 
+
+You will be provided with the following information:
+
+<title>
+[video_title]
+<title>
+
+<video_topic_theme>
+[video_topic_theme]
+</video_topic_theme>
+
+<other_title_ideas>
+[title_ideas]
+</other_title_ideas>
+
+<example_only>
+| Thumb Text                | Part 1        | Part 2      | Part 3    | Title Idea                                                        |
+|---------------------------|---------------|-------------|-----------|-------------------------------------------------------------------|
+| Build AI Fast!            | Build AI      | Fast!       |           | Agent as Code: The Fastest Way to Build AI Workflows in 2024      |
+| Fast AI, No Code          | Fast AI       | No Code     |           |                                                                   |
+| Speed Up Your AI          | Speed Up      | Your AI     |           |                                                                   |
+| Automate Workflows Now    | Automate      | Workflows   | Now       |                                                                   |
+| Unlock AI Speed           | Unlock        | AI Speed    |           |                                                                   |
+| Simplify AI Creation      | Simplify      | AI Creation |           | Agent as Code: A Simple Language for Rapid AI Automation          |
+| AI Automation Simplified  | AI Automation | Simplified  |           |                                                                   |
+| Create AI in Minutes      | Create AI     | in Minutes  |           |                                                                   |
+| Quick AI, Simple Code     | Quick AI      | Simple Code |           |                                                                   |
+| Fast, Simple AI Workflows | Fast          | Simple AI   | Workflows |                                                                   |
+| Concept to Workflow       | Concept       | to Workflow |           | Agent as Code: A Proof of Concept for Rapid AI Workflow Creation  |
+| See AI in Action          | See AI        | in Action   |           |                                                                   |
+| Workflow Revolution       | Workflow      | Revolution  |           |                                                                   |
+| From Idea to AI           | From Idea     | to AI       |           |                                                                   |
+| Transform AI Creation     | Transform     | AI Creation |           |                                                                   |
+</example_only>
+
+Keep in mind that thumbnail text differs from video titles in the following ways:
+1. It uses a different psychological hook
+2. It's usually shorter and more concise
+3. It may be split into multiple text pieces
+4. It often has a visual element associated with it
+
+When creating thumbnail text ideas, follow these guidelines:
+1. Keep the text short and impactful (typically 3-5 words)
+2. Use attention-grabbing words or phrases
+3. Create a sense of curiosity or urgency
+4. Relate to the video's content without directly copying the title
+5. Consider using numbers, questions, or provocative statements
+
+When generating the table of ideas
+1. Generate 3-5 thumb text ideas based on the provided title idea
+2. Split the thumb text idea up into parts (aka segments) using 1, 2, 3 or 4 parts
+3. Ensure that the parts use the same text as the thumb text
+
+Present your ideas in a code block in a table with the following headings
+
+- Thumb Text 
+- Part 1 
+- Part 2 
+- Part 3 
+- Title Idea 
+
+Remember to be creative and think about what would make a viewer want to click on the video.
+Your ideas should be distinct from the provided title ideas while still relating to the video's theme and content.
+It should include best practices for thumbnail text
+It should be complementary to a YouTube title, meaning it should reinforce from a different perspective, maybe emotional, not say the same thing
