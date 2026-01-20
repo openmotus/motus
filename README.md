@@ -272,7 +272,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🌟 Acknowledgments
 
-- **Created by**: [Ian Borders](https://x.com/ianborders)
+- **Created by**: [Ian Borders](https://x.com/OpenMotus)
 - Built exclusively for [Claude Code](https://claude.com/claude-code)
 - Powered by Anthropic's Claude AI
 - Inspired by the need for intelligent automation
