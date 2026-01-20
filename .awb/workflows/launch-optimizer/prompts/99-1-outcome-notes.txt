@@ -1,0 +1,192 @@
+# GLING WORDS 
+AppyDave
+ChatGPT
+FliVideo
+KlueLess
+Agent Workflow Builder
+b-roll
+AI TLDR
+Cursor
+Cursor AI
+Aider
+Aider AI
+GIT
+git diff
+JSON
+
+# ChatGPT Reference: [gpt_links]
+
+# Gpt Links
+[gpt_links]
+
+# Project Code
+[project_code]
+
+# Project Folder
+[project_folder]
+
+# YouTube Title:
+
+[video_title]
+
+# YouTube URL
+
+[video_url]
+
+---
+
+# Short Title
+
+[short_title]
+
+# Main Topic
+
+[video_topic_theme]
+
+# Title Ideas/Suggested Titles:
+
+[title_ideas]
+
+# Thumbnail Text Ideas:
+
+[thumbnail_text]
+
+---
+
+# Brand Details
+
+- Name & Pseudonym: David (Pseudonym: AppyDave)
+- Profession: Software Developer, Architect, and YouTube Content Creator
+- Brands & Focus:
+  - @AppyDave: In-depth content on ChatGPT, Coding with GPT, Prompt Engineering, building GPT Agents, and creating automatic YouTube videos or faceless channels.
+  - @AiTLDR: Experiments with YouTube Automation, AI tools, and faceless channel content creation.
+  - @WinningPrompts: One-shot prompts for Workflows & MicroApps
+
+Social:
+- Website: https://appydave.com
+- Twitter: https://twitter.com/appyDave
+
+My Sites & Channels:
+- Agent Workflow Builder: https://www.appydave.com/opt-in
+- AI-TLDR: https://youtube.com/@aitldr
+- WinningPrompts: https://youtube.com/@winningprompts
+
+# Above Fold CTA
+
+Agent Workflow Builder Early Access:
+https://www.appydave.com/opt-in
+
+# Primary CTA
+
+AppyDave loves Coffee :) https://buymeacoffee.com/appydave
+
+# Affiliate CTAs
+
+Affiliate Links:
+- Buy Me a Coffee: https://buymeacoffee.com/appydave
+- Kajabi: https://app.kajabi.com/r/jMLhRhFi
+- Gling.AI: https://gling.ai?via=appydave
+- ECamm Live: https://www.ecamm.com/mac/ecammlive/?fp_ref=appydave
+
+# Video Related Links
+
+Agent Workflow Builder (POC): How I Visualize GPT Workflows
+https://www.youtube.com/watch?v=h3F18BTUhfE
+
+Agent Workflow Builder (Built in Public)
+https://www.youtube.com/watch?v=h3F18BTUhfE&list=PLx0FU01Q5blxxrH7-FCEgx0RTxqujVnkP
+
+Building AI Workflows Fast with "Agent as Code" (AoC): Proof of Concept
+https://www.youtube.com/watch?v=YUQ8_THNjbQ
+
+6 Use Cases: Strawberry vs GPT-4o – Where Each Model Shines
+https://www.youtube.com/watch?v=AHso_s_3HrY
+
+# Video Keywords
+
+AI assistants,
+Domain-specific languages (DSLs),
+AI workflow designer,
+AI Programming languages,
+AI pair programmers,
+
+[video_keywords]
+
+## Content Highlights/Key Takeaways
+
+[content_highlights]
+
+[key_takeaways]
+
+# Chapters
+
+[chapters]
+
+# Video editor instructions
+
+[video_editor_instructions]
+
+# Simple YouTube Description
+
+[video_simple_description]
+
+## YouTube Description
+
+[video_description]
+
+# Intro
+
+[intro]
+
+# Outro
+
+[outro]
+
+# References to other videos
+
+[video_references]
+
+# Abridgment
+
+[abridgement]
+
+# Summary
+
+[summary]
+
+# Transcript
+
+[transcript]
+
+# Intro/Outro design ideas
+
+[intro_outro_design_ideas]
+
+# Design Style
+
+[design_style]
+
+# Content Essence
+
+[analyze_content_essence]
+
+# Audience Engagement
+
+[analyze_audience_engagement]
+
+# CTA/Competitors
+
+[analyze_cta_competitors]
+
+[key_takeaways]
+[video_metadata]
+
+# No place holder yet
+
+[design_eas]
+[editor_brief]
+
+[thumbnail_visual_elements]
+[video_related_links]
+
+[video_pinned_comment]

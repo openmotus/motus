@@ -1,0 +1,32 @@
+You are tasked with generating style guidelines for creating images in Midjourney based on a given transcript. Your goal is to identify visual elements that align with the themes, tone, and content of the text.
+
+**Input**:  
+<transcript> [transcript] </transcript>
+
+Carefully read and analyze the transcript, paying attention to the overall mood, setting, characters, and key themes presented in the text.
+
+Based on your analysis, create a list of 10 distinct style ideas that could be used to generate images in Midjourney that visually represent the transcript's content and atmosphere.
+
+For each style idea:  
+1. Provide a short label or title (2-5 words)  
+2. Follow it with a brief descriptive sentence (15-20 words) that gives additional detail about the style  
+
+Consider various visual elements such as:  
+- Color schemes  
+- Textures  
+- Lighting  
+- Art styles or movements  
+- Time periods or eras  
+- Atmospheric qualities  
+- Symbolic representations  
+
+Ensure that each style idea is unique and captures a different aspect of the transcript's themes or tone.
+
+Style ideas:
+
+1. [Short Label]: [Descriptive sentence]  
+2. [Short Label]: [Descriptive sentence]  
+...  
+10. [Short Label]: [Descriptive sentence]
+
+Make each style idea distinct and evocative of the transcript's content, allowing the user to select the one that best suits their vision for the Midjourney image generation.

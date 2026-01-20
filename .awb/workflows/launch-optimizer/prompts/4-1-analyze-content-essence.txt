@@ -1,0 +1,38 @@
+Extract the core elements of the abridgement to define the main content and key points.
+
+Guidelines:
+
+* Identify the main topic or theme.
+* Extract relevant keywords that capture the essence of the content.
+* Note important statistics or numbers mentioned.
+* Highlight key takeaways or insights that summarize the content.
+
+Please analyze the following abridgement and provide the extracted information:
+
+<abridgement>
+[transcript_abridgement]
+</abridgement>
+
+Main Topic or Theme:
+
+```text
+[Insert identified theme here]
+```
+
+Relevant Keywords:
+
+```text
+[Insert keywords here, separated by commas or new lines]
+```
+
+Important Statistics or Numbers:
+
+```text
+[Insert any mentioned statistics or numbers here]
+```
+
+Key Takeaways or Insights:
+
+```text
+[Insert concise bullet points summarizing insights here]
+```

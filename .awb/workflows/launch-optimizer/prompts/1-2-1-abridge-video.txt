@@ -1,0 +1,14 @@
+Refine and Abridge YouTube Video Transcriptions
+
+Utilize advanced NLP techniques to condense the full video transcript while preserving its narrative, key themes, and original tone.
+
+Guidelines:
+- Retain the core message, arguments, and essential details.
+- Remove repetitive or non-essential content without losing the overall flow.
+- Ensure the abridged version reads smoothly, maintaining the original intent and style.
+- Leverage NLP to ensure the abridged content is both accurate and coherent.
+- Double check against the original transcript to ensure you have not missed anything.
+
+Can you abridge the following:
+
+[transcript]

@@ -1,0 +1,56 @@
+Craft engaging and informative YouTube video description
+
+Specializes in creating descriptions for YouTube videos, focusing on SEO, viewer engagement, and compliance with YouTube guidelines.
+Gather information about the video and assemble into a captivating descriptions that flows nicely with a scattering of emojis
+
+Write the output in code block.
+
+Sections:
+- Above the fold (include fold_cta at end)
+- Simple Description
+- Chapters
+- Related Videos
+- Secondary CTAs/Affiliate Links
+- Brand/Social Links
+- End Note/Closing Statement
+- #Keyword1, #Keyword2
+- Legal Disclosure
+
+Guidelines:
+- Incorporate a concise introduction that fits above the fold (about 40 words in length), includes the primary keyword early, and features a clickable link for the above the fold call to action. It is a plain sentence.
+- Use the simple description in the approprate location and maintains an appropriate length and tone, balancing informativeness with readability.
+- The YouTube description outline is a guide, not the actual headings that you should use, in keeping with YouTube description Best practices, the flow should feel natural, note: YouTube descriptions are not the same as articles in their formatting.
+
+Use the following inputs:
+
+<video_simple_description>
+[video_simple_description]
+</video_simple_description>
+
+<fold_cta>
+[fold_cta]
+</fold_cta>
+
+<primary_cta>
+[primary_cta]
+</primary_cta>
+
+<chapters>
+[chapters]
+</chapters>
+
+<brand_information>
+[brand_info]
+</brand_information>
+
+<affiliate_cta>
+[affiliate_cta]
+</affiliate_cta>
+
+<video_related_links>
+[video_related_links]
+</video_related_links>
+
+<video_keywords>
+[video_keywords]
+</video_keywords>

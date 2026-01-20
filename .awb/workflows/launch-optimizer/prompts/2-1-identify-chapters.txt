@@ -1,0 +1,22 @@
+Identify and list youtube chapters with reference from the transcript included on next line in quote marks.
+
+Chapter names should: "Use simple, general terms; minimize detail"
+
+Put list in code block in markdown format, do not use **bold** and number each chapter
+
+Here is a (SAMPLE ONLY) format:
+
+1. Chapter Name
+  "In this video...."
+2 Another Chapter Name
+  "Some information about..."
+
+<more chapters>
+
+5 Last Chapter Name
+  "Whatever was said"
+
+Here is the script:
+
+[transcript]
+[x-transcript-abridgement]

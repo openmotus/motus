@@ -1,0 +1,1283 @@
+{
+  "name": "youtube_livestream_podcast_brief",
+  "title": "Youtube Livestream Podcast Brief",
+  "description": "This workflow transforms YouTube live stream transcripts into structured podcast briefs.",
+  "settings": {
+    "prompt_path": {
+      "value": "/Users/davidcruwys/dev/ad/agent-workflow-builder/ad-agent_architecture/prompts/youtube/livestream_podcast_brief",
+      "description": null,
+      "title": "Prompt Path"
+    },
+    "default_llm": {
+      "value": "gpt4o",
+      "description": null,
+      "title": "Default Llm"
+    }
+  },
+  "sections": [
+    {
+      "name": "Transcript Processing",
+      "title": "Transcript Processing",
+      "order": 1,
+      "description": "Prepare the YouTube live stream transcript for analysis.",
+      "steps": [
+        {
+          "name": "Configure",
+          "title": "Configure",
+          "order": 1,
+          "description": "Set brand, style, and general CTAs.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "project_code",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Project Code"
+            },
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "brand_details",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Details"
+            },
+            {
+              "name": "style_guidelines",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Style Guidelines"
+            },
+            {
+              "name": "brand_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Brand Cta"
+            },
+            {
+              "name": "content_cta",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Content Cta"
+            }
+          ],
+          "output_attributes": [],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Transcript Processor",
+          "title": "Transcript Processor",
+          "order": 2,
+          "description": "Take the next transcript part and process a final transcript document",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript_original",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Original"
+            },
+            {
+              "name": "transcript_part",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Part"
+            },
+            {
+              "name": "transcript_processed1",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Processed1"
+            },
+            {
+              "name": "transcript_processed2",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Processed2"
+            },
+            {
+              "name": "transcript_processed3",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Processed3"
+            },
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Script Summary",
+          "title": "Script Summary",
+          "order": 3,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_summary",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Summary"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Script Abridgement",
+          "title": "Script Abridgement",
+          "order": 4,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Abridge QA",
+          "title": "Abridge Qa",
+          "order": 5,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_abridgement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement"
+            },
+            {
+              "name": "transcript_abridgement_descrepencies",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement Descrepencies"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_abridgement_descrepencies",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Abridgement Descrepencies"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Get Intro",
+          "title": "Get Intro",
+          "order": 6,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_intro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Intro"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Get Outro",
+          "title": "Get Outro",
+          "order": 7,
+          "description": null,
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "transcript_outro",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Outro"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transcript Analysis",
+      "title": "Transcript Analysis",
+      "order": 2,
+      "description": "Analyze the YouTube live stream transcript for key insights.",
+      "steps": [
+        {
+          "name": "Engagement Triggers",
+          "title": "Engagement Triggers",
+          "order": 1,
+          "description": "Identify engagement triggers.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_general_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis General Trigger"
+            },
+            {
+              "name": "analysis_brand_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Brand Trigger"
+            },
+            {
+              "name": "analysis_content_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Content Trigger"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_general_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis General Trigger"
+            },
+            {
+              "name": "analysis_brand_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Brand Trigger"
+            },
+            {
+              "name": "analysis_content_trigger",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Content Trigger"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Key Insights/Moments",
+          "title": "Key Insights Moments",
+          "order": 2,
+          "description": "Identify key insights and moments.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_key_insights",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Key Insights"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_key_insights",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Key Insights"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Audience Engagement",
+          "title": "Audience Engagement",
+          "order": 3,
+          "description": "Analyze audience engagement.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_audience_engagement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Audience Engagement"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_audience_engagement",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Audience Engagement"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Content Themes",
+          "title": "Content Themes",
+          "order": 4,
+          "description": "Identify key content themes.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_content_themes",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Content Themes"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_content_themes",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Content Themes"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Issues & Opportunities",
+          "title": "Issues Opportunities",
+          "order": 5,
+          "description": "Highlight issues and opportunities.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_issues_opportunities",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Issues Opportunities"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_issues_opportunities",
+              "type": "array",
+              "is_array": true,
+              "description": null,
+              "title": "Analysis Issues Opportunities"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Personal & Authentic Elements",
+          "title": "Personal Authentic Elements",
+          "order": 6,
+          "description": "Identify personal and authentic elements.",
+          "prompt": "analyze_personal_authentic_prompt",
+          "input_attributes": [
+            {
+              "name": "transcript",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript"
+            },
+            {
+              "name": "analysis_personal_authentic",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Personal Authentic"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "analysis_personal_authentic",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Analysis Personal Authentic"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Define & Generate Podcast Brief",
+      "title": "Define Generate Podcast Brief",
+      "order": 3,
+      "description": "Structure the podcast brief from refined content.",
+      "steps": [
+        {
+          "name": "Suggest Focal Points",
+          "title": "Suggest Focal Points",
+          "order": 1,
+          "description": "Propose main themes for the podcast.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "refined_talking_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Refined Talking Points"
+            },
+            {
+              "name": "hidden_gems",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Hidden Gems"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "suggested_focal_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Suggested Focal Points"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Define Focal Points",
+          "title": "Define Focal Points",
+          "order": 2,
+          "description": "Select main and secondary focal points.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "suggested_focal_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Suggested Focal Points"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "main_focal_point",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Main Focal Point"
+            },
+            {
+              "name": "secondary_focal_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Secondary Focal Points"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Generate Guest Questions",
+          "title": "Generate Guest Questions",
+          "order": 3,
+          "description": "Create questions for podcast discussion.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "main_focal_point",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Main Focal Point"
+            },
+            {
+              "name": "secondary_focal_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Secondary Focal Points"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "guest_questions",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Guest Questions"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "List Direct Mentions",
+          "title": "List Direct Mentions",
+          "order": 4,
+          "description": "Identify and list specific references.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "transcript_text",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Transcript Text"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "direct_mentions",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Direct Mentions"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Create Podcast Brief",
+          "title": "Create Podcast Brief",
+          "order": 5,
+          "description": "Compile structured brief for podcast.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "main_focal_point",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Main Focal Point"
+            },
+            {
+              "name": "secondary_focal_points",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Secondary Focal Points"
+            },
+            {
+              "name": "guest_questions",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Guest Questions"
+            },
+            {
+              "name": "direct_mentions",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Direct Mentions"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "podcast_brief",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Podcast Brief"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Validate & Refine",
+      "title": "Validate Refine",
+      "order": 4,
+      "description": "Ensure quality and accuracy of podcast script.",
+      "steps": [
+        {
+          "name": "Validate Script",
+          "title": "Validate Script",
+          "order": 1,
+          "description": "Check script against the podcast brief.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "podcast_brief",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Podcast Brief"
+            },
+            {
+              "name": "podcast_script",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Podcast Script"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "validation_results",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Validation Results"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Identify Gaps",
+          "title": "Identify Gaps",
+          "order": 2,
+          "description": "Find missing or misaligned content.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "validation_results",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Validation Results"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "content_gaps",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Content Gaps"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        },
+        {
+          "name": "Provide Feedback",
+          "title": "Provide Feedback",
+          "order": 3,
+          "description": "Suggest adjustments for improvement.",
+          "prompt": "",
+          "input_attributes": [
+            {
+              "name": "content_gaps",
+              "type": "array",
+              "is_array": false,
+              "description": null,
+              "title": "Content Gaps"
+            }
+          ],
+          "output_attributes": [
+            {
+              "name": "revision_feedback",
+              "type": "string",
+              "is_array": false,
+              "description": null,
+              "title": "Revision Feedback"
+            }
+          ],
+          "language_models": [
+            "gpt4o"
+          ]
+        }
+      ]
+    }
+  ],
+  "attributes": {
+    "brand_details": {
+      "name": "brand_details",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Brand Details"
+    },
+    "style_guidelines": {
+      "name": "style_guidelines",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Style Guidelines"
+    },
+    "brand_cta": {
+      "name": "brand_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Brand Cta"
+    },
+    "content_cta": {
+      "name": "content_cta",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Content Cta"
+    },
+    "transcript_original": {
+      "name": "transcript_original",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Original"
+    },
+    "transcript_part": {
+      "name": "transcript_part",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Part"
+    },
+    "transcript_processed1": {
+      "name": "transcript_processed1",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Processed1"
+    },
+    "transcript_processed2": {
+      "name": "transcript_processed2",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Processed2"
+    },
+    "transcript_processed3": {
+      "name": "transcript_processed3",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Processed3"
+    },
+    "transcript": {
+      "name": "transcript",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript"
+    },
+    "transcript_summary": {
+      "name": "transcript_summary",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Summary"
+    },
+    "transcript_abridgement": {
+      "name": "transcript_abridgement",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Abridgement"
+    },
+    "transcript_abridgement_descrepencies": {
+      "name": "transcript_abridgement_descrepencies",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Abridgement Descrepencies"
+    },
+    "transcript_intro": {
+      "name": "transcript_intro",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Intro"
+    },
+    "transcript_outro": {
+      "name": "transcript_outro",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Outro"
+    },
+    "all_talking_points": {
+      "name": "all_talking_points",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "All Talking Points"
+    },
+    "talking_point_refinement_instructions": {
+      "name": "talking_point_refinement_instructions",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Talking Point Refinement Instructions"
+    },
+    "refined_talking_points": {
+      "name": "refined_talking_points",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Refined Talking Points"
+    },
+    "hidden_gems": {
+      "name": "hidden_gems",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Hidden Gems"
+    },
+    "suggested_focal_points": {
+      "name": "suggested_focal_points",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Suggested Focal Points"
+    },
+    "main_focal_point": {
+      "name": "main_focal_point",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Main Focal Point"
+    },
+    "secondary_focal_points": {
+      "name": "secondary_focal_points",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Secondary Focal Points"
+    },
+    "guest_questions": {
+      "name": "guest_questions",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Guest Questions"
+    },
+    "direct_mentions": {
+      "name": "direct_mentions",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Direct Mentions"
+    },
+    "podcast_brief": {
+      "name": "podcast_brief",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Podcast Brief"
+    },
+    "podcast_script": {
+      "name": "podcast_script",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Podcast Script"
+    },
+    "validation_results": {
+      "name": "validation_results",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Validation Results"
+    },
+    "content_gaps": {
+      "name": "content_gaps",
+      "type": "array",
+      "is_array": false,
+      "description": null,
+      "title": "Content Gaps"
+    },
+    "revision_feedback": {
+      "name": "revision_feedback",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Revision Feedback"
+    },
+    "project_code": {
+      "name": "project_code",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Project Code"
+    },
+    "analysis_general_trigger": {
+      "name": "analysis_general_trigger",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analysis General Trigger"
+    },
+    "analysis_brand_trigger": {
+      "name": "analysis_brand_trigger",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analysis Brand Trigger"
+    },
+    "analysis_content_trigger": {
+      "name": "analysis_content_trigger",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analysis Content Trigger"
+    },
+    "analysis_key_insights": {
+      "name": "analysis_key_insights",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Analysis Key Insights"
+    },
+    "analysis_audience_engagement": {
+      "name": "analysis_audience_engagement",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analysis Audience Engagement"
+    },
+    "analysis_content_themes": {
+      "name": "analysis_content_themes",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Analysis Content Themes"
+    },
+    "analysis_issues_opportunities": {
+      "name": "analysis_issues_opportunities",
+      "type": "array",
+      "is_array": true,
+      "description": null,
+      "title": "Analysis Issues Opportunities"
+    },
+    "analysis_personal_authentic": {
+      "name": "analysis_personal_authentic",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Analysis Personal Authentic"
+    },
+    "transcript_text": {
+      "name": "transcript_text",
+      "type": "string",
+      "is_array": false,
+      "description": null,
+      "title": "Transcript Text"
+    }
+  },
+  "prompts": {
+    "configure_prompt": {
+      "name": "configure_prompt",
+      "content": "",
+      "description": null,
+      "title": "Configure Prompt"
+    },
+    "transcript_processor_prompt": {
+      "name": "transcript_processor_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Processor Prompt"
+    },
+    "transcript_summary_prompt": {
+      "name": "transcript_summary_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Summary Prompt"
+    },
+    "transcript_abridgement_prompt": {
+      "name": "transcript_abridgement_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Abridgement Prompt"
+    },
+    "transcript_abridgement_descrepencies_prompt": {
+      "name": "transcript_abridgement_descrepencies_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Abridgement Descrepencies Prompt"
+    },
+    "transcript_intro_prompt": {
+      "name": "transcript_intro_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Intro Prompt"
+    },
+    "transcript_outro_prompt": {
+      "name": "transcript_outro_prompt",
+      "content": "",
+      "description": null,
+      "title": "Transcript Outro Prompt"
+    },
+    "analyze_engagement_triggers_prompt": {
+      "name": "analyze_engagement_triggers_prompt",
+      "content": "",
+      "description": null,
+      "title": "Analyze Engagement Triggers Prompt"
+    },
+    "analyze_audience_engagement_prompt": {
+      "name": "analyze_audience_engagement_prompt",
+      "content": "",
+      "description": null,
+      "title": "Analyze Audience Engagement Prompt"
+    },
+    "analyze_key_insights_prompt": {
+      "name": "analyze_key_insights_prompt",
+      "content": "",
+      "description": null,
+      "title": "Analyze Key Insights Prompt"
+    },
+    "analyze_content_themes_prompt": {
+      "name": "analyze_content_themes_prompt",
+      "content": "",
+      "description": null,
+      "title": "Analyze Content Themes Prompt"
+    },
+    "analyze_issues_opportunities_prompt": {
+      "name": "analyze_issues_opportunities_prompt",
+      "content": "",
+      "description": null,
+      "title": "Analyze Issues Opportunities Prompt"
+    },
+    "extract_talking_points": {
+      "name": "extract_talking_points",
+      "content": "",
+      "description": null,
+      "title": "Extract Talking Points"
+    },
+    "categorize_talking_points": {
+      "name": "categorize_talking_points",
+      "content": "",
+      "description": null,
+      "title": "Categorize Talking Points"
+    },
+    "refine_talking_points": {
+      "name": "refine_talking_points",
+      "content": "",
+      "description": null,
+      "title": "Refine Talking Points"
+    },
+    "identify_hidden_gems": {
+      "name": "identify_hidden_gems",
+      "content": "",
+      "description": null,
+      "title": "Identify Hidden Gems"
+    },
+    "suggest_focal_points": {
+      "name": "suggest_focal_points",
+      "content": "",
+      "description": null,
+      "title": "Suggest Focal Points"
+    },
+    "define_focal_points": {
+      "name": "define_focal_points",
+      "content": "",
+      "description": null,
+      "title": "Define Focal Points"
+    },
+    "generate_guest_questions": {
+      "name": "generate_guest_questions",
+      "content": "",
+      "description": null,
+      "title": "Generate Guest Questions"
+    },
+    "list_direct_mentions": {
+      "name": "list_direct_mentions",
+      "content": "",
+      "description": null,
+      "title": "List Direct Mentions"
+    },
+    "create_podcast_brief": {
+      "name": "create_podcast_brief",
+      "content": "",
+      "description": null,
+      "title": "Create Podcast Brief"
+    },
+    "validate_script": {
+      "name": "validate_script",
+      "content": "",
+      "description": null,
+      "title": "Validate Script"
+    },
+    "identify_gaps": {
+      "name": "identify_gaps",
+      "content": "",
+      "description": null,
+      "title": "Identify Gaps"
+    },
+    "provide_feedback": {
+      "name": "provide_feedback",
+      "content": "",
+      "description": null,
+      "title": "Provide Feedback"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Read and absorb the following abridgement from a long-form video.
+
+You will be receiving transcripts from shorts that are based on this transcript.
+
+The shorts transcripts are the priority, but this information will help with context.
+
+<abridgement>
+[transcript_abridgement]
+</abridgement>

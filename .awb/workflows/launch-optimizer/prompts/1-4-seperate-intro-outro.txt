@@ -1,0 +1,21 @@
+You will be analyzing a video transcript to identify key sections, extract important information, and generate prompts for visual elements. Follow these steps carefully:
+
+1. Read the following video transcript:  
+   <transcript> [transcript] </transcript>
+
+2. Identify the intro and outro sections of the transcript:
+   - The intro includes everything up to where the main content begins.
+   - The outro starts when the speaker recaps or mentions liking/subscribing.
+
+3. Extract the words from the intro and outro:
+   - Copy the text of the intro section and place it under Intro section.
+   - Copy the text of the outro section and place it under Outro section.
+
+Present your findings in the following format:
+
+Intro section:
+[Extracted intro text]
+
+Outro section:
+[Extracted outro text]
+

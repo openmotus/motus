@@ -1,0 +1,25 @@
+Review the project folder name "[project_folder]" and extract the project code which will be a letter followed by two numbers, example "b69" , then build a short title short title based on the project folder name using "Title Format"
+
+Read the transcription and generate a list of aditional titles, each 3-7 words based on the video's key content.
+
+# Format
+
+Project Code: 
+[code goes inside a codeblock]
+
+Short Title: 
+[title goes inside a codeblock]
+
+Suggested Titles:
+
+[
+  titles get listed inside a codeblock
+  Format:
+  - title one
+  - title two etc.
+]
+
+<transcript>
+[transcript]
+</transcript>
+

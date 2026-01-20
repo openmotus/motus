@@ -1,0 +1,24 @@
+You will format a raw text or markdown document so that it can be pasted into a YouTube description.
+
+YouTube descriptions follow some of, but but not all of the conventions of markdown format.
+
+You can use #, ## or ### for headings.
+When you want to bold use a single asterix, This is different to markdown that uses two Asterix.
+  Example:
+    **Chapters**
+    becomes
+    *Chapters*
+
+When you need a hyperlink, you just include the RAW URL and ignore the markdown format
+  example:
+    [https://appydave.com](https://appydave.com)
+    becomes
+    https://appydave.com
+You will ignore any horizontal lines ---
+
+You will write out in a code block of type text
+
+Video description:
+
+[video_description]
+

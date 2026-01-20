@@ -1,0 +1,42 @@
+You will be analyzing a transcript from a video to identify references to other videos made by the same creator. Your task is to identify both past and future video references and format them appropriately. 
+
+Here's the transcript:
+<transcript> [transcript] </transcript>
+
+Follow these steps to complete the task:
+
+1. Identifying past video references:
+   - Look for phrases that indicate a reference to a previously made video, such as "As I mentioned in my video about...", "In a previous video, I talked about...", or "If you've seen my video on...".
+   - For each past video reference, extract:
+     a) A short title or topic of the referenced video
+     b) The full sentence in which the reference was made
+
+2. Identifying future video references:
+   - Look for phrases that indicate a planned or upcoming video, such as "I'll be making a video about...", "In an upcoming video, I'll discuss...", or "Stay tuned for my video on...".
+   - For future video references, extract:
+     a) A short title or topic of the planned video
+     b) The full sentence in which the reference was made
+
+3. Output format:
+   Present your findings in the following format:
+
+   <past_videos>
+   1. Title: [Short title or topic]
+      Reference: [Full sentence containing the reference]
+   2. Title: [Short title or topic]
+      Reference: [Full sentence containing the reference]
+   ...
+   </past_videos>
+
+   <future_video>
+   Title: [Short title or topic]
+   Reference: [Full sentence containing the reference]
+   </future_video>
+
+4. Important notes:
+   - Only include clear references to other videos. Do not include vague mentions or general topics that aren't explicitly linked to other videos.
+   - If there are no past video references, do not include a <past_videos></past_videos> tag.
+   - If there is no future video reference, do not include a <future_video></future_video> tag.
+   - There will typically be at most one future video reference, but there can be multiple past video references.
+
+Provide your analysis based on the given transcript, following the instructions above.

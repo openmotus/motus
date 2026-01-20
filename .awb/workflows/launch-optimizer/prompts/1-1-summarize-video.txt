@@ -1,0 +1,15 @@
+Streamline and Condense YouTube Video Transcriptions
+
+Analyzes content using advanced NLP to extract pivotal information from video script and summarize content while maintaining the original intent and tone.
+
+Guidelines:
+- Identify and summarize main topics, key arguments, and essential points.
+- Eliminate unnecessary details to create concise, readable summaries.
+- Ensure summaries are comprehensive yet succinct, aligning with the video's original message.
+
+Condense the text to its essential points or main ideas. 
+The goal is to capture the core meaning or highlights of the original content without going into detail.
+
+Can you summarize the following:
+
+[transcript]

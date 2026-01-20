@@ -1,0 +1,16 @@
+Accuracy Check for Abridged Transcript
+
+Compare the abridged output to the original transcript to identify any discrepancies, omissions, or inaccuracies. Focus on key details, narrative flow, and the preservation of the original intent and tone. List only the discrepancies or potential issues where the abridged version may not accurately reflect the source material.
+
+Guidelines:
+- Identify any missing key points, themes, or arguments from the original transcript.
+- Flag any changes in tone or intent that alter the original message.
+- Highlight areas where the abridged version might oversimplify or misrepresent the content.
+
+Can you analyze the following and list discrepancies:
+
+Abridged Output:
+[transcript_abridgement]
+
+Original Transcript:
+[transcript]
