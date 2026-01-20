@@ -500,21 +500,26 @@ If the script fails:
 
 ### Test Agent
 
+Run the agent directly in Claude Code:
 ```
-/motus <dept> test-agent <agent-name>
+/motus <dept> <agent-name>
+```
+
+Or execute the implementation script manually:
+```bash
+node departments/<dept>/agents/<agent-name>.js
 ```
 
 ### Test Workflow
 
+Run the workflow and verify output:
 ```
-/motus <dept> workflow test <workflow-name> --dry-run
+/motus <dept> <workflow-name>
 ```
 
 ### Test Integration
 
-```
-/motus integrations test <integration-name>
-```
+Run an agent that uses the integration to verify connectivity.
 
 ## Next Steps
 

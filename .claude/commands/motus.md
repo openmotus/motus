@@ -9,7 +9,7 @@ argument-hint: [subcommand] [options] (e.g., daily-brief, life briefing, init)
 You are the Motus Life Admin orchestrator. Process the command: `$ARGUMENTS`
 
 ## Available Specialized Agents
-These agents are defined in /Users/ianwinscom/motus/.claude/agents/:
+These agents are defined in ./.claude/agents/:
 - weather-fetcher - Retrieves weather from WeatherAPI
 - calendar-fetcher - Gets Google Calendar events
 - email-processor - Processes Gmail for important emails
@@ -50,7 +50,7 @@ USE ONLY these specific agents defined in .claude/agents/
 ### Core Commands
 - `init` - Initialize Motus system
 - `oauth` - Launch OAuth Manager web interface
-- `terminal` - Launch beautiful web terminal interface
+- `terminal` - Web dashboard (coming soon)
 - `daily-brief` or `life briefing` - Generate complete morning briefing
 - `daily-notion` - Generate daily briefing directly in Notion
 - `life review` - Evening review and reflection
@@ -119,10 +119,7 @@ Based on the command, perform these actions:
 4. Tell user: "OAuth Manager launching at http://localhost:3001"
 
 ### For `terminal`:
-1. Use Bash to run: `./start-terminal.sh`
-2. This launches a beautiful web-based terminal at localhost:3000
-3. Provides full dashboard, wizards, and interactive workflows
-4. Tell user: "Terminal launching at http://localhost:3000"
+This feature is on the roadmap. Tell user: "Web terminal/dashboard is planned for a future release. Use /motus commands directly for now."
 
 ### For `daily-brief` or `life briefing`:
 1. MUST use Task tool to run these SPECIFIC agents IN PARALLEL (all at once):
@@ -135,7 +132,7 @@ Based on the command, perform these actions:
    - Task(subagent_type: 'insight-generator') - Generate insights from all collected data
 3. Finally:
    - Task(subagent_type: 'note-creator') - Create/update Obsidian daily note
-4. These agents are defined in: /Users/ianwinscom/motus/.claude/agents/
+4. These agents are defined in: ./.claude/agents/
 5. DO NOT use generic life-admin agent
 6. DO NOT use Bash to execute scripts
 7. ONLY use the specific agents listed above
@@ -201,7 +198,7 @@ Save data to tracking file and provide confirmation.
 Generate appropriate planning content based on timeframe (day/week/month).
 
 ### For `workflow list`:
-1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js list`
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => { const workflows = rm.workflows.workflows; Object.entries(workflows).forEach(([dept, ws]) => { console.log('\\n' + dept + ':'); Object.values(ws).forEach(w => console.log('  - ' + w.name + ': ' + w.description)); }); });"`
 2. Display the list of available workflows with their descriptions
 
 ### For `workflow create`:
@@ -210,23 +207,23 @@ Generate appropriate planning content based on timeframe (day/week/month).
 3. Save the workflow for future use
 
 ### For `workflow run [name]`:
-1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js run [workflow-name]`
-2. Execute each step using appropriate sub-agents via Task tool
+1. Look up workflow in registry: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => console.log(JSON.stringify(rm.getWorkflow('[dept]', '[workflow-name]'), null, 2)));"`
+2. Execute each step using appropriate sub-agents via Task tool based on workflow config
 3. Show progress and results for each step
 
 ### For `workflow show [name]`:
-1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/workflow-system.js show [workflow-name]`
+1. Use Bash to run: `node -e "const RegistryManager = require('./lib/registry-manager'); const rm = new RegistryManager(); rm.load().then(() => console.log(JSON.stringify(rm.getWorkflow('[dept]', '[workflow-name]'), null, 2)));"`
 2. Display the workflow structure and steps
 
 ### For `life review` or `evening-review`:
-1. Use Bash to run: `node /Users/ianwinscom/motus/life-admin/evening-review.js`
-2. This runs an interactive evening review that:
-   - Reviews today's accomplishments
-   - Sets tomorrow's priorities
-   - Tracks health metrics
-   - Records gratitude
-   - Captures notes and ideas
-3. Automatically updates the Obsidian daily note with all responses
+1. If evening-review-agent exists, use Task tool to delegate to evening-review-agent
+2. Otherwise, interactively:
+   - Ask about today's accomplishments
+   - Set tomorrow's priorities
+   - Track health metrics
+   - Record gratitude
+   - Capture notes and ideas
+3. Update the daily note (Obsidian or Notion based on configuration)
 
 ### For `evening-report`:
 1. MUST use Task tool to run these SPECIFIC agents IN PARALLEL (all at once):
@@ -319,10 +316,15 @@ Generate appropriate planning content based on timeframe (day/week/month).
 3. Format for terminal display
 
 ## Environment Configuration
-- Weather Location: Chiang Mai, TH
-- Timezone: Asia/Bangkok
-- Obsidian Vault: /Users/ianwinscom/Library/Mobile Documents/iCloud~md~obsidian/Documents
-- Daily Notes Folder: Daily
+
+Configuration is loaded from environment variables (see `.env.example`):
+
+- **Weather Location**: Set via `WEATHER_LOCATION` in .env
+- **Timezone**: Set via `TIMEZONE` in .env (default: America/New_York)
+- **Obsidian Vault**: Set via `OBSIDIAN_VAULT_PATH` in .env
+- **Daily Notes Folder**: Set via `OBSIDIAN_DAILY_NOTES_FOLDER` in .env (default: Daily)
+
+Before using life management features, configure these in your `.env` file.
 
 ## Direct Execution
 Commands are executed directly using appropriate tools (Bash, Read, Edit) rather than delegation to ensure proper API usage and avoid unnecessary web scraping.

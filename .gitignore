@@ -18,7 +18,10 @@ logs/
 .idea/
 *.swp
 *.swo
+
+# macOS
 .DS_Store
+**/.DS_Store
 
 # Build outputs
 dist/
@@ -48,29 +51,31 @@ temp/
 credentials.json
 token.json
 
-# Obsidian vault (it's in iCloud)
-# Don't commit actual daily notes
 # ============================================================================
 # Personal Data - DO NOT COMMIT
 # ============================================================================
-.env
-.env.local
-data/
+
+# Personal departments (users create their own)
 life-admin/
 marketing/
 archive/
-docs/
-org-docs/departments/*.md
-!docs/examples/
+
+# Claude Code local settings (contains personal paths)
+.claude/settings.local.json
+.claude/hooks.json
+.claude/settings/
+
+# Old folder structure
+.claudecode/
+
+# OAuth tokens (sensitive)
+oauth-manager/tokens/
 ~/.motus/
 .motus/
 
-# Hook configurations (personal automation)
-.claude/hooks.json
-.claude/settings/
-.claudecode/hooks/
-.claudecode/mcp/
+# Generated department docs (regenerated from registries)
+org-docs/departments/*.md
+!org-docs/departments/.gitkeep
 
 # Keep example files
 !.env.example
-!org-docs/departments/.gitkeep

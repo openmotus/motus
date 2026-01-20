@@ -135,12 +135,12 @@ Motus includes a wizard-driven system for consistently creating departments, age
 - ✅ **workflow-creator** (`.claude/agents/workflow-creator.md`) - Step builder with parallel/sequential detection
 - ✅ **documentation-updater** (`.claude/agents/documentation-updater.md`) - Auto-generates all docs from registries
 
-**Templates:** (11 total)
-- Department: `department-agent.md`, `orchestrator-agent.md`
-- Agents: `data-fetcher-agent.md`, `data-fetcher-script.js`, `orchestrator-agent.md`, `specialist-agent.md`
-- Workflows: `workflow-config.json`, `workflow-trigger.sh`
-- Documentation: `commands-reference.md`, `department-docs.md`
-- Schema: `agent-schema.json`
+**Templates:** (14 total: 11 Handlebars + 3 JSON schemas)
+- Department (3): `department-agent.md.hbs`, `department-readme.md.hbs`, `orchestrator-agent.md.hbs`
+- Agents (4): `data-fetcher-agent.md.hbs`, `data-fetcher-script.js.hbs`, `orchestrator-agent.md.hbs`, `specialist-agent.md.hbs`
+- Workflows (2): `workflow-config.json.hbs`, `workflow-trigger.sh.hbs`
+- Documentation (2): `commands-reference.md.hbs`, `department-docs.md.hbs`
+- Schemas (3): `agent-schema.json`, `department-schema.json`, `workflow-schema.json`
 
 **Testing:**
 - ✅ 3 test suites: `test-template-engine.js`, `test-phase2-components.js`, `test-phase3-integration.js`
@@ -156,7 +156,7 @@ Motus includes a wizard-driven system for consistently creating departments, age
 - `org-docs/departments/[dept].md` - Per-department documentation
 - This file (CLAUDE.md) - Architecture updates
 
-See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan.
+See the public-docs/ directory for complete documentation.
 
 ## Working Directory Structure
 ```
@@ -192,11 +192,7 @@ See `docs/STANDARDIZED-CREATION-SYSTEM-PLAN.md` for complete implementation plan
 ├── org-docs/            # Auto-generated documentation
 │   ├── COMMANDS_REFERENCE.md
 │   └── departments/    # Created as you add departments
-├── public-docs/         # User-facing documentation (16 files)
-├── docs/                # Technical documentation
-│   ├── STANDARDIZED-CREATION-SYSTEM-PLAN.md
-│   ├── PROJECT_OVERVIEW.md
-│   └── GAP-REPORT.md
+├── public-docs/         # User-facing documentation (18 files)
 ├── tests/               # Test suites (3 files)
 ├── .env.example         # Environment template
 ├── motus                # Main CLI executable

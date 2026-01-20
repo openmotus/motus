@@ -40,61 +40,21 @@ Your Browser <----> OAuth Manager (localhost:3001) <----> OAuth Provider (Google
 
 ### Start OAuth Manager
 
+From your terminal in the Motus project directory:
+
+```bash
+./start-oauth-manager.sh
 ```
-/motus oauth start
-```
 
-The server starts at `http://localhost:3001` and automatically opens in your default browser.
-
-**Expected Output:**
-
-```
-🔐 OAuth Manager Starting...
-
-✓ Server running at http://localhost:3001
-✓ Opening browser...
-
-OAuth Manager Status:
-  - Google: Not connected
-  - LinkedIn: Not connected
-  - Facebook: Not connected
-  - Twitter: Not connected
-
-Ready to authorize integrations!
-```
+The server starts at `http://localhost:3001`. Open this URL in your browser to access the web interface.
 
 ### Stop OAuth Manager
 
-```
-/motus oauth stop
-```
+Press `Ctrl+C` in the terminal where the OAuth Manager is running, or close the terminal window.
 
 ### Check Status
 
-```
-/motus oauth status
-```
-
-**Output:**
-
-```
-🔐 OAuth Manager Status
-
-Connected Services (2):
-  ✓ Google
-    - Connected: 2025-10-09
-    - Expires: 2025-11-09
-    - Scopes: calendar, gmail
-
-  ✓ LinkedIn
-    - Connected: 2025-10-08
-    - Expires: 2025-12-08
-    - Scopes: profile, posts
-
-Not Connected (2):
-  ✗ Facebook
-  ✗ Twitter
-```
+Visit `http://localhost:3001` in your browser to see the status of all connected services. The web interface shows which services are connected and their token expiration status.
 
 ## Web Interface
 
@@ -283,36 +243,38 @@ Update `lib/oauth-registry.js` to include Google config:
 
 ### Step 7: Connect in OAuth Manager
 
-1. Start OAuth Manager:
+1. Start OAuth Manager from your terminal:
+   ```bash
+   ./start-oauth-manager.sh
    ```
-   /motus oauth start
-   ```
 
-2. In the web interface, click "**Connect with Google**"
+2. Open `http://localhost:3001` in your browser
 
-3. You'll be redirected to Google's consent screen
+3. Click "**Connect with Google**"
 
-4. Sign in to your Google account (if not already)
+4. You'll be redirected to Google's consent screen
 
-5. Review the permissions:
+5. Sign in to your Google account (if not already)
+
+6. Review the permissions:
    ```
    Motus wants to:
    ✓ See your calendar events
    ✓ Read your Gmail messages
    ```
 
-6. Click "**Allow**"
+7. Click "**Allow**"
 
-7. You're redirected back to OAuth Manager
+8. You're redirected back to OAuth Manager
 
-8. Google card now shows:
+9. Google card now shows:
    ```
    Status: ✓ Connected
    Expires: [Date]
    Scopes: calendar, gmail
    ```
 
-**✅ Success!** Google is now connected and ready to use in your agents.
+**Success!** Google is now connected and ready to use in your agents.
 
 ### Step 8: Test the Connection
 
@@ -477,62 +439,26 @@ NOTION_REDIRECT_URI=http://localhost:3001/oauth/notion/callback
 
 ## Managing Tokens
 
-### View All Tokens
+### View Token Status
 
-```
-/motus oauth tokens
-```
-
-**Output:**
-
-```json
-{
-  "google": {
-    "accessToken": "ya29.a0AfH6SMB...",
-    "refreshToken": "1//0gHZs...",
-    "expiresAt": "2025-11-09T10:00:00.000Z",
-    "scopes": ["calendar", "gmail"]
-  },
-  "linkedin": {
-    "accessToken": "AQV7Kw...",
-    "refreshToken": null,
-    "expiresAt": "2025-12-08T10:00:00.000Z",
-    "scopes": ["profile", "posts"]
-  }
-}
-```
+Visit `http://localhost:3001` in your browser. The OAuth Manager web interface displays all connected services with their:
+- Connection status
+- Token expiration date
+- Granted scopes
 
 ### Refresh a Token
 
-Manually refresh an expired token:
-
-```
-/motus oauth refresh google
-```
-
-**Output:**
-
-```
-🔄 Refreshing Google token...
-✓ Token refreshed successfully
-  New expiration: 2025-11-10T10:00:00.000Z
-```
+Tokens automatically refresh when they expire. If you encounter authentication errors:
+1. Open the OAuth Manager at `http://localhost:3001`
+2. Click "Refresh" on the service card
+3. If refresh fails, click "Disconnect" and reconnect
 
 ### Disconnect a Service
 
-```
-/motus oauth disconnect google
-```
-
-**Output:**
-
-```
-🔌 Disconnecting Google...
-✓ Token removed from registry
-✓ Credentials deleted
-
-To reconnect, use: /motus oauth start
-```
+1. Open the OAuth Manager at `http://localhost:3001`
+2. Click "Disconnect" on the service card you want to remove
+3. The token will be removed from the registry
+4. To reconnect, click "Connect" again and reauthorize
 
 ### Token Lifecycle
 
@@ -567,18 +493,7 @@ Error: listen EADDRINUSE: address already in use :::3001
 
 **Solutions:**
 
-**Option A - Use Different Port:**
-
-```
-/motus oauth start --port 3002
-```
-
-**Important:** Update redirect URIs in all OAuth provider settings to use port 3002:
-```
-http://localhost:3002/oauth/google/callback
-```
-
-**Option B - Kill Process on Port 3001:**
+**Option A - Kill Process on Port 3001:**
 
 ```bash
 # macOS/Linux
@@ -587,6 +502,13 @@ lsof -ti:3001 | xargs kill -9
 # Windows
 netstat -ano | findstr :3001
 taskkill /PID <process_id> /F
+```
+
+**Option B - Use Different Port:**
+
+Edit the `start-oauth-manager.sh` script or modify `oauth-manager/server.js` to use a different port. Remember to update redirect URIs in all OAuth provider settings:
+```
+http://localhost:3002/oauth/google/callback
 ```
 
 #### Issue 2: Redirect URI Mismatch
@@ -642,10 +564,8 @@ The OAuth client was not found.
 3. If they don't match, update `.env` with correct values
 
 4. Restart OAuth Manager:
-   ```
-   /motus oauth stop
-   /motus oauth start
-   ```
+   - Press `Ctrl+C` in the terminal to stop it
+   - Run `./start-oauth-manager.sh` again
 
 #### Issue 4: Token Expired
 
@@ -660,19 +580,15 @@ Error 401: Token has been expired or revoked
 
 **Solution:**
 
-**Step 1: Try manual refresh**
+**Step 1: Try refresh from web interface**
 
-```
-/motus oauth refresh google
-```
+1. Open `http://localhost:3001`
+2. Click "Refresh" on the service card
 
 **Step 2: If refresh fails, disconnect and reconnect**
 
-```
-/motus oauth disconnect google
-/motus oauth start
-# Click "Connect with Google" in web interface
-```
+1. Click "Disconnect" on the service card
+2. Click "Connect" again and reauthorize
 
 #### Issue 5: Missing Scopes
 
@@ -688,10 +604,7 @@ The request is missing required scopes: calendar.readonly
 
 **Solution:**
 
-1. Disconnect the service:
-   ```
-   /motus oauth disconnect google
-   ```
+1. Disconnect the service at `http://localhost:3001`
 
 2. Update `lib/oauth-registry.js` to include required scope:
    ```javascript
@@ -701,28 +614,19 @@ The request is missing required scopes: calendar.readonly
    ]
    ```
 
-3. Reconnect and reauthorize:
-   ```
-   /motus oauth start
-   # Connect service and approve new scopes
-   ```
+3. Reconnect and reauthorize - click "Connect" and approve the new scopes
 
 #### Issue 6: Browser Doesn't Open
 
 **Symptom:**
 
-OAuth Manager starts but browser doesn't open automatically
+OAuth Manager starts but you need to access it
 
 **Solution:**
 
-Manually open browser to:
+Manually open your browser to:
 ```
 http://localhost:3001
-```
-
-Or specify to not auto-open:
-```
-/motus oauth start --no-browser
 ```
 
 #### Issue 7: Tokens Not Persisting
@@ -735,22 +639,21 @@ Tokens lost after restarting OAuth Manager
 
 **Solution:**
 
-1. Check token storage file:
+1. Check token storage in the oauth-manager directory
    ```bash
-   ls -la ~/.motus/tokens.json
-   # Or wherever tokens are stored
+   ls -la oauth-manager/tokens/
    ```
 
 2. Verify file is writable:
    ```bash
-   chmod 600 ~/.motus/tokens.json
+   chmod 600 oauth-manager/tokens/*.json
    ```
 
 3. If corrupted, delete and reconnect:
    ```bash
-   rm ~/.motus/tokens.json
-   /motus oauth start
-   # Reconnect all services
+   rm oauth-manager/tokens/*.json
+   ./start-oauth-manager.sh
+   # Reconnect all services via web interface
    ```
 
 ## Environment Variables Reference
@@ -904,24 +807,22 @@ If credentials are compromised:
    - Revoke access for Motus app
 
 2. **Disconnect in Motus:**
-   ```
-   /motus oauth disconnect google
-   ```
+   - Open `http://localhost:3001`
+   - Click "Disconnect" on the compromised service
 
-3. **Delete Token File:**
+3. **Delete Token Files:**
    ```bash
-   rm ~/.motus/tokens.json
+   rm oauth-manager/tokens/*.json
    ```
 
 4. **Generate New Credentials:**
-   - Delete old OAuth client in provider
+   - Delete old OAuth client in provider dashboard
    - Create new OAuth client
    - Update `.env` with new credentials
 
 5. **Reconnect:**
-   ```
-   /motus oauth start
-   ```
+   - Run `./start-oauth-manager.sh`
+   - Connect services at `http://localhost:3001`
 
 ## Next Steps
 

@@ -11,8 +11,8 @@ You are the Workflow Creator Agent. Your role is to guide users through creating
 ## Primary Responsibility
 
 Create a complete workflow including:
-1. Workflow configuration file (`life-admin/departments/[dept]/workflows/[workflow-name].json`)
-2. Trigger script if scheduled (`life-admin/departments/[dept]/workflows/[workflow-name].sh`)
+1. Workflow configuration file (`departments/[dept]/workflows/[workflow-name].json`)
+2. Trigger script if scheduled (`departments/[dept]/workflows/[workflow-name].sh`)
 3. Update department orchestrator to include workflow
 4. Update registries
 5. Regenerate documentation
@@ -216,8 +216,8 @@ Steps (4):
 Output: Obsidian daily note (Daily/2025-10-08.md)
 
 Will generate:
-  ✓ life-admin/departments/life/workflows/daily-briefing.json
-  ✓ life-admin/departments/life/workflows/daily-briefing.sh (trigger script)
+  ✓ departments/life/workflows/daily-briefing.json
+  ✓ departments/life/workflows/daily-briefing.sh (trigger script)
   ✓ Update life-orchestrator.md
   ✓ Update registries
   ✓ Update documentation
@@ -290,7 +290,7 @@ const context = ${JSON.stringify(context)};
 engine.renderToFile(
   'workflow/workflow-config.json',
   context,
-  'life-admin/departments/${context.department}/workflows/${context.name}.json'
+  'departments/${context.department}/workflows/${context.name}.json'
 ).then(() => console.log('✓ Created ${context.name}.json'));
 "
 ```
@@ -306,12 +306,12 @@ if (context.trigger.type === 'scheduled') {
   engine.renderToFile(
     'workflow/workflow-trigger.sh',
     context,
-    'life-admin/departments/${context.department}/workflows/${context.name}.sh'
+    'departments/${context.department}/workflows/${context.name}.sh'
   ).then(() => console.log('✓ Created ${context.name}.sh'));
   "
 
   # Make executable
-  chmod +x life-admin/departments/${context.department}/workflows/${context.name}.sh
+  chmod +x departments/${context.department}/workflows/${context.name}.sh
 }
 ```
 
@@ -368,10 +368,10 @@ Task(documentation-updater, prompt: "Workflow ${workflowName} created in ${depar
 
 📊 Generated Files:
   Workflow Configuration:
-    ✓ life-admin/departments/life/workflows/daily-briefing.json
+    ✓ departments/life/workflows/daily-briefing.json
 
   Trigger Script:
-    ✓ life-admin/departments/life/workflows/daily-briefing.sh (executable)
+    ✓ departments/life/workflows/daily-briefing.sh (executable)
 
   Updated Files:
     ✓ .claude/agents/life-orchestrator.md
@@ -486,7 +486,7 @@ After creation, workflow can be tested:
 
 # Direct JSON execution
 node -e "
-const workflow = require('./life-admin/departments/[dept]/workflows/[name].json');
+const workflow = require('./departments/[dept]/workflows/[name].json');
 console.log('Testing workflow:', workflow.name);
 // Simulate execution
 "

@@ -3,17 +3,19 @@
 /**
  * Phase 3 Integration Tests
  *
- * End-to-end tests for:
- * - Registry system with Life department
+ * End-to-end tests for the Motus framework:
+ * - Registry system with empty state (fresh install)
  * - Documentation generation
- * - Command routing verification
  * - File structure validation
+ * - Library integration
  */
 
 const fs = require('fs').promises;
 const path = require('path');
 const RegistryManager = require('../lib/registry-manager');
 const DocGenerator = require('../lib/doc-generator');
+const TemplateEngine = require('../lib/template-engine');
+const Validator = require('../lib/validator');
 
 class Phase3TestSuite {
   constructor() {
@@ -86,10 +88,10 @@ async function runTests() {
   console.log('='.repeat(60) + '\n');
 
   // ========================================
-  // REGISTRY TESTS
+  // REGISTRY TESTS (Empty State)
   // ========================================
 
-  console.log('Registry Integration Tests\n');
+  console.log('Registry Integration Tests (Empty State)\n');
 
   await suite.test('Registry: Load production registries', async () => {
     registry = new RegistryManager();
@@ -97,113 +99,76 @@ async function runTests() {
     suite.assertTrue(registry.loaded, 'Registries loaded');
   });
 
-  await suite.test('Registry: Life department exists', async () => {
-    const dept = registry.getDepartment('life');
-    suite.assert(dept, 'Life department found');
-    suite.assertEquals(dept.name, 'life', 'Department name correct');
+  await suite.test('Registry: Empty registries have correct structure', async () => {
+    suite.assert(registry.departments.departments !== undefined, 'Departments object exists');
+    suite.assert(registry.agents.agents !== undefined, 'Agents object exists');
+    suite.assert(registry.workflows.workflows !== undefined, 'Workflows object exists');
+    suite.assert(registry.departments.metadata !== undefined, 'Departments metadata exists');
   });
 
-  await suite.test('Registry: Life department has agents', async () => {
-    const dept = registry.getDepartment('life');
-    suite.assertTrue(dept.agents.length > 0, 'Life has agents');
-    suite.assertTrue(dept.agents.length >= 23, 'Life has at least 23 agents');
-  });
-
-  await suite.test('Registry: Life department has workflows', async () => {
-    const dept = registry.getDepartment('life');
-    suite.assertTrue(dept.workflows.length > 0, 'Life has workflows');
-    suite.assertTrue(dept.workflows.includes('daily-brief'), 'Life has daily-brief workflow');
-  });
-
-  await suite.test('Registry: All Life agents exist in agents registry', async () => {
-    const dept = registry.getDepartment('life');
-    for (const agentName of dept.agents) {
-      const agent = registry.getAgent(agentName);
-      suite.assert(agent, `Agent ${agentName} exists in registry`);
-      suite.assertEquals(agent.department, 'life', `Agent ${agentName} belongs to life`);
-    }
-  });
-
-  await suite.test('Registry: All Life workflows exist in workflows registry', async () => {
-    const dept = registry.getDepartment('life');
-    for (const workflowName of dept.workflows) {
-      const workflow = registry.getWorkflow('life', workflowName);
-      suite.assert(workflow, `Workflow ${workflowName} exists in registry`);
-      suite.assertEquals(workflow.department, 'life', `Workflow ${workflowName} belongs to life`);
-    }
-  });
-
-  await suite.test('Registry: Statistics are correct', async () => {
+  await suite.test('Registry: Statistics work with empty registries', async () => {
     const stats = await registry.getStatistics();
-    suite.assertEquals(stats.departments.total, 2, 'Should have 2 departments (life + system)');
-    suite.assertTrue(stats.agents.total >= 27, 'Should have at least 27 agents');
-    suite.assertEquals(stats.workflows.total, 4, 'Should have 4 workflows');
+    suite.assertEquals(stats.departments.total, 0, 'Should have 0 departments');
+    suite.assertEquals(stats.agents.total, 0, 'Should have 0 agents');
+    suite.assertEquals(stats.workflows.total, 0, 'Should have 0 workflows');
   });
 
-  await suite.test('Registry: Validation passes', async () => {
+  await suite.test('Registry: Validation passes on empty registries', async () => {
     const validation = await registry.validate();
-    suite.assertTrue(validation.valid, 'Registry validation should pass');
+    suite.assertTrue(validation.valid, 'Empty registry validation should pass');
     suite.assertEquals(validation.errors.length, 0, 'Should have no validation errors');
   });
 
-  await suite.test('Registry: Search works', async () => {
-    const results = await registry.search('weather');
-    suite.assertTrue(results.agents.length > 0, 'Should find weather agents');
+  await suite.test('Registry: Search returns empty results on empty registries', async () => {
+    const results = await registry.search('test');
+    suite.assertEquals(results.agents.length, 0, 'No agents found');
+    suite.assertEquals(results.workflows.length, 0, 'No workflows found');
+    suite.assertEquals(results.departments.length, 0, 'No departments found');
   });
 
-  await suite.test('Registry: List agents by department', async () => {
-    const agents = await registry.listAgentsByDepartment('life');
-    suite.assertTrue(agents.length >= 23, 'Should have at least 23 Life agents');
-  });
-
-  await suite.test('Registry: List workflows by department', async () => {
-    const workflows = await registry.listWorkflowsByDepartment('life');
-    suite.assertEquals(workflows.length, 4, 'Should have 4 Life workflows');
+  await suite.test('Registry: getDepartment returns null for non-existent', async () => {
+    const dept = registry.getDepartment('non-existent');
+    suite.assertEquals(dept, null, 'Returns null for non-existent department');
   });
 
   // ========================================
-  // DOCUMENTATION GENERATION TESTS
+  // LIBRARY INTEGRATION TESTS
   // ========================================
 
-  console.log('\nDocumentation Generation Tests\n');
+  console.log('\nLibrary Integration Tests\n');
 
-  await suite.test('DocGen: Generate all documentation', async () => {
-    const generator = new DocGenerator();
-    await generator.generate();
-    suite.assert(true, 'Documentation generated without errors');
+  await suite.test('Libraries: TemplateEngine loads', async () => {
+    const engine = new TemplateEngine();
+    const templates = await engine.listTemplates();
+    suite.assertTrue(templates.length === 11, 'Has 11 templates');
   });
 
-  await suite.test('DocGen: COMMANDS_REFERENCE.md exists', async () => {
-    const referencePath = path.join(__dirname, '..', 'org-docs', 'COMMANDS_REFERENCE.md');
-    const stats = await fs.stat(referencePath);
-    suite.assertTrue(stats.isFile(), 'COMMANDS_REFERENCE.md created');
+  await suite.test('Libraries: Validator works', async () => {
+    const validator = new Validator();
+    const validResult = validator.validateDepartmentName('test-department');
+    const invalidResult = validator.validateDepartmentName('TEST');
+    suite.assertTrue(validResult.valid, 'Valid name accepted');
+    suite.assertTrue(!invalidResult.valid, 'Invalid name rejected');
   });
 
-  await suite.test('DocGen: Life department doc exists', async () => {
-    const deptDocPath = path.join(__dirname, '..', 'org-docs', 'departments', 'life-department.md');
-    const stats = await fs.stat(deptDocPath);
-    suite.assertTrue(stats.isFile(), 'life-department.md created');
-  });
+  await suite.test('Libraries: TemplateEngine + Validator integration', async () => {
+    const engine = new TemplateEngine();
+    const validator = new Validator();
 
-  await suite.test('DocGen: COMMANDS_REFERENCE contains Life department', async () => {
-    const referencePath = path.join(__dirname, '..', 'org-docs', 'COMMANDS_REFERENCE.md');
-    const content = await fs.readFile(referencePath, 'utf8');
-    suite.assertTrue(content.includes('Life Department'), 'Reference includes Life Department');
-    suite.assertTrue(content.includes('daily-brief'), 'Reference includes daily-brief');
-  });
+    // Validate context then render
+    const context = {
+      name: 'test-dept',
+      displayName: 'Test Department',
+      description: 'A test department for validation testing purposes',
+      agents: [],
+      workflows: [],
+      integrations: [],
+      responsibilities: [],
+      created: new Date().toISOString()
+    };
 
-  await suite.test('DocGen: Life department doc has agents section', async () => {
-    const deptDocPath = path.join(__dirname, '..', 'org-docs', 'departments', 'life-department.md');
-    const content = await fs.readFile(deptDocPath, 'utf8');
-    suite.assertTrue(content.includes('## Agents'), 'Includes Agents section');
-    suite.assertTrue(content.includes('weather-fetcher'), 'Includes weather-fetcher agent');
-  });
-
-  await suite.test('DocGen: Life department doc has workflows section', async () => {
-    const deptDocPath = path.join(__dirname, '..', 'org-docs', 'departments', 'life-department.md');
-    const content = await fs.readFile(deptDocPath, 'utf8');
-    suite.assertTrue(content.includes('## Workflows'), 'Includes Workflows section');
-    suite.assertTrue(content.includes('daily-brief'), 'Includes daily-brief workflow');
+    const nameValidation = validator.validateDepartmentName(context.name);
+    suite.assertTrue(nameValidation.valid, 'Name validation works');
   });
 
   // ========================================
@@ -235,15 +200,15 @@ async function runTests() {
     suite.assertTrue(stats.isDirectory(), 'org-docs directory exists');
   });
 
-  await suite.test('Structure: org-docs/departments/ exists', async () => {
-    const deptDocsPath = path.join(__dirname, '..', 'org-docs', 'departments');
-    const stats = await fs.stat(deptDocsPath);
+  await suite.test('Structure: departments/ directory exists', async () => {
+    const deptPath = path.join(__dirname, '..', 'departments');
+    const stats = await fs.stat(deptPath);
     suite.assertTrue(stats.isDirectory(), 'departments directory exists');
   });
 
   await suite.test('Structure: lib/ contains all Phase 2 libraries', async () => {
     const libPath = path.join(__dirname, '..', 'lib');
-    const requiredLibs = ['template-engine.js', 'registry-manager.js', 'validator.js', 'doc-generator.js'];
+    const requiredLibs = ['template-engine.js', 'registry-manager.js', 'validator.js', 'doc-generator.js', 'oauth-registry.js'];
 
     for (const lib of requiredLibs) {
       const libFile = path.join(libPath, lib);
@@ -268,52 +233,65 @@ async function runTests() {
     }
   });
 
-  // ========================================
-  // AGENT TYPE DISTRIBUTION TESTS
-  // ========================================
+  await suite.test('Structure: Templates directory has all templates', async () => {
+    const templatesPath = path.join(__dirname, '..', 'templates');
+    const expectedDirs = ['department', 'agent', 'workflow', 'docs', 'schemas'];
 
-  console.log('\nAgent Type Distribution Tests\n');
-
-  await suite.test('Agents: Has data-fetchers', async () => {
-    const agents = await registry.listAgents({ type: 'data-fetcher' });
-    suite.assertTrue(agents.length > 0, 'Has data-fetcher agents');
-    const hasWeather = agents.some(a => a.name === 'weather-fetcher');
-    suite.assertTrue(hasWeather, 'Has weather-fetcher');
+    for (const dir of expectedDirs) {
+      const dirPath = path.join(templatesPath, dir);
+      const stats = await fs.stat(dirPath);
+      suite.assertTrue(stats.isDirectory(), `templates/${dir}/ exists`);
+    }
   });
 
-  await suite.test('Agents: Has orchestrators', async () => {
-    const agents = await registry.listAgents({ type: 'orchestrator' });
-    suite.assertTrue(agents.length > 0, 'Has orchestrator agents');
-    const hasDailyBrief = agents.some(a => a.name === 'daily-brief-orchestrator');
-    suite.assertTrue(hasDailyBrief, 'Has daily-brief-orchestrator');
-  });
-
-  await suite.test('Agents: Has specialists', async () => {
-    const agents = await registry.listAgents({ type: 'specialist' });
-    suite.assertTrue(agents.length > 0, 'Has specialist agents');
-    const hasInsight = agents.some(a => a.name === 'insight-generator');
-    suite.assertTrue(hasInsight, 'Has insight-generator');
+  await suite.test('Structure: /motus slash command exists', async () => {
+    const commandPath = path.join(__dirname, '..', '.claude', 'commands', 'motus.md');
+    const stats = await fs.stat(commandPath);
+    suite.assertTrue(stats.isFile(), 'motus.md command exists');
   });
 
   // ========================================
-  // WORKFLOW STRUCTURE TESTS
+  // DOCUMENTATION GENERATION TESTS
   // ========================================
 
-  console.log('\nWorkflow Structure Tests\n');
+  console.log('\nDocumentation Generation Tests\n');
 
-  await suite.test('Workflow: daily-brief has correct structure', async () => {
-    const workflow = registry.getWorkflow('life', 'daily-brief');
-    suite.assert(workflow, 'daily-brief workflow exists');
-    suite.assertTrue(workflow.steps.length > 0, 'Has steps');
-    suite.assertTrue(workflow.steps[0].parallel, 'First step is parallel');
-    suite.assertTrue(workflow.agents.length >= 6, 'Has at least 6 agents');
+  await suite.test('DocGen: Generate documentation without errors', async () => {
+    const generator = new DocGenerator();
+    await generator.generate();
+    suite.assert(true, 'Documentation generated without errors');
   });
 
-  await suite.test('Workflow: evening-report has correct structure', async () => {
-    const workflow = registry.getWorkflow('life', 'evening-report');
-    suite.assert(workflow, 'evening-report workflow exists');
-    suite.assertTrue(workflow.steps.length > 0, 'Has steps');
-    suite.assertEquals(workflow.trigger.type, 'manual', 'Is manual trigger');
+  await suite.test('DocGen: COMMANDS_REFERENCE.md exists', async () => {
+    const referencePath = path.join(__dirname, '..', 'org-docs', 'COMMANDS_REFERENCE.md');
+    const stats = await fs.stat(referencePath);
+    suite.assertTrue(stats.isFile(), 'COMMANDS_REFERENCE.md created');
+  });
+
+  await suite.test('DocGen: COMMANDS_REFERENCE has framework commands', async () => {
+    const referencePath = path.join(__dirname, '..', 'org-docs', 'COMMANDS_REFERENCE.md');
+    const content = await fs.readFile(referencePath, 'utf8');
+    suite.assertTrue(content.includes('department create'), 'Has department create command');
+    suite.assertTrue(content.includes('agent create'), 'Has agent create command');
+    suite.assertTrue(content.includes('workflow create'), 'Has workflow create command');
+  });
+
+  // ========================================
+  // MOTUS EXECUTABLE TESTS
+  // ========================================
+
+  console.log('\nMotus Executable Tests\n');
+
+  await suite.test('Executable: motus file exists', async () => {
+    const motusPath = path.join(__dirname, '..', 'motus');
+    const stats = await fs.stat(motusPath);
+    suite.assertTrue(stats.isFile(), 'motus executable exists');
+  });
+
+  await suite.test('Executable: package.json has correct bin entry', async () => {
+    const pkgPath = path.join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf8'));
+    suite.assertEquals(pkg.bin.motus, './motus', 'Correct bin entry');
   });
 
   // Print summary

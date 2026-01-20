@@ -63,7 +63,7 @@ Tools: Bash, Read
 Purpose: Get current weather from WeatherAPI
 ```
 
-When you create this agent, the wizard generates the agent definition file and optionally creates a script template at `<department>/agents/weather-fetcher.js` that you would implement.
+When you create this agent, the wizard generates the agent definition file and optionally creates a script template at `departments/<department>/agents/weather-fetcher.js` that you would implement.
 
 ### 3. Specialist Agents
 
@@ -257,7 +257,7 @@ Location: `config/registries/agents.json`
 
 ### 3. Implementation Script (Data Fetchers Only)
 
-Location: `<department>/agents/<agent-name>.js`
+Location: `departments/<department>/agents/<agent-name>.js`
 
 ```javascript
 #!/usr/bin/env node
@@ -463,22 +463,22 @@ Used in workflows:
 
 ### Update Agent
 
+To update an agent, edit its definition file directly or use Claude Code:
 ```
-/motus <department> agent update <agent-name>
+Update the bookmark-analyzer agent to include WebSearch in its tools
 ```
 
-Example:
-```
-/motus research agent update bookmark-analyzer --description "New description"
-```
+The agent definition is at `.claude/agents/<agent-name>.md`.
 
 ### Delete Agent
 
-```
-/motus <department> agent delete <agent-name>
-```
+To delete an agent:
+1. Remove the agent definition file from `.claude/agents/`
+2. Remove the entry from `config/registries/agents.json`
+3. Update any workflows that reference this agent
+4. Run `/motus docs update` to regenerate documentation
 
-⚠️ **Warning**: This will remove the agent from all workflows!
+⚠️ **Warning**: Make sure to update any workflows that depend on this agent!
 
 ## Testing Your Agent
 

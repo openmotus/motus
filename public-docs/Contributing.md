@@ -166,9 +166,9 @@ cp .env.example .env
 
 4. **Test Setup**
 
-In Claude Code:
+In Claude Code, navigate to the motus directory and run:
 ```
-/motus --version
+/motus help
 ```
 
 ### Development Workflow
@@ -185,11 +185,14 @@ Edit files, add features, fix bugs
 
 3. **Test Changes**
 
-```
-/motus test
+Run the test suites:
+```bash
+node tests/test-template-engine.js
+node tests/test-phase2-components.js
+node tests/test-phase3-integration.js
 ```
 
-Run affected commands to verify
+Test affected commands in Claude Code to verify
 
 4. **Commit Changes**
 

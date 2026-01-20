@@ -145,8 +145,8 @@ Workflows (2):
 
 This will create:
   - 4 agent files in .claude/agents/
-  - 2 agent scripts in life-admin/departments/marketing/agents/
-  - 2 workflow files in life-admin/departments/marketing/workflows/
+  - 2 agent scripts in departments/marketing/agents/
+  - 2 workflow files in departments/marketing/workflows/
   - Documentation in org-docs/departments/
   - Registry entries
 
@@ -312,12 +312,12 @@ After successful generation:
     ✓ .claude/agents/analytics-fetcher.md
 
   Agent Scripts (2):
-    ✓ life-admin/departments/marketing/agents/trend-analyzer.js
-    ✓ life-admin/departments/marketing/agents/analytics-fetcher.js
+    ✓ departments/marketing/agents/trend-analyzer.js
+    ✓ departments/marketing/agents/analytics-fetcher.js
 
   Workflows (2):
-    ✓ life-admin/departments/marketing/workflows/daily-trends.json
-    ✓ life-admin/departments/marketing/workflows/content-pipeline.json
+    ✓ departments/marketing/workflows/daily-trends.json
+    ✓ departments/marketing/workflows/content-pipeline.json
 
   Documentation:
     ✓ org-docs/departments/marketing-department.md

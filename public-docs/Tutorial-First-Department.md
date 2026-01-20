@@ -24,14 +24,16 @@ Before starting, make sure you have:
 **Verify your setup:**
 
 ```bash
-# Check Motus is installed
-/motus --version
-
 # Check Node.js version
 node --version
 ```
 
-You should see version numbers for both.
+You should see a version number (18.x or higher).
+
+In Claude Code, verify Motus is available:
+```
+/motus help
+```
 
 ---
 
@@ -147,10 +149,10 @@ First, let's create a JSON file with some sample tasks:
 
 ```bash
 # Create data directory
-mkdir -p tasks/data
+mkdir -p departments/tasks/data
 
 # Create sample tasks file
-cat > tasks/data/my-tasks.json << 'EOF'
+cat > departments/tasks/data/my-tasks.json << 'EOF'
 {
   "tasks": [
     {
@@ -255,10 +257,10 @@ Now we need to create the actual script that fetches tasks. Create this file man
 
 ```bash
 # Create agents directory
-mkdir -p tasks/agents
+mkdir -p departments/tasks/agents
 
 # Create the task-fetcher script
-cat > tasks/agents/task-fetcher.js << 'EOF'
+cat > departments/tasks/agents/task-fetcher.js << 'EOF'
 #!/usr/bin/env node
 
 /**
@@ -275,7 +277,7 @@ const path = require('path');
  * @param {string} filePath - Path to tasks JSON file
  * @returns {Object} Tasks data
  */
-async function fetchTasks(filePath = 'tasks/data/my-tasks.json') {
+async function fetchTasks(filePath = 'departments/tasks/data/my-tasks.json') {
   try {
     // Resolve absolute path
     const absolutePath = path.resolve(process.cwd(), filePath);
@@ -329,7 +331,7 @@ module.exports = { fetchTasks };
 EOF
 
 # Make it executable
-chmod +x tasks/agents/task-fetcher.js
+chmod +x departments/tasks/agents/task-fetcher.js
 ```
 
 ### 2.5 Test the Task Fetcher
@@ -337,7 +339,7 @@ chmod +x tasks/agents/task-fetcher.js
 Let's test the script independently:
 
 ```bash
-node tasks/agents/task-fetcher.js
+node departments/tasks/agents/task-fetcher.js
 ```
 
 **Expected Output:**
@@ -393,10 +395,10 @@ This agent reads tasks from a local JSON file and returns structured data.
 To fetch tasks, execute the script:
 
 ```bash
-node tasks/agents/task-fetcher.js [optional-file-path]
+node departments/tasks/agents/task-fetcher.js [optional-file-path]
 ```
 
-Default file path: `tasks/data/my-tasks.json`
+Default file path: `departments/tasks/data/my-tasks.json`
 
 ## Output Format
 
@@ -411,7 +413,7 @@ Returns JSON with:
 
 In Claude Code:
 ```
-Use the task-fetcher agent to get all my current tasks from tasks/data/my-tasks.json
+Use the task-fetcher agent to get all my current tasks from departments/tasks/data/my-tasks.json
 ```
 
 The agent will execute the script and return the structured task data.
@@ -462,7 +464,7 @@ yes
 ### 3.2 Create the Prioritizer Script
 
 ```bash
-cat > tasks/agents/task-prioritizer.js << 'EOF'
+cat > departments/tasks/agents/task-prioritizer.js << 'EOF'
 #!/usr/bin/env node
 
 /**
@@ -613,13 +615,13 @@ if (require.main === module) {
 module.exports = { prioritizeTasks, calculatePriorityScore };
 EOF
 
-chmod +x tasks/agents/task-prioritizer.js
+chmod +x departments/tasks/agents/task-prioritizer.js
 ```
 
 ### 3.3 Test the Task Prioritizer
 
 ```bash
-node tasks/agents/task-prioritizer.js tasks/data/my-tasks.json
+node departments/tasks/agents/task-prioritizer.js departments/tasks/data/my-tasks.json
 ```
 
 **Expected Output:**
@@ -721,7 +723,7 @@ yes
 Since workflows need orchestration, let's create a simple script that runs both agents:
 
 ```bash
-cat > tasks/workflows/daily-tasks.sh << 'EOF'
+cat > departments/tasks/workflows/daily-tasks.sh << 'EOF'
 #!/bin/bash
 
 ###
@@ -734,7 +736,7 @@ echo ""
 
 # Step 1: Fetch tasks
 echo "📥 Step 1: Fetching tasks..."
-TASKS_JSON=$(node tasks/agents/task-fetcher.js)
+TASKS_JSON=$(node departments/tasks/agents/task-fetcher.js)
 FETCH_STATUS=$?
 
 if [ $FETCH_STATUS -ne 0 ]; then
@@ -750,7 +752,7 @@ echo "$TASKS_JSON" > /tmp/fetched-tasks.json
 
 # Step 2: Prioritize tasks
 echo "🎯 Step 2: Prioritizing tasks..."
-PRIORITIZED_JSON=$(node tasks/agents/task-prioritizer.js /tmp/fetched-tasks.json)
+PRIORITIZED_JSON=$(node departments/tasks/agents/task-prioritizer.js /tmp/fetched-tasks.json)
 PRIORITIZE_STATUS=$?
 
 if [ $PRIORITIZE_STATUS -ne 0 ]; then
@@ -788,7 +790,7 @@ echo "$PRIORITIZED_JSON" | jq -r '.categories.normal.tasks[] | "  \(.id). \(.tit
 echo ""
 
 # Save full report
-REPORT_FILE="tasks/data/daily-report-$(date +%Y-%m-%d).json"
+REPORT_FILE="departments/tasks/data/daily-report-$(date +%Y-%m-%d).json"
 echo "$PRIORITIZED_JSON" > "$REPORT_FILE"
 echo "💾 Full report saved to: $REPORT_FILE"
 echo ""
@@ -799,7 +801,7 @@ echo "✅ Workflow complete!"
 rm /tmp/fetched-tasks.json
 EOF
 
-chmod +x tasks/workflows/daily-tasks.sh
+chmod +x departments/tasks/workflows/daily-tasks.sh
 ```
 
 ### 4.3 Update the Workflow Registry
@@ -830,7 +832,7 @@ cat > config/registries/workflows.json << 'EOF'
         }
       ],
       "trigger": "manual",
-      "script": "tasks/workflows/daily-tasks.sh",
+      "script": "departments/tasks/workflows/daily-tasks.sh",
       "created": "2025-10-09T00:00:00.000Z"
     }
   }
@@ -849,7 +851,7 @@ Now let's run everything together and see it work!
 ### 5.1 Run the Workflow
 
 ```bash
-./tasks/workflows/daily-tasks.sh
+./departments/tasks/workflows/daily-tasks.sh
 ```
 
 ### 5.2 Expected Output
@@ -885,7 +887,7 @@ You should see:
   3. Schedule dentist appointment (due: 2025-10-30)
   5. Research new development tools (due: 2025-11-01)
 
-💾 Full report saved to: tasks/data/daily-report-2025-10-09.json
+💾 Full report saved to: departments/tasks/data/daily-report-2025-10-09.json
 
 ✅ Workflow complete!
 ```
@@ -893,7 +895,7 @@ You should see:
 ### 5.3 Verify the Report File
 
 ```bash
-cat tasks/data/daily-report-2025-10-09.json
+cat departments/tasks/data/daily-report-2025-10-09.json
 ```
 
 You should see the full JSON report with all prioritized tasks!
@@ -919,7 +921,7 @@ Claude Code will execute `task-fetcher.js` and show you the results.
 ### 6.2 Prioritize Tasks
 
 ```
-Use the task-prioritizer agent to analyze my tasks from tasks/data/my-tasks.json
+Use the task-prioritizer agent to analyze my tasks from departments/tasks/data/my-tasks.json
 ```
 
 ### 6.3 Run Full Workflow
@@ -955,7 +957,7 @@ echo "$PRIORITIZED_JSON"
 
 ```bash
 cd /path/to/motus
-./tasks/workflows/daily-tasks.sh
+./departments/tasks/workflows/daily-tasks.sh
 ```
 
 ### Issue: Permission denied
@@ -963,9 +965,9 @@ cd /path/to/motus
 **Solution:** Make scripts executable:
 
 ```bash
-chmod +x tasks/agents/task-fetcher.js
-chmod +x tasks/agents/task-prioritizer.js
-chmod +x tasks/workflows/daily-tasks.sh
+chmod +x departments/tasks/agents/task-fetcher.js
+chmod +x departments/tasks/agents/task-prioritizer.js
+chmod +x departments/tasks/workflows/daily-tasks.sh
 ```
 
 ### Issue: Module not found
@@ -992,20 +994,20 @@ Congratulations! You've built a complete task management system:
 
 2. ✅ **Task Fetcher Agent**
    - Agent definition (`.claude/agents/task-fetcher.md`)
-   - Implementation script (`tasks/agents/task-fetcher.js`)
+   - Implementation script (`departments/tasks/agents/task-fetcher.js`)
    - Reads from JSON files
    - Returns structured data
 
 3. ✅ **Task Prioritizer Agent**
    - Agent definition (`.claude/agents/task-prioritizer.md`)
-   - Implementation script (`tasks/agents/task-prioritizer.js`)
+   - Implementation script (`departments/tasks/agents/task-prioritizer.js`)
    - Calculates priority scores
    - Categorizes tasks (urgent/important/normal)
    - Generates recommendations
 
 4. ✅ **Daily Tasks Workflow**
    - Workflow definition in registry
-   - Orchestration script (`tasks/workflows/daily-tasks.sh`)
+   - Orchestration script (`departments/tasks/workflows/daily-tasks.sh`)
    - Sequential execution: fetch → prioritize
    - Generates daily reports
 
@@ -1025,15 +1027,16 @@ motus/
 │   ├── departments.json
 │   ├── agents.json
 │   └── workflows.json
-├── tasks/
-│   ├── agents/
-│   │   ├── task-fetcher.js
-│   │   └── task-prioritizer.js
-│   ├── workflows/
-│   │   └── daily-tasks.sh
-│   └── data/
-│       ├── my-tasks.json
-│       └── daily-report-2025-10-09.json
+├── departments/
+│   └── tasks/
+│       ├── agents/
+│       │   ├── task-fetcher.js
+│       │   └── task-prioritizer.js
+│       ├── workflows/
+│       │   └── daily-tasks.sh
+│       └── data/
+│           ├── my-tasks.json
+│           └── daily-report-2025-10-09.json
 └── org-docs/departments/
     └── tasks-department.md
 ```
@@ -1068,18 +1071,18 @@ motus/
 /motus tasks agent create task-reporter
 ```
 
-Create `tasks/agents/task-reporter.js` that:
+Create `departments/tasks/agents/task-reporter.js` that:
 - Reads prioritized tasks
 - Generates a Markdown report
 - Saves to a file or sends via email
 
 ### Example: Schedule Daily Execution
 
-Edit `tasks/workflows/daily-tasks.sh` to add a cron job:
+Edit `departments/tasks/workflows/daily-tasks.sh` to add a cron job:
 
 ```bash
 # Run every day at 9 AM
-0 9 * * * cd /path/to/motus && ./tasks/workflows/daily-tasks.sh
+0 9 * * * cd /path/to/motus && ./departments/tasks/workflows/daily-tasks.sh
 ```
 
 ---

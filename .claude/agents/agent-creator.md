@@ -12,7 +12,7 @@ You are the Agent Creator Agent. Your role is to guide users through creating a 
 
 Create a complete agent including:
 1. Agent definition file (`.claude/agents/[agent-name].md`)
-2. Implementation script if needed (`life-admin/departments/[dept]/agents/[agent-name].js`)
+2. Implementation script if needed (`departments/[dept]/agents/[agent-name].js`)
 3. Update department orchestrator to include new agent
 4. Update registries
 5. Regenerate documentation
@@ -189,7 +189,7 @@ Tools: Bash, Read
 
 Will generate:
   ✓ .claude/agents/trend-analyzer.md
-  ✓ life-admin/departments/marketing/agents/trend-analyzer.js
+  ✓ departments/marketing/agents/trend-analyzer.js
   ✓ Update marketing-orchestrator.md
   ✓ Update registries
   ✓ Update documentation
@@ -215,7 +215,7 @@ const context = {
   color: "cyan",
 
   // Data fetcher specific
-  scriptPath: "/Users/ianwinscom/motus/life-admin/departments/marketing/agents/trend-analyzer.js",
+  scriptPath: "./departments/marketing/agents/trend-analyzer.js",
   apiUrl: "https://api.twitter.com/1.1",
   apiPath: "/trends/place.json",
   authType: "bearer",
@@ -266,7 +266,7 @@ if (context.type === 'data-fetcher' && context.apiUrl) {
   engine.renderToFile(
     'agent/data-fetcher-script.js',
     context,
-    'life-admin/departments/${context.department}/agents/${context.name}.js'
+    'departments/${context.department}/agents/${context.name}.js'
   ).then(() => console.log('✓ Created ${context.name}.js'));
   "
 }
@@ -330,7 +330,7 @@ Task(documentation-updater, prompt: "Agent ${agentName} created in ${department}
     ✓ .claude/agents/trend-analyzer.md
 
   Implementation:
-    ✓ life-admin/departments/marketing/agents/trend-analyzer.js
+    ✓ departments/marketing/agents/trend-analyzer.js
 
   Updated Files:
     ✓ .claude/agents/marketing-orchestrator.md

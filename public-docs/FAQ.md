@@ -36,11 +36,12 @@ Advanced users can write custom agents if desired.
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
+cp .env.example .env
 ```
 
-Then in Claude Code:
+Then in Claude Code, navigate to the motus directory and run:
 ```
-/motus --version
+/motus help
 ```
 
 ### Do I need all the integrations?
@@ -79,9 +80,12 @@ Yes! When creating a workflow, choose "Scheduled" type and provide a cron schedu
 
 ### How do I test an agent?
 
+Run the agent directly in Claude Code:
 ```
-/motus <department> test-agent <agent-name>
+/motus <department> <agent-name>
 ```
+
+Or ask Claude Code to execute the agent's script directly to check for errors.
 
 ### Where are my daily notes stored?
 
@@ -144,29 +148,28 @@ Check:
 1. Workflow name spelling
 2. Department is correct
 3. All agents exist
-4. Integrations are configured
-5. Run with `--debug` flag
+4. Integrations are configured in `.env`
 
 ### "Environment variable not set" error
 
-1. Check `.env` file exists
-2. Verify variable name
+1. Check `.env` file exists in project root
+2. Verify variable name (exact match required)
 3. No spaces around `=`
-4. Restart Claude Code
+4. Restart Claude Code session
 
 ### OAuth authorization fails
 
-1. Ensure OAuth Manager is running: `/motus oauth status`
+1. Ensure OAuth Manager is running at `http://localhost:3001`
 2. Check redirect URI matches in provider settings
-3. Verify Client ID and Secret are correct
+3. Verify Client ID and Secret are correct in `.env`
 4. Clear browser cookies and try again
 
 ### Agent returns no data
 
-1. Check API credentials
-2. Verify integration: `/motus integrations test <name>`
-3. Check if data exists at source
-4. Look for errors in output
+1. Check API credentials in `.env`
+2. Test API key with a simple curl command
+3. Check if data exists at the source
+4. Look for errors in the agent output
 
 ## Customization
 

@@ -89,7 +89,7 @@ Motus is a sophisticated automation **framework** that provides the structure to
 
 ### Prerequisites
 
-- [Claude Code CLI](https://claude.com/claude-code) installed
+- [Claude Code CLI](https://claude.ai/download) installed and working
 - Node.js 18+ installed
 - Git installed
 
@@ -103,14 +103,15 @@ cd motus
 # Install dependencies
 npm install
 
-# Make executable
-chmod +x motus
-
-# Verify installation
+# Verify installation (optional - shows usage info)
 ./motus --version
 ```
 
+> **Important**: Motus commands run inside Claude Code CLI, not in a regular terminal. After installation, open Claude Code in the motus directory to use `/motus` commands.
+
 ### Your First Department
+
+Open Claude Code CLI in the motus directory, then:
 
 ```bash
 # Create a department with interactive wizard
@@ -135,7 +136,7 @@ chmod +x motus
 
 ## 📚 Documentation
 
-Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus.sh/)**
+Comprehensive documentation is available in the **[public-docs/](public-docs/)** directory.
 
 ### Core Guides
 
@@ -211,20 +212,22 @@ Comprehensive documentation is available at **[docs.motus.sh](https://docs.motus
 ```
 motus/
 ├── .claude/              # Claude Code configuration
-│   ├── agents/          # Agent definitions
-│   └── commands/        # CLI commands
+│   ├── agents/          # Agent definitions (creator wizards)
+│   └── commands/        # Slash commands (/motus)
 ├── config/              # System configuration
 │   └── registries/      # Department/agent/workflow registries
+├── departments/         # Your created departments go here
 ├── lib/                 # Core libraries
 │   ├── registry-manager.js
 │   ├── template-engine.js
+│   ├── validator.js
 │   ├── oauth-registry.js
 │   └── doc-generator.js
-├── templates/           # Handlebars templates
+├── templates/           # Handlebars templates (11 templates)
 ├── oauth-manager/       # OAuth Manager server
 ├── public-docs/         # User documentation
 ├── org-docs/            # Auto-generated docs
-├── motus                # Main CLI executable
+├── motus                # Usage info (actual commands run inside Claude Code)
 └── package.json         # Dependencies
 ```
 
@@ -258,8 +261,9 @@ npm test
 # Make your changes
 # ...
 
-# Test your changes
-./motus department create test-dept
+# Test your changes in Claude Code CLI
+# Open Claude Code in the motus directory, then run:
+/motus department create test-dept
 ```
 
 ## 📝 License
@@ -275,16 +279,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Website**: [https://motus.sh](https://motus.sh)
-- **Documentation**: [https://docs.motus.sh](https://docs.motus.sh)
 - **GitHub**: [https://github.com/openmotus/motus](https://github.com/openmotus/motus)
+- **Documentation**: [public-docs/](public-docs/)
 - **Issues**: [Report bugs or request features](https://github.com/openmotus/motus/issues)
 
 ## 🆘 Support
 
 Need help?
 
-- 📖 Check the [Documentation](https://docs.motus.sh/)
+- 📖 Check the [Documentation](public-docs/)
 - 🐛 Report issues on [GitHub](https://github.com/openmotus/motus/issues)
 - 💬 Ask questions in [Discussions](https://github.com/openmotus/motus/discussions)
 

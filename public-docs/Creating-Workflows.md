@@ -501,31 +501,19 @@ Claude Code will execute the workflow and show progress.
 
 ### Update a Workflow
 
+To update a workflow, edit its definition file directly in `.claude/commands/` or ask Claude Code to modify it:
 ```
-/motus <department> workflow update <workflow-name>
-```
-
-Example:
-```
-/motus marketing workflow update content-pipeline --schedule "0 10 * * *"
+Update the content-pipeline workflow to run at 10 AM instead of 8 AM
 ```
 
 ### Delete a Workflow
 
-```
-/motus <department> workflow delete <workflow-name>
-```
+To delete a workflow:
+1. Remove the workflow definition from `.claude/commands/`
+2. Remove the entry from `config/registries/workflows.json`
+3. Run `/motus docs update` to regenerate documentation
 
-⚠️ **Warning**: This will remove the workflow and its schedule!
-
-### Enable/Disable Scheduled Workflows
-
-```
-/motus <department> workflow disable <workflow-name>
-/motus <department> workflow enable <workflow-name>
-```
-
-Useful for temporarily pausing scheduled workflows.
+⚠️ **Warning**: Make sure to update any workflows that depend on this one!
 
 ## Testing Your Workflow
 
@@ -539,25 +527,14 @@ Run the workflow and observe the output:
 
 Watch as each agent executes and provides results.
 
-### Dry Run Mode
+### Review Execution
 
-Test workflow logic without executing agents:
-
+Ask Claude Code for detailed output:
 ```
-/motus marketing workflow test content-pipeline --dry-run
-```
-
-Shows what would happen without actually running agents.
-
-### Debug Mode
-
-Run with detailed logging:
-
-```
-/motus marketing content-pipeline --debug
+Run the content-pipeline workflow and show me what each agent returns
 ```
 
-See detailed information about each step.
+This helps you understand what's happening at each step.
 
 ## Best Practices
 
@@ -713,25 +690,15 @@ Daily briefing workflow →
 
 ## Scheduling Workflows
 
-### Setup Automation
-
-First, setup the automation system:
-
-```
-/motus init automation
-```
-
-This configures your system for scheduled workflows.
-
 ### Add a Scheduled Workflow
 
 When creating a workflow, choose "Scheduled" type:
 
 ```
 /motus marketing workflow create daily-briefing
-> Type: Scheduled
-> Schedule: 0 8 * * *
 ```
+
+In the wizard, select "Scheduled" and provide a cron schedule.
 
 ### Common Schedules
 
@@ -743,15 +710,9 @@ Every 6 hours:     0 */6 * * *
 Weekdays 7 AM:     0 7 * * 1-5
 ```
 
-### Verify Scheduled Workflows
+### Running Scheduled Workflows
 
-List all scheduled workflows:
-
-```
-/motus schedule list
-```
-
-Output shows all active schedules across departments.
+To actually run workflows on a schedule, you'll need to set up a system cron job or scheduler that invokes Claude Code with the workflow command. This can be done with your operating system's scheduling tools (cron on Linux/macOS, Task Scheduler on Windows).
 
 ## Next Steps
 

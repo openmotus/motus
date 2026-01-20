@@ -1,113 +1,79 @@
 #!/usr/bin/env node
 
 /**
- * Motus Command Line Interface
- * This is the main entry point for /motus commands in Claude Code
+ * Motus - AI Life & Business Automation Framework
+ *
+ * This file is a stub. Motus is designed to run inside Claude Code CLI,
+ * not as a standalone command-line tool.
+ *
+ * USAGE:
+ * 1. Open Claude Code CLI in this directory
+ * 2. Use /motus commands directly in the Claude Code interface
+ *
+ * EXAMPLES:
+ *   /motus department create marketing
+ *   /motus marketing agent create trend-analyzer
+ *   /motus marketing workflow create daily-report
+ *   /motus docs update
+ *
+ * For more information, see the README.md or visit:
+ * https://github.com/openmotus/motus
  */
 
-require('dotenv').config();
-const EnhancedLifeDepartment = require('./lib/life-department-enhanced');
-const MotusCommand = require('./motus-command');
-const MotusLife = require('./motus-life');
-const fs = require('fs').promises;
-const path = require('path');
+const chalk = require('chalk');
+const boxen = require('boxen');
 
-async function main() {
-  const args = process.argv.slice(2);
-  const [command, subcommand, ...params] = args;
+const message = `
+${chalk.bold.cyan('Motus')} - AI Life & Business Automation Framework
 
-  // Initialize Motus
-  const motus = new MotusCommand();
-  await motus.initialize();
+${chalk.yellow('⚠️  Motus runs inside Claude Code CLI, not as a standalone tool.')}
 
-  // Handle daily-brief shortcut
-  if (command === 'daily-brief') {
-    const motusLife = new MotusLife();
-    await motusLife.handleCommand(['daily-brief']);
-    return;
-  }
+${chalk.bold('To use Motus:')}
+  1. Open ${chalk.green('Claude Code CLI')} in this directory
+  2. Use ${chalk.cyan('/motus')} commands in the Claude Code interface
 
-  // Handle Life Department commands with real integrations
-  if (command === 'life') {
-    const motusLife = new MotusLife();
-    await motusLife.handleCommand([subcommand, ...params]);
-    return;
-  }
+${chalk.bold('Example commands:')}
+  ${chalk.gray('/motus department create marketing')}
+  ${chalk.gray('/motus marketing agent create trend-analyzer')}
+  ${chalk.gray('/motus docs update')}
 
-  // DEPRECATED - Old life commands for backward compatibility
-  if (command === 'life-old') {
-    const lifeDept = new EnhancedLifeDepartment();
-    
-    switch (subcommand) {
-      case 'briefing':
-        await lifeDept.morningBriefing();
-        break;
-      
-      case 'review':
-        await lifeDept.eveningReview();
-        break;
-      
-      case 'track':
-        const [type, ...data] = params;
-        console.log(`✅ Tracked ${type}: ${data.join(' ')}`);
-        // Save to data file
-        const trackingPath = path.join(process.env.MOTUS_DATA_DIR || './data', 'tracking.json');
-        let tracking = [];
-        try {
-          const existing = await fs.readFile(trackingPath, 'utf8');
-          tracking = JSON.parse(existing);
-        } catch (e) {}
-        tracking.push({
-          type,
-          data: data.join(' '),
-          timestamp: new Date().toISOString()
-        });
-        await fs.mkdir(path.dirname(trackingPath), { recursive: true });
-        await fs.writeFile(trackingPath, JSON.stringify(tracking, null, 2));
-        break;
-      
-      case 'plan':
-        const period = params[0] || 'day';
-        console.log(`\n📅 Planning session for: ${period}\n`);
-        if (period === 'week') {
-          // Weekly planning would go here
-          console.log('Weekly planning coming soon with full Task integration!');
-        } else {
-          console.log('Daily planning coming soon!');
-        }
-        break;
-      
-      default:
-        console.log(`
-🏠 Life Department Commands:
-  /motus life briefing    - Morning briefing with real weather
-  /motus life review      - Evening review
-  /motus life track       - Track habits/goals
-  /motus life plan        - Planning session
+${chalk.bold('Quick links:')}
+  📖 Documentation: ${chalk.blue('public-docs/')}
+  🐙 GitHub: ${chalk.blue('https://github.com/openmotus/motus')}
+`;
+
+console.log(boxen(message, {
+  padding: 1,
+  margin: 1,
+  borderStyle: 'round',
+  borderColor: 'cyan'
+}));
+
+// Also support --version and --help flags
+const args = process.argv.slice(2);
+
+if (args.includes('--version') || args.includes('-v')) {
+  const pkg = require('./package.json');
+  console.log(`Motus v${pkg.version}`);
+}
+
+if (args.includes('--help') || args.includes('-h')) {
+  console.log(`
+${chalk.bold('Available flags:')}
+  --version, -v    Show version number
+  --help, -h       Show this help message
+  --oauth          Launch OAuth Manager
+
+${chalk.bold('OAuth Manager:')}
+  Run ${chalk.cyan('./start-oauth-manager.sh')} to manage API connections
+  Opens web UI at ${chalk.blue('http://localhost:3001')}
 `);
-    }
-  } 
-  // Run workflow shortcut
-  else if (command === 'run') {
-    if (subcommand === 'morning-briefing') {
-      const lifeDept = new EnhancedLifeDepartment();
-      await lifeDept.morningBriefing();
-    } else if (subcommand === 'evening-review') {
-      const lifeDept = new EnhancedLifeDepartment();
-      await lifeDept.eveningReview();
-    } else {
-      await motus.runWorkflow(subcommand, params);
-    }
-  }
-  // Default to original command handler
-  else {
-    await motus.handleCommand(args);
-  }
 }
 
-// Run if executed directly
-if (require.main === module) {
-  main().catch(console.error);
+if (args.includes('--oauth')) {
+  console.log(chalk.cyan('\nLaunching OAuth Manager...'));
+  require('child_process').spawn('./start-oauth-manager.sh', {
+    stdio: 'inherit',
+    shell: true
+  });
 }
-
-module.exports = main;

@@ -17,38 +17,25 @@ Motus uses environment variables to store sensitive configuration like API keys,
 
 ### Step 1: Create .env File
 
-In Claude Code, create your environment file:
-
-```
-/motus init env
-```
-
-This creates a `.env` file with all available configuration options.
-
-**Alternative**: Copy the example file:
+Copy the example file to create your environment configuration:
 
 ```bash
-# Only use bash for initial file copy
 cp .env.example .env
 ```
 
 ### Step 2: Configure Required Settings
 
-Open the `.env` file in Claude Code and configure:
+Edit the `.env` file with your API keys and paths. In Claude Code, you can ask:
 
 ```
-Tell Claude Code to open .env file for editing
+Help me edit the .env file to configure my API keys
 ```
 
 ### Step 3: Verify Configuration
 
-Check your environment setup:
-
-```
-/motus env check
-```
-
-This validates all required variables are set.
+Check that your `.env` file has the required variables by reviewing its contents. The most important ones are:
+- `TIMEZONE` - Your local timezone
+- Any API keys for integrations you want to use
 
 ## Environment Variables
 
@@ -364,58 +351,34 @@ Different departments require different integrations. Below are examples of depa
 
 ### View Current Configuration
 
-Check which variables are set:
+Check which variables are set by viewing your `.env` file:
 
-```
-/motus env list
+```bash
+cat .env
 ```
 
-Shows all environment variables (with secrets masked).
+Or in Claude Code, ask to see the `.env` file contents.
 
 ### Update a Variable
 
-Change a specific variable:
+Edit the `.env` file directly to add or change variables:
 
-```
-/motus env set WEATHER_API_KEY new_key_value
+```bash
+# In your text editor or ask Claude Code to edit
+WEATHER_API_KEY=your_new_key_value
 ```
 
 ### Remove a Variable
 
-Delete a variable:
+Delete or comment out the line in `.env`:
 
-```
-/motus env unset TWITTER_API_KEY
+```bash
+# TWITTER_API_KEY=old_value  # Commented out
 ```
 
 ### Validate Configuration
 
-Check if all required variables for a department are set:
-
-```
-/motus env validate <department>
-```
-
-Example:
-```
-/motus env validate life
-```
-
-Output:
-```
-✅ Life Department Configuration:
-
-Required (2/2):
-  ✅ TIMEZONE
-  ✅ OBSIDIAN_VAULT_PATH
-
-Optional (3/5):
-  ✅ WEATHER_API_KEY
-  ✅ GOOGLE_CLIENT_ID
-  ✅ GOOGLE_CLIENT_SECRET
-  ❌ NOTION_API_KEY (not set)
-  ❌ OURA_ACCESS_TOKEN (not set)
-```
+Review your `.env` file to ensure required variables for your integrations are set. Each department you create may need specific integrations - check the integration setup guides for what's required.
 
 ## Security Best Practices
 
@@ -443,49 +406,37 @@ Optional (3/5):
 
 **Solution**:
 1. Check `.env` file exists in project root
-2. Verify variable name spelling
-3. Restart Claude Code session
-4. Run `/motus env check` to verify
+2. Verify variable name spelling (exact match required)
+3. Ensure no spaces around the `=` sign
+4. Restart Claude Code session after editing `.env`
 
 ### Invalid Path
 
 **Issue**: "OBSIDIAN_VAULT_PATH does not exist"
 
 **Solution**:
-1. Verify path is absolute (starts with `/`)
-2. Check path exists:
-```
-/motus env test-path OBSIDIAN_VAULT_PATH
-```
-3. Use correct path for your OS (macOS, Linux, Windows)
+1. Verify path is absolute (starts with `/` on macOS/Linux)
+2. Check the path exists by navigating to it in your file manager
+3. Use correct path format for your OS
 
 ### OAuth Not Working
 
 **Issue**: OAuth redirect fails
 
 **Solution**:
-1. Verify redirect URI matches exactly
-2. Check OAuth Manager is running:
-```
-/motus oauth status
-```
-3. Restart OAuth Manager:
-```
-/motus oauth restart
-```
+1. Verify redirect URI matches exactly in your OAuth provider settings
+2. Check OAuth Manager is running by visiting `http://localhost:3001`
+3. Stop and restart OAuth Manager with: `./start-oauth-manager.sh`
 
 ### API Key Invalid
 
 **Issue**: API returns "unauthorized" or "forbidden"
 
 **Solution**:
-1. Verify API key is correct
-2. Check API has required permissions
-3. Test API key directly:
-```
-/motus env test-key WEATHER_API_KEY
-```
-4. Regenerate key if needed
+1. Verify API key is correct (copy-paste from provider dashboard)
+2. Check API key has required permissions/scopes
+3. Test API key using a simple curl command
+4. Regenerate key at the provider if needed
 
 ## Environment Templates
 

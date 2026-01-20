@@ -29,10 +29,9 @@ Welcome to the official Motus documentation! This guide will help you get starte
 
 ## 🚀 Quick Links
 
-- **Website**: [https://motus.sh](https://motus.sh)
-- **Docs**: [https://docs.motus.sh](https://docs.motus.sh)
 - **GitHub**: [https://github.com/openmotus/motus](https://github.com/openmotus/motus)
 - **Issues**: [Report bugs](https://github.com/openmotus/motus/issues)
+- **Discussions**: [Community](https://github.com/openmotus/motus/discussions)
 
 ## 💡 Need Help?
 

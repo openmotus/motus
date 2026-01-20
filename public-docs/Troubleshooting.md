@@ -16,11 +16,11 @@ Common issues and solutions for Motus.
 
 ### Permission denied
 
-**Issue**: Can't execute `/motus` command
+**Issue**: Can't execute OAuth Manager script
 
 **Solution**:
 ```bash
-chmod +x motus
+chmod +x start-oauth-manager.sh
 ```
 
 ## Environment Issues
@@ -52,36 +52,30 @@ chmod +x motus
 **Issue**: Integration returns "unauthorized"
 
 **Solutions**:
-1. Verify key is correct
-2. Check for extra spaces or quotes
-3. Ensure key hasn't been revoked
-4. Test: `/motus integrations test <name>`
+1. Verify key is correct in `.env`
+2. Check for extra spaces or quotes around the value
+3. Ensure key hasn't been revoked at the provider
+4. Test by running an agent that uses the integration
 
 ### OAuth authorization fails
 
 **Issue**: OAuth redirect fails
 
 **Solutions**:
-1. Start OAuth Manager: `/motus oauth start`
-2. Check redirect URI matches exactly in provider
-3. Verify Client ID and Secret correct
+1. Start OAuth Manager: `./start-oauth-manager.sh`
+2. Check redirect URI matches exactly in provider settings
+3. Verify Client ID and Secret are correct in `.env`
 4. Clear browser cookies
-5. Try different browser
+5. Try a different browser
 
 ### Token expired
 
 **Issue**: "Token expired" error
 
 **Solution**:
-```
-/motus integrations refresh <service-name>
-```
-
-If fails, disconnect and reconnect:
-```
-/motus integrations disconnect <service>
-/motus oauth start
-```
+1. Open OAuth Manager at `http://localhost:3001`
+2. Click "Refresh" on the service card
+3. If that fails, click "Disconnect" and reconnect
 
 ## Department Issues
 
@@ -172,22 +166,22 @@ chmod +x <script-path>
 
 **Issue**: Can't start OAuth Manager
 
-**Solution**: Use different port:
-```
-/motus oauth start --port 3002
+**Solution**: Kill the process using port 3001:
+```bash
+lsof -ti:3001 | xargs kill -9
 ```
 
-Remember to update all redirect URIs!
+Then restart: `./start-oauth-manager.sh`
 
 ### Can't connect to localhost:3001
 
 **Issue**: Browser can't reach OAuth Manager
 
 **Solutions**:
-1. Check OAuth Manager is running: `/motus oauth status`
+1. Check OAuth Manager is running in your terminal
 2. Try http://127.0.0.1:3001
 3. Check firewall settings
-4. Restart OAuth Manager
+4. Restart with `./start-oauth-manager.sh`
 
 ## Data Issues
 
@@ -206,10 +200,10 @@ Remember to update all redirect URIs!
 **Issue**: Notion integration fails
 
 **Solutions**:
-1. Verify NOTION_API_KEY and NOTION_DATABASE_ID set
-2. Check database is shared with integration
-3. Test: `/motus integrations test notion`
-4. Verify database properties match expected
+1. Verify NOTION_API_KEY and NOTION_DATABASE_ID are set in `.env`
+2. Check database is shared with your Notion integration
+3. Test by running a notion-related agent
+4. Verify database properties match what agents expect
 
 ## Performance Issues
 
@@ -240,19 +234,19 @@ Remember to update all redirect URIs!
 **Issue**: `/motus` command not recognized
 
 **Solutions**:
-1. In Claude Code, not terminal
-2. Check you're in project directory
-3. Verify `/motus` command exists in `.claude/commands/`
+1. Make sure you're in Claude Code CLI, not a regular terminal
+2. Check you're in the Motus project directory
+3. Verify `.claude/commands/motus.md` exists
 
 ### "Registry not found"
 
 **Issue**: Can't load registry file
 
 **Solutions**:
-1. Check `config/registries/` exists
-2. Verify JSON files not corrupted
+1. Check `config/registries/` directory exists
+2. Verify JSON files are not corrupted
 3. Restore from backup if needed
-4. Reinitialize: `/motus init`
+4. Create fresh empty registries based on `.env.example`
 
 ### "Invalid JSON"
 
@@ -268,24 +262,16 @@ Remember to update all redirect URIs!
 
 ### Enable Debug Logging
 
-For any command:
+When running agents or workflows, you can ask Claude Code for verbose output:
 ```
-/motus <command> --debug
+Run the workflow with detailed logging
 ```
 
-Shows detailed execution information.
+Or check the terminal output when running OAuth Manager or other scripts.
 
 ### View Logs
 
-Check logs for errors:
-```
-/motus logs show
-```
-
-Filter by level:
-```
-/motus logs show --level error
-```
+Check agent script output for errors. Implementation scripts output to stdout/stderr which Claude Code captures and displays.
 
 ## Getting Help
 
@@ -300,7 +286,6 @@ Filter by level:
 If you can't solve the issue:
 
 1. Gather information:
-   - Motus version: `/motus --version`
    - Node.js version: `node --version`
    - Error message
    - Steps to reproduce
@@ -311,7 +296,7 @@ If you can't solve the issue:
    - Description of problem
    - Expected behavior
    - Actual behavior
-   - Environment details
+   - Environment details (OS, Node.js version)
    - Error logs
 
 ## Common Error Patterns
@@ -358,12 +343,10 @@ If you can't solve the issue:
 
 ### Health Checks
 
-Run regular health checks:
-```
-/motus health check
-```
-
-Shows system status and potential issues.
+Periodically verify your setup:
+- Check `.env` file has all needed variables
+- Verify OAuth tokens are valid at `http://localhost:3001`
+- Test agents work by running simple workflows
 
 ## Next Steps
 

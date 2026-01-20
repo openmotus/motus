@@ -102,10 +102,9 @@ Ready to automate your life? Here's what to do next:
 
 ## Community & Support
 
-- **Documentation**: [https://docs.motus.sh/](https://docs.motus.sh/)
-- **Website**: [https://motus.sh](https://motus.sh)
 - **GitHub**: [https://github.com/openmotus/motus](https://github.com/openmotus/motus)
-- **Issues**: Report bugs and request features on GitHub
+- **Issues**: [Report bugs](https://github.com/openmotus/motus/issues)
+- **Discussions**: [Community](https://github.com/openmotus/motus/discussions)
 
 ## License
 

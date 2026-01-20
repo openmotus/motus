@@ -8,17 +8,17 @@ Before starting, make sure you have:
 
 - ✅ Claude Code CLI installed and running
 - ✅ Motus installed ([Installation Guide](Installation.md))
-- ✅ Basic understanding of command line
+- ✅ Basic understanding of Claude Code slash commands
 
 ## Step 1: Verify Installation
 
-Open Claude Code and verify Motus is installed:
+Open Claude Code in the Motus project directory and verify Motus is ready:
 
 ```
-/motus --version
+/motus help
 ```
 
-You should see the Motus version number.
+You should see the Motus command menu with available options.
 
 ## Step 2: Create Your First Department
 
@@ -84,15 +84,15 @@ Choose model (1-2): 1
 
 **Result:** Motus creates:
 - ✅ Agent definition: `.claude/agents/task-fetcher.md`
-- ✅ Implementation script: `tasks/agents/task-fetcher.js`
+- ✅ Implementation template: `departments/tasks/agents/task-fetcher.js`
 - ✅ Registry entry with department linkage
 
 ## Step 4: View Your Agent
 
-Check that your agent was created:
+Check that your agent was created. In Claude Code, ask:
 
-```bash
-cat .claude/agents/task-fetcher.md
+```
+Show me the contents of .claude/agents/task-fetcher.md
 ```
 
 You should see a fully-formed agent definition ready to use!
@@ -145,10 +145,10 @@ The workflow will execute and your `task-fetcher` agent will run!
 
 ## Step 7: View Documentation
 
-Check out the auto-generated documentation for your department:
+Check out the auto-generated documentation for your department. In Claude Code:
 
-```bash
-cat org-docs/departments/tasks-department.md
+```
+Show me org-docs/departments/tasks-department.md
 ```
 
 You'll see a complete document with:
@@ -172,31 +172,20 @@ In 5 minutes, you created:
 
 Create additional agents for your department:
 
-```bash
-# Create a task prioritizer
+```
 /motus tasks agent create task-prioritizer
-
-# Create a task reporter
 /motus tasks agent create task-reporter
 ```
 
 ### Add Integrations
 
-Connect external services:
-
-```bash
-# Add Todoist integration
-/motus tasks integration add todoist
-```
-
-See [Setup Integrations](Setup-Integrations.md) for details.
+Connect external services by setting up API keys in your `.env` file. See [Setup Integrations](Setup-Integrations.md) for details on configuring Google, Notion, Weather API, and more.
 
 ### Create Complex Workflows
 
 Build multi-agent workflows:
 
-```bash
-# Workflow that fetches, prioritizes, and reports
+```
 /motus tasks workflow create complete-task-flow
 ```
 
@@ -206,17 +195,14 @@ See [Creating Workflows](Creating-Workflows.md) for advanced workflows.
 
 Check out example departments:
 
-```bash
-# View all departments
+```
 /motus department list
-
-# View specific department
 /motus department info tasks
 ```
 
 ## Common Commands Cheat Sheet
 
-```bash
+```
 # Departments
 /motus department create <name>          # Create department
 /motus department list                   # List all departments
@@ -239,28 +225,19 @@ Check out example departments:
 
 ## Troubleshooting
 
-**Issue:** Command not found
-```bash
-# Solution: Make sure motus is executable
-chmod +x /path/to/motus/motus
-```
+**Issue:** Command not recognized
+
+Make sure you're in the Motus project directory when running Claude Code. The `/motus` command only works in Claude Code CLI, not in a regular terminal.
 
 **Issue:** Agent not working
-```bash
-# Solution: Check agent definition
-cat .claude/agents/<agent-name>.md
 
-# Validate registries
-node lib/validator.js
-```
+Check the agent definition file by asking Claude Code to show you `.claude/agents/<agent-name>.md`. Verify the agent is properly defined.
 
 **Issue:** Workflow fails
-```bash
-# Solution: Check workflow configuration
-/motus <dept> workflow info <workflow-name>
 
-# View logs
-tail -f logs/motus.log  # if logging is enabled
+Check the workflow configuration:
+```
+/motus <dept> workflow info <workflow-name>
 ```
 
 For more help, see [Troubleshooting](Troubleshooting.md).
@@ -279,14 +256,14 @@ Now that you have the basics, dive deeper:
 
 Here's a complete example you can build:
 
-```bash
+```
 # 1. Create department
 /motus department create tasks
 
 # 2. Create agents
-/motus tasks agent create task-fetcher       # Get tasks
-/motus tasks agent create task-prioritizer   # Prioritize
-/motus tasks agent create task-reporter      # Create report
+/motus tasks agent create task-fetcher
+/motus tasks agent create task-prioritizer
+/motus tasks agent create task-reporter
 
 # 3. Create workflow
 /motus tasks workflow create morning-tasks

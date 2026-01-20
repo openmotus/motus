@@ -98,10 +98,12 @@ When you create a department, Motus automatically generates:
 
 4. **Directory Structure**
    ```
-   research/
-   ├── agents/        # Implementation scripts
-   ├── data/          # Workflow outputs
-   └── README.md      # Department overview
+   departments/
+   └── research/
+       ├── agents/        # Implementation scripts
+       ├── workflows/     # Workflow scripts
+       ├── data/          # Workflow outputs
+       └── README.md      # Department overview
    ```
 
 ## Department Structure
@@ -229,24 +231,24 @@ Integrations (3):
 
 ### Update Department
 
-```bash
-# Update description
-/motus department update research --description "New description"
-
-# Update status
-/motus department update research --status inactive
-
-# Add integration
-/motus department update research --add-integration pocket
+To update a department, edit its entry in the registry directly or use Claude Code:
 ```
+Update the research department description in the registries
+```
+
+The department registry is at `config/registries/departments.json`.
 
 ### Delete Department
 
-```
-/motus department delete research
-```
+To delete a department:
+1. Remove the department entry from `config/registries/departments.json`
+2. Remove related agents from `config/registries/agents.json`
+3. Remove related workflows from `config/registries/workflows.json`
+4. Delete the agent definition files from `.claude/agents/`
+5. Delete the department directory from `departments/`
+6. Run `/motus docs update` to regenerate documentation
 
-⚠️ **Warning**: This will delete all agents, workflows, and data associated with the department!
+⚠️ **Warning**: This will remove all agents, workflows, and data associated with the department!
 
 ## Example Departments
 

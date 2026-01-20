@@ -4,26 +4,11 @@
   "departments": [],
   "activeWorkflows": [],
   "settings": {
-    "timezone": "Asia/Bangkok",
+    "timezone": "America/New_York",
     "defaultModel": "claude-3-sonnet",
     "autonomousMode": true,
     "notificationLevel": "important",
     "morningBriefingTime": "08:00",
     "eveningReviewTime": "21:00"
-  },
-  "life": {
-    "priorities": [],
-    "goals": [],
-    "habits": [],
-    "health": {
-      "trackFitness": true,
-      "trackNutrition": true,
-      "trackSleep": true
-    },
-    "finance": {
-      "trackBudget": true,
-      "trackInvestments": true,
-      "billReminders": true
-    }
   }
 }

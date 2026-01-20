@@ -7,16 +7,8 @@ Complete guide to connecting external services to Motus.
 Integrations connect Motus with external services like Google Calendar, Weather APIs, and social media platforms.
 
 **Integration Types**:
-1. **API Key** - Simple key-based authentication  
-2. **OAuth2** - Secure delegated access
-
-## Quick Commands
-
-```
-/motus integrations list          # Show all integrations
-/motus integrations test <name>   # Test an integration
-/motus oauth start                 # Start OAuth Manager
-```
+1. **API Key** - Simple key-based authentication
+2. **OAuth2** - Secure delegated access via OAuth Manager
 
 ## Weather API
 
@@ -24,12 +16,11 @@ Integrations connect Motus with external services like Google Calendar, Weather 
 
 **Setup**:
 1. Sign up at [WeatherAPI.com](https://www.weatherapi.com/)
-2. Copy your API key
-3. Add to environment:
+2. Copy your API key from the dashboard
+3. Add to your `.env` file:
+```bash
+WEATHER_API_KEY=your_key_here
 ```
-/motus env set WEATHER_API_KEY your_key
-```
-4. Test: `/motus integrations test weather`
 
 **Free Tier**: 1M calls/month
 
@@ -41,16 +32,17 @@ Integrations connect Motus with external services like Google Calendar, Weather 
 1. Create project at [Google Cloud Console](https://console.cloud.google.com/)
 2. Enable Google Calendar API and Gmail API
 3. Create OAuth credentials with redirect URI: `http://localhost:3001/oauth/google/callback`
-4. Add to environment:
+4. Add to your `.env` file:
+```bash
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret
+GOOGLE_REDIRECT_URI=http://localhost:3001/oauth/google/callback
 ```
-/motus env set GOOGLE_CLIENT_ID your_id
-/motus env set GOOGLE_CLIENT_SECRET your_secret
+5. Start OAuth Manager and authorize:
+```bash
+./start-oauth-manager.sh
 ```
-5. Authorize:
-```
-/motus oauth start
-```
-   Click Connect on Google card
+   Then open `http://localhost:3001` and click Connect on the Google card.
 
 **Scopes**: Calendar (read), Gmail (read/send)
 
@@ -60,15 +52,15 @@ Integrations connect Motus with external services like Google Calendar, Weather 
 
 **Setup**:
 1. Go to [Notion Integrations](https://www.notion.so/my-integrations)
-2. Create new integration named Motus
+2. Create new integration named "Motus"
 3. Copy Integration Token
 4. Create Daily Journal database in Notion
-5. Share database with integration
-6. Copy database ID from URL
-7. Add to environment:
-```
-/motus env set NOTION_API_KEY secret_your_token
-/motus env set NOTION_DATABASE_ID your_database_id
+5. Share database with your integration
+6. Copy database ID from URL (the part after the workspace name and before `?`)
+7. Add to your `.env` file:
+```bash
+NOTION_API_KEY=secret_your_token
+NOTION_DATABASE_ID=your_database_id
 ```
 
 ## Oura Ring
@@ -78,9 +70,9 @@ Integrations connect Motus with external services like Google Calendar, Weather 
 **Setup**:
 1. Go to [Oura Cloud](https://cloud.ouraring.com/personal-access-tokens)
 2. Create Personal Access Token
-3. Add to environment:
-```
-/motus env set OURA_ACCESS_TOKEN your_token
+3. Add to your `.env` file:
+```bash
+OURA_ACCESS_TOKEN=your_token
 ```
 
 **Requirements**: Oura Ring + active membership
@@ -92,68 +84,61 @@ Integrations connect Motus with external services like Google Calendar, Weather 
 
 1. Create app at [Twitter Developer Portal](https://developer.twitter.com/)
 2. Get Bearer Token
-3. Add: `/motus env set TWITTER_BEARER_TOKEN your_token`
+3. Add to your `.env` file:
+```bash
+TWITTER_BEARER_TOKEN=your_token
+```
 
-### LinkedIn  
+### LinkedIn
 **Type**: OAuth2
 
 1. Create app at [LinkedIn Developers](https://www.linkedin.com/developers/)
 2. Add redirect URI: `http://localhost:3001/oauth/linkedin/callback`
-3. Add credentials to .env
-4. Authorize via `/motus oauth start`
+3. Add credentials to `.env`
+4. Authorize via OAuth Manager at `http://localhost:3001`
 
 ### Facebook
 **Type**: OAuth2
 
 1. Create app at [Meta for Developers](https://developers.facebook.com/)
 2. Add Facebook Login product
-3. Configure OAuth redirect
+3. Configure OAuth redirect URI
 4. Authorize via OAuth Manager
 
 ## Managing Integrations
 
-### List Integrations
+### View Integration Status
+
+Check which integrations are configured by reviewing your `.env` file or visiting the OAuth Manager at `http://localhost:3001` for OAuth-based integrations.
+
+### Test an Integration
+
+Test your integration by running a simple agent that uses it. For example, test weather:
 ```
-/motus integrations list
+/motus life weather
 ```
 
-### Test Integration
-```
-/motus integrations test <name>
-```
+Or create a test agent to verify API connectivity.
 
 ### Refresh OAuth Token
-```
-/motus integrations refresh <name>
-```
 
-### Disconnect
-```
-/motus integrations disconnect <name>
-```
-
-### View Details
-```
-/motus integrations info <name>
-```
+OAuth tokens automatically refresh when they expire. If you encounter authentication errors, disconnect and reconnect through the OAuth Manager web interface.
 
 ## Troubleshooting
 
 **API Key Not Working**:
-1. Check .env file
-2. Verify no extra spaces
-3. Ensure key is active
-4. Test: `/motus integrations test <name>`
+1. Check `.env` file for typos
+2. Verify no extra spaces around the `=` sign
+3. Ensure key is active at the provider
+4. Try a simple API test with curl
 
 **OAuth Fails**:
-1. Check OAuth Manager: `/motus oauth status`
-2. Verify redirect URI matches exactly
+1. Check OAuth Manager is running at `http://localhost:3001`
+2. Verify redirect URI matches **exactly** in provider settings
 3. Clear browser cookies and retry
 
 **Token Expired**:
-```
-/motus integrations refresh <name>
-```
+Disconnect and reconnect through the OAuth Manager web interface at `http://localhost:3001`.
 
 ## Security Best Practices
 
