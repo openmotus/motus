@@ -2,6 +2,7 @@
 
 **AI-Powered Life & Business Automation Framework for Claude Code**
 
+[![CI](https://github.com/openmotus/motus/actions/workflows/ci.yml/badge.svg)](https://github.com/openmotus/motus/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Built%20for-Claude%20Code-5A67D8)](https://claude.com/claude-code)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js)](https://nodejs.org/)
