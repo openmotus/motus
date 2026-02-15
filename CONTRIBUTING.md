@@ -24,7 +24,7 @@ Thank you for your interest in contributing to Motus! This document provides gui
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/openmotus/motus.git
    cd motus
    ```
 
@@ -230,13 +230,15 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests
+# Run all tests (168 tests across 5 suites)
 npm test
 
 # Run specific test suite
-node tests/test-template-engine.js
-node tests/test-phase2-components.js
-node tests/test-phase3-integration.js
+node tests/test-template-engine.js    # Template rendering (7 tests)
+node tests/test-phase2-components.js  # Validator + registry + integration (48 tests)
+node tests/test-phase3-integration.js # File structure + doc generation (22 tests)
+node tests/test-error-handling.js     # Error messages + edge cases (21 tests)
+node tests/test-validator.js          # Comprehensive validator coverage (70 tests)
 ```
 
 ### Test Coverage
