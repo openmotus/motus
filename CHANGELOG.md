@@ -7,10 +7,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- CI workflow with Node.js 18/20/22 matrix testing
+- CI badge on README
+- Doc-generator test suite (22 tests) covering integration docs, command reference, edge cases
+- Comprehensive validator test suite (70 tests) covering name validation, type detection, context schemas
+- Error-handling test suite (21 tests) covering edge cases and improved error messages
 - Community health files: Code of Conduct, Security Policy, issue/PR templates
 - CHANGELOG.md
+- Repository/homepage/bugs URLs in package.json
+
+### Changed
+- Overhauled README with concrete daily-briefing example, architecture diagram, and cleaner structure
+- Improved error messages in registry-manager.js (missing fields listed individually, available departments shown)
+- Improved error messages in template-engine.js (suggests checking templates/ directory)
+- Updated CONTRIBUTING.md with actual GitHub URL and all test suite details
+- Total test count: 48 → 190 across 6 suites
 
 ### Fixed
+- Fixed hardcoded user path in doc-generator.js troubleshooting output
+- Fixed CONTRIBUTING.md placeholder `<repository-url>` with actual GitHub URL
 - Updated dependencies and fixed axios DoS vulnerability
 
 ## [1.0.0] - 2025-10-15
