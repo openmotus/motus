@@ -213,7 +213,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (190 tests)
+└── tests/                       # Test suite (267 tests across 7 suites)
 ```
 
 ## Documentation
@@ -237,10 +237,22 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 190 tests across 6 suites
+npm test   # 267 tests across 7 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.
+
+## Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| `Registries not loaded` error | Call `await registry.load()` before any registry operations |
+| Template not found | Check that the template exists in `templates/` with the `.hbs` extension |
+| Agent type not detected | Ensure your agent description contains keywords like "fetch", "analyze", or "coordinate" |
+| OAuth integration not added | Verify `server.js` has the `// Future services` comment as the insertion marker |
+| Tests fail on fresh clone | Run `npm install` first; tests create temp directories automatically |
+
+See [Troubleshooting](public-docs/Troubleshooting.md) for a complete guide.
 
 ## Roadmap
 
