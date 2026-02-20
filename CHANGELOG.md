@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - CI workflow with Node.js 18/20/22 matrix testing
+- CI security audit job (npm audit at moderate level)
 - CI badge on README
+- Complete working example: `examples/daily-briefing/` with weather fetcher, calendar fetcher, briefing creator, and workflow config
+- Template-helpers test suite (87 tests) covering all 20 Handlebars helpers, template caching, path resolution, renderToFile, and edge cases
 - OAuth-registry test suite (77 tests) covering config generation, integration management, standard configs
 - Doc-generator test suite (22 tests) covering integration docs, command reference, edge cases
 - Comprehensive validator test suite (70 tests) covering name validation, type detection, context schemas
@@ -24,13 +27,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Improved error messages in registry-manager.js (missing fields listed individually, available departments shown)
 - Improved error messages in template-engine.js (suggests checking templates/ directory)
 - Updated CONTRIBUTING.md with actual GitHub URL and all test suite details
-- Total test count: 48 → 267 across 7 suites
+- Updated GitHub topics: replaced misleading "typescript" with "javascript" and "nodejs"
+- Total test count: 48 → 354 across 8 suites
 
 ### Fixed
 - Fixed hardcoded user path in test-template-engine.js (used `path.join` instead of absolute path)
 - Fixed hardcoded user path in doc-generator.js troubleshooting output
 - Fixed CONTRIBUTING.md placeholder `<repository-url>` with actual GitHub URL
 - Updated dependencies and fixed axios DoS vulnerability
+- Fixed qs transitive dependency vulnerability (express → qs arrayLimit bypass)
 
 ## [1.0.0] - 2025-10-15
 

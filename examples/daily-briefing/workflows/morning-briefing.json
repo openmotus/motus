@@ -1,0 +1,42 @@
+{
+  "name": "morning-briefing",
+  "displayName": "Morning Briefing",
+  "department": "daily-briefing",
+  "description": "Fetches weather and calendar data in parallel, then compiles a daily briefing",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "weather-fetcher",
+          "prompt": "Fetch current weather and today's forecast"
+        },
+        {
+          "name": "calendar-fetcher",
+          "prompt": "Fetch today's calendar events"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "briefing-creator",
+          "prompt": "Compile weather and calendar data into a formatted daily briefing"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "scheduled",
+    "schedule": "daily 7:00",
+    "enabled": true
+  },
+  "output": {
+    "type": "console",
+    "destination": null
+  },
+  "estimatedDuration": "30 seconds"
+}

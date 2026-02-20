@@ -203,6 +203,8 @@ motus/
 ├── .claude/agents/              # Creator wizard agents
 ├── config/registries/           # Department/agent/workflow registries (JSON)
 ├── departments/                 # Your created departments live here
+├── examples/                    # Complete working examples
+│   └── daily-briefing/          #   Weather + calendar → daily briefing
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
 │   ├── template-engine.js       #   Handlebars rendering + 20 custom helpers
@@ -213,7 +215,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (267 tests across 7 suites)
+└── tests/                       # Test suite (354 tests across 8 suites)
 ```
 
 ## Documentation
@@ -237,7 +239,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 267 tests across 7 suites
+npm test   # 354 tests across 8 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.
