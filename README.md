@@ -195,6 +195,40 @@ This generates a workflow config:
 
 All data-fetcher agents execute in parallel, then the briefing-creator compiles results into your preferred format (Obsidian note, Notion page, terminal output).
 
+## Programmatic Usage
+
+Motus can also be used as a library in your own Node.js scripts:
+
+```javascript
+const { RegistryManager, Validator, TemplateEngine } = require('./path/to/motus');
+
+// Create and manage departments programmatically
+const registry = new RegistryManager('/path/to/project');
+await registry.load();
+
+await registry.addDepartment({
+  name: 'analytics',
+  displayName: 'Analytics',
+  description: 'Data analysis and reporting pipelines'
+});
+
+await registry.addAgent({
+  name: 'metrics-collector',
+  displayName: 'Metrics Collector',
+  department: 'analytics',
+  type: 'data-fetcher',
+  description: 'Collects metrics from monitoring APIs',
+  tools: ['Bash', 'Read']
+});
+
+// Search across all registries
+const results = await registry.search('metrics');
+
+// Get system statistics
+const stats = await registry.getStatistics();
+console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
+```
+
 ## Project Structure
 
 ```
@@ -215,7 +249,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (354 tests across 8 suites)
+└── tests/                       # Test suite (436 tests across 9 suites)
 ```
 
 ## Documentation
@@ -239,7 +273,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 354 tests across 8 suites
+npm test   # 436 tests across 9 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.

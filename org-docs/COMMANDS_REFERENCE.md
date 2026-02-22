@@ -1,6 +1,6 @@
 # Motus Commands Reference
 
-Auto-generated from registries on 2026-02-20T03:06:34.979Z
+Auto-generated from registries on 2026-02-22T03:06:46.456Z
 
 ## System Overview
 
@@ -76,4 +76,4 @@ Perform specialized analysis and processing
 ---
 
 *This document is auto-generated from `config/registries/`. Do not edit manually.*
-*Last updated: 2026-02-20T03:06:34.979Z*
+*Last updated: 2026-02-22T03:06:46.456Z*

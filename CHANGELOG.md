@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `index.js` library entry point — all modules (`RegistryManager`, `TemplateEngine`, `Validator`, `DocGenerator`, `OAuthRegistry`) exported for programmatic use
+- Registry-manager test suite (82 tests) covering CRUD operations, multi-department workflows, search, import/export, validation, file-sync checking, and edge cases
+- Programmatic Usage section in README with code examples
 - CI workflow with Node.js 18/20/22 matrix testing
 - CI security audit job (npm audit at moderate level)
 - CI badge on README
@@ -28,7 +31,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Improved error messages in template-engine.js (suggests checking templates/ directory)
 - Updated CONTRIBUTING.md with actual GitHub URL and all test suite details
 - Updated GitHub topics: replaced misleading "typescript" with "javascript" and "nodejs"
-- Total test count: 48 → 354 across 8 suites
+- Updated package.json `main` field to `index.js` for library usage
+- Total test count: 48 → 436 across 9 suites
 
 ### Fixed
 - Fixed hardcoded user path in test-template-engine.js (used `path.join` instead of absolute path)
