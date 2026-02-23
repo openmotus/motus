@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (436 tests across 9 suites)
+# Run all tests (488 tests across 10 suites)
 npm test
 
 # Run specific test suite
@@ -243,6 +243,7 @@ node tests/test-doc-generator.js      # Doc generator + integration docs (22 tes
 node tests/test-oauth-registry.js     # OAuth registry + config generation (77 tests)
 node tests/test-template-helpers.js   # Template helpers + engine methods (87 tests)
 node tests/test-registry-manager.js   # Registry CRUD, search, import/export, validation (82 tests)
+node tests/test-end-to-end.js         # End-to-end lifecycle, cross-module, examples (52 tests)
 ```
 
 ### Test Coverage

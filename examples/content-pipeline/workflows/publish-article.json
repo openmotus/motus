@@ -1,0 +1,47 @@
+{
+  "name": "publish-article",
+  "displayName": "Publish Article",
+  "department": "content-pipeline",
+  "description": "Researches a topic, drafts an article, and reviews it for quality before publishing",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "topic-researcher",
+          "prompt": "Research the given topic and return structured source data"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "article-writer",
+          "prompt": "Write a structured article from the research data"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "quality-reviewer",
+          "prompt": "Review the article for clarity, accuracy, and structure. Return a score and verdict."
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "output/articles/"
+  },
+  "estimatedDuration": "2-3 minutes"
+}
