@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Bug-fix verification test suite (22 tests) covering agent type validation, template path resolution, OAuth regex fix, and init function guard
 - Complete working example: `examples/content-pipeline/` — 3-step content creation workflow with topic researcher, article writer, and quality reviewer agents
 - End-to-end workflow test suite (52 tests) covering full lifecycle (department → agents → workflow → validate → search → export/import), cross-module interop (RegistryManager + Validator + TemplateEngine), multi-department scenarios, example directory validation, and error scenarios
 - `index.js` library entry point — all modules (`RegistryManager`, `TemplateEngine`, `Validator`, `DocGenerator`, `OAuthRegistry`) exported for programmatic use
@@ -27,6 +28,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- Added class-level JSDoc with `@example` blocks to all 5 lib/ modules (RegistryManager, TemplateEngine, Validator, DocGenerator, OAuthRegistry)
+- Agent type validation: `addAgent()` now rejects invalid types with a clear error listing valid options
+- Replaced placeholder import paths in README and index.js (`'./path/to/motus'` → `'./index'`)
+- Updated CONTRIBUTING.md: fixed stale `docs/` directory reference, updated helper line-number references to method names
+- Removed 3 unused dependencies: `socket.io`, `@octokit/rest`, `node-cron` (never imported in any source file)
+- Total test count: 488 → 510 across 11 suites
 - Added JSDoc documentation to all 20 Handlebars template helpers with usage examples
 - Overhauled README with concrete daily-briefing example, architecture diagram, and cleaner structure
 - Improved error messages in registry-manager.js (missing fields listed individually, available departments shown)
@@ -37,6 +44,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Total test count: 48 → 488 across 10 suites
 
 ### Fixed
+- Fixed `OAuthRegistry.addIntegration()` regex that never matched `server.js` comment (`// Future services can be added here` vs `// Future services`)
+- Fixed `TemplateEngine.resolveTemplatePath()` producing garbled paths with `undefined` for unsupported extensions — now throws a clear error
+- Fixed `OAuthRegistry._generateInitFunction()` accessing `envVars[1]` when only one env var provided — now guards against short arrays
+- Fixed `RegistryManager._generateAgentFiles()` falling through to non-existent `generic-agent.md` template for unknown types — now throws explicit error
 - Fixed hardcoded user path in test-template-engine.js (used `path.join` instead of absolute path)
 - Fixed hardcoded user path in doc-generator.js troubleshooting output
 - Fixed CONTRIBUTING.md placeholder `<repository-url>` with actual GitHub URL

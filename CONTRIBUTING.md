@@ -76,7 +76,7 @@ motus/
 ├── oauth-manager/          # OAuth server
 ├── public-docs/            # User-facing documentation
 ├── org-docs/               # Auto-generated documentation
-└── docs/                   # Technical documentation
+└── examples/               # Complete working examples
 ```
 
 ### Development Workflow
@@ -146,7 +146,7 @@ class ExampleClass {
 
 - **File Extension**: Use `.hbs` for all Handlebars templates
 - **Naming**: Match the output file type (e.g., `agent-name.md.hbs` for markdown)
-- **Helpers**: Use provided Handlebars helpers (see `lib/template-engine.js:18-153`)
+- **Helpers**: Use provided Handlebars helpers (see `lib/template-engine.js` `registerHelpers()` method)
   - `kebabCase`, `camelCase`, `pascalCase` for case conversion
   - `capitalize`, `uppercase`, `lowercase` for text formatting
   - `join`, `ifNotEmpty` for array/object handling
@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (488 tests across 10 suites)
+# Run all tests (510 tests across 11 suites)
 npm test
 
 # Run specific test suite
@@ -244,6 +244,7 @@ node tests/test-oauth-registry.js     # OAuth registry + config generation (77 t
 node tests/test-template-helpers.js   # Template helpers + engine methods (87 tests)
 node tests/test-registry-manager.js   # Registry CRUD, search, import/export, validation (82 tests)
 node tests/test-end-to-end.js         # End-to-end lifecycle, cross-module, examples (52 tests)
+node tests/test-bug-fixes.js          # Bug fix verification: type validation, regex, paths (22 tests)
 ```
 
 ### Test Coverage
@@ -476,7 +477,7 @@ engine.renderToFile(
 
 ### Available Handlebars Helpers
 
-Reference `lib/template-engine.js:18-153` for all helpers:
+Reference `lib/template-engine.js` `registerHelpers()` for all helpers:
 
 - **Case Conversion**: `kebabCase`, `camelCase`, `pascalCase`
 - **String Manipulation**: `capitalize`, `uppercase`, `lowercase`, `indent`

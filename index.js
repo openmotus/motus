@@ -2,9 +2,9 @@
  * Motus — Department-based AI automation framework for Claude Code
  *
  * @example
- * const { RegistryManager, TemplateEngine, Validator } = require('motus');
+ * const { RegistryManager, TemplateEngine, Validator } = require('./index');
  *
- * const registry = new RegistryManager('/path/to/project');
+ * const registry = new RegistryManager(__dirname);
  * await registry.load();
  *
  * await registry.addDepartment({

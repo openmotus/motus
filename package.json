@@ -7,7 +7,7 @@
     "motus": "./motus"
   },
   "scripts": {
-    "test": "node tests/test-template-engine.js && node tests/test-phase2-components.js && node tests/test-phase3-integration.js && node tests/test-error-handling.js && node tests/test-validator.js && node tests/test-doc-generator.js && node tests/test-oauth-registry.js && node tests/test-template-helpers.js && node tests/test-registry-manager.js && node tests/test-end-to-end.js",
+    "test": "node tests/test-template-engine.js && node tests/test-phase2-components.js && node tests/test-phase3-integration.js && node tests/test-error-handling.js && node tests/test-validator.js && node tests/test-doc-generator.js && node tests/test-oauth-registry.js && node tests/test-template-helpers.js && node tests/test-registry-manager.js && node tests/test-end-to-end.js && node tests/test-bug-fixes.js",
     "oauth": "./start-oauth-manager.sh"
   },
   "keywords": [
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@notionhq/client": "^4.0.2",
-    "@octokit/rest": "^20.1.2",
     "axios": "^1.11.0",
     "boxen": "^5.1.2",
     "chalk": "^4.1.2",
@@ -41,9 +40,7 @@
     "googleapis": "^128.0.0",
     "handlebars": "^4.7.8",
     "inquirer": "^9.2.0",
-    "node-cron": "^3.0.2",
-    "open": "^10.2.0",
-    "socket.io": "^4.8.1"
+    "open": "^10.2.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -200,10 +200,10 @@ All data-fetcher agents execute in parallel, then the briefing-creator compiles 
 Motus can also be used as a library in your own Node.js scripts:
 
 ```javascript
-const { RegistryManager, Validator, TemplateEngine } = require('./path/to/motus');
+const { RegistryManager, Validator, TemplateEngine } = require('./index');
 
 // Create and manage departments programmatically
-const registry = new RegistryManager('/path/to/project');
+const registry = new RegistryManager(__dirname);
 await registry.load();
 
 await registry.addDepartment({
@@ -250,7 +250,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (488 tests across 10 suites)
+└── tests/                       # Test suite (510 tests across 11 suites)
 ```
 
 ## Documentation
@@ -274,7 +274,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 488 tests across 10 suites
+npm test   # 510 tests across 11 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.
