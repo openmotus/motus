@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Steward fixes test suite (59 tests) covering schedule time-range validation, workflow context fall-through, template path double-extension fix, import/update guards, listTemplates, search edge cases, and validate cross-checks
+- `files` field in package.json to whitelist published files (lib/, templates/, index.js, motus, README.md, LICENSE, CHANGELOG.md)
+- Prominent Claude Code prerequisite note at top of Quick Start section
 - Bug-fix verification test suite (22 tests) covering agent type validation, template path resolution, OAuth regex fix, and init function guard
 - Complete working example: `examples/content-pipeline/` — 3-step content creation workflow with topic researcher, article writer, and quality reviewer agents
 - End-to-end workflow test suite (52 tests) covering full lifecycle (department → agents → workflow → validate → search → export/import), cross-module interop (RegistryManager + Validator + TemplateEngine), multi-department scenarios, example directory validation, and error scenarios
@@ -28,6 +31,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `validateSchedule()` now validates time ranges (hours 0-23, minutes 0-59) — previously accepted `daily 25:99` as valid
+- `updateDepartment()` and `updateAgent()` now validate the updates parameter is a non-null object
+- `import()` now validates input is a non-null object before overwriting registry state
+- `listTemplates()` now only swallows ENOENT errors, re-throwing permission and other errors
+- `renderToFile()` now wraps write errors with contextual message including the output path
+- Total test count: 510 → 569 across 12 suites
 - Added class-level JSDoc with `@example` blocks to all 5 lib/ modules (RegistryManager, TemplateEngine, Validator, DocGenerator, OAuthRegistry)
 - Agent type validation: `addAgent()` now rejects invalid types with a clear error listing valid options
 - Replaced placeholder import paths in README and index.js (`'./path/to/motus'` → `'./index'`)
@@ -44,6 +53,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Total test count: 48 → 488 across 10 suites
 
 ### Fixed
+- Fixed `validateWorkflowContext()` falling through to `forEach` on non-array `steps`, which would throw an unguarded TypeError
+- Fixed `resolveTemplatePath()` producing double-extension paths (e.g. `test-agent.md.hbs` instead of `test-agent.hbs`) when using `name.ext` format
 - Fixed `OAuthRegistry.addIntegration()` regex that never matched `server.js` comment (`// Future services can be added here` vs `// Future services`)
 - Fixed `TemplateEngine.resolveTemplatePath()` producing garbled paths with `undefined` for unsupported extensions — now throws a clear error
 - Fixed `OAuthRegistry._generateInitFunction()` accessing `envVars[1]` when only one env var provided — now guards against short arrays

@@ -45,6 +45,8 @@ Think of it as **Rails for AI automation** — you bring the business logic, Mot
 - [Claude Code CLI](https://claude.ai/download) installed and authenticated
 - Node.js 18+
 
+> **Note**: Motus slash commands (`/motus`) run inside the Claude Code CLI, not a regular terminal. Install Claude Code first, then use Motus commands within a Claude Code session.
+
 ### Install
 
 ```bash
@@ -72,8 +74,6 @@ Open Claude Code CLI in the motus directory:
 ```
 
 The wizard generates working templates. You edit `departments/tasks/agents/*.md` to add your specific logic — API calls, data processing, output formatting. See [Creating Agents](public-docs/Creating-Agents.md) for details.
-
-> **Important**: `/motus` commands run inside Claude Code CLI, not a regular terminal.
 
 ## What's Included
 
@@ -250,7 +250,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (510 tests across 11 suites)
+└── tests/                       # Test suite (569 tests across 12 suites)
 ```
 
 ## Documentation
@@ -274,7 +274,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 510 tests across 11 suites
+npm test   # 569 tests across 12 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.

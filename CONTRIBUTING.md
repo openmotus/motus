@@ -230,21 +230,22 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (510 tests across 11 suites)
+# Run all tests (569 tests across 12 suites)
 npm test
 
 # Run specific test suite
-node tests/test-template-engine.js    # Template rendering (7 tests)
-node tests/test-phase2-components.js  # Validator + registry + integration (48 tests)
-node tests/test-phase3-integration.js # File structure + doc generation (22 tests)
-node tests/test-error-handling.js     # Error messages + edge cases (21 tests)
-node tests/test-validator.js          # Comprehensive validator coverage (70 tests)
-node tests/test-doc-generator.js      # Doc generator + integration docs (22 tests)
-node tests/test-oauth-registry.js     # OAuth registry + config generation (77 tests)
-node tests/test-template-helpers.js   # Template helpers + engine methods (87 tests)
-node tests/test-registry-manager.js   # Registry CRUD, search, import/export, validation (82 tests)
-node tests/test-end-to-end.js         # End-to-end lifecycle, cross-module, examples (52 tests)
-node tests/test-bug-fixes.js          # Bug fix verification: type validation, regex, paths (22 tests)
+node tests/test-template-engine.js       # Template rendering (7 tests)
+node tests/test-phase2-components.js     # Validator + registry + integration (48 tests)
+node tests/test-phase3-integration.js    # File structure + doc generation (22 tests)
+node tests/test-error-handling.js        # Error messages + edge cases (21 tests)
+node tests/test-validator.js             # Comprehensive validator coverage (70 tests)
+node tests/test-doc-generator.js         # Doc generator + integration docs (22 tests)
+node tests/test-oauth-registry.js        # OAuth registry + config generation (77 tests)
+node tests/test-template-helpers.js      # Template helpers + engine methods (87 tests)
+node tests/test-registry-manager.js      # Registry CRUD, search, import/export, validation (82 tests)
+node tests/test-end-to-end.js            # End-to-end lifecycle, cross-module, examples (52 tests)
+node tests/test-bug-fixes.js             # Bug fix verification: type validation, regex, paths (22 tests)
+node tests/test-steward-fixes-0227.js    # Steward fixes: schedule validation, import guards, template paths (59 tests)
 ```
 
 ### Test Coverage
