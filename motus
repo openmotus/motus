@@ -23,10 +23,59 @@
 const chalk = require('chalk');
 const boxen = require('boxen');
 
-const message = `
+const args = process.argv.slice(2);
+
+// Handle flags before printing the boxen message so scripted usage gets clean output
+if (args.includes('--version') || args.includes('-V')) {
+  const pkg = require('./package.json');
+  console.log(`Motus v${pkg.version}`);
+  process.exit(0);
+}
+
+if (args.includes('--help') || args.includes('-h')) {
+  console.log(`
+${chalk.bold.cyan('Motus')} - AI automation framework for Claude Code
+
+${chalk.bold('Usage:')}
+  motus              Show this info
+  motus --version    Show version number
+  motus --help       Show this help message
+  motus --oauth      Launch OAuth Manager
+
+${chalk.bold('Claude Code commands:')}
+  /motus department create [name]     Create a new department
+  /motus [dept] agent create [name]   Add an agent to a department
+  /motus [dept] workflow create [name] Create a workflow
+  /motus docs update                  Regenerate documentation
+
+${chalk.bold('OAuth Manager:')}
+  Run ${chalk.cyan('./start-oauth-manager.sh')} to manage API connections
+  Opens web UI at ${chalk.blue('http://localhost:3001')}
+
+${chalk.bold('More info:')}
+  ${chalk.blue('https://github.com/openmotus/motus')}
+`);
+  process.exit(0);
+}
+
+if (args.includes('--oauth')) {
+  console.log(chalk.cyan('Launching OAuth Manager...'));
+  const child = require('child_process').spawn('./start-oauth-manager.sh', {
+    stdio: 'inherit',
+    shell: true
+  });
+  child.on('error', (err) => {
+    console.error(chalk.red(`Failed to start OAuth Manager: ${err.message}`));
+    console.error(chalk.yellow('Ensure start-oauth-manager.sh exists and is executable: chmod +x start-oauth-manager.sh'));
+    process.exit(1);
+  });
+  // Don't print the boxen message when launching OAuth
+} else {
+  // Default: show informational boxen message
+  const message = `
 ${chalk.bold.cyan('Motus')} - AI Life & Business Automation Framework
 
-${chalk.yellow('⚠️  Motus runs inside Claude Code CLI, not as a standalone tool.')}
+${chalk.yellow('Motus runs inside Claude Code CLI, not as a standalone tool.')}
 
 ${chalk.bold('To use Motus:')}
   1. Open ${chalk.green('Claude Code CLI')} in this directory
@@ -38,42 +87,14 @@ ${chalk.bold('Example commands:')}
   ${chalk.gray('/motus docs update')}
 
 ${chalk.bold('Quick links:')}
-  📖 Documentation: ${chalk.blue('public-docs/')}
-  🐙 GitHub: ${chalk.blue('https://github.com/openmotus/motus')}
+  Docs: ${chalk.blue('public-docs/')}
+  GitHub: ${chalk.blue('https://github.com/openmotus/motus')}
 `;
 
-console.log(boxen(message, {
-  padding: 1,
-  margin: 1,
-  borderStyle: 'round',
-  borderColor: 'cyan'
-}));
-
-// Also support --version and --help flags
-const args = process.argv.slice(2);
-
-if (args.includes('--version') || args.includes('-v')) {
-  const pkg = require('./package.json');
-  console.log(`Motus v${pkg.version}`);
-}
-
-if (args.includes('--help') || args.includes('-h')) {
-  console.log(`
-${chalk.bold('Available flags:')}
-  --version, -v    Show version number
-  --help, -h       Show this help message
-  --oauth          Launch OAuth Manager
-
-${chalk.bold('OAuth Manager:')}
-  Run ${chalk.cyan('./start-oauth-manager.sh')} to manage API connections
-  Opens web UI at ${chalk.blue('http://localhost:3001')}
-`);
-}
-
-if (args.includes('--oauth')) {
-  console.log(chalk.cyan('\nLaunching OAuth Manager...'));
-  require('child_process').spawn('./start-oauth-manager.sh', {
-    stdio: 'inherit',
-    shell: true
-  });
+  console.log(boxen(message, {
+    padding: 1,
+    margin: 1,
+    borderStyle: 'round',
+    borderColor: 'cyan'
+  }));
 }

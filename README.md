@@ -197,7 +197,7 @@ All data-fetcher agents execute in parallel, then the briefing-creator compiles 
 
 ## Programmatic Usage
 
-Motus can also be used as a library in your own Node.js scripts:
+Motus can also be used as a library in your own Node.js scripts. See [`examples/programmatic-usage/`](examples/programmatic-usage/) for a complete runnable example.
 
 ```javascript
 const { RegistryManager, Validator, TemplateEngine } = require('./index');
@@ -221,8 +221,10 @@ await registry.addAgent({
   tools: ['Bash', 'Read']
 });
 
-// Search across all registries
+// Search across all registries — returns { departments, agents, workflows }
 const results = await registry.search('metrics');
+console.log(`Found ${results.agents.length} agents matching "metrics"`);
+results.agents.forEach(a => console.log(`  - ${a.name} (${a.type})`));
 
 // Get system statistics
 const stats = await registry.getStatistics();
@@ -239,7 +241,8 @@ motus/
 ├── departments/                 # Your created departments live here
 ├── examples/                    # Complete working examples
 │   ├── daily-briefing/          #   Weather + calendar → daily briefing
-│   └── content-pipeline/        #   Research → write → review article
+│   ├── content-pipeline/        #   Research → write → review article
+│   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
 │   ├── template-engine.js       #   Handlebars rendering + 20 custom helpers
@@ -250,7 +253,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (569 tests across 12 suites)
+└── tests/                       # Test suite (610 tests across 13 suites)
 ```
 
 ## Documentation
@@ -274,7 +277,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test   # 569 tests across 12 suites
+npm test   # 610 tests across 13 suites
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](https://github.com/openmotus/motus/issues) for ways to help.
@@ -286,7 +289,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or check [open issues](ht
 | `Registries not loaded` error | Call `await registry.load()` before any registry operations |
 | Template not found | Check that the template exists in `templates/` with the `.hbs` extension |
 | Agent type not detected | Ensure your agent description contains keywords like "fetch", "analyze", or "coordinate" |
-| OAuth integration not added | Verify `server.js` has the `// Future services` comment as the insertion marker |
+| OAuth integration not added | Verify `server.js` has the `// Future services can be added here` comment as the insertion marker |
 | Tests fail on fresh clone | Run `npm install` first; tests create temp directories automatically |
 
 See [Troubleshooting](public-docs/Troubleshooting.md) for a complete guide.

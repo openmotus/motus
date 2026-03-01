@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Steward cycle test suite (41 tests) covering CLI flag ordering, validateContext error handling, programmatic example validation, and JSDoc presence verification
+- Complete working example: `examples/programmatic-usage/` — creates a department, agents, and workflows entirely from code with registry search, validation, and export
 - Steward fixes test suite (59 tests) covering schedule time-range validation, workflow context fall-through, template path double-extension fix, import/update guards, listTemplates, search edge cases, and validate cross-checks
 - `files` field in package.json to whitelist published files (lib/, templates/, index.js, motus, README.md, LICENSE, CHANGELOG.md)
 - Prominent Claude Code prerequisite note at top of Quick Start section
@@ -31,6 +33,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- CLI: `--version` and `--help` flags now exit immediately without printing the boxen info message — enables clean output for scripts and CI
+- CLI: `--oauth` spawn now has error handling with helpful message if `start-oauth-manager.sh` is missing or not executable
+- CLI: Version flag changed from `-v` to `-V` to avoid conflict with common `-v` verbose convention
+- `validateContext()` now only swallows ENOENT errors when schema is missing; permission and parse errors are re-thrown instead of silently returning valid
+- Added comprehensive `@param`, `@returns`, `@throws` JSDoc to all public methods across all 5 lib/ modules (RegistryManager, TemplateEngine, Validator, DocGenerator, OAuthRegistry)
+- Total test count: 569 → 610 across 13 suites
 - `validateSchedule()` now validates time ranges (hours 0-23, minutes 0-59) — previously accepted `daily 25:99` as valid
 - `updateDepartment()` and `updateAgent()` now validate the updates parameter is a non-null object
 - `import()` now validates input is a non-null object before overwriting registry state
@@ -53,6 +61,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Total test count: 48 → 488 across 10 suites
 
 ### Fixed
+- Fixed CLI printing boxen message before `--version`/`--help` output — scripted usage now gets clean, parseable output
+- Fixed `validateContext()` swallowing all schema errors (EISDIR, EACCES, JSON parse) — now only swallows ENOENT
+- Fixed README troubleshooting entry for OAuth insertion marker (was `// Future services`, correct is `// Future services can be added here`)
 - Fixed `validateWorkflowContext()` falling through to `forEach` on non-array `steps`, which would throw an unguarded TypeError
 - Fixed `resolveTemplatePath()` producing double-extension paths (e.g. `test-agent.md.hbs` instead of `test-agent.hbs`) when using `name.ext` format
 - Fixed `OAuthRegistry.addIntegration()` regex that never matched `server.js` comment (`// Future services can be added here` vs `// Future services`)

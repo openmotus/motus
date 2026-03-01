@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (569 tests across 12 suites)
+# Run all tests (610 tests across 13 suites)
 npm test
 
 # Run specific test suite
@@ -246,6 +246,7 @@ node tests/test-registry-manager.js      # Registry CRUD, search, import/export,
 node tests/test-end-to-end.js            # End-to-end lifecycle, cross-module, examples (52 tests)
 node tests/test-bug-fixes.js             # Bug fix verification: type validation, regex, paths (22 tests)
 node tests/test-steward-fixes-0227.js    # Steward fixes: schedule validation, import guards, template paths (59 tests)
+node tests/test-steward-fixes-0301.js    # CLI flags, validateContext ENOENT, JSDoc verification, example validation (41 tests)
 ```
 
 ### Test Coverage
