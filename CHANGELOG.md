@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Test runner (`tests/run-all.js`) — auto-discovers test suites, continues on failure, reports per-suite and grand totals, supports `--filter` for running subsets
+- Complete working example: `examples/devops-monitoring/` — multi-agent monitoring pipeline with uptime checker, log analyzer, and alert sender
 - Steward cycle test suite (41 tests) covering CLI flag ordering, validateContext error handling, programmatic example validation, and JSDoc presence verification
 - Complete working example: `examples/programmatic-usage/` — creates a department, agents, and workflows entirely from code with registry search, validation, and export
 - Steward fixes test suite (59 tests) covering schedule time-range validation, workflow context fall-through, template path double-extension fix, import/update guards, listTemplates, search edge cases, and validate cross-checks
@@ -33,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- Replaced fragile `&&`-chained npm test script with auto-discovering test runner — new test suites are picked up automatically
 - CLI: `--version` and `--help` flags now exit immediately without printing the boxen info message — enables clean output for scripts and CI
 - CLI: `--oauth` spawn now has error handling with helpful message if `start-oauth-manager.sh` is missing or not executable
 - CLI: Version flag changed from `-v` to `-V` to avoid conflict with common `-v` verbose convention

@@ -233,7 +233,11 @@ Agent content here...
 # Run all tests (610 tests across 13 suites)
 npm test
 
-# Run specific test suite
+# Filter suites by keyword
+npm test -- --filter template            # Run only template-related suites
+npm test -- --filter registry            # Run only registry-related suites
+
+# Run a specific suite directly
 node tests/test-template-engine.js       # Template rendering (7 tests)
 node tests/test-phase2-components.js     # Validator + registry + integration (48 tests)
 node tests/test-phase3-integration.js    # File structure + doc generation (22 tests)
@@ -248,6 +252,8 @@ node tests/test-bug-fixes.js             # Bug fix verification: type validation
 node tests/test-steward-fixes-0227.js    # Steward fixes: schedule validation, import guards, template paths (59 tests)
 node tests/test-steward-fixes-0301.js    # CLI flags, validateContext ENOENT, JSDoc verification, example validation (41 tests)
 ```
+
+The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.
 
 ### Test Coverage
 

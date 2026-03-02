@@ -1,0 +1,26 @@
+{
+  "name": "health-check",
+  "department": "devops",
+  "description": "Monitors service uptime and logs, sends alerts when issues are detected",
+  "steps": [
+    {
+      "parallel": true,
+      "agents": ["uptime-checker", "log-analyzer"],
+      "description": "Check all endpoints and scan logs simultaneously"
+    },
+    {
+      "parallel": false,
+      "agents": ["alert-sender"],
+      "description": "Evaluate results and send alerts if needed"
+    }
+  ],
+  "trigger": {
+    "type": "scheduled",
+    "schedule": "every 15m"
+  },
+  "config": {
+    "timeout_seconds": 30,
+    "retry_on_failure": true,
+    "max_retries": 2
+  }
+}
