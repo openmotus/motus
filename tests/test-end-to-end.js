@@ -624,6 +624,87 @@ async function runTests() {
     }
   });
 
+  await test('examples/code-review: has required files', async () => {
+    const dir = path.join(examplesDir, 'code-review');
+    const readme = await fs.readFile(path.join(dir, 'README.md'), 'utf8');
+    assert(readme.includes('Code Review'), 'Should have README');
+
+    const workflow = JSON.parse(await fs.readFile(path.join(dir, 'workflows', 'review-pr.json'), 'utf8'));
+    assert(workflow.name === 'review-pr', 'Should have workflow config');
+    assert(workflow.steps.length === 3, 'Should have 3 steps');
+    assert(workflow.steps[1].parallel === true, 'Step 2 should be parallel');
+
+    const diffMd = await fs.readFile(path.join(dir, 'agents', 'diff-collector.md'), 'utf8');
+    assert(diffMd.includes('diff-collector'), 'Should have diff collector agent');
+
+    const diffJs = await fs.readFile(path.join(dir, 'agents', 'diff-collector.js'), 'utf8');
+    assert(diffJs.includes('collectDiff') || diffJs.includes('parseDiff'), 'Should have diff collector implementation');
+
+    const securityMd = await fs.readFile(path.join(dir, 'agents', 'security-scanner.md'), 'utf8');
+    assert(securityMd.includes('security-scanner'), 'Should have security scanner agent');
+
+    const styleMd = await fs.readFile(path.join(dir, 'agents', 'style-checker.md'), 'utf8');
+    assert(styleMd.includes('style-checker'), 'Should have style checker agent');
+
+    const logicMd = await fs.readFile(path.join(dir, 'agents', 'logic-reviewer.md'), 'utf8');
+    assert(logicMd.includes('logic-reviewer'), 'Should have logic reviewer agent');
+
+    const summarizerMd = await fs.readFile(path.join(dir, 'agents', 'review-summarizer.md'), 'utf8');
+    assert(summarizerMd.includes('review-summarizer'), 'Should have review summarizer agent');
+  });
+
+  await test('examples/code-review: workflow agents match agent files', async () => {
+    const dir = path.join(examplesDir, 'code-review');
+    const workflow = JSON.parse(await fs.readFile(path.join(dir, 'workflows', 'review-pr.json'), 'utf8'));
+
+    const agentNames = workflow.steps.flatMap(s => s.agents.map(a => a.name));
+    for (const name of agentNames) {
+      const mdPath = path.join(dir, 'agents', `${name}.md`);
+      try {
+        await fs.access(mdPath);
+      } catch {
+        throw new Error(`Workflow references agent '${name}' but ${name}.md is missing`);
+      }
+    }
+  });
+
+  await test('examples/code-review: workflow has valid JSON structure', async () => {
+    const dir = path.join(examplesDir, 'code-review');
+    const workflow = JSON.parse(await fs.readFile(path.join(dir, 'workflows', 'review-pr.json'), 'utf8'));
+
+    assert(workflow.name, 'Should have name');
+    assert(workflow.department, 'Should have department');
+    assert(workflow.description, 'Should have description');
+    assert(Array.isArray(workflow.steps), 'Steps should be array');
+    assert(workflow.trigger, 'Should have trigger');
+    assert(workflow.output, 'Should have output');
+
+    for (let i = 0; i < workflow.steps.length; i++) {
+      assertEquals(workflow.steps[i].group, i + 1, `Step ${i} should have group ${i + 1}`);
+    }
+  });
+
+  await test('examples/code-review: diff-collector.js exports functions', async () => {
+    const { collectDiff, parseDiff } = require(path.join(examplesDir, 'code-review', 'agents', 'diff-collector.js'));
+    assert(typeof collectDiff === 'function', 'Should export collectDiff');
+    assert(typeof parseDiff === 'function', 'Should export parseDiff');
+
+    // Test parseDiff with a sample diff
+    const sampleDiff = `a/lib/test.js b/lib/test.js
+index abc..def
+--- a/lib/test.js
++++ b/lib/test.js
+@@ -1,3 +1,4 @@
+ const x = 1;
++const y = 2;
+ module.exports = x;
+`;
+    const files = parseDiff(sampleDiff);
+    assert(files.length === 1, 'Should parse one file');
+    assert(files[0].path === 'lib/test.js', 'Should extract file path');
+    assert(files[0].additions >= 1, 'Should count additions');
+  });
+
   // ========================================
   // ERROR SCENARIOS
   // ========================================

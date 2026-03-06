@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (610 tests across 13 suites)
+# Run all tests (616 tests across 13 suites)
 npm test
 
 # Filter suites by keyword

@@ -204,6 +204,8 @@ console.log('\nvalidateContext: error handling');
   assert(fs.existsSync(path.join(__dirname, '..', 'examples', 'programmatic-usage', 'setup-department.js')), 'programmatic-usage/setup-department.js exists');
   assert(fs.existsSync(path.join(__dirname, '..', 'examples', 'daily-briefing')), 'daily-briefing/ exists');
   assert(fs.existsSync(path.join(__dirname, '..', 'examples', 'content-pipeline')), 'content-pipeline/ exists');
+  assert(fs.existsSync(path.join(__dirname, '..', 'examples', 'code-review')), 'code-review/ exists');
+  assert(fs.existsSync(path.join(__dirname, '..', 'examples', 'code-review', 'agents', 'diff-collector.js')), 'code-review/diff-collector.js exists');
 
   // ============================================================
   // Results

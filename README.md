@@ -242,6 +242,7 @@ motus/
 ├── examples/                    # Complete working examples
 │   ├── daily-briefing/          #   Weather + calendar → daily briefing
 │   ├── content-pipeline/        #   Research → write → review article
+│   ├── code-review/             #   PR diff → security/style/logic → review
 │   ├── devops-monitoring/       #   Uptime + logs → alerts pipeline
 │   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
@@ -254,7 +255,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (610 tests, 13 suites, auto-discovered runner)
+└── tests/                       # Test suite (616 tests, 13 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -278,7 +279,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 610 tests across 13 suites
+npm test                              # 616 tests across 13 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

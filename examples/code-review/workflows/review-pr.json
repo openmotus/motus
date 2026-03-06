@@ -1,0 +1,55 @@
+{
+  "name": "review-pr",
+  "displayName": "Review Pull Request",
+  "department": "code-review",
+  "description": "Collects a PR diff, runs parallel security/style/logic analysis, then summarizes findings into an actionable review",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "diff-collector",
+          "prompt": "Collect the git diff for the current branch against main"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "security-scanner",
+          "prompt": "Scan the diff for security vulnerabilities"
+        },
+        {
+          "name": "style-checker",
+          "prompt": "Check the diff for style and convention issues"
+        },
+        {
+          "name": "logic-reviewer",
+          "prompt": "Review the diff for logic errors and edge cases"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "review-summarizer",
+          "prompt": "Compile all findings into a final code review with verdict"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "stdout",
+    "format": "json"
+  },
+  "estimatedDuration": "1-2 minutes"
+}

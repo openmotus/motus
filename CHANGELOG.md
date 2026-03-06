@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/code-review/` — PR review pipeline with diff collector, parallel security/style/logic analysis, and review summarizer (5 agents, 1 workflow)
+- Code-review example validation tests in end-to-end suite (file structure, agent-workflow cross-reference, JSON schema, parseDiff unit tests)
 - Test runner (`tests/run-all.js`) — auto-discovers test suites, continues on failure, reports per-suite and grand totals, supports `--filter` for running subsets
 - Complete working example: `examples/devops-monitoring/` — multi-agent monitoring pipeline with uptime checker, log analyzer, and alert sender
 - Steward cycle test suite (41 tests) covering CLI flag ordering, validateContext error handling, programmatic example validation, and JSDoc presence verification
@@ -41,7 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - CLI: Version flag changed from `-v` to `-V` to avoid conflict with common `-v` verbose convention
 - `validateContext()` now only swallows ENOENT errors when schema is missing; permission and parse errors are re-thrown instead of silently returning valid
 - Added comprehensive `@param`, `@returns`, `@throws` JSDoc to all public methods across all 5 lib/ modules (RegistryManager, TemplateEngine, Validator, DocGenerator, OAuthRegistry)
-- Total test count: 569 → 610 across 13 suites
+- Total test count: 610 → 616 across 13 suites
 - `validateSchedule()` now validates time ranges (hours 0-23, minutes 0-59) — previously accepted `daily 25:99` as valid
 - `updateDepartment()` and `updateAgent()` now validate the updates parameter is a non-null object
 - `import()` now validates input is a non-null object before overwriting registry state
