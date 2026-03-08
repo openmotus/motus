@@ -1,0 +1,51 @@
+{
+  "name": "deep-research",
+  "displayName": "Deep Research",
+  "department": "research-assistant",
+  "description": "Gathers sources from web and academic channels, evaluates quality, then synthesizes a structured research report with citations",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "web-researcher",
+          "prompt": "Search the web for relevant sources on the given topic"
+        },
+        {
+          "name": "academic-searcher",
+          "prompt": "Search academic and technical sources on the given topic"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "source-evaluator",
+          "prompt": "Evaluate all gathered sources for relevance, credibility, and recency"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "report-synthesizer",
+          "prompt": "Synthesize the top-scored sources into a structured research report"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "stdout",
+    "format": "json"
+  },
+  "estimatedDuration": "2-5 minutes"
+}

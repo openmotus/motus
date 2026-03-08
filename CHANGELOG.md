@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/research-assistant/` — multi-step research workflow with parallel web and academic source gathering, source quality evaluation, and report synthesis (4 agents, 1 workflow, implementation script with `classifySource` utility)
+- Steward fixes test suite (61 tests) covering `addWorkflow()` agents array validation, `updateWorkflow()` null guard, research-assistant example validation, and `web-researcher.js` module tests
 - Complete working example: `examples/code-review/` — PR review pipeline with diff collector, parallel security/style/logic analysis, and review summarizer (5 agents, 1 workflow)
 - Code-review example validation tests in end-to-end suite (file structure, agent-workflow cross-reference, JSON schema, parseDiff unit tests)
 - Test runner (`tests/run-all.js`) — auto-discovers test suites, continues on failure, reports per-suite and grand totals, supports `--filter` for running subsets
@@ -37,6 +39,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `addWorkflow()` now validates that `agents` parameter is an array when provided — previously passing a string would crash with an unguarded TypeError on `forEach`
+- `updateWorkflow()` now validates that `updates` parameter is a non-null object — matches existing guards on `updateDepartment()` and `updateAgent()`
+- `updateWorkflow()` now has full JSDoc with `@param`, `@returns`, `@throws` documentation
+- Total test count: 616 → 677 across 14 suites
 - Replaced fragile `&&`-chained npm test script with auto-discovering test runner — new test suites are picked up automatically
 - CLI: `--version` and `--help` flags now exit immediately without printing the boxen info message — enables clean output for scripts and CI
 - CLI: `--oauth` spawn now has error handling with helpful message if `start-oauth-manager.sh` is missing or not executable
