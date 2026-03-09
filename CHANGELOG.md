@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `getWorkflowsByAgent(agentName)` method on `RegistryManager` — returns all workflows that include a specific agent, useful for impact analysis before modifying or removing agents
+- Metadata counter consistency checks in `validate()` — detects when `totalDepartments`, `totalAgents`, or `totalWorkflows` metadata counters drift from actual registry counts
+- Steward fixes test suite (36 tests) covering update rename prevention, metadata validation, `getWorkflowsByAgent()`, and edge cases
 - Complete working example: `examples/research-assistant/` — multi-step research workflow with parallel web and academic source gathering, source quality evaluation, and report synthesis (4 agents, 1 workflow, implementation script with `classifySource` utility)
 - Steward fixes test suite (61 tests) covering `addWorkflow()` agents array validation, `updateWorkflow()` null guard, research-assistant example validation, and `web-researcher.js` module tests
 - Complete working example: `examples/code-review/` — PR review pipeline with diff collector, parallel security/style/logic analysis, and review summarizer (5 agents, 1 workflow)
@@ -39,6 +42,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `updateDepartment()` now rejects updates that attempt to change the `name` field — previously silently desynced the registry key from the stored object value
+- `updateAgent()` now rejects updates that attempt to change the `name` field — same key desync prevention
+- `updateWorkflow()` now rejects updates that attempt to change the `name` or `department` fields — prevents key desync since workflow IDs are `${department}-${name}`
+- Total test count: 677 → 713 across 15 suites
 - `addWorkflow()` now validates that `agents` parameter is an array when provided — previously passing a string would crash with an unguarded TypeError on `forEach`
 - `updateWorkflow()` now validates that `updates` parameter is a non-null object — matches existing guards on `updateDepartment()` and `updateAgent()`
 - `updateWorkflow()` now has full JSDoc with `@param`, `@returns`, `@throws` documentation

@@ -226,6 +226,10 @@ const results = await registry.search('metrics');
 console.log(`Found ${results.agents.length} agents matching "metrics"`);
 results.agents.forEach(a => console.log(`  - ${a.name} (${a.type})`));
 
+// Find workflows that use a specific agent
+const workflows = await registry.getWorkflowsByAgent('metrics-collector');
+workflows.forEach(w => console.log(`  ${w.name} (${w.department})`));
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
@@ -256,7 +260,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (677 tests, 14 suites, auto-discovered runner)
+└── tests/                       # Test suite (713 tests, 15 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -280,7 +284,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 677 tests across 14 suites
+npm test                              # 713 tests across 15 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

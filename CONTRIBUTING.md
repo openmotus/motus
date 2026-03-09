@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (677 tests across 14 suites)
+# Run all tests (713 tests across 15 suites)
 npm test
 
 # Filter suites by keyword
@@ -247,11 +247,12 @@ node tests/test-doc-generator.js         # Doc generator + integration docs (22 
 node tests/test-oauth-registry.js        # OAuth registry + config generation (77 tests)
 node tests/test-template-helpers.js      # Template helpers + engine methods (87 tests)
 node tests/test-registry-manager.js      # Registry CRUD, search, import/export, validation (82 tests)
-node tests/test-end-to-end.js            # End-to-end lifecycle, cross-module, examples (52 tests)
+node tests/test-end-to-end.js            # End-to-end lifecycle, cross-module, examples (56 tests)
 node tests/test-bug-fixes.js             # Bug fix verification: type validation, regex, paths (22 tests)
 node tests/test-steward-fixes-0227.js    # Steward fixes: schedule validation, import guards, template paths (59 tests)
-node tests/test-steward-fixes-0301.js    # CLI flags, validateContext ENOENT, JSDoc verification, example validation (41 tests)
+node tests/test-steward-fixes-0301.js    # CLI flags, validateContext ENOENT, JSDoc verification, example validation (43 tests)
 node tests/test-steward-fixes-0308.js    # Workflow validation, updateWorkflow guard, research-assistant example (61 tests)
+node tests/test-steward-fixes-0309.js    # Update rename prevention, metadata validation, getWorkflowsByAgent (36 tests)
 ```
 
 The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.
