@@ -169,8 +169,8 @@ async function runTests() {
     const collector = registry.getAgent('metrics-collector');
     const analyzer = registry.getAgent('trend-analyzer');
     const orchestrator = registry.getAgent('analytics-orchestrator');
-    assert(collector.usedInWorkflows.includes('daily-metrics'));
-    assert(analyzer.usedInWorkflows.includes('daily-metrics'));
+    assert(collector.usedInWorkflows.includes('analytics-daily-metrics'));
+    assert(analyzer.usedInWorkflows.includes('analytics-daily-metrics'));
     assertEquals(orchestrator.usedInWorkflows.length, 0, 'Orchestrator not in workflow agents list');
   });
 

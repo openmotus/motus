@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/customer-support/` — ticket triage pipeline with intake parser, parallel sentiment/category/priority analysis, and response drafter (5 agents, 1 workflow, implementation script with `parseTicket`, `parseCustomer`, `stripHtml` utilities)
+- Steward fixes test suite (35 tests) covering `listWorkflows`/`getStatistics` crash safety with missing trigger fields, `usedInWorkflows` workflow ID format, `getWorkflowsByAgent` cross-department, and customer-support example validation with `ticket-intake.js` module tests
 - `getWorkflowsByAgent(agentName)` method on `RegistryManager` — returns all workflows that include a specific agent, useful for impact analysis before modifying or removing agents
 - Metadata counter consistency checks in `validate()` — detects when `totalDepartments`, `totalAgents`, or `totalWorkflows` metadata counters drift from actual registry counts
 - Steward fixes test suite (36 tests) covering update rename prevention, metadata validation, `getWorkflowsByAgent()`, and edge cases
@@ -42,6 +44,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `addWorkflow()` now stores workflow ID (`${department}-${name}`) in agent `usedInWorkflows` instead of bare workflow name — prevents ambiguity when multiple departments have workflows with the same name
+- `listWorkflows()` type filter now safely handles workflows with missing `trigger` field — previously crashed with TypeError on imported/corrupted data
+- `getStatistics()` workflow type counting now safely handles workflows with missing `trigger` field — same crash prevention as `listWorkflows()`
+- Total test count: 713 → 748 across 16 suites
 - `updateDepartment()` now rejects updates that attempt to change the `name` field — previously silently desynced the registry key from the stored object value
 - `updateAgent()` now rejects updates that attempt to change the `name` field — same key desync prevention
 - `updateWorkflow()` now rejects updates that attempt to change the `name` or `department` fields — prevents key desync since workflow IDs are `${department}-${name}`

@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (713 tests across 15 suites)
+# Run all tests (748 tests across 16 suites)
 npm test
 
 # Filter suites by keyword
@@ -253,6 +253,7 @@ node tests/test-steward-fixes-0227.js    # Steward fixes: schedule validation, i
 node tests/test-steward-fixes-0301.js    # CLI flags, validateContext ENOENT, JSDoc verification, example validation (43 tests)
 node tests/test-steward-fixes-0308.js    # Workflow validation, updateWorkflow guard, research-assistant example (61 tests)
 node tests/test-steward-fixes-0309.js    # Update rename prevention, metadata validation, getWorkflowsByAgent (36 tests)
+node tests/test-steward-fixes-0311.js    # Trigger crash safety, usedInWorkflows IDs, customer-support example (35 tests)
 ```
 
 The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.

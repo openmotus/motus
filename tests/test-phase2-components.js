@@ -338,7 +338,7 @@ async function runTests() {
 
   await suite.test('RegistryManager: Agent workflow tracking updated', async () => {
     const agent = registry.getAgent('trend-analyzer');
-    suite.assertTrue(agent.usedInWorkflows.includes('daily-trends'), 'Agent should track workflow usage');
+    suite.assertTrue(agent.usedInWorkflows.includes('marketing-daily-trends'), 'Agent should track workflow usage');
   });
 
   await suite.test('RegistryManager: Get statistics', async () => {

@@ -1,0 +1,55 @@
+{
+  "name": "triage-ticket",
+  "displayName": "Triage Support Ticket",
+  "department": "customer-support",
+  "description": "Parses an incoming support ticket, runs parallel sentiment/category/priority analysis, then drafts a customer-appropriate response with routing recommendation",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "ticket-intake",
+          "prompt": "Parse the incoming support ticket into structured data"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "sentiment-analyzer",
+          "prompt": "Analyze the customer's emotional tone and urgency"
+        },
+        {
+          "name": "category-classifier",
+          "prompt": "Classify the ticket topic and determine routing"
+        },
+        {
+          "name": "priority-scorer",
+          "prompt": "Score ticket priority based on all available signals"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "response-drafter",
+          "prompt": "Draft a response combining all analysis into an appropriate customer reply"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "stdout",
+    "format": "json"
+  },
+  "estimatedDuration": "30-60 seconds"
+}
