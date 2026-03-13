@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/data-pipeline/` — ETL pipeline with CSV extractor, parallel data cleaner and enricher, schema validator, and database loader (5 agents, 1 workflow, implementation script with `parseCsv`, `splitCsvLine`, `detectDelimiter` utilities)
+- Steward fixes test suite (32 tests) covering `updateClaudeMd()` marker-based updates, data-pipeline example validation, and `csv-extractor.js` module tests (CSV parsing, quoted fields, delimiter detection, edge cases)
 - Complete working example: `examples/customer-support/` — ticket triage pipeline with intake parser, parallel sentiment/category/priority analysis, and response drafter (5 agents, 1 workflow, implementation script with `parseTicket`, `parseCustomer`, `stripHtml` utilities)
 - Steward fixes test suite (35 tests) covering `listWorkflows`/`getStatistics` crash safety with missing trigger fields, `usedInWorkflows` workflow ID format, `getWorkflowsByAgent` cross-department, and customer-support example validation with `ticket-intake.js` module tests
 - `getWorkflowsByAgent(agentName)` method on `RegistryManager` — returns all workflows that include a specific agent, useful for impact analysis before modifying or removing agents
@@ -44,6 +46,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `DocGenerator.updateClaudeMd()` now actually updates CLAUDE.md when `<!-- stats:start -->` / `<!-- stats:end -->` markers are present — previously was a stub that only logged stats without modifying the file. Returns `false` gracefully when markers are absent or file is missing.
+- Total test count: 748 → 780 across 17 suites
 - `addWorkflow()` now stores workflow ID (`${department}-${name}`) in agent `usedInWorkflows` instead of bare workflow name — prevents ambiguity when multiple departments have workflows with the same name
 - `listWorkflows()` type filter now safely handles workflows with missing `trigger` field — previously crashed with TypeError on imported/corrupted data
 - `getStatistics()` workflow type counting now safely handles workflows with missing `trigger` field — same crash prevention as `listWorkflows()`

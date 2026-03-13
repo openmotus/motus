@@ -1,0 +1,63 @@
+{
+  "name": "etl-pipeline",
+  "displayName": "ETL Data Pipeline",
+  "department": "data-pipeline",
+  "description": "Extract CSV data, clean and enrich in parallel, validate against schema, then load to destination",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "csv-extractor",
+          "prompt": "Read and parse the source CSV file into structured rows"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "data-cleaner",
+          "prompt": "Normalize values, remove duplicates, and fix formatting issues"
+        },
+        {
+          "name": "data-enricher",
+          "prompt": "Add computed fields: full_name, days_since_signup, email_domain"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "schema-validator",
+          "prompt": "Validate all rows against the expected output schema"
+        }
+      ]
+    },
+    {
+      "group": 4,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "db-loader",
+          "prompt": "Write validated records to the destination"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "scheduled",
+    "schedule": "daily 2:00",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "output/processed.json",
+    "format": "json"
+  },
+  "estimatedDuration": "1-5 minutes"
+}
