@@ -1,0 +1,27 @@
+{
+  "name": "release-pipeline",
+  "department": "devops",
+  "description": "Automated release pipeline: run tests, validate changelog, determine version bump, and generate release notes",
+  "steps": [
+    {
+      "parallel": true,
+      "agents": ["test-runner", "changelog-validator"]
+    },
+    {
+      "parallel": false,
+      "agents": ["version-bumper"]
+    },
+    {
+      "parallel": false,
+      "agents": ["release-notes-generator"]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "RELEASE_NOTES.md"
+  }
+}

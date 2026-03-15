@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/release-manager/` — release pipeline with test runner, changelog validator, version bumper, and release notes generator (4 agents, 1 workflow, implementation script with `parseSemver`, `bumpVersion`, `parseUnreleasedSection`, `determineBumpType` utilities)
+- Steward fixes test suite (41 tests) covering `DocGenerator` basePath parameter, release-manager example validation, and `version-checker.js` module tests (semver parsing, version bumping, changelog parsing, bump type determination)
 - Complete working example: `examples/data-pipeline/` — ETL pipeline with CSV extractor, parallel data cleaner and enricher, schema validator, and database loader (5 agents, 1 workflow, implementation script with `parseCsv`, `splitCsvLine`, `detectDelimiter` utilities)
 - Steward fixes test suite (32 tests) covering `updateClaudeMd()` marker-based updates, data-pipeline example validation, and `csv-extractor.js` module tests (CSV parsing, quoted fields, delimiter detection, edge cases)
 - Complete working example: `examples/customer-support/` — ticket triage pipeline with intake parser, parallel sentiment/category/priority analysis, and response drafter (5 agents, 1 workflow, implementation script with `parseTicket`, `parseCustomer`, `stripHtml` utilities)
@@ -46,6 +48,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `DocGenerator` constructor now accepts an optional `basePath` parameter — previously hardcoded to `path.join(__dirname, '..')`, now consistent with `RegistryManager`'s constructor API. The internal `RegistryManager` instance also receives this path, enabling programmatic doc generation from any project root.
+- Fixed stale JSDoc in `DocGenerator` — updated `updateClaudeMd` description from "stub — not yet implemented" to reflect the actual marker-based implementation
+- Total test count: 780 → 821 across 18 suites
 - `DocGenerator.updateClaudeMd()` now actually updates CLAUDE.md when `<!-- stats:start -->` / `<!-- stats:end -->` markers are present — previously was a stub that only logged stats without modifying the file. Returns `false` gracefully when markers are absent or file is missing.
 - Total test count: 748 → 780 across 17 suites
 - `addWorkflow()` now stores workflow ID (`${department}-${name}`) in agent `usedInWorkflows` instead of bare workflow name — prevents ambiguity when multiple departments have workflows with the same name
