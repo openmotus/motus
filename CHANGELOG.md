@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Complete working example: `examples/meeting-notes/` — post-meeting pipeline with transcript reader, parallel action and decision extractors, summary writer, and follow-up drafter (5 agents, 1 workflow, implementation script with `detectFormat`, `parseLabeledTranscript`, `parseSrtTranscript`, `extractAttendees`, `estimateDuration`, `parseTranscript` utilities)
+- Steward fixes test suite (114 tests) covering `search()` null safety, `import()` structure validation, `suggestTools()` mutation prevention, `detectAgentType()` type safety, meeting-notes example validation, and `transcript-reader.js` module tests
 - Complete working example: `examples/release-manager/` — release pipeline with test runner, changelog validator, version bumper, and release notes generator (4 agents, 1 workflow, implementation script with `parseSemver`, `bumpVersion`, `parseUnreleasedSection`, `determineBumpType` utilities)
 - Steward fixes test suite (41 tests) covering `DocGenerator` basePath parameter, release-manager example validation, and `version-checker.js` module tests (semver parsing, version bumping, changelog parsing, bump type determination)
 - Complete working example: `examples/data-pipeline/` — ETL pipeline with CSV extractor, parallel data cleaner and enricher, schema validator, and database loader (5 agents, 1 workflow, implementation script with `parseCsv`, `splitCsvLine`, `detectDelimiter` utilities)
@@ -48,6 +50,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in package.json
 
 ### Changed
+- `search()` now returns empty results for `null`, `undefined`, or non-string queries instead of crashing with TypeError — empty string still matches everything (existing behavior)
+- `import()` now validates the structure of each registry section (`{ departments: {}, metadata: {} }` shape) before overwriting — previously accepted corrupt data like `{ departments: "string" }` which would silently break all subsequent operations
+- `suggestTools()` now returns a fresh copy of the tool array on each call — previously mutated the internal template array, causing `Bash` to accumulate on repeated calls with `needsApi=true`
+- `detectAgentType()` now returns `null` for non-string inputs (numbers, booleans, objects, arrays) instead of crashing on `.toLowerCase()` — already returned `null` for `null`/`undefined`
+- Total test count: 821 → 935 across 19 suites
 - `DocGenerator` constructor now accepts an optional `basePath` parameter — previously hardcoded to `path.join(__dirname, '..')`, now consistent with `RegistryManager`'s constructor API. The internal `RegistryManager` instance also receives this path, enabling programmatic doc generation from any project root.
 - Fixed stale JSDoc in `DocGenerator` — updated `updateClaudeMd` description from "stub — not yet implemented" to reflect the actual marker-based implementation
 - Total test count: 780 → 821 across 18 suites

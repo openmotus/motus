@@ -1,0 +1,56 @@
+{
+  "name": "post-meeting",
+  "displayName": "Post-Meeting Notes Pipeline",
+  "department": "meeting-notes",
+  "description": "Process a meeting transcript into structured notes, action items, decisions, and follow-up emails",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "transcript-reader",
+          "prompt": "Read and parse the meeting transcript into structured sections with speaker labels"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "action-extractor",
+          "prompt": "Extract all action items with owners, deadlines, and priority levels"
+        },
+        {
+          "name": "decision-extractor",
+          "prompt": "Identify all key decisions, their rationale, and any deferred items"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "summary-writer",
+          "prompt": "Compile the transcript, actions, and decisions into formatted meeting notes"
+        },
+        {
+          "name": "followup-drafter",
+          "prompt": "Draft personalized follow-up emails for each attendee with their action items"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "output/meeting-notes.md",
+    "format": "markdown"
+  },
+  "estimatedDuration": "1-3 minutes"
+}
