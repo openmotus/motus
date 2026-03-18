@@ -1,0 +1,52 @@
+{
+  "name": "ci-check",
+  "displayName": "CI Quality Check",
+  "department": "ci-pipeline",
+  "description": "Run lint and tests in parallel, analyze coverage, then notify with pipeline results",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "lint-checker",
+          "prompt": "Run linting on all source files and report violations by severity"
+        },
+        {
+          "name": "test-runner",
+          "prompt": "Execute the full test suite and collect pass/fail results with timing"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "coverage-reporter",
+          "prompt": "Analyze test coverage data and check against the 80% threshold"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "deploy-notifier",
+          "prompt": "Compile lint, test, and coverage results into a notification and send to the configured channel"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "console",
+    "destination": null,
+    "format": "text"
+  },
+  "estimatedDuration": "2-10 minutes"
+}

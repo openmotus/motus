@@ -7,6 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `getDepartmentSummary(name)` method on `RegistryManager` — returns department info, agents, workflows, type breakdowns, and integration count in a single call
+- Complete working example: `examples/ci-pipeline/` — CI quality check pipeline with lint checker, test runner (parallel), coverage reporter, and deploy notifier (4 agents, 1 workflow, implementation script with `detectLinter`, `countSourceFiles`, `parseLintLine`, `topViolations` utilities)
+- Steward fixes test suite (50 tests) covering `detectParallelExecution()` null/non-string safety, `validateEnvVarName()` type guard, `suggestEnvVarName()` null safety, `generateIntegrationDocs()` envVars guard, `getDepartmentSummary()` comprehensive tests, ci-pipeline example validation, and `lint-checker.js` module tests
+
+### Fixed
+- `detectParallelExecution()` crash on null, undefined, number, boolean, or object input — now returns `{ shouldBeParallel: false, actionCount: 0, confidence: 0 }`
+- `validateEnvVarName()` crash on non-string input (number, boolean, object) — now returns validation error
+- `suggestEnvVarName()` crash on null/undefined/non-string department or service — now returns empty string
+- `generateIntegrationDocs()` crash when `integration.envVars` is undefined or empty — now guards all array iterations and conditional `echo` command
+
+### Previously Added
 - Complete working example: `examples/meeting-notes/` — post-meeting pipeline with transcript reader, parallel action and decision extractors, summary writer, and follow-up drafter (5 agents, 1 workflow, implementation script with `detectFormat`, `parseLabeledTranscript`, `parseSrtTranscript`, `extractAttendees`, `estimateDuration`, `parseTranscript` utilities)
 - Steward fixes test suite (114 tests) covering `search()` null safety, `import()` structure validation, `suggestTools()` mutation prevention, `detectAgentType()` type safety, meeting-notes example validation, and `transcript-reader.js` module tests
 - Complete working example: `examples/release-manager/` — release pipeline with test runner, changelog validator, version bumper, and release notes generator (4 agents, 1 workflow, implementation script with `parseSemver`, `bumpVersion`, `parseUnreleasedSection`, `determineBumpType` utilities)

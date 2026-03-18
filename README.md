@@ -230,6 +230,11 @@ results.agents.forEach(a => console.log(`  - ${a.name} (${a.type})`));
 const workflows = await registry.getWorkflowsByAgent('metrics-collector');
 workflows.forEach(w => console.log(`  ${w.name} (${w.department})`));
 
+// Get a full department summary in one call
+const summary = await registry.getDepartmentSummary('analytics');
+console.log(`${summary.agents.length} agents, ${summary.workflows.length} workflows`);
+console.log(`By type: ${summary.agentsByType['data-fetcher']} fetchers, ${summary.agentsByType['specialist']} specialists`);
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
@@ -253,6 +258,7 @@ motus/
 │   ├── data-pipeline/           #   CSV extract → clean/enrich → validate → load (ETL)
 │   ├── release-manager/         #   Tests → changelog → version bump → release notes
 │   ├── meeting-notes/           #   Transcript → actions/decisions → summary → follow-ups
+│   ├── ci-pipeline/             #   Lint + tests (parallel) → coverage → deploy notification
 │   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
@@ -264,7 +270,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (935 tests, 19 suites, auto-discovered runner)
+└── tests/                       # Test suite (985 tests, 20 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -288,7 +294,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 935 tests across 19 suites
+npm test                              # 985 tests across 20 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
