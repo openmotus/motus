@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Motus - Department-based AI automation framework for Claude Code",
   "main": "index.js",
+  "types": "index.d.ts",
   "bin": {
     "motus": "./motus"
   },
@@ -14,6 +15,7 @@
     "lib/",
     "templates/",
     "index.js",
+    "index.d.ts",
     "motus",
     "README.md",
     "LICENSE",

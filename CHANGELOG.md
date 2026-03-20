@@ -7,11 +7,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- TypeScript type definitions (`index.d.ts`) — comprehensive types for all 5 exported classes (`RegistryManager`, `TemplateEngine`, `Validator`, `DocGenerator`, `OAuthRegistry`), including interfaces for `Department`, `Agent`, `Workflow`, `Statistics`, `SearchResults`, `DepartmentSummary`, and all input/output types
+- Name validation in `addDepartment()`, `addAgent()`, and `addWorkflow()` — uses existing Validator to reject invalid names (non-kebab-case, too short, uppercase, etc.) before creating registry entries
+- Agent existence warnings in `addWorkflow()` — logs a `console.warn` when workflow references agents not yet registered, suggesting `addAgent()` to enable usage tracking
+- Steward fixes test suite (48 tests) covering TypeScript definition structure and method coverage, name validation in CRUD methods (rejection and acceptance), agent existence warnings, validator integration, and error message quality
+
+### Changed
+- `package.json` now includes `types` field pointing to `index.d.ts` and includes the file in `files` array for npm publish
+
+### Previously Added
 - `getDepartmentSummary(name)` method on `RegistryManager` — returns department info, agents, workflows, type breakdowns, and integration count in a single call
 - Complete working example: `examples/ci-pipeline/` — CI quality check pipeline with lint checker, test runner (parallel), coverage reporter, and deploy notifier (4 agents, 1 workflow, implementation script with `detectLinter`, `countSourceFiles`, `parseLintLine`, `topViolations` utilities)
 - Steward fixes test suite (50 tests) covering `detectParallelExecution()` null/non-string safety, `validateEnvVarName()` type guard, `suggestEnvVarName()` null safety, `generateIntegrationDocs()` envVars guard, `getDepartmentSummary()` comprehensive tests, ci-pipeline example validation, and `lint-checker.js` module tests
 
-### Fixed
+### Previously Fixed
 - `detectParallelExecution()` crash on null, undefined, number, boolean, or object input — now returns `{ shouldBeParallel: false, actionCount: 0, confidence: 0 }`
 - `validateEnvVarName()` crash on non-string input (number, boolean, object) — now returns validation error
 - `suggestEnvVarName()` crash on null/undefined/non-string department or service — now returns empty string
