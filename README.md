@@ -81,7 +81,7 @@ The wizard generates working templates. You edit `departments/tasks/agents/*.md`
 |-----------|-------------|
 | **4 Creation Wizards** | Interactive generators for departments, agents, workflows, and docs |
 | **11 Handlebars Templates** | Agent definitions, workflow configs, scripts, documentation |
-| **20+ Template Helpers** | String transforms (kebabCase, pascalCase), conditionals, iterators |
+| **21 Template Helpers** | String transforms (kebabCase, pascalCase), conditionals, iterators, array builder |
 | **Registry System** | JSON-based tracking of all departments, agents, and workflows |
 | **OAuth Manager** | Web UI for managing OAuth2 connections to any service |
 | **Doc Generator** | Auto-generates command reference and department docs from registries |
@@ -262,7 +262,7 @@ motus/
 │   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
-│   ├── template-engine.js       #   Handlebars rendering + 20 custom helpers
+│   ├── template-engine.js       #   Handlebars rendering + 21 custom helpers
 │   ├── validator.js             #   Name, type, and schema validation
 │   ├── doc-generator.js         #   Auto-doc generation from registries
 │   └── oauth-registry.js        #   OAuth2 service management
@@ -270,7 +270,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1033 tests, 21 suites, auto-discovered runner)
+└── tests/                       # Test suite (1122 tests, 22 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -294,7 +294,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1033 tests across 21 suites
+npm test                              # 1122 tests across 22 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

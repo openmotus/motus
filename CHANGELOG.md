@@ -7,12 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `array` Handlebars helper in `TemplateEngine` — creates arrays from variadic arguments for use with `join`, `contains`, and other collection helpers (e.g. `{{join (array "a" "b" "c") ", "}}`)
+- Input safety guards on `TemplateEngine.loadTemplate()`, `resolveTemplatePath()`, and `render()` — non-string or empty template names now throw a descriptive error instead of crashing on `.split()` or `.includes()`
+- Type guard on `Validator.validateDescription()` — non-string inputs (numbers, booleans, objects, arrays) now return a validation error instead of crashing on `.length` or `.toLowerCase()`
+- Steward fixes test suite (89 tests) covering TemplateEngine input safety (null/undefined/number/empty/boolean/array inputs), `array` helper with `join`/`contains`, `renderToFile` edge cases, `clearCache`, `listTemplates` by type, `validateDescription` non-string safety, `validateUrl` non-string safety, `getDepartmentSummary` edge cases, search edge cases, and export/import roundtrip
 - TypeScript type definitions (`index.d.ts`) — comprehensive types for all 5 exported classes (`RegistryManager`, `TemplateEngine`, `Validator`, `DocGenerator`, `OAuthRegistry`), including interfaces for `Department`, `Agent`, `Workflow`, `Statistics`, `SearchResults`, `DepartmentSummary`, and all input/output types
 - Name validation in `addDepartment()`, `addAgent()`, and `addWorkflow()` — uses existing Validator to reject invalid names (non-kebab-case, too short, uppercase, etc.) before creating registry entries
 - Agent existence warnings in `addWorkflow()` — logs a `console.warn` when workflow references agents not yet registered, suggesting `addAgent()` to enable usage tracking
 - Steward fixes test suite (48 tests) covering TypeScript definition structure and method coverage, name validation in CRUD methods (rejection and acceptance), agent existence warnings, validator integration, and error message quality
 
 ### Changed
+- Total test count: 1033 → 1122 across 22 suites
 - `package.json` now includes `types` field pointing to `index.d.ts` and includes the file in `files` array for npm publish
 
 ### Previously Added
