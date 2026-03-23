@@ -1,393 +1,354 @@
 # API Reference
 
-Developer reference for building custom agents and extending Motus.
+Complete reference for the Motus library API. All modules are exported from `index.js` for programmatic use.
 
-## Core Libraries
-
-### TemplateEngine
-
-Renders Handlebars templates for agent and workflow creation.
-
-**Location**: `lib/template-engine.js`
-
-**Usage**:
 ```javascript
-const TemplateEngine = require('./lib/template-engine');
-const engine = new TemplateEngine('/path/to/templates');
-
-// Render template
-const output = await engine.render('agent/data-fetcher-agent.md', {
-  name: 'weather-fetcher',
-  description: 'Fetches weather data'
-});
-
-// Render to file
-await engine.renderToFile(
-  'agent/data-fetcher-agent.md',
-  context,
-  '/path/to/output.md'
-);
+const { RegistryManager, TemplateEngine, Validator, DocGenerator, OAuthRegistry } = require('./index');
 ```
 
-**Methods**:
+## RegistryManager
 
-- `render(templatePath, context)` - Render template to string
-- `renderToFile(templatePath, context, outputPath)` - Render to file
-- `validate(context, schema)` - Validate context against schema
-
-**Helpers**:
-- `{{lowercase text}}` - Convert to lowercase
-- `{{uppercase text}}` - Convert to uppercase
-- `{{capitalize text}}` - Capitalize first letter
-- `{{kebabCase text}}` - Convert to kebab-case
-- `{{camelCase text}}` - Convert to camelCase
-- `{{eq a b}}` - Equality check
-- `{{join array separator}}` - Join array
-- Plus 20+ more helpers
-
-### RegistryManager
-
-Manages departments, agents, and workflows in registry files.
+Central registry for departments, agents, and workflows. Persists data as JSON files in `config/registries/`.
 
 **Location**: `lib/registry-manager.js`
 
-**Usage**:
 ```javascript
-const RegistryManager = require('./lib/registry-manager');
-const registry = new RegistryManager('/project/path');
+const registry = new RegistryManager('/path/to/motus');
+await registry.load();  // Required before any operations
+```
 
-// Add department
+### Lifecycle
+
+| Method | Description |
+|--------|-------------|
+| `load()` | Load registries from disk. Creates directory if missing. **Must be called first.** |
+| `save()` | Persist all registries to disk. Called automatically after mutations. |
+| `reset()` | Clear all in-memory data (does not delete files). |
+| `ensureLoaded()` | Throws if `load()` hasn't been called yet. |
+
+### Departments
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `addDepartment(data)` | `Department` | Create a department. Validates name (kebab-case), generates admin agent file. |
+| `getDepartment(name)` | `Department \| null` | Look up a department by name. |
+| `updateDepartment(name, updates)` | `Department` | Merge updates into a department. Cannot rename. |
+| `listDepartments(filters?)` | `Department[]` | List departments, optionally filtered by `{ status }`. |
+| `departmentExists(name)` | `boolean` | Check if a department exists. |
+| `getDepartmentSummary(name)` | `DepartmentSummary` | Full summary: agents, workflows, type breakdowns, integration count. |
+
+```javascript
+// Create a department
 await registry.addDepartment({
-  name: 'marketing',
-  displayName: 'Marketing',
-  description: 'Marketing automation',
-  integrations: ['twitter', 'facebook']
+  name: 'analytics',
+  displayName: 'Analytics',
+  description: 'Data analysis and reporting pipelines'
 });
 
-// Add agent
+// Get a summary with agent breakdown
+const summary = await registry.getDepartmentSummary('analytics');
+console.log(`${summary.agents.length} agents, ${summary.workflows.length} workflows`);
+console.log(`By type: ${summary.agentsByType['data-fetcher']} fetchers`);
+```
+
+### Agents
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `addAgent(data)` | `Agent` | Register a new agent. Validates name and type. |
+| `getAgent(name)` | `Agent \| null` | Look up an agent by name. |
+| `updateAgent(name, updates)` | `Agent` | Merge updates into an agent. Cannot rename. |
+| `listAgents(filters?)` | `Agent[]` | List agents, optionally filtered by `{ department, type }`. |
+| `listAgentsByDepartment(dept)` | `Agent[]` | List agents in a specific department. |
+| `agentExists(name)` | `boolean` | Check if an agent exists. |
+
+```javascript
 await registry.addAgent({
-  name: 'trend-analyzer',
-  displayName: 'Trend Analyzer',
-  department: 'marketing',
-  type: 'data-fetcher',
-  description: 'Analyzes trending topics',
-  integrations: ['twitter'],
+  name: 'metrics-collector',
+  displayName: 'Metrics Collector',
+  department: 'analytics',
+  type: 'data-fetcher',          // 'data-fetcher' | 'orchestrator' | 'specialist'
+  description: 'Collects metrics from monitoring APIs',
   tools: ['Bash', 'Read'],
   model: 'claude-sonnet-4'
 });
-
-// Add workflow
-await registry.addWorkflow({
-  name: 'social-analytics',
-  displayName: 'Social Analytics',
-  department: 'marketing',
-  type: 'scheduled',
-  schedule: '0 9 * * *',
-  agents: ['trend-analyzer', 'report-creator'],
-  executionPattern: 'sequential'
-});
 ```
 
-**Methods**:
+### Workflows
 
-**Departments**:
-- `addDepartment(data)` - Add new department
-- `getDepartment(name)` - Get department
-- `listDepartments()` - List all departments
-- `updateDepartment(name, updates)` - Update department
-- `deleteDepartment(name)` - Delete department
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `addWorkflow(data)` | `Workflow` | Register a new workflow. Warns if agents don't exist yet. |
+| `getWorkflow(dept, name)` | `Workflow \| null` | Look up a workflow by department and name. |
+| `updateWorkflow(dept, name, updates)` | `Workflow` | Merge updates into a workflow. Cannot rename. |
+| `listWorkflows(filters?)` | `Workflow[]` | List workflows, optionally filtered by `{ department }`. |
+| `listWorkflowsByDepartment(dept)` | `Workflow[]` | List workflows in a specific department. |
+| `getWorkflowsByAgent(agentName)` | `Workflow[]` | Find all workflows that use a given agent. |
+| `workflowExists(dept, name)` | `boolean` | Check if a workflow exists. |
 
-**Agents**:
-- `addAgent(data)` - Add new agent
-- `getAgent(name)` - Get agent
-- `listAgents(department)` - List agents in department
-- `updateAgent(name, updates)` - Update agent
-- `deleteAgent(name)` - Delete agent
+```javascript
+await registry.addWorkflow({
+  name: 'daily-report',
+  displayName: 'Daily Report',
+  department: 'analytics',
+  description: 'Generates daily analytics report',
+  agents: ['metrics-collector', 'report-writer'],
+  trigger: { type: 'scheduled', schedule: '0 9 * * *' },
+  output: { type: 'file', path: 'reports/' }
+});
 
-**Workflows**:
-- `addWorkflow(data)` - Add new workflow
-- `getWorkflow(name)` - Get workflow
-- `listWorkflows(department)` - List workflows
-- `updateWorkflow(name, updates)` - Update workflow
-- `deleteWorkflow(name)` - Delete workflow
+// Find workflows that depend on an agent
+const workflows = await registry.getWorkflowsByAgent('metrics-collector');
+```
 
-**Utilities**:
-- `save()` - Save registries to disk
-- `load()` - Load registries from disk
-- `validateFiles()` - Check registry-file sync
+### Search & Query
 
-### Validator
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `search(query)` | `SearchResults` | Full-text search across departments, agents, and workflows. |
+| `getStatistics()` | `Statistics` | System-wide counts, type breakdowns, department sizes. |
+| `validate()` | `ValidationReport` | Check registry integrity: cross-references, metadata counters. |
+| `validateFiles()` | `FileValidation` | Verify registry JSON files are valid and in sync. |
 
-Validates names, types, and data structures.
+```javascript
+// Search across everything
+const results = await registry.search('metrics');
+console.log(`${results.agents.length} agents, ${results.workflows.length} workflows`);
+
+// System overview
+const stats = await registry.getStatistics();
+console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
+```
+
+### Import/Export
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `export()` | `object` | Export all registries as a single JSON-serializable object. |
+| `import(data)` | `void` | Import registries from an exported object. Validates structure. |
+
+```javascript
+// Backup
+const backup = await registry.export();
+fs.writeFileSync('backup.json', JSON.stringify(backup, null, 2));
+
+// Restore
+const data = JSON.parse(fs.readFileSync('backup.json', 'utf8'));
+await registry.import(data);
+```
+
+---
+
+## TemplateEngine
+
+Handlebars-based template rendering with 21 custom helpers and template caching.
+
+**Location**: `lib/template-engine.js`
+
+```javascript
+const engine = new TemplateEngine();  // Auto-resolves templates/ directory
+```
+
+### Methods
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `render(templateName, context)` | `string` | Render a template with the given context. |
+| `renderToFile(templateName, context, outputPath)` | `void` | Render a template and write to a file. |
+| `loadTemplate(templateName)` | `Function` | Load and compile a template (cached). |
+| `resolveTemplatePath(templateName)` | `string` | Resolve a template name to its file path. |
+| `listTemplates(type?)` | `string[]` | List available templates, optionally filtered by type (`agent`, `workflow`, `docs`). |
+| `validateContext(templateName, context)` | `ValidationResult` | Validate context against a template's JSON schema. |
+| `clearCache()` | `void` | Clear the compiled template cache. |
+
+```javascript
+// Render a template
+const output = await engine.render('agent/data-fetcher-agent.md', {
+  name: 'weather-fetcher',
+  description: 'Fetches weather data from WeatherAPI'
+});
+
+// Render directly to a file
+await engine.renderToFile('agent/data-fetcher-agent.md', context, '/output/agent.md');
+
+// List available agent templates
+const templates = await engine.listTemplates('agent');
+```
+
+### Built-in Helpers
+
+| Helper | Example | Output |
+|--------|---------|--------|
+| `kebabCase` | `{{kebabCase "My Agent"}}` | `my-agent` |
+| `pascalCase` | `{{pascalCase "my-agent"}}` | `MyAgent` |
+| `camelCase` | `{{camelCase "my-agent"}}` | `myAgent` |
+| `capitalize` | `{{capitalize "hello"}}` | `Hello` |
+| `lowercase` | `{{lowercase "HELLO"}}` | `hello` |
+| `uppercase` | `{{uppercase "hello"}}` | `HELLO` |
+| `timestamp` | `{{timestamp}}` | `2026-03-23T...` |
+| `formatDate` | `{{formatDate createdAt}}` | ISO 8601 string |
+| `join` | `{{join tools ", "}}` | `Bash, Read, Write` |
+| `eq` | `{{#eq type "specialist"}}...{{/eq}}` | Conditional block |
+| `contains` | `{{#contains tools "Bash"}}...{{/contains}}` | Conditional block |
+| `pluralize` | `{{pluralize count "agent" "agents"}}` | `agent` or `agents` |
+| `indent` | `{{indent text 4}}` | Indented text |
+| `docComment` | `{{docComment "Description"}}` | JSDoc block |
+| `agentList` | `{{agentList agents}}` | Bulleted agent list |
+| `toolList` | `{{toolList tools}}` | Comma-separated tools |
+| `envBlock` | `{{envBlock vars}}` | Environment variable block |
+| `array` | `{{join (array "a" "b") ", "}}` | `a, b` |
+| `ifNotEmpty` | `{{#ifNotEmpty list}}...{{/ifNotEmpty}}` | Conditional block |
+| `json` | `{{json data}}` | Pretty-printed JSON |
+| `default` | `{{default value "fallback"}}` | Value or fallback |
+
+---
+
+## Validator
+
+Validates names, types, descriptions, schedules, URLs, and agent contexts. All methods are instance methods.
 
 **Location**: `lib/validator.js`
 
-**Usage**:
 ```javascript
-const Validator = require('./lib/validator');
-
-// Validate name
-Validator.validateName('my-agent'); // ✓
-Validator.validateName('My Agent'); // ✗ (spaces not allowed)
-
-// Detect agent type
-const type = Validator.detectAgentType('weather-fetcher'); // 'data-fetcher'
-
-// Validate schema
-const valid = Validator.validateSchema(data, {
-  name: 'string',
-  type: ['data-fetcher', 'orchestrator', 'specialist']
-});
+const validator = new Validator();
 ```
 
-**Methods**:
-- `validateName(name)` - Check name is valid
-- `validateType(type)` - Check type is valid
-- `validateSchema(data, schema)` - Validate data structure
-- `detectAgentType(name)` - Auto-detect agent type from name
-- `detectContext(name)` - Determine department context
+### Name Validation
 
-### DocGenerator
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `validateDepartmentName(name)` | `{valid, errors}` | Check kebab-case, length 3-30. |
+| `validateAgentName(name)` | `{valid, errors, suggestions}` | Check kebab-case, action-noun pattern. |
+| `validateWorkflowName(name)` | `{valid, errors}` | Check kebab-case, length 3-50. |
+| `validateEnvVarName(name)` | `{valid, errors}` | Check UPPER_SNAKE_CASE format. |
 
-Generates documentation from registries.
+```javascript
+const result = validator.validateAgentName('weather-fetcher');
+// { valid: true, errors: [] }
+
+const bad = validator.validateAgentName('My Agent');
+// { valid: false, errors: ['Agent name must be in kebab-case...'], suggestions: ['my-agent'] }
+```
+
+### Content Validation
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `validateDescription(desc, min?, max?)` | `{valid, errors}` | Length and quality checks. |
+| `validateUrl(url)` | `{valid, errors}` | HTTP/HTTPS URL format. |
+| `validateSchedule(schedule)` | `{valid, errors}` | Cron expression or natural language schedule. |
+
+### Detection & Suggestion
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `detectAgentType(description)` | `{type, confidence, scores}` | Detect agent type from description keywords. |
+| `detectParallelExecution(desc)` | `{shouldBeParallel, actionCount, confidence}` | Detect if a step should run in parallel. |
+| `suggestAgentName(name)` | `string[]` | Suggest kebab-case alternatives for an invalid name. |
+| `suggestTools(agentType, needsApi?)` | `string[]` | Suggest tools based on agent type. |
+| `suggestEnvVarName(dept, service)` | `string` | Generate an env var name from department and service. |
+
+```javascript
+const detection = validator.detectAgentType('Fetches weather data from an API endpoint');
+// { type: 'data-fetcher', confidence: 0.8, scores: {...} }
+```
+
+### Context Validation
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `validateAgentContext(context)` | `{valid, errors}` | Validate a full agent creation context. |
+| `validateDepartmentContext(context)` | `{valid, errors}` | Validate a full department creation context. |
+| `validateWorkflowContext(context)` | `{valid, errors}` | Validate a full workflow creation context. |
+
+---
+
+## DocGenerator
+
+Generates documentation from registry data.
 
 **Location**: `lib/doc-generator.js`
 
-**Usage**:
 ```javascript
-const DocGenerator = require('./lib/doc-generator');
-const generator = new DocGenerator(registryManager);
-
-// Generate department docs
-await generator.generateDepartmentDocs('marketing');
-
-// Generate command reference
-await generator.generateCommandReference();
-
-// Generate integration docs
-const docs = generator.generateIntegrationDocs(integration, 'marketing');
+const generator = new DocGenerator('/path/to/motus');  // Optional basePath
+await generator.generate();  // Generates all docs
 ```
 
-**Methods**:
-- `generateDepartmentDocs(department)` - Create department docs
-- `generateCommandReference()` - Create master command list
-- `generateIntegrationDocs(integration, dept)` - Create setup instructions
-- `updateCLAUDEmd()` - Update CLAUDE.md with latest info
+### Methods
 
-## Agent Development
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `generate()` | `void` | Generate all documentation (commands reference + department docs + CLAUDE.md stats). |
+| `generateCommandsReference()` | `void` | Generate `COMMANDS_REFERENCE.md` with system overview. |
+| `generateDepartmentDocs()` | `void` | Generate per-department documentation files. |
+| `updateClaudeMd()` | `void` | Update CLAUDE.md statistics via `<!-- stats:start/end -->` markers. |
 
-### Agent Structure
-
-**Definition File** (`.claude/agents/agent-name.md`):
-```markdown
----
-subagent_type: data-fetcher
-description: Short description
-tools: Bash, Read
-model: claude-sonnet-4
 ---
 
-Instructions for the agent...
+## OAuthRegistry
 
-Use the Bash tool to execute:
-path/to/script.js
+Manages OAuth2 service configurations for API integrations.
 
-Return the results in this format:
-{
-  "data": ...,
-  "timestamp": ...
-}
-```
-
-**Implementation Script** (for data-fetchers):
-```javascript
-#!/usr/bin/env node
-
-const axios = require('axios');
-require('dotenv').config();
-
-async function fetchData() {
-  try {
-    const response = await axios.get(API_ENDPOINT, {
-      headers: { Authorization: `Bearer ${process.env.API_KEY}` }
-    });
-    
-    const data = {
-      results: response.data,
-      timestamp: new Date().toISOString()
-    };
-    
-    console.log(JSON.stringify(data, null, 2));
-  } catch (error) {
-    console.error('Error:', error.message);
-    process.exit(1);
-  }
-}
-
-fetchData();
-```
-
-### Agent Types
-
-**Data Fetcher**:
-- Purpose: Fetch data from APIs
-- Has implementation script
-- Returns JSON data
-- Tools: Bash, Read
-
-**Specialist**:
-- Purpose: Analysis, transformation, creation
-- No implementation script
-- Uses Claude Code tools
-- Tools: Read, Write, Edit, Task
-
-**Orchestrator**:
-- Purpose: Coordinate other agents
-- Manages workflow execution
-- Uses Task tool
-- Tools: Task, Read, Write
-
-### Creating Custom Agent
-
-**Step 1**: Design agent
-- What does it do?
-- What data does it need?
-- What does it output?
-
-**Step 2**: Choose type
-- API calls? → Data Fetcher
-- Analysis/content? → Specialist  
-- Coordination? → Orchestrator
-
-**Step 3**: Create agent
-```
-/motus <dept> agent create <name>
-```
-
-**Step 4**: Implement script (if data-fetcher)
-Edit generated script in `<dept>/agents/<name>.js`
-
-**Step 5**: Test agent
-```
-/motus <dept> test-agent <name>
-```
-
-### API Integration Template
+**Location**: `lib/oauth-registry.js`
 
 ```javascript
-#!/usr/bin/env node
-
-const axios = require('axios');
-require('dotenv').config();
-
-// Configuration
-const API_BASE = 'https://api.example.com';
-const API_KEY = process.env.YOUR_API_KEY;
-
-async function fetchFromAPI() {
-  try {
-    // Validate environment
-    if (!API_KEY) {
-      throw new Error('API_KEY not set in environment');
-    }
-
-    // Make API request
-    const response = await axios.get(`${API_BASE}/endpoint`, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      params: {
-        // Query parameters
-      }
-    });
-
-    // Process response
-    const data = {
-      status: 'success',
-      results: response.data,
-      count: response.data.length,
-      timestamp: new Date().toISOString()
-    };
-
-    // Output JSON
-    console.log(JSON.stringify(data, null, 2));
-
-  } catch (error) {
-    // Error handling
-    const errorData = {
-      status: 'error',
-      message: error.message,
-      timestamp: new Date().toISOString()
-    };
-    console.error(JSON.stringify(errorData, null, 2));
-    process.exit(1);
-  }
-}
-
-// Execute
-fetchFromAPI();
+const oauth = new OAuthRegistry('/path/to/motus');
+await oauth.load();
 ```
 
-## Workflow Development
+### Methods
 
-### Workflow Definition Template
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `load()` | `void` | Parse OAuth configs from `oauth-manager/server.js`. |
+| `addIntegration(integration)` | `void` | Add a new OAuth service configuration. |
+| `generateEnvConfig(integrations)` | `string` | Generate `.env` template for required API keys. |
 
-```markdown
----
-name: workflow-name
-description: What this workflow does
-department: dept-name
-type: manual | scheduled
-schedule: 0 9 * * * (if scheduled)
 ---
 
-Execute the workflow:
+## TypeScript Support
 
-1. Invoke agent-1 to fetch data
-2. Wait for results from agent-1
-3. Invoke agent-2 with data from agent-1
-4. Create final output
-5. Return summary
+Motus ships TypeScript definitions in `index.d.ts`. Key types:
+
+```typescript
+type AgentType = 'data-fetcher' | 'orchestrator' | 'specialist';
+type TriggerType = 'manual' | 'scheduled';
+
+interface Department { name, displayName, description, agents, workflows, ... }
+interface Agent { name, displayName, department, type, description, tools, ... }
+interface Workflow { name, displayName, department, agents, trigger, steps, ... }
+interface Statistics { departments: { total }, agents: { total, byType }, workflows: { total } }
+interface SearchResults { departments: Department[], agents: Agent[], workflows: Workflow[] }
+interface DepartmentSummary { department, agents, workflows, agentsByType, integrationCount }
 ```
 
-### Parallel Execution Pattern
+See `index.d.ts` for complete type definitions.
 
-```markdown
-Execute agents in parallel:
+---
 
-1. Invoke agent-1, agent-2, agent-3 simultaneously
-2. Wait for all agents to complete
-3. Compile all results
-4. Create combined output
-```
+## Registry File Format
 
-### Sequential Execution Pattern
-
-```markdown
-Execute agents sequentially:
-
-1. Invoke agent-1, wait for completion
-2. Pass agent-1 results to agent-2, wait for completion
-3. Pass agent-2 results to agent-3, wait for completion
-4. Create final output with all data
-```
-
-## Registry File Formats
+Registries are stored as JSON in `config/registries/`.
 
 ### departments.json
 
 ```json
 {
-  "marketing": {
-    "name": "marketing",
-    "displayName": "Marketing",
-    "description": "Marketing automation and analytics",
-    "integrations": ["twitter", "facebook", "linkedin"],
-    "created": "2025-10-08T10:00:00.000Z",
-    "agentCount": 5,
-    "workflowCount": 3
-  }
+  "departments": {
+    "analytics": {
+      "name": "analytics",
+      "displayName": "Analytics",
+      "description": "Data analysis and reporting",
+      "created": "2026-01-15T10:00:00.000Z",
+      "status": "active",
+      "version": "1.0.0",
+      "agents": ["metrics-collector", "report-writer"],
+      "workflows": ["daily-report"],
+      "integrations": [],
+      "responsibilities": []
+    }
+  },
+  "metadata": { "totalDepartments": 1, "lastUpdated": "..." }
 }
 ```
 
@@ -396,19 +357,21 @@ Execute agents sequentially:
 ```json
 {
   "agents": {
-    "trend-analyzer": {
-      "name": "trend-analyzer",
-      "displayName": "Trend Analyzer",
-      "department": "marketing",
+    "metrics-collector": {
+      "name": "metrics-collector",
+      "displayName": "Metrics Collector",
+      "department": "analytics",
       "type": "data-fetcher",
-      "description": "Analyzes trending topics on Twitter",
-      "integrations": ["twitter"],
+      "description": "Collects metrics from monitoring APIs",
       "tools": ["Bash", "Read"],
       "model": "claude-sonnet-4",
-      "script": "marketing/agents/trend-analyzer.js",
-      "created": "2025-10-08T10:00:00.000Z"
+      "script": "analytics/agents/metrics-collector.js",
+      "created": "2026-01-15T10:00:00.000Z",
+      "version": "1.0.0",
+      "usedInWorkflows": ["analytics/daily-report"]
     }
-  }
+  },
+  "metadata": { "totalAgents": 1, "lastUpdated": "..." }
 }
 ```
 
@@ -416,117 +379,30 @@ Execute agents sequentially:
 
 ```json
 {
-  "social-analytics": {
-    "name": "social-analytics",
-    "displayName": "Social Media Analytics",
-    "department": "marketing",
-    "type": "scheduled",
-    "schedule": "0 9 * * *",
-    "description": "Daily social media performance report",
-    "agents": ["trend-analyzer", "social-fetcher", "report-creator"],
-    "executionPattern": "sequential",
-    "output": "/marketing/reports/social-YYYY-MM-DD.md",
-    "created": "2025-10-08T10:00:00.000Z",
-    "lastRun": "2025-10-08T09:00:00.000Z",
-    "runCount": 45
-  }
+  "workflows": {
+    "analytics": {
+      "daily-report": {
+        "name": "daily-report",
+        "displayName": "Daily Report",
+        "department": "analytics",
+        "description": "Generates daily analytics report",
+        "orchestrator": "analytics-orchestrator",
+        "agents": ["metrics-collector", "report-writer"],
+        "trigger": { "type": "scheduled", "schedule": "0 9 * * *" },
+        "output": { "type": "file", "path": "reports/" },
+        "estimatedDuration": "5m",
+        "created": "2026-01-15T10:00:00.000Z",
+        "version": "1.0.0",
+        "lastRun": null,
+        "runCount": 0,
+        "successRate": 0
+      }
+    }
+  },
+  "metadata": { "totalWorkflows": 1, "lastUpdated": "..." }
 }
 ```
-
-## Environment Variables
-
-### Required for Core
-
-```bash
-TIMEZONE=America/Los_Angeles        # Your timezone
-```
-
-### Integration Variables
-
-```bash
-# Weather
-WEATHER_API_KEY=your_key
-
-# Google
-GOOGLE_CLIENT_ID=your_id
-GOOGLE_CLIENT_SECRET=your_secret
-GOOGLE_REDIRECT_URI=http://localhost:3001/oauth/google/callback
-
-# Notion
-NOTION_API_KEY=secret_your_key
-NOTION_DATABASE_ID=database_id
-
-# Oura
-OURA_ACCESS_TOKEN=your_token
-
-# Social Media
-TWITTER_BEARER_TOKEN=your_token
-LINKEDIN_CLIENT_ID=your_id
-LINKEDIN_CLIENT_SECRET=your_secret
-FACEBOOK_APP_ID=your_id
-FACEBOOK_APP_SECRET=your_secret
-```
-
-## Error Handling
-
-### In Agent Scripts
-
-```javascript
-try {
-  const data = await fetchData();
-  console.log(JSON.stringify(data, null, 2));
-} catch (error) {
-  const errorResponse = {
-    status: 'error',
-    message: error.message,
-    code: error.code,
-    timestamp: new Date().toISOString()
-  };
-  console.error(JSON.stringify(errorResponse, null, 2));
-  process.exit(1);
-}
-```
-
-### In Agent Definitions
-
-```markdown
-If the script fails:
-1. Log the error message
-2. Return partial results if available
-3. Suggest fallback action to user
-```
-
-## Testing
-
-### Test Agent
-
-Run the agent directly in Claude Code:
-```
-/motus <dept> <agent-name>
-```
-
-Or execute the implementation script manually:
-```bash
-node departments/<dept>/agents/<agent-name>.js
-```
-
-### Test Workflow
-
-Run the workflow and verify output:
-```
-/motus <dept> <workflow-name>
-```
-
-### Test Integration
-
-Run an agent that uses the integration to verify connectivity.
-
-## Next Steps
-
-- **[Examples](Examples.md)** - See real implementations
-- **[Contributing](Contributing.md)** - Contribute to Motus
-- **[FAQ](FAQ.md)** - Common questions
 
 ---
 
-**Previous**: [Examples ←](Examples.md) | **Next**: [Contributing →](Contributing.md)
+**Previous**: [Examples](Examples.md) | **Next**: [Contributing](Contributing.md)

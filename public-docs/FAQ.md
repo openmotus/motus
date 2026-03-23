@@ -14,7 +14,7 @@ No, Motus is exclusively designed for Claude Code CLI. It uses Claude Code's uni
 
 ### Is Motus free?
 
-Yes, Motus is open source (MIT license). Some integrations may require paid API keys (like OpenAI), but many free options exist (Weather API, Google, etc.).
+Yes, Motus is open source (MIT license). Some integrations may require paid API keys (like WeatherAPI or Notion), but many free options exist (Google Calendar, Gmail, etc.).
 
 ### Do I need coding experience?
 
