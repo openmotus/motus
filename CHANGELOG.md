@@ -46,7 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1122 tests across 22 auto-discovered suites):**
+**Test Suites (1145 tests across 23 auto-discovered suites):**
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)
@@ -69,9 +69,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `test-steward-fixes-0318.js` — detectParallelExecution/envVar safety, getDepartmentSummary (50 tests)
 - `test-steward-fixes-0320.js` — TypeScript definitions, name validation in CRUD (48 tests)
 - `test-steward-fixes-0322.js` — TemplateEngine input safety, array helper, validateDescription guard (89 tests)
+- `test-steward-fixes-0325.js` — export() mutation safety, search('') fix, validate() orphan detection (23 tests)
 - Auto-discovering test runner (`tests/run-all.js`) with `--filter` support
 
 ### Changed
+- `export()` now returns deep copies of registry data — modifying exported objects no longer mutates internal state
+- `search('')` now returns empty results instead of matching everything — empty/whitespace-only queries are treated as no-ops
+- `validate()` now detects orphan agents and workflows — entries in the registry whose parent department doesn't list them
+- Overhauled `public-docs/Examples.md` — complete rewrite showcasing all 11 working examples with code patterns, agent breakdowns, and a patterns-at-a-glance table
 - `search()` now returns empty results for null/undefined/non-string queries instead of crashing
 - `import()` now validates structure of each registry section before overwriting
 - `suggestTools()` now returns a fresh copy of the tool array on each call (no mutation)

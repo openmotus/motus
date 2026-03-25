@@ -81,10 +81,10 @@ async function runTests() {
   const boolResult = await registry.search(true);
   suite.assert(boolResult.departments.length === 0, 'search(true) returns empty results for boolean');
 
-  // Empty string should still work (matches everything)
+  // Empty string now returns empty results (safety fix)
   const emptyResult = await registry.search('');
-  suite.assert(emptyResult.departments.length > 0, 'search("") still returns all departments');
-  suite.assert(emptyResult.agents.length > 0, 'search("") still returns all agents');
+  suite.assert(emptyResult.departments.length === 0, 'search("") returns empty departments');
+  suite.assert(emptyResult.agents.length === 0, 'search("") returns empty agents');
 
   // Normal search still works
   const normalResult = await registry.search('test');

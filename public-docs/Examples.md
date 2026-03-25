@@ -1,502 +1,254 @@
 # Examples
 
-Real-world examples of departments, agents, and workflows you can build with Motus.
+Motus ships with **11 complete working examples** in the [`examples/`](../examples/) directory. Each example is a self-contained department with agents, workflows, and (where relevant) utility modules you can study and adapt.
 
-> **💡 Important**: These are examples of systems you **CAN BUILD** with Motus, not pre-built features included in the framework. Motus provides the structure (departments, agents, workflows, templates) - you provide the implementation (the actual code for each agent). Each example below shows the commands to create the structure and describes what logic you would implement.
+## Working Examples
 
-## Life Management Examples
+### 1. Daily Briefing
 
-### Example 1: Daily Briefing System
+**Path:** [`examples/daily-briefing/`](../examples/daily-briefing/)
 
-Complete morning briefing with weather, calendar, emails, and tasks.
+A morning briefing system that fetches weather and calendar data in parallel, then compiles them into a summary.
 
-**Department**: Life
+**Pattern:** Parallel data fetchers &rarr; sequential compiler
 
-**Agents**:
-- `weather-fetcher` - Gets current/forecast weather
-- `calendar-fetcher` - Retrieves today's events
-- `email-processor` - Finds important emails
-- `task-compiler` - Compiles prioritized tasks
-- `note-creator` - Creates Obsidian daily note
+**Agents:**
+- `weather-fetcher` (data-fetcher) &mdash; calls WeatherAPI for current conditions and forecast
+- `calendar-fetcher` (data-fetcher) &mdash; retrieves today's Google Calendar events
+- `briefing-creator` (specialist) &mdash; compiles fetched data into a formatted note
 
-**Workflow**: `daily-brief`
-
-**How to Build**:
-
-1. Create Life department (if not exists):
-```
-/motus department create life
-```
-
-2. Add weather agent:
-```
-/motus life agent create weather-fetcher
-```
-Configure as data-fetcher using WeatherAPI
-
-3. Add calendar agent:
-```
-/motus life agent create calendar-fetcher
-```
-Configure as data-fetcher using Google Calendar
-
-4. Add email agent:
-```
-/motus life agent create email-processor
-```
-Configure as specialist for email categorization
-
-5. Add task agent:
-```
-/motus life agent create task-compiler
-```
-Configure as specialist for task prioritization
-
-6. Add note creator:
-```
-/motus life agent create note-creator
-```
-Configure as specialist for Obsidian note creation
-
-7. Create workflow:
-```
-/motus life workflow create daily-brief
-```
-- Type: Scheduled
-- Schedule: Daily at 7:00 AM
-- Agents: All 5 agents
-- Pattern: Parallel fetch, sequential creation
-
-**Run It**:
-```
-/motus life daily-brief
-```
-
-### Example 2: Evening Review
-
-Reflect on accomplishments and plan tomorrow.
-
-**Agents**:
-- `accomplishment-analyzer` - Extract completed tasks
-- `tomorrow-calendar` - Get tomorrow's events
-- `tomorrow-weather` - Get tomorrow's forecast
-- `note-appender` - Add evening report to note
-
-**Workflow**: `evening-review`
-
-**Schedule**: Daily at 8:00 PM
-
-**Build It**:
-```
-/motus life workflow create evening-review
-```
-
-## Marketing Examples
-
-### Example 3: Social Media Analytics
-
-Daily social media performance report.
-
-**Department**: Marketing
-
-**Agents**:
-- `trend-analyzer` - Gets trending topics (Twitter)
-- `social-fetcher` - Gets engagement metrics
-- `sentiment-analyzer` - Analyzes brand mentions
-- `report-creator` - Creates analytics report
-
-**Workflow**: `social-analytics`
-
-**Build**:
-
-1. Create Marketing department:
-```
-/motus department create marketing
-```
-
-2. Create Twitter trends agent:
-```
-/motus marketing agent create trend-analyzer
-```
-Uses Twitter API for trending topics
-
-3. Create social metrics agent:
-```
-/motus marketing agent create social-fetcher
-```
-Fetches from Twitter, LinkedIn, Facebook
-
-4. Create sentiment agent:
-```
-/motus marketing agent create sentiment-analyzer
-```
-Analyzes sentiment of social mentions
-
-5. Create report agent:
-```
-/motus marketing agent create report-creator
-```
-Compiles data into formatted report
-
-6. Create workflow:
-```
-/motus marketing workflow create social-analytics
-```
-- Type: Scheduled
-- Schedule: Daily at 9:00 AM
-- Pattern: Parallel data collection
-
-**Output**: Daily report in `/marketing/reports/social-YYYY-MM-DD.md`
-
-### Example 4: Content Creation Pipeline
-
-Automated content ideation to publication.
-
-**Agents**:
-- `trend-analyzer` - Find trending topics
-- `content-creator` - Generate content ideas
-- `seo-optimizer` - Optimize for SEO
-- `social-publisher` - Publish to platforms
-
-**Workflow**: `content-pipeline`
-
-**Type**: Manual (run on-demand)
-
-**Build**:
-```
-/motus marketing workflow create content-pipeline
-```
-
-Sequential execution:
-1. Get trends
-2. Generate ideas
-3. Optimize content
-4. Publish
-
-**Run**:
-```
-/motus marketing content-pipeline
-```
-
-## Health & Fitness Examples
-
-### Example 5: Weekly Fitness Report
-
-Oura Ring + workout data analysis.
-
-**Department**: Fitness
-
-**Agents**:
-- `oura-fetcher` - Gets sleep and activity data
-- `workout-analyzer` - Analyzes workout patterns
-- `progress-tracker` - Tracks progress vs goals
-- `report-creator` - Creates weekly summary
-
-**Workflow**: `weekly-fitness-report`
-
-**Schedule**: Every Monday at 9:00 AM
-
-**Build**:
-
-1. Create Fitness department:
-```
-/motus department create fitness
-```
-
-2. Create Oura agent:
-```
-/motus fitness agent create oura-fetcher
-```
-
-3. Create analysis agents:
-```
-/motus fitness agent create workout-analyzer
-/motus fitness agent create progress-tracker
-```
-
-4. Create report agent:
-```
-/motus fitness agent create report-creator
-```
-
-5. Create workflow:
-```
-/motus fitness workflow create weekly-fitness-report
-```
-
-**Output**: Weekly summary with:
-- Sleep quality trends
-- Activity metrics
-- Workout consistency
-- Goal progress
-- Recommendations
-
-## Business Examples
-
-### Example 6: Email Newsletter
-
-Curated weekly newsletter from bookmarks and articles.
-
-**Department**: Content
-
-**Agents**:
-- `bookmark-fetcher` - Gets saved bookmarks
-- `article-summarizer` - Summarizes articles
-- `category-organizer` - Groups by topic
-- `newsletter-creator` - Creates formatted newsletter
-
-**Workflow**: `weekly-newsletter`
-
-**Schedule**: Every Friday at 10:00 AM
-
-**Build**:
-```
-/motus department create content
-/motus content agent create bookmark-fetcher
-/motus content agent create article-summarizer
-/motus content agent create category-organizer
-/motus content agent create newsletter-creator
-/motus content workflow create weekly-newsletter
-```
-
-### Example 7: Project Status Dashboard
-
-Daily project metrics and team updates.
-
-**Department**: Projects
-
-**Agents**:
-- `github-fetcher` - Gets PRs, issues, commits
-- `slack-fetcher` - Gets important messages
-- `calendar-fetcher` - Gets meetings
-- `dashboard-creator` - Creates status dashboard
-
-**Workflow**: `daily-status`
-
-**Schedule**: Weekdays at 8:30 AM
-
-**Output**: Daily dashboard in Notion or Obsidian
-
-## Complete System Examples
-
-### Example 8: Full Life Automation
-
-Complete daily automation system.
-
-**Departments**: Life, Health, Finance
-
-**Morning Routine (7:00 AM)**:
-```
-/motus life daily-brief
-```
-- Weather
-- Calendar
-- Emails
-- Tasks
-- News highlights
-
-**Midday Check (12:00 PM)**:
-```
-/motus life midday-check
-```
-- Lunch suggestions
-- Afternoon schedule
-- Task progress
-
-**Evening Review (8:00 PM)**:
-```
-/motus life evening-review
-```
-- Accomplishments
-- Tomorrow's prep
-- Health metrics
-
-**Weekly Reports**:
-- Monday 9 AM: Fitness summary
-- Friday 5 PM: Week review
-- Sunday 7 PM: Week planning
-
-### Example 9: Marketing Department
-
-Complete marketing automation.
-
-**Daily (9:00 AM)**:
-- Social media analytics
-- Trending topics analysis
-- Competitor monitoring
-- Content performance
-
-**Weekly (Monday 10:00 AM)**:
-- Weekly metrics report
-- Content calendar planning
-- Campaign performance review
-
-**Monthly (1st at 9:00 AM)**:
-- Monthly analytics dashboard
-- ROI calculations
-- Strategy recommendations
-
-## Quick Start Templates
-
-### Template 1: Personal Productivity
-
-```
-/motus department create life
-/motus life agent create calendar-fetcher
-/motus life agent create task-compiler
-/motus life agent create note-creator
-/motus life workflow create daily-plan
-```
-
-### Template 2: Content Marketing
-
-```
-/motus department create marketing
-/motus marketing agent create trend-analyzer
-/motus marketing agent create content-creator
-/motus marketing agent create social-publisher
-/motus marketing workflow create content-pipeline
-```
-
-### Template 3: Health Tracking
-
-```
-/motus department create health
-/motus health agent create oura-fetcher
-/motus health agent create fitness-tracker
-/motus health agent create report-creator
-/motus health workflow create daily-health-summary
-```
-
-## Integration Examples
-
-### Example with Multiple Integrations
-
-**Agents Using**:
-- Google Calendar
-- Gmail
-- Weather API
-- Oura Ring
-- Notion
-
-**Workflow**:
-1. Fetch from all sources in parallel
-2. Compile into unified briefing
-3. Create in Notion and Obsidian
-4. Send summary email (optional)
-
-### Example API Usage
-
-**Weather API**:
-```javascript
-// In weather-fetcher.js
-const response = await axios.get(
-  `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${LOCATION}&days=3`
-);
-```
-
-**Google Calendar**:
-```javascript
-// In calendar-fetcher.js
-const events = await calendar.events.list({
-  calendarId: 'primary',
-  timeMin: startOfDay,
-  timeMax: endOfDay,
-  singleEvents: true,
-  orderBy: 'startTime'
-});
-```
-
-**Notion**:
-```javascript
-// In notion-creator.js
-await notion.pages.create({
-  parent: { database_id: DATABASE_ID },
-  properties: {
-    Date: { date: { start: today } },
-    Weather: { rich_text: [{ text: { content: weather } }] }
-  }
-});
-```
-
-## Customization Examples
-
-### Custom Agent Example
-
-Create a custom news aggregator:
-
-```
-/motus life agent create news-aggregator
-```
-
-In the agent script:
-- Fetch from multiple news APIs
-- Filter by interests
-- Summarize articles
-- Format for daily note
-
-### Custom Workflow Example
-
-Morning + Evening combined:
-
-```
-/motus life workflow create full-day-automation
-```
-
-Agents:
-1. Morning: weather, calendar, emails, tasks
-2. Evening: accomplishments, tomorrow prep, health check
-
-## Real User Examples
-
-### Example: Freelancer Workflow
-
-**Morning**:
-- Client emails summary
-- Project deadlines
-- Time tracking prep
-
-**Afternoon**:
-- Invoice reminders
-- Project status updates
-
-**Evening**:
-- Time logged summary
-- Tomorrow's client meetings
-
-### Example: Student Workflow
-
-**Morning**:
-- Class schedule
-- Assignment deadlines
-- Study goals
-
-**Evening**:
-- Study time logged
-- Assignment progress
-- Tomorrow's prep
-
-### Example: Manager Workflow
-
-**Morning**:
-- Team updates
-- Meeting prep
-- Priority tasks
-
-**Afternoon**:
-- Slack important messages
-- GitHub PR reviews
-
-**Evening**:
-- Team accomplishments
-- Tomorrow's 1-on-1s
-
-## Next Steps
-
-- **[API Reference](API-Reference.md)** - Build custom agents
-- **[Contributing](Contributing.md)** - Share your examples
-- **[FAQ](FAQ.md)** - Common questions
+**Key concept:** Two data-fetcher agents run simultaneously, then a specialist combines their output.
 
 ---
 
-**Previous**: [Troubleshooting ←](Troubleshooting.md) | **Next**: [API Reference →](API-Reference.md)
+### 2. Content Pipeline
+
+**Path:** [`examples/content-pipeline/`](../examples/content-pipeline/)
+
+A 3-step content creation workflow: research a topic, draft an article, then review it for quality.
+
+**Pattern:** Research &rarr; write &rarr; review (3 sequential steps)
+
+**Agents:**
+- `topic-researcher` (data-fetcher) &mdash; gathers source material
+- `article-writer` (specialist) &mdash; drafts the article
+- `quality-reviewer` (specialist) &mdash; reviews for accuracy and style
+
+**Key concept:** Multi-step sequential workflow where each step depends on the previous output.
+
+---
+
+### 3. Code Review
+
+**Path:** [`examples/code-review/`](../examples/code-review/)
+
+Automated PR review with parallel analysis agents examining different aspects of a changeset.
+
+**Pattern:** Collect diff &rarr; parallel analysis (security, style, logic) &rarr; summarize
+
+**Agents:**
+- `diff-collector` (data-fetcher) &mdash; gathers the PR diff and changed files
+- `security-analyzer` (specialist) &mdash; checks for vulnerabilities
+- `style-analyzer` (specialist) &mdash; checks code style and conventions
+- `logic-analyzer` (specialist) &mdash; reviews business logic correctness
+- `review-summarizer` (specialist) &mdash; combines all findings into one review
+
+**Key concept:** Fan-out/fan-in pattern with one collector feeding three parallel analyzers.
+
+---
+
+### 4. DevOps Monitoring
+
+**Path:** [`examples/devops-monitoring/`](../examples/devops-monitoring/)
+
+A monitoring pipeline that checks service health, analyzes logs, and sends alerts.
+
+**Pattern:** Parallel data collection &rarr; alert notification
+
+**Agents:**
+- `uptime-checker` (data-fetcher) &mdash; pings endpoints for status, latency, SSL expiry
+- `log-analyzer` (specialist) &mdash; scans recent logs for error patterns
+- `alert-sender` (specialist) &mdash; routes alerts based on severity
+
+**Key concept:** Real-world API integration with health checks and log analysis.
+
+---
+
+### 5. Research Assistant
+
+**Path:** [`examples/research-assistant/`](../examples/research-assistant/)
+
+Deep research on any topic with parallel source gathering and quality evaluation.
+
+**Pattern:** Parallel gathering &rarr; evaluate &rarr; synthesize report
+
+**Agents:**
+- `web-gatherer` (data-fetcher) &mdash; collects sources from the web
+- `academic-gatherer` (data-fetcher) &mdash; collects academic/scholarly sources
+- `source-evaluator` (specialist) &mdash; scores and ranks source credibility
+- `report-synthesizer` (specialist) &mdash; produces a structured research report
+
+**Key concept:** Multiple data-fetcher agents gathering from different source types in parallel.
+
+---
+
+### 6. Customer Support Triage
+
+**Path:** [`examples/customer-support/`](../examples/customer-support/)
+
+Automated ticket routing with parallel multi-factor analysis.
+
+**Pattern:** Parse ticket &rarr; parallel scoring (sentiment, category, priority) &rarr; draft response
+
+**Agents:**
+- `ticket-intake` (data-fetcher) &mdash; parses and normalizes incoming tickets
+- `sentiment-scorer` (specialist) &mdash; evaluates customer emotion
+- `category-classifier` (specialist) &mdash; classifies the issue type
+- `priority-assessor` (specialist) &mdash; determines urgency
+- `response-drafter` (specialist) &mdash; drafts an appropriate reply
+
+**Includes:** `ticket-intake.js` utility with `parseTicket()`, `parseCustomer()`, `stripHtml()`, and `detectChannel()` functions.
+
+**Key concept:** Multi-factor decision pipeline where parallel specialists each score one dimension.
+
+---
+
+### 7. Data Pipeline (ETL)
+
+**Path:** [`examples/data-pipeline/`](../examples/data-pipeline/)
+
+A classic Extract-Transform-Load pipeline for CSV data.
+
+**Pattern:** Extract &rarr; parallel transform (clean + enrich) &rarr; validate &rarr; load
+
+**Agents:**
+- `csv-extractor` (data-fetcher) &mdash; reads and parses source CSV files
+- `data-cleaner` (specialist) &mdash; normalizes and deduplicates records
+- `data-enricher` (specialist) &mdash; augments records with additional data
+- `schema-validator` (specialist) &mdash; checks data integrity against a schema
+- `db-loader` (specialist) &mdash; writes validated data to the destination
+
+**Includes:** `csv-extractor.js` utility with `parseCsv()`, `splitCsvLine()`, `detectDelimiter()` functions.
+
+**Key concept:** Parallel transformers operating on the same dataset independently.
+
+---
+
+### 8. Release Manager
+
+**Path:** [`examples/release-manager/`](../examples/release-manager/)
+
+Automates the release process: run tests, validate changelog, bump version, generate release notes.
+
+**Pattern:** Test &rarr; validate &rarr; bump &rarr; generate notes (sequential)
+
+**Agents:**
+- `test-runner` (data-fetcher) &mdash; runs the test suite and reports results
+- `changelog-validator` (specialist) &mdash; checks changelog format and completeness
+- `version-bumper` (specialist) &mdash; determines and applies the version bump
+- `notes-generator` (specialist) &mdash; creates release notes from changelog
+
+**Includes:** `version-checker.js` utility with `parseSemver()`, `bumpVersion()`, `parseUnreleasedSection()`, and `determineBumpType()` functions.
+
+**Key concept:** Strict sequential pipeline where each step must pass before proceeding.
+
+---
+
+### 9. Meeting Notes
+
+**Path:** [`examples/meeting-notes/`](../examples/meeting-notes/)
+
+Post-meeting automation: read transcript, extract action items and decisions, write summary, draft follow-ups.
+
+**Pattern:** Read transcript &rarr; parallel extraction (actions + decisions) &rarr; summary &rarr; follow-ups
+
+**Agents:**
+- `transcript-reader` (data-fetcher) &mdash; ingests and parses meeting transcripts
+- `action-extractor` (specialist) &mdash; identifies action items with owners and deadlines
+- `decision-extractor` (specialist) &mdash; captures key decisions and their rationale
+- `summary-writer` (specialist) &mdash; compiles the final meeting notes
+- `followup-drafter` (specialist) &mdash; prepares follow-up emails
+
+**Includes:** `transcript-reader.js` utility with `detectFormat()`, `parseLabeledTranscript()`, `parseSrtTranscript()`, `extractAttendees()`, and `estimateDuration()` functions.
+
+**Key concept:** Fan-out/fan-in with parallel extraction from the same source document.
+
+---
+
+### 10. CI Pipeline
+
+**Path:** [`examples/ci-pipeline/`](../examples/ci-pipeline/)
+
+A continuous integration quality check pipeline.
+
+**Pattern:** Parallel quality gates (lint + tests) &rarr; coverage report &rarr; deploy notification
+
+**Agents:**
+- `lint-checker` (data-fetcher) &mdash; runs linters and reports violations
+- `test-runner` (data-fetcher) &mdash; executes tests and reports results
+- `coverage-reporter` (specialist) &mdash; analyzes code coverage
+- `deploy-notifier` (specialist) &mdash; announces build results
+
+**Includes:** `lint-checker.js` utility with `detectLinter()`, `countSourceFiles()`, `parseLintLine()`, and `topViolations()` functions.
+
+**Key concept:** Parallel quality gates that must both pass before sequential reporting.
+
+---
+
+### 11. Programmatic Usage
+
+**Path:** [`examples/programmatic-usage/`](../examples/programmatic-usage/)
+
+Uses Motus as a Node.js library (not slash commands) to create departments, agents, and workflows from code.
+
+**Run it:**
+```bash
+cd examples/programmatic-usage
+node setup-department.js
+```
+
+**Key concept:** Everything the `/motus` commands do can also be done via the JavaScript API.
+
+---
+
+## Patterns at a Glance
+
+| Pattern | Examples | Description |
+|---------|----------|-------------|
+| **Parallel fetch &rarr; compile** | Daily Briefing, DevOps | Multiple data-fetchers run simultaneously, one specialist compiles |
+| **Fan-out/fan-in** | Code Review, Customer Support, Meeting Notes | One collector feeds N parallel analyzers, then one summarizer |
+| **Sequential pipeline** | Content Pipeline, Release Manager | Each step feeds the next in strict order |
+| **Parallel transform** | Data Pipeline, CI Pipeline | Multiple agents process the same data independently |
+| **Gather &rarr; evaluate &rarr; synthesize** | Research Assistant | Parallel sources, quality scoring, final synthesis |
+
+## Running an Example
+
+Each example is a reference implementation &mdash; it shows the directory structure, agent definitions, and workflow configs you would create when building a similar system with Motus.
+
+1. Browse the example directory to understand the structure
+2. Read the `README.md` in each example for details
+3. Use the agent `.md` files as templates for your own agents
+4. Adapt the workflow config to your use case
+
+To create a similar department in your own project:
+
+```bash
+# Example: recreate the code-review pipeline
+/motus department create code-review
+/motus code-review agent create diff-collector
+/motus code-review agent create security-analyzer
+/motus code-review agent create style-analyzer
+/motus code-review agent create logic-analyzer
+/motus code-review agent create review-summarizer
+/motus code-review workflow create pr-review
+```
+
+## Next Steps
+
+- **[API Reference](API-Reference.md)** &mdash; Library API for programmatic use
+- **[Creating Agents](Creating-Agents.md)** &mdash; Agent types and customization
+- **[Creating Workflows](Creating-Workflows.md)** &mdash; Workflow configuration and scheduling
+
+---
+
+**Previous**: [Troubleshooting &larr;](Troubleshooting.md) | **Next**: [API Reference &rarr;](API-Reference.md)

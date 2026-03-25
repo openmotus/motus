@@ -270,7 +270,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1122 tests, 22 suites, auto-discovered runner)
+└── tests/                       # Test suite (1145 tests, 23 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -294,7 +294,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1122 tests across 22 suites
+npm test                              # 1145 tests across 23 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

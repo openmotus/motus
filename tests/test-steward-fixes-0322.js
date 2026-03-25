@@ -469,7 +469,7 @@ async function testSearchEdgeCases() {
       description: 'Test department'
     });
     const r2 = await registry.search('');
-    assert(r2.departments.length === 1, 'empty string search matches all departments');
+    assert(r2.departments.length === 0, 'empty string search returns empty results');
 
     // Case-insensitive search
     const r3 = await registry.search('TEST');

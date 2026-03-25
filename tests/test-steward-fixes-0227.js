@@ -346,10 +346,10 @@ async function run() {
   // ============================================================
   console.log('\nsearch(): edge cases\n');
 
-  // Search with empty string should return everything
+  // Search with empty string should return empty results (safety fix)
   const emptySearch = await registry.search('');
-  suite.assert(emptySearch.departments.length > 0, 'search("") returns departments');
-  suite.assert(emptySearch.agents.length > 0, 'search("") returns agents');
+  suite.assert(emptySearch.departments.length === 0, 'search("") returns empty departments');
+  suite.assert(emptySearch.agents.length === 0, 'search("") returns empty agents');
 
   // Search with non-matching query
   const noMatch = await registry.search('zzzznonexistent');
