@@ -235,6 +235,14 @@ const summary = await registry.getDepartmentSummary('analytics');
 console.log(`${summary.agents.length} agents, ${summary.workflows.length} workflows`);
 console.log(`By type: ${summary.agentsByType['data-fetcher']} fetchers, ${summary.agentsByType['specialist']} specialists`);
 
+// Remove an agent — cleans up department lists and workflow references
+const { agent, updatedWorkflows } = await registry.removeAgent('metrics-collector');
+console.log(`Removed ${agent.name}, updated ${updatedWorkflows.length} workflows`);
+
+// Remove a department — cascade-deletes its agents and workflows
+const { removedAgents, removedWorkflows } = await registry.removeDepartment('analytics');
+console.log(`Cascade removed ${removedAgents.length} agents, ${removedWorkflows.length} workflows`);
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
@@ -270,7 +278,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1145 tests, 23 suites, auto-discovered runner)
+└── tests/                       # Test suite (1175 tests, 24 suites, auto-discovered runner)
 ```
 
 ## Documentation

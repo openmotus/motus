@@ -261,6 +261,7 @@ node tests/test-steward-fixes-0318.js    # detectParallelExecution/envVar safety
 node tests/test-steward-fixes-0320.js    # TypeScript definitions, name validation in CRUD, agent warnings (48 tests)
 node tests/test-steward-fixes-0322.js    # TemplateEngine input safety, array helper, validateDescription guard (89 tests)
 node tests/test-steward-fixes-0325.js    # export() mutation safety, search('') fix, validate() orphan detection (23 tests)
+node tests/test-steward-fixes-0327.js    # removeDepartment, removeAgent, removeWorkflow with cascade (30 tests)
 ```
 
 The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.

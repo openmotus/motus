@@ -261,6 +261,21 @@ export class RegistryManager {
   getWorkflowsByAgent(agentName: string): Promise<Workflow[]>;
   workflowExists(department: string, name: string): boolean;
 
+  // Remove operations
+  removeDepartment(name: string, options?: { cascade?: boolean }): Promise<{
+    department: Department;
+    removedAgents: string[];
+    removedWorkflows: string[];
+  }>;
+  removeAgent(name: string): Promise<{
+    agent: Agent;
+    updatedWorkflows: string[];
+  }>;
+  removeWorkflow(department: string, name: string): Promise<{
+    workflow: Workflow;
+    updatedAgents: string[];
+  }>;
+
   // Statistics & queries
   getStatistics(): Promise<Statistics>;
   validate(): Promise<ValidationResult>;

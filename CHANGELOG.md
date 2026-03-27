@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `removeDepartment(name, options?)` method on `RegistryManager` — removes a department with cascade-delete of its agents and workflows by default; pass `{ cascade: false }` to block removal when children exist
+- `removeAgent(name)` method on `RegistryManager` — removes an agent, cleaning up the owning department's agent list and any workflow agent references
+- `removeWorkflow(department, name)` method on `RegistryManager` — removes a workflow, cleaning up the owning department's workflow list and agent `usedInWorkflows` arrays
+- TypeScript definitions for all three remove methods in `index.d.ts`
 - `index.js` library entry point — all modules (`RegistryManager`, `TemplateEngine`, `Validator`, `DocGenerator`, `OAuthRegistry`) exported for programmatic use
 - TypeScript type definitions (`index.d.ts`) — comprehensive types for all 5 exported classes, including interfaces for `Department`, `Agent`, `Workflow`, `Statistics`, `SearchResults`, `DepartmentSummary`, and all input/output types
 - `getDepartmentSummary(name)` method on `RegistryManager` — returns department info, agents, workflows, type breakdowns, and integration count in a single call
@@ -46,7 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1145 tests across 23 auto-discovered suites):**
+**Test Suites (1175 tests across 24 auto-discovered suites):**
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)
@@ -70,6 +74,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `test-steward-fixes-0320.js` — TypeScript definitions, name validation in CRUD (48 tests)
 - `test-steward-fixes-0322.js` — TemplateEngine input safety, array helper, validateDescription guard (89 tests)
 - `test-steward-fixes-0325.js` — export() mutation safety, search('') fix, validate() orphan detection (23 tests)
+- `test-steward-fixes-0327.js` — removeDepartment, removeAgent, removeWorkflow with cascade, cross-references, edge cases (30 tests)
 - Auto-discovering test runner (`tests/run-all.js`) with `--filter` support
 
 ### Changed

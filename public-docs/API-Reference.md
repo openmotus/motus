@@ -36,6 +36,7 @@ await registry.load();  // Required before any operations
 | `listDepartments(filters?)` | `Department[]` | List departments, optionally filtered by `{ status }`. |
 | `departmentExists(name)` | `boolean` | Check if a department exists. |
 | `getDepartmentSummary(name)` | `DepartmentSummary` | Full summary: agents, workflows, type breakdowns, integration count. |
+| `removeDepartment(name, opts?)` | `RemoveResult` | Remove a department. Cascade-deletes agents/workflows by default. Pass `{ cascade: false }` to block if children exist. |
 
 ```javascript
 // Create a department
@@ -48,6 +49,10 @@ await registry.addDepartment({
 // Get a summary with agent breakdown
 const summary = await registry.getDepartmentSummary('analytics');
 console.log(`${summary.agents.length} agents, ${summary.workflows.length} workflows`);
+
+// Remove a department and all its agents/workflows
+const { department, removedAgents, removedWorkflows } = await registry.removeDepartment('analytics');
+console.log(`Removed ${removedAgents.length} agents, ${removedWorkflows.length} workflows`);
 console.log(`By type: ${summary.agentsByType['data-fetcher']} fetchers`);
 ```
 
@@ -61,6 +66,7 @@ console.log(`By type: ${summary.agentsByType['data-fetcher']} fetchers`);
 | `listAgents(filters?)` | `Agent[]` | List agents, optionally filtered by `{ department, type }`. |
 | `listAgentsByDepartment(dept)` | `Agent[]` | List agents in a specific department. |
 | `agentExists(name)` | `boolean` | Check if an agent exists. |
+| `removeAgent(name)` | `RemoveResult` | Remove an agent. Cleans up department lists and workflow references. |
 
 ```javascript
 await registry.addAgent({
@@ -85,6 +91,7 @@ await registry.addAgent({
 | `listWorkflowsByDepartment(dept)` | `Workflow[]` | List workflows in a specific department. |
 | `getWorkflowsByAgent(agentName)` | `Workflow[]` | Find all workflows that use a given agent. |
 | `workflowExists(dept, name)` | `boolean` | Check if a workflow exists. |
+| `removeWorkflow(dept, name)` | `RemoveResult` | Remove a workflow. Cleans up department lists and agent usage tracking. |
 
 ```javascript
 await registry.addWorkflow({
