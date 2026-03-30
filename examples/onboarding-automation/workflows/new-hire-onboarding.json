@@ -1,0 +1,50 @@
+{
+  "name": "new-hire-onboarding",
+  "department": "onboarding",
+  "description": "End-to-end onboarding pipeline for new employees: collects documents and provisions accounts in parallel, then schedules training, and finally sends a personalized welcome package",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "document-collector",
+          "prompt": "Collect all required onboarding documents for the new hire: {{employeeName}}, role: {{role}}, department: {{department}}, start date: {{startDate}}"
+        },
+        {
+          "name": "account-provisioner",
+          "prompt": "Provision all necessary accounts for: {{employeeName}}, role: {{role}}, department: {{department}}, manager: {{managerName}}"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "training-scheduler",
+          "prompt": "Create a two-week training schedule for {{employeeName}} starting {{startDate}}. Role: {{role}}, team: {{department}}"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "welcome-sender",
+          "prompt": "Compile the onboarding package for {{employeeName}} using the document checklist, provisioned accounts, and training schedule from previous steps"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "event",
+    "event": "new-hire-submitted",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "onboarding/{{employeeName}}/welcome-package.md"
+  }
+}

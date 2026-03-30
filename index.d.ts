@@ -11,8 +11,8 @@
 /** Valid agent type identifiers. */
 export type AgentType = 'data-fetcher' | 'orchestrator' | 'specialist';
 
-/** Valid trigger types for workflows. */
-export type TriggerType = 'manual' | 'scheduled';
+/** Known trigger types for workflows. Custom types are also allowed. */
+export type TriggerType = 'manual' | 'scheduled' | 'event' | 'webhook' | 'cron' | (string & {});
 
 /** Validation result returned by most validation methods. */
 export interface ValidationResult {

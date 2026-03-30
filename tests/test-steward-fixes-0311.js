@@ -123,7 +123,8 @@ async function run() {
     const stats = await registry.getStatistics();
     assertEquals(stats.workflows.total, 2, 'Should count both workflows');
     assertEquals(stats.workflows.byType.scheduled, 1, 'Should count 1 scheduled');
-    assertEquals(stats.workflows.byType.manual, 0, 'Missing trigger is not manual');
+    assertEquals(stats.workflows.byType.manual || 0, 0, 'Missing trigger is not manual');
+    assertEquals(stats.workflows.byType.unknown, 1, 'Workflow with no trigger counted as unknown');
   });
 
   // ============================================
