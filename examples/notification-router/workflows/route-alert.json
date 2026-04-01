@@ -1,0 +1,59 @@
+{
+  "name": "route-alert",
+  "displayName": "Route Alert",
+  "department": "notification-router",
+  "description": "Classify incoming alerts, resolve target channels, format messages, and dispatch notifications",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "alert-classifier",
+          "prompt": "Parse the incoming alert payload and classify its severity and category"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "channel-resolver",
+          "prompt": "Determine which notification channels should receive this alert based on routing rules"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "message-formatter",
+          "prompt": "Format the alert message for each target channel (Slack, email, SMS, webhook)"
+        }
+      ]
+    },
+    {
+      "group": 4,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "dispatch-sender",
+          "prompt": "Send formatted messages to all resolved channels and report delivery status"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "event",
+    "enabled": true,
+    "source": "webhook"
+  },
+  "output": {
+    "type": "console",
+    "destination": null,
+    "format": "json"
+  },
+  "estimatedDuration": "5-15 seconds"
+}

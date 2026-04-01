@@ -413,8 +413,7 @@ async function testGetDepartmentSummaryEdgeCases() {
     assert(summary.agentsByType['data-fetcher'] === 0, 'agentsByType all zero');
     assert(summary.agentsByType['orchestrator'] === 0, 'agentsByType all zero');
     assert(summary.agentsByType['specialist'] === 0, 'agentsByType all zero');
-    assert(summary.workflowsByTrigger.manual === 0, 'workflowsByTrigger all zero');
-    assert(summary.workflowsByTrigger.scheduled === 0, 'workflowsByTrigger all zero');
+    assert(Object.keys(summary.workflowsByTrigger).length === 0, 'workflowsByTrigger empty object for no workflows');
     assert(summary.integrationCount === 0, 'integrationCount zero');
 
     // Department with agents of different types

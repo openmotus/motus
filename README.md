@@ -268,6 +268,7 @@ motus/
 │   ├── meeting-notes/           #   Transcript → actions/decisions → summary → follow-ups
 │   ├── ci-pipeline/             #   Lint + tests (parallel) → coverage → deploy notification
 │   ├── onboarding-automation/   #   Docs + accounts (parallel) → training → welcome package
+│   ├── notification-router/     #   Alert classify → channel resolve → format → dispatch
 │   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
@@ -279,7 +280,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1213 tests, 25 suites, auto-discovered runner)
+└── tests/                       # Test suite (1260 tests, 26 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -303,7 +304,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1213 tests across 25 suites
+npm test                              # 1260 tests across 26 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

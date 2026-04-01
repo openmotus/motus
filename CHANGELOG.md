@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `getDepartmentSummary()` now dynamically counts all trigger types — previously hardcoded to only count `manual` and `scheduled`, now consistent with `getStatistics()` behavior
+- `validate()` now checks agent type validity — detects agents with invalid types (e.g. from corrupted imports)
+- `validate()` now checks `usedInWorkflows` consistency — detects stale workflow references in agents and missing reverse references from workflows to agents
 - `import()` now deep copies all imported data via JSON roundtrip — prevents external mutation from corrupting registry state (same class of fix as `export()` mutation safety from 2026-03-25)
 - `getStatistics()` now dynamically counts all trigger types — previously only counted `manual` and `scheduled`, missing `event`, `webhook`, `cron`, and custom types
 - TypeScript `TriggerType` extended to include `'event' | 'webhook' | 'cron'` plus arbitrary string support via `(string & {})`
@@ -32,7 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in `package.json`
 - Community health files: Code of Conduct, Security Policy, issue/PR templates, CHANGELOG
 
-**Examples (12 complete working examples):**
+**Examples (13 complete working examples):**
 - `examples/daily-briefing/` — weather fetcher, calendar fetcher, briefing creator, and workflow config
 - `examples/content-pipeline/` — 3-step content creation workflow with topic researcher, article writer, and quality reviewer
 - `examples/code-review/` — PR review pipeline with diff collector, parallel security/style/logic analysis, and review summarizer
@@ -45,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `examples/meeting-notes/` — post-meeting pipeline with transcript reader, action/decision extractors, and follow-up drafter
 - `examples/ci-pipeline/` — CI quality check pipeline with lint checker, test runner (parallel), coverage reporter, and deploy notifier
 - `examples/onboarding-automation/` — new employee onboarding pipeline with document collector and account provisioner (parallel), training scheduler, and welcome sender (4 agents, 1 event-triggered workflow, onboarding-checklist.js with createChecklist/updateDocumentStatus/updateAccountStatus/calculateCompletion/getPendingSummary)
+- `examples/notification-router/` — alert routing pipeline with alert classifier, channel resolver, message formatter, and dispatch sender (4 agents, 1 event-triggered workflow, alert-router.js with parseAlert/classifySeverity/resolveChannels/formatForChannel/buildDispatchPlan)
 
 **Input Safety Guards:**
 - `TemplateEngine.loadTemplate()`, `resolveTemplatePath()`, and `render()` — non-string or empty template names now throw descriptive errors
@@ -54,7 +58,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1213 tests across 25 auto-discovered suites):**
+**Test Suites (1260 tests across 26 auto-discovered suites):**
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)
@@ -80,9 +84,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `test-steward-fixes-0325.js` — export() mutation safety, search('') fix, validate() orphan detection (23 tests)
 - `test-steward-fixes-0327.js` — removeDepartment, removeAgent, removeWorkflow with cascade, cross-references, edge cases (30 tests)
 - `test-steward-fixes-0330.js` — import() mutation safety, getStatistics() dynamic trigger types, TypeScript definitions, onboarding-automation example validation, onboarding-checklist.js module tests (38 tests)
+- `test-steward-fixes-0401.js` — getDepartmentSummary dynamic trigger counting, validate() agent type and usedInWorkflows consistency checks, notification-router example validation, alert-router.js module tests (48 tests)
 - Auto-discovering test runner (`tests/run-all.js`) with `--filter` support
 
 ### Changed
+- `getDepartmentSummary()` `workflowsByTrigger` now dynamically counts all trigger types present — previously only counted `manual` and `scheduled`, now uses the same dynamic counting as `getStatistics()`
 - `import()` now deep copies all imported data — prevents external mutation from corrupting internal registry state (mirrors the `export()` fix)
 - `getStatistics()` `workflows.byType` now dynamically counts all trigger types present (e.g. `event`, `webhook`, `cron`) instead of only `manual`/`scheduled`
 - Updated TypeScript `TriggerType` to accept custom trigger types beyond `manual`/`scheduled`
