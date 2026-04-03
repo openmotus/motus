@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `recordWorkflowRun(department, name, result?)` method on `RegistryManager` — tracks workflow execution history by updating `lastRun`, `runCount`, `successRate`, and optionally `lastDurationMs`/`lastError`. Enables programmatic monitoring of workflow health.
 - `getDepartmentSummary()` now dynamically counts all trigger types — previously hardcoded to only count `manual` and `scheduled`, now consistent with `getStatistics()` behavior
 - `validate()` now checks agent type validity — detects agents with invalid types (e.g. from corrupted imports)
 - `validate()` now checks `usedInWorkflows` consistency — detects stale workflow references in agents and missing reverse references from workflows to agents
@@ -50,6 +51,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `examples/onboarding-automation/` — new employee onboarding pipeline with document collector and account provisioner (parallel), training scheduler, and welcome sender (4 agents, 1 event-triggered workflow, onboarding-checklist.js with createChecklist/updateDocumentStatus/updateAccountStatus/calculateCompletion/getPendingSummary)
 - `examples/notification-router/` — alert routing pipeline with alert classifier, channel resolver, message formatter, and dispatch sender (4 agents, 1 event-triggered workflow, alert-router.js with parseAlert/classifySeverity/resolveChannels/formatForChannel/buildDispatchPlan)
 
+**Documentation:**
+- `examples/README.md` — comprehensive index of all 13 examples with categories, agent counts, and common patterns
+- `examples/onboarding-automation/README.md` — structure, how it works, checklist helper API
+- `examples/release-manager/README.md` — structure, sequential pipeline walkthrough
+
 **Input Safety Guards:**
 - `TemplateEngine.loadTemplate()`, `resolveTemplatePath()`, and `render()` — non-string or empty template names now throw descriptive errors
 - `Validator.validateDescription()` — non-string inputs return a validation error instead of crashing
@@ -58,7 +64,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1260 tests across 26 auto-discovered suites):**
+**Test Suites (1282 tests across 27 auto-discovered suites):**
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)
@@ -85,6 +91,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `test-steward-fixes-0327.js` — removeDepartment, removeAgent, removeWorkflow with cascade, cross-references, edge cases (30 tests)
 - `test-steward-fixes-0330.js` — import() mutation safety, getStatistics() dynamic trigger types, TypeScript definitions, onboarding-automation example validation, onboarding-checklist.js module tests (38 tests)
 - `test-steward-fixes-0401.js` — getDepartmentSummary dynamic trigger counting, validate() agent type and usedInWorkflows consistency checks, notification-router example validation, alert-router.js module tests (48 tests)
+- `test-steward-fixes-0403.js` — recordWorkflowRun success/failure/rate tracking, persistence, input validation, edge cases, example README validation, examples index (22 tests)
 - Auto-discovering test runner (`tests/run-all.js`) with `--filter` support
 
 ### Changed

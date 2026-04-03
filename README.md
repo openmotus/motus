@@ -243,6 +243,12 @@ console.log(`Removed ${agent.name}, updated ${updatedWorkflows.length} workflows
 const { removedAgents, removedWorkflows } = await registry.removeDepartment('analytics');
 console.log(`Cascade removed ${removedAgents.length} agents, ${removedWorkflows.length} workflows`);
 
+// Record workflow execution — tracks lastRun, runCount, successRate
+await registry.recordWorkflowRun('analytics', 'daily-report', { success: true, durationMs: 4500 });
+await registry.recordWorkflowRun('analytics', 'daily-report', { success: false, error: 'API timeout' });
+const wf = registry.getWorkflow('analytics', 'daily-report');
+console.log(`${wf.runCount} runs, ${(wf.successRate * 100).toFixed(0)}% success rate`);
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
@@ -280,7 +286,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1260 tests, 26 suites, auto-discovered runner)
+└── tests/                       # Test suite (1282 tests, 27 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -304,7 +310,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1260 tests across 26 suites
+npm test                              # 1282 tests across 27 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
