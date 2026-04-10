@@ -198,6 +198,31 @@ export interface FileValidationResult {
   warnings: string[];
 }
 
+export type WorkflowHealthStatus = 'healthy' | 'degraded' | 'failing' | 'idle';
+
+export interface WorkflowHealthEntry {
+  name: string;
+  department: string;
+  status: WorkflowHealthStatus;
+  runCount: number;
+  successRate: number;
+  lastRun: string | null;
+  daysSinceLastRun: number | null;
+  lastDurationMs: number | null;
+  lastError: string | null;
+}
+
+export interface WorkflowHealthResult {
+  summary: {
+    total: number;
+    healthy: number;
+    degraded: number;
+    failing: number;
+    idle: number;
+  };
+  workflows: WorkflowHealthEntry[];
+}
+
 export interface ExportData {
   departments: { departments: Record<string, Department>; metadata: object };
   agents: { agents: Record<string, Agent>; metadata: object };
@@ -288,6 +313,7 @@ export class RegistryManager {
   validate(): Promise<ValidationResult>;
   validateFiles(): Promise<FileValidationResult>;
   search(query: string): Promise<SearchResults>;
+  getWorkflowHealth(filters?: { department?: string; status?: WorkflowHealthStatus }): Promise<WorkflowHealthResult>;
 
   // Utilities
   reset(): Promise<void>;

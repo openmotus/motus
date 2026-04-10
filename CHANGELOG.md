@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `getWorkflowHealth(filters?)` method on `RegistryManager` — analyzes workflow health across all or filtered workflows, returning per-workflow status (`healthy`, `degraded`, `failing`, `idle`) based on success rate, run recency, and run count. Supports `department` and `status` filters. Includes summary counts.
+- TypeScript types: `WorkflowHealthStatus`, `WorkflowHealthEntry`, `WorkflowHealthResult`
 - `recordWorkflowRun(department, name, result?)` method on `RegistryManager` — tracks workflow execution history by updating `lastRun`, `runCount`, `successRate`, and optionally `lastDurationMs`/`lastError`. Enables programmatic monitoring of workflow health.
 - `getDepartmentSummary()` now dynamically counts all trigger types — previously hardcoded to only count `manual` and `scheduled`, now consistent with `getStatistics()` behavior
 - `validate()` now checks agent type validity — detects agents with invalid types (e.g. from corrupted imports)
@@ -64,7 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1282 tests across 27 auto-discovered suites):**
+**Test Suites (1310 tests across 28 auto-discovered suites):**
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)

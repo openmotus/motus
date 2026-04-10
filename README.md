@@ -286,7 +286,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1282 tests, 27 suites, auto-discovered runner)
+└── tests/                       # Test suite (1310 tests, 28 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -310,7 +310,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1282 tests across 27 suites
+npm test                              # 1310 tests across 28 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
@@ -330,11 +330,11 @@ See [Troubleshooting](public-docs/Troubleshooting.md) for a complete guide.
 
 ## Roadmap
 
+- [x] Workflow execution history and health analytics (`recordWorkflowRun()`, `getWorkflowHealth()`)
+- [ ] npm package distribution (`npx create-motus` / `@openmotus/motus`)
 - [ ] Plugin system for community-shared departments and agents
 - [ ] Web dashboard for monitoring workflow runs
 - [ ] Slack and Todoist integrations
-- [ ] Workflow execution history and analytics
-- [ ] npm package distribution (`npx create-motus`)
 
 ## License
 

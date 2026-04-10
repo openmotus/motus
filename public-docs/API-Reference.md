@@ -108,6 +108,36 @@ await registry.addWorkflow({
 const workflows = await registry.getWorkflowsByAgent('metrics-collector');
 ```
 
+### Workflow Run Tracking & Health
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `recordWorkflowRun(dept, name, result?)` | `Workflow` | Record a workflow execution. Tracks `lastRun`, `runCount`, `successRate`, and optionally `lastDurationMs`/`lastError`. |
+| `getWorkflowHealth(filters?)` | `WorkflowHealthResult` | Analyze workflow health across all or filtered workflows. Returns per-workflow status (`healthy`, `degraded`, `failing`, `idle`) and summary counts. |
+
+```javascript
+// Record workflow executions
+await registry.recordWorkflowRun('analytics', 'daily-report', { success: true, durationMs: 4500 });
+await registry.recordWorkflowRun('analytics', 'daily-report', { success: false, error: 'API timeout' });
+
+// Check health across all workflows
+const health = await registry.getWorkflowHealth();
+console.log(`${health.summary.healthy} healthy, ${health.summary.failing} failing`);
+
+// Filter by department
+const deptHealth = await registry.getWorkflowHealth({ department: 'analytics' });
+
+// Filter by status — find all failing workflows
+const failing = await registry.getWorkflowHealth({ status: 'failing' });
+failing.workflows.forEach(w => console.log(`${w.name}: ${w.lastError}`));
+```
+
+**Health status grades:**
+- `healthy` — success rate >= 90% and ran within the last 7 days
+- `degraded` — success rate 50-90%, or no runs in 7+ days
+- `failing` — success rate below 50%
+- `idle` — never been run
+
 ### Search & Query
 
 | Method | Returns | Description |

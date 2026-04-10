@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^4.0.2",
-    "axios": "^1.11.0",
+    "axios": "^1.15.0",
     "boxen": "^5.1.2",
     "chalk": "^4.1.2",
     "commander": "^11.0.0",
