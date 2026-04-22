@@ -249,6 +249,18 @@ await registry.recordWorkflowRun('analytics', 'daily-report', { success: false, 
 const wf = registry.getWorkflow('analytics', 'daily-report');
 console.log(`${wf.runCount} runs, ${(wf.successRate * 100).toFixed(0)}% success rate`);
 
+// Analyze agent usage — spot unused agents and bottlenecks
+const usage = await registry.getAgentUsage();
+console.log(`${usage.summary.unused} unused agents, ${usage.summary.high} overused`);
+usage.agents
+  .filter(a => a.usage === 'unused')
+  .forEach(a => console.log(`  Removal candidate: ${a.name} (${a.department})`));
+
+// Only unused data-fetchers in a specific department
+const dead = await registry.getAgentUsage({
+  department: 'analytics', type: 'data-fetcher', usage: 'unused'
+});
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
@@ -286,7 +298,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1310 tests, 28 suites, auto-discovered runner)
+└── tests/                       # Test suite (1334 tests, 29 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -310,7 +322,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1310 tests across 28 suites
+npm test                              # 1334 tests across 29 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
@@ -331,6 +343,7 @@ See [Troubleshooting](public-docs/Troubleshooting.md) for a complete guide.
 ## Roadmap
 
 - [x] Workflow execution history and health analytics (`recordWorkflowRun()`, `getWorkflowHealth()`)
+- [x] Agent usage analytics with unused/overused detection (`getAgentUsage()`)
 - [ ] npm package distribution (`npx create-motus` / `@openmotus/motus`)
 - [ ] Plugin system for community-shared departments and agents
 - [ ] Web dashboard for monitoring workflow runs

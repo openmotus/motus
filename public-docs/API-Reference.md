@@ -138,6 +138,43 @@ failing.workflows.forEach(w => console.log(`${w.name}: ${w.lastError}`));
 - `failing` — success rate below 50%
 - `idle` — never been run
 
+### Agent Usage Analytics
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `getAgentUsage(filters?)` | `AgentUsageResult` | Analyze agent usage across workflows. Returns per-agent usage level (`unused`, `low`, `medium`, `high`), workflow count, and back-references. Summary includes `byType` and `byDepartment` breakdowns. |
+
+```javascript
+// Overview — spot unused agents and bottlenecks
+const usage = await registry.getAgentUsage();
+console.log(`${usage.summary.unused} unused, ${usage.summary.high} overused`);
+
+// Agents nobody uses — removal candidates
+const dead = await registry.getAgentUsage({ usage: 'unused' });
+dead.agents.forEach(a => console.log(`  ${a.department}/${a.name}`));
+
+// Which workflows use a given agent
+const withRefs = await registry.getAgentUsage({ department: 'analytics' });
+withRefs.agents.forEach(a => {
+  console.log(`${a.name} (${a.usage}) — used by:`);
+  a.workflows.forEach(w => console.log(`  - ${w.department}/${w.name}`));
+});
+
+// Filter by type — unused data-fetchers only
+const unusedFetchers = await registry.getAgentUsage({
+  type: 'data-fetcher',
+  usage: 'unused'
+});
+```
+
+**Usage levels:**
+- `unused` — not referenced by any workflow (safe to remove)
+- `low` — referenced by exactly 1 workflow
+- `medium` — referenced by 2–4 workflows
+- `high` — referenced by 5+ workflows (potential bottleneck)
+
+The lookup uses the live `workflow.agents` field as the source of truth, so drifted `usedInWorkflows` references cannot mask a truly unused agent.
+
 ### Search & Query
 
 | Method | Returns | Description |
@@ -349,7 +386,9 @@ Motus ships TypeScript definitions in `index.d.ts`. Key types:
 
 ```typescript
 type AgentType = 'data-fetcher' | 'orchestrator' | 'specialist';
-type TriggerType = 'manual' | 'scheduled';
+type TriggerType = 'manual' | 'scheduled' | 'event' | 'webhook' | 'cron' | (string & {});
+type WorkflowHealthStatus = 'healthy' | 'degraded' | 'failing' | 'idle';
+type AgentUsageLevel = 'unused' | 'low' | 'medium' | 'high';
 
 interface Department { name, displayName, description, agents, workflows, ... }
 interface Agent { name, displayName, department, type, description, tools, ... }
@@ -357,6 +396,8 @@ interface Workflow { name, displayName, department, agents, trigger, steps, ... 
 interface Statistics { departments: { total }, agents: { total, byType }, workflows: { total } }
 interface SearchResults { departments: Department[], agents: Agent[], workflows: Workflow[] }
 interface DepartmentSummary { department, agents, workflows, agentsByType, integrationCount }
+interface WorkflowHealthResult { summary: { total, healthy, degraded, failing, idle }, workflows }
+interface AgentUsageResult { summary: { total, unused, low, medium, high, byType, byDepartment }, agents }
 ```
 
 See `index.d.ts` for complete type definitions.

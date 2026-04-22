@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (1310 tests across 28 suites)
+# Run all tests (1334 tests across 29 suites)
 npm test
 
 # Filter suites by keyword
@@ -264,6 +264,9 @@ node tests/test-steward-fixes-0325.js    # export() mutation safety, search('') 
 node tests/test-steward-fixes-0327.js    # removeDepartment, removeAgent, removeWorkflow with cascade (30 tests)
 node tests/test-steward-fixes-0330.js    # import() mutation safety, dynamic trigger types, onboarding example (38 tests)
 node tests/test-steward-fixes-0401.js    # getDepartmentSummary trigger counting, validate() type/ref checks, notification-router example (48 tests)
+node tests/test-steward-fixes-0403.js    # recordWorkflowRun analytics, example READMEs, examples index (22 tests)
+node tests/test-steward-fixes-0410.js    # getWorkflowHealth, axios SSRF fix, WorkflowHealthResult types (28 tests)
+node tests/test-steward-fixes-0422.js    # getAgentUsage, follow-redirects fix, AgentUsageResult types (24 tests)
 ```
 
 The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.

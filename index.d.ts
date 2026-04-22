@@ -223,6 +223,36 @@ export interface WorkflowHealthResult {
   workflows: WorkflowHealthEntry[];
 }
 
+export type AgentUsageLevel = 'unused' | 'low' | 'medium' | 'high';
+
+export interface AgentUsageWorkflowRef {
+  id: string;
+  name: string;
+  department: string;
+}
+
+export interface AgentUsageEntry {
+  name: string;
+  department: string;
+  type: AgentType;
+  usage: AgentUsageLevel;
+  workflowCount: number;
+  workflows: AgentUsageWorkflowRef[];
+}
+
+export interface AgentUsageResult {
+  summary: {
+    total: number;
+    unused: number;
+    low: number;
+    medium: number;
+    high: number;
+    byType: Record<string, number>;
+    byDepartment: Record<string, number>;
+  };
+  agents: AgentUsageEntry[];
+}
+
 export interface ExportData {
   departments: { departments: Record<string, Department>; metadata: object };
   agents: { agents: Record<string, Agent>; metadata: object };
@@ -314,6 +344,7 @@ export class RegistryManager {
   validateFiles(): Promise<FileValidationResult>;
   search(query: string): Promise<SearchResults>;
   getWorkflowHealth(filters?: { department?: string; status?: WorkflowHealthStatus }): Promise<WorkflowHealthResult>;
+  getAgentUsage(filters?: { department?: string; type?: AgentType; usage?: AgentUsageLevel }): Promise<AgentUsageResult>;
 
   // Utilities
   reset(): Promise<void>;

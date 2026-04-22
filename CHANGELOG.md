@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `getAgentUsage(filters?)` method on `RegistryManager` — analyzes agent usage across all workflows, returning per-agent usage level (`unused`, `low`, `medium`, `high`), workflow count, and back-references to using workflows. Supports `department`, `type`, and `usage` filters. Summary includes `byType` and `byDepartment` breakdowns. Uses live `workflow.agents` as source of truth so drifted `usedInWorkflows` fields can't mask unused agents.
+- TypeScript types: `AgentUsageLevel`, `AgentUsageEntry`, `AgentUsageWorkflowRef`, `AgentUsageResult`
 - `getWorkflowHealth(filters?)` method on `RegistryManager` — analyzes workflow health across all or filtered workflows, returning per-workflow status (`healthy`, `degraded`, `failing`, `idle`) based on success rate, run recency, and run count. Supports `department` and `status` filters. Includes summary counts.
 - TypeScript types: `WorkflowHealthStatus`, `WorkflowHealthEntry`, `WorkflowHealthResult`
 - `recordWorkflowRun(department, name, result?)` method on `RegistryManager` — tracks workflow execution history by updating `lastRun`, `runCount`, `successRate`, and optionally `lastDurationMs`/`lastError`. Enables programmatic monitoring of workflow health.
@@ -142,6 +144,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Hardcoded user paths in test-template-engine.js and doc-generator.js
 - CONTRIBUTING.md placeholder `<repository-url>` with actual GitHub URL
 - axios DoS vulnerability and qs transitive dependency vulnerability
+- `follow-redirects` moderate vulnerability (GHSA-r4q5-vmmm-2653 — auth header leakage on cross-domain redirect) patched via `npm audit fix`
 
 ## [1.0.0] - 2025-10-15
 
