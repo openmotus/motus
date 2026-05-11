@@ -253,6 +253,25 @@ export interface AgentUsageResult {
   agents: AgentUsageEntry[];
 }
 
+/** Layout direction for Mermaid flowchart export. */
+export type MermaidDirection = 'TD' | 'TB' | 'BT' | 'LR' | 'RL';
+
+/** Options for exportMermaid(). */
+export interface MermaidExportOptions {
+  /** Layout direction. Default: 'LR'. */
+  direction?: MermaidDirection;
+  /** Filter the diagram to a single department. */
+  department?: string;
+  /** Include workflow nodes/edges. Default: true. */
+  includeWorkflows?: boolean;
+  /** Include agent nodes/edges. Default: true. */
+  includeAgents?: boolean;
+  /** Render agents/workflows whose department is missing. Default: true. */
+  includeOrphans?: boolean;
+  /** Optional title rendered above the flowchart. */
+  title?: string;
+}
+
 export interface ExportData {
   departments: { departments: Record<string, Department>; metadata: object };
   agents: { agents: Record<string, Agent>; metadata: object };
@@ -350,6 +369,7 @@ export class RegistryManager {
   reset(): Promise<void>;
   export(): Promise<ExportData>;
   import(data: Partial<ExportData>): Promise<void>;
+  exportMermaid(options?: MermaidExportOptions): Promise<string>;
 }
 
 // ============================================================

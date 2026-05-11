@@ -200,6 +200,7 @@ console.log(`${stats.agents.total} agents across ${stats.departments.total} depa
 |--------|---------|-------------|
 | `export()` | `object` | Export all registries as a single JSON-serializable object. |
 | `import(data)` | `void` | Import registries from an exported object. Validates structure. |
+| `exportMermaid(options?)` | `string` | Render the registry as a [Mermaid](https://mermaid.js.org/) flowchart. |
 
 ```javascript
 // Backup
@@ -209,7 +210,37 @@ fs.writeFileSync('backup.json', JSON.stringify(backup, null, 2));
 // Restore
 const data = JSON.parse(fs.readFileSync('backup.json', 'utf8'));
 await registry.import(data);
+
+// Visualize — Mermaid flowchart with each department in its own subgraph,
+// agents as nodes, workflows as ovals, and agent→workflow edges
+const diagram = await registry.exportMermaid({
+  direction: 'LR',
+  title: 'My AI Org'
+});
+fs.writeFileSync('org-chart.mmd', diagram);
 ```
+
+**`exportMermaid()` options:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `direction` | `'TD' \| 'TB' \| 'BT' \| 'LR' \| 'RL'` | `'LR'` | Flowchart layout direction. |
+| `department` | `string` | _(all)_ | Restrict diagram to one department. Suppresses the Orphans subgraph. |
+| `includeAgents` | `boolean` | `true` | Render agent nodes (and edges into workflows). |
+| `includeWorkflows` | `boolean` | `true` | Render workflow nodes (and incoming edges from agents). |
+| `includeOrphans` | `boolean` | `true` | Surface agents/workflows whose declared department doesn't exist under a "⚠️ Orphans" subgraph. |
+| `title` | `string` | _(none)_ | Optional Mermaid front-matter title rendered above the flowchart. |
+
+Node shapes/icons:
+
+| Symbol | Meaning |
+|--------|---------|
+| 📥 | data-fetcher agent |
+| 🎯 | orchestrator agent |
+| 🛠️ | specialist agent |
+| ⚡ | workflow |
+| 📁 | department subgraph |
+| ⚠️ | orphans subgraph |
 
 ---
 
@@ -389,6 +420,7 @@ type AgentType = 'data-fetcher' | 'orchestrator' | 'specialist';
 type TriggerType = 'manual' | 'scheduled' | 'event' | 'webhook' | 'cron' | (string & {});
 type WorkflowHealthStatus = 'healthy' | 'degraded' | 'failing' | 'idle';
 type AgentUsageLevel = 'unused' | 'low' | 'medium' | 'high';
+type MermaidDirection = 'TD' | 'TB' | 'BT' | 'LR' | 'RL';
 
 interface Department { name, displayName, description, agents, workflows, ... }
 interface Agent { name, displayName, department, type, description, tools, ... }
@@ -398,6 +430,7 @@ interface SearchResults { departments: Department[], agents: Agent[], workflows:
 interface DepartmentSummary { department, agents, workflows, agentsByType, integrationCount }
 interface WorkflowHealthResult { summary: { total, healthy, degraded, failing, idle }, workflows }
 interface AgentUsageResult { summary: { total, unused, low, medium, high, byType, byDepartment }, agents }
+interface MermaidExportOptions { direction?, department?, includeAgents?, includeWorkflows?, includeOrphans?, title? }
 ```
 
 See `index.d.ts` for complete type definitions.

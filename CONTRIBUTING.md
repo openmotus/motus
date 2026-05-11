@@ -230,7 +230,7 @@ Agent content here...
 ### Running Tests
 
 ```bash
-# Run all tests (1334 tests across 29 suites)
+# Run all tests (1357 tests across 30 suites)
 npm test
 
 # Filter suites by keyword
@@ -267,6 +267,7 @@ node tests/test-steward-fixes-0401.js    # getDepartmentSummary trigger counting
 node tests/test-steward-fixes-0403.js    # recordWorkflowRun analytics, example READMEs, examples index (22 tests)
 node tests/test-steward-fixes-0410.js    # getWorkflowHealth, axios SSRF fix, WorkflowHealthResult types (28 tests)
 node tests/test-steward-fixes-0422.js    # getAgentUsage, follow-redirects fix, AgentUsageResult types (24 tests)
+node tests/test-steward-fixes-0511.js    # exportMermaid() rendering, filters, orphans, dedup; axios advisory clean (23 tests)
 ```
 
 The test runner (`tests/run-all.js`) auto-discovers all `test-*.js` files, so new test suites are picked up automatically without updating `package.json`.

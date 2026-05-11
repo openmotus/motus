@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 **Core Features:**
+- `exportMermaid(options?)` method on `RegistryManager` — renders the entire registry as a [Mermaid](https://mermaid.js.org/) flowchart. Departments become labelled subgraphs; agents and workflows become nodes with type-specific icons (📥 data-fetcher, 🎯 orchestrator, 🛠️ specialist, ⚡ workflow); `workflow.agents` references render as edges. Supports `direction` (`TD`/`TB`/`BT`/`LR`/`RL`), `department` filter, `includeAgents`/`includeWorkflows`/`includeOrphans` toggles, and an optional `title`. Orphan agents/workflows (whose declared department is missing) surface in a separate "⚠️ Orphans" subgraph by default. Output is paste-ready for GitHub READMEs.
+- TypeScript types: `MermaidDirection`, `MermaidExportOptions`
 - `getAgentUsage(filters?)` method on `RegistryManager` — analyzes agent usage across all workflows, returning per-agent usage level (`unused`, `low`, `medium`, `high`), workflow count, and back-references to using workflows. Supports `department`, `type`, and `usage` filters. Summary includes `byType` and `byDepartment` breakdowns. Uses live `workflow.agents` as source of truth so drifted `usedInWorkflows` fields can't mask unused agents.
 - TypeScript types: `AgentUsageLevel`, `AgentUsageEntry`, `AgentUsageWorkflowRef`, `AgentUsageResult`
 - `getWorkflowHealth(filters?)` method on `RegistryManager` — analyzes workflow health across all or filtered workflows, returning per-workflow status (`healthy`, `degraded`, `failing`, `idle`) based on success rate, run recency, and run count. Supports `department` and `status` filters. Includes summary counts.
@@ -68,7 +70,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1310 tests across 28 auto-discovered suites):**
+**Test Suites (1357 tests across 30 auto-discovered suites):**
+- `test-steward-fixes-0511.js` — exportMermaid() rendering, filters, orphans, dedup, type defs; axios advisory clean (23 tests)
+- `test-steward-fixes-0422.js` — getAgentUsage() analytics, follow-redirects advisory clean (24 tests)
+- `test-steward-fixes-0410.js` — getWorkflowHealth() analytics (28 tests)
 - `test-template-engine.js` — Template rendering (7 tests)
 - `test-phase2-components.js` — Validator + registry + integration (48 tests)
 - `test-phase3-integration.js` — File structure + doc generation (22 tests)

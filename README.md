@@ -261,9 +261,45 @@ const dead = await registry.getAgentUsage({
   department: 'analytics', type: 'data-fetcher', usage: 'unused'
 });
 
+// Visualize your AI org chart — exports a Mermaid flowchart of every
+// department, agent, and workflow. Paste straight into a GitHub README
+// or any Mermaid-aware renderer.
+const diagram = await registry.exportMermaid({ title: 'My AI Org' });
+require('fs').writeFileSync('org-chart.mmd', diagram);
+
 // Get system statistics
 const stats = await registry.getStatistics();
 console.log(`${stats.agents.total} agents across ${stats.departments.total} departments`);
+```
+
+### Visualize your AI org chart
+
+`exportMermaid()` renders the entire registry as a [Mermaid](https://mermaid.js.org/) flowchart — perfect for README diagrams, design reviews, and onboarding new contributors who need to see how agents are wired across workflows.
+
+```js
+const diagram = await registry.exportMermaid({
+  direction: 'LR',          // 'TD' | 'TB' | 'BT' | 'LR' | 'RL'
+  department: 'life',       // scope to one department (omit for whole registry)
+  includeWorkflows: true,
+  includeAgents: true,
+  includeOrphans: true,     // surface agents/workflows whose dept is missing
+  title: 'Life OS — agent map'
+});
+```
+
+Output (excerpt):
+
+```mermaid
+flowchart LR
+  subgraph dept_life["📁 Life OS"]
+    agent_weather_fetcher["📥 weather-fetcher"]
+    agent_calendar_fetcher["📥 calendar-fetcher"]
+    agent_briefing_creator["🛠️ briefing-creator"]
+    wf_life_morning_briefing(["⚡ morning-briefing"])
+  end
+  agent_weather_fetcher --> wf_life_morning_briefing
+  agent_calendar_fetcher --> wf_life_morning_briefing
+  agent_briefing_creator --> wf_life_morning_briefing
 ```
 
 ## Project Structure
@@ -298,7 +334,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1334 tests, 29 suites, auto-discovered runner)
+└── tests/                       # Test suite (1357 tests, 30 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -322,7 +358,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1334 tests across 29 suites
+npm test                              # 1357 tests across 30 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
@@ -344,6 +380,7 @@ See [Troubleshooting](public-docs/Troubleshooting.md) for a complete guide.
 
 - [x] Workflow execution history and health analytics (`recordWorkflowRun()`, `getWorkflowHealth()`)
 - [x] Agent usage analytics with unused/overused detection (`getAgentUsage()`)
+- [x] Mermaid org-chart export — visualize departments, agents, and workflows (`exportMermaid()`)
 - [ ] npm package distribution (`npx create-motus` / `@openmotus/motus`)
 - [ ] Plugin system for community-shared departments and agents
 - [ ] Web dashboard for monitoring workflow runs
