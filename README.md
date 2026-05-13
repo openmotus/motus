@@ -38,6 +38,21 @@ You say: /motus marketing daily-trends
 
 Think of it as **Rails for AI automation** — you bring the business logic, Motus provides the architecture.
 
+## What People Build with Motus
+
+| Use Case | Departments | Example Workflow |
+|----------|-------------|-----------------|
+| **Morning Briefing** | life | weather + calendar + tasks → briefing note |
+| **Content Pipeline** | marketing | trend research → article draft → quality review |
+| **DevOps Monitoring** | devops | uptime check + log analysis → alert dispatch |
+| **Code Review** | engineering | PR diff → security/style/logic analysis → review summary |
+| **Customer Support** | support | ticket intake → sentiment + category + priority → response |
+| **ETL Pipeline** | data | CSV extract → clean + enrich → validate → load |
+| **Release Manager** | releases | tests → changelog → version bump → release notes |
+| **Meeting Notes** | admin | transcript → actions + decisions → follow-up emails |
+
+All 13 of these are included as complete, runnable examples in the `examples/` directory.
+
 ## Quick Start
 
 ### Prerequisites
@@ -343,6 +358,7 @@ motus/
 |-------|-------------|
 | [Introduction](public-docs/Introduction.md) | What Motus is and how it works |
 | [Quick Start](public-docs/Quick-Start.md) | Get running in 5 minutes |
+| [Recipes](RECIPES.md) | Copy-paste patterns for common tasks |
 | [Concepts](public-docs/Concepts.md) | Departments, agents, workflows explained |
 | [Creating Departments](public-docs/Creating-Departments.md) | Department wizard walkthrough |
 | [Creating Agents](public-docs/Creating-Agents.md) | Agent types and customization |
@@ -358,7 +374,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1357 tests across 30 suites
+npm test                              # 1,357+ tests across 30 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 

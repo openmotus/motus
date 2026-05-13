@@ -285,7 +285,7 @@ Faster than building from scratch.
 1. Check this [FAQ](FAQ.md)
 2. Read [documentation](README.md)
 3. Search [issues](https://github.com/openmotus/motus/issues)
-4. Ask in [discussions](https://github.com/openmotus/motus/discussions)
+4. Open a new issue if you don't find an answer
 
 ### How do I report bugs?
 
@@ -302,17 +302,17 @@ Yes! Create a feature request issue on [GitHub](https://github.com/openmotus/mot
 
 ### Is there a community?
 
-Join discussions on [GitHub Discussions](https://github.com/openmotus/motus/discussions).
+Currently the best place to ask questions is [GitHub Issues](https://github.com/openmotus/motus/issues). GitHub Discussions will be enabled as the community grows.
 
 ## Still Have Questions?
 
 Can't find your answer?
 
 1. Search [existing issues](https://github.com/openmotus/motus/issues)
-2. Ask in [Discussions](https://github.com/openmotus/motus/discussions)
-3. Create new issue if needed
+2. Open a new issue — include your Node.js version, OS, and the error output
+3. Check the [Troubleshooting guide](Troubleshooting.md) for common fixes
 
-We're here to help! 🚀
+We're here to help!
 
 ---
 
