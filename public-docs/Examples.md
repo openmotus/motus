@@ -1,6 +1,6 @@
 # Examples
 
-Motus ships with **11 complete working examples** in the [`examples/`](../examples/) directory. Each example is a self-contained department with agents, workflows, and (where relevant) utility modules you can study and adapt.
+Motus ships with **14 complete working examples** in the [`examples/`](../examples/) directory. Each example is a self-contained department with agents, workflows, and (where relevant) utility modules you can study and adapt.
 
 ## Working Examples
 
@@ -195,7 +195,27 @@ A continuous integration quality check pipeline.
 
 ---
 
-### 11. Programmatic Usage
+### 11. Social Media Pipeline
+
+**Path:** [`examples/social-media-pipeline/`](../examples/social-media-pipeline/)
+
+Takes source content — a blog post, article URL, or raw text — and produces platform-optimized social posts for Twitter/X and LinkedIn, along with a posting schedule.
+
+**Pattern:** Analyze source &rarr; parallel platform writing &rarr; schedule assembly
+
+**Agents:**
+- `content-analyzer` (data-fetcher) &mdash; reads source content, extracts core message, tone, and quotable lines
+- `twitter-writer` (specialist) &mdash; writes a tweet or thread optimized for engagement
+- `linkedin-writer` (specialist) &mdash; writes a professional LinkedIn post with hook and body
+- `post-scheduler` (orchestrator) &mdash; assembles all posts into a schedule with optimal timing
+
+**Includes:** `platform-formatter.js` utility with `normaliseHashtag()`, `prepareHashtags()`, `twitterCharCount()`, `checkFit()`, `splitIntoThread()`, and `getOptimalTiming()` functions.
+
+**Key concept:** One analysis step feeds two parallel platform-specific writers, then a final scheduler assembles the package.
+
+---
+
+### 12. Programmatic Usage
 
 **Path:** [`examples/programmatic-usage/`](../examples/programmatic-usage/)
 
@@ -220,6 +240,7 @@ node setup-department.js
 | **Sequential pipeline** | Content Pipeline, Release Manager | Each step feeds the next in strict order |
 | **Parallel transform** | Data Pipeline, CI Pipeline | Multiple agents process the same data independently |
 | **Gather &rarr; evaluate &rarr; synthesize** | Research Assistant | Parallel sources, quality scoring, final synthesis |
+| **Analyze &rarr; parallel write &rarr; schedule** | Social Media Pipeline | One analysis feeds multiple platform-specific writers in parallel |
 
 ## Running an Example
 

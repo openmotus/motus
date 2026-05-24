@@ -1,0 +1,51 @@
+{
+  "name": "distribute-content",
+  "displayName": "Distribute Content",
+  "department": "social-media-pipeline",
+  "description": "Takes source content (article, blog post, or URL) and produces platform-optimized posts for Twitter/X and LinkedIn, with a scheduling plan",
+  "steps": [
+    {
+      "group": 1,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "content-analyzer",
+          "prompt": "Analyze the provided source content and extract key messages, tone, and quotable lines for social media adaptation"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "parallel": true,
+      "agents": [
+        {
+          "name": "twitter-writer",
+          "prompt": "Write Twitter/X posts (single tweet or thread) using the content analysis from the previous step"
+        },
+        {
+          "name": "linkedin-writer",
+          "prompt": "Write a LinkedIn post using the content analysis from the previous step"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "parallel": false,
+      "agents": [
+        {
+          "name": "post-scheduler",
+          "prompt": "Assemble all platform posts into a final schedule with optimal timing recommendations"
+        }
+      ]
+    }
+  ],
+  "trigger": {
+    "type": "manual",
+    "enabled": true
+  },
+  "output": {
+    "type": "file",
+    "destination": "output/social-schedules/"
+  },
+  "estimatedDuration": "1-2 minutes"
+}

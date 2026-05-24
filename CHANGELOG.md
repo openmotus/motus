@@ -42,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Repository/homepage/bugs URLs in `package.json`
 - Community health files: Code of Conduct, Security Policy, issue/PR templates, CHANGELOG
 
-**Examples (13 complete working examples):**
+**Examples (14 complete working examples):**
 - `examples/daily-briefing/` — weather fetcher, calendar fetcher, briefing creator, and workflow config
 - `examples/content-pipeline/` — 3-step content creation workflow with topic researcher, article writer, and quality reviewer
 - `examples/code-review/` — PR review pipeline with diff collector, parallel security/style/logic analysis, and review summarizer
@@ -56,6 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `examples/ci-pipeline/` — CI quality check pipeline with lint checker, test runner (parallel), coverage reporter, and deploy notifier
 - `examples/onboarding-automation/` — new employee onboarding pipeline with document collector and account provisioner (parallel), training scheduler, and welcome sender (4 agents, 1 event-triggered workflow, onboarding-checklist.js with createChecklist/updateDocumentStatus/updateAccountStatus/calculateCompletion/getPendingSummary)
 - `examples/notification-router/` — alert routing pipeline with alert classifier, channel resolver, message formatter, and dispatch sender (4 agents, 1 event-triggered workflow, alert-router.js with parseAlert/classifySeverity/resolveChannels/formatForChannel/buildDispatchPlan)
+- `examples/social-media-pipeline/` — content distribution pipeline with content analyzer, parallel Twitter/LinkedIn writers, and post scheduler (4 agents, 1 workflow, platform-formatter.js with normaliseHashtag/prepareHashtags/twitterCharCount/checkFit/splitIntoThread/getOptimalTiming)
 
 **Documentation:**
 - `examples/README.md` — comprehensive index of all 13 examples with categories, agent counts, and common patterns
@@ -70,7 +71,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `suggestEnvVarName()` — null/undefined/non-string inputs return empty string
 - `generateIntegrationDocs()` — guards `envVars` iterations when undefined or empty
 
-**Test Suites (1357 tests across 30 auto-discovered suites):**
+**Test Suites (1,417 tests across 32 auto-discovered suites):**
+- `test-steward-fixes-0524.js` — social-media-pipeline example validation, platform-formatter.js module (37 tests)
+- `test-steward-fixes-0513.js` — RECIPES.md patterns end-to-end, examples index (23 tests)
 - `test-steward-fixes-0511.js` — exportMermaid() rendering, filters, orphans, dedup, type defs; axios advisory clean (23 tests)
 - `test-steward-fixes-0422.js` — getAgentUsage() analytics, follow-redirects advisory clean (24 tests)
 - `test-steward-fixes-0410.js` — getWorkflowHealth() analytics (28 tests)

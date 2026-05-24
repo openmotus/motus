@@ -27,6 +27,7 @@ Complete, working examples demonstrating different automation patterns with Motu
 | [content-pipeline](content-pipeline/) | Research, write, and review articles | 3 | Sequential pipeline |
 | [meeting-notes](meeting-notes/) | Transcript to actions, decisions, summary, follow-ups | 4 | Sequential extraction |
 | [notification-router](notification-router/) | Classify alerts, resolve channels, format, dispatch | 4 | Sequential routing |
+| [social-media-pipeline](social-media-pipeline/) | Analyze content, write Twitter + LinkedIn posts in parallel, schedule | 4 | Analyze, parallel write, schedule |
 
 ### Operations
 

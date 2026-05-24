@@ -50,8 +50,9 @@ Think of it as **Rails for AI automation** — you bring the business logic, Mot
 | **ETL Pipeline** | data | CSV extract → clean + enrich → validate → load |
 | **Release Manager** | releases | tests → changelog → version bump → release notes |
 | **Meeting Notes** | admin | transcript → actions + decisions → follow-up emails |
+| **Social Media** | marketing | article/post → Twitter thread + LinkedIn post → schedule |
 
-All 13 of these are included as complete, runnable examples in the `examples/` directory.
+All 14 of these are included as complete, runnable examples in the `examples/` directory.
 
 ## Quick Start
 
@@ -338,6 +339,7 @@ motus/
 │   ├── ci-pipeline/             #   Lint + tests (parallel) → coverage → deploy notification
 │   ├── onboarding-automation/   #   Docs + accounts (parallel) → training → welcome package
 │   ├── notification-router/     #   Alert classify → channel resolve → format → dispatch
+│   ├── social-media-pipeline/   #   Article → Twitter thread + LinkedIn post → schedule
 │   └── programmatic-usage/      #   Use Motus as a Node.js library
 ├── lib/                         # Core libraries
 │   ├── registry-manager.js      #   CRUD for departments, agents, workflows
@@ -349,7 +351,7 @@ motus/
 ├── oauth-manager/               # OAuth Manager web server
 ├── public-docs/                 # User documentation
 ├── org-docs/                    # Auto-generated reference docs
-└── tests/                       # Test suite (1357 tests, 30 suites, auto-discovered runner)
+└── tests/                       # Test suite (1,417+ tests, 32 suites, auto-discovered runner)
 ```
 
 ## Documentation
@@ -374,7 +376,7 @@ motus/
 git clone https://github.com/openmotus/motus.git
 cd motus
 npm install
-npm test                              # 1,357+ tests across 30 suites
+npm test                              # 1,417+ tests across 32 suites
 npm test -- --filter template         # Run only template-related suites
 ```
 
